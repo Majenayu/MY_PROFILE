@@ -131,7 +131,7 @@ const profileSchema = new mongoose.Schema({
   location:   { type:String, default:"India", trim:true },
   education:  { type:String, default:"B.Tech", trim:true },
   status:     { type:String, default:"open", enum:["open","busy","available","learning"] },
-  characterImage: { type:String, default:"https://storage.googleapis.com/anirive-outputs/users/HN9YKn8OyMfDhEb7ofw1ho2mzGQ2/chars/mmnd4h8r/anims/mmnd8v9a/animation.webp" },
+  characterImage: { type:String, default:"https://storage.googleapis.com/anirive-outputs/users/8ENEUTvq42OIhrEJRP0xBvs1bew2/chars/mmuuwver/anims/mmuuyw68/animation.webp" },
   characterImagePublicId: { type:String, default:"" },
   updatedAt:  { type:Date, default:Date.now },
 });
@@ -504,7 +504,7 @@ app.post("/api/profile", profileUpload.single("characterImage"), async (req,res)
         fullName:fullName.trim(), title:(title||"B.Tech · Developer · Builder").trim(),
         description:description.trim(), location:(location||"India").trim(),
         education:(education||"B.Tech").trim(), status:status||"open",
-        characterImage: req.file?req.file.path:"https://storage.googleapis.com/anirive-outputs/users/HN9YKn8OyMfDhEb7ofw1ho2mzGQ2/chars/mmnd4h8r/anims/mmnd8v9a/animation.webp",
+        characterImage: req.file?req.file.path:"https://storage.googleapis.com/anirive-outputs/users/8ENEUTvq42OIhrEJRP0xBvs1bew2/chars/mmuuwver/anims/mmuuyw68/animation.webp",
         characterImagePublicId: req.file?req.file.filename:"",
       });
     }

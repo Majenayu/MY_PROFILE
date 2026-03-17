@@ -321,6 +321,9 @@ body::after {
   width: 94px; height: 94px; object-fit: contain;
   filter: drop-shadow(0 0 18px rgba(0,240,255,0.45));
   animation: charFloat 3s ease-in-out infinite;
+  /* Ensure WebP animations loop properly */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 @keyframes charFloat {
   0%,100% { transform: translateY(0); }

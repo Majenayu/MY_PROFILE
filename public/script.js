@@ -710,9 +710,16 @@ function buildBalls(badges) {
 // ════════════════════════════════════════════════════════════
 //  PROFILE DATA LOADING
 // ════════════════════════════════════════════════════════════
+const DEFAULT_AVATAR = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIGZpbGw9InVybCgjZ3JhZGllbnQpIiBzdHJva2U9IiMwMGYwZmYiIHN0cm9rZS13aWR0aD0iMiIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNDAiIHI9IjE1IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjgiLz48cGF0aCBkPSJNMzAgNzBjMC0xMSA5LTIwIDIwLTIwczIwIDkgMjAgMjAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuOCIvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwMGYwZmYiIHN0b3Atb3BhY2l0eT0iMC4yIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjN2MzYWVkIiBzdG9wLW9wYWNpdHk9IjAuMiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==';
+
 async function loadProfileData() {
     try {
-        const r=await fetch('/api/profile'); const d=await r.json();
+        console.log('Loading profile data...');
+        const r=await fetch('/api/profile'); 
+        console.log('Profile API response status:', r.status);
+        const d=await r.json();
+        console.log('Profile data:', d);
+        
         if(d.success&&d.profile) {
             const p=d.profile;
             const nameEl=document.getElementById('profileName');
@@ -722,16 +729,32 @@ async function loadProfileData() {
             const chipStatus=document.getElementById('chipStatus');
             const chipLocation=document.getElementById('chipLocation');
             const chipEdu=document.getElementById('chipEdu');
+            
             if(nameEl)  nameEl.textContent=p.fullName||'P G AYUSH RAI';
             if(titleEl) titleEl.textContent=p.title||'B.Tech · Developer · Builder';
             if(aboutEl) aboutEl.innerHTML=`<strong>${p.fullName||'P G Ayush Rai'}</strong> — ${p.description||'technologist &amp; builder.'}`;
-            if(charEl&&p.characterImage) charEl.src=p.characterImage;
+            
+            if(charEl) {
+                // Always preserve the current animation if no new image is provided
+                const currentSrc = charEl.src;
+                if(p.characterImage && p.characterImage !== currentSrc) {
+                    console.log('Setting character image to:', p.characterImage);
+                    charEl.src = p.characterImage;
+                } else {
+                    console.log('Keeping current character animation:', currentSrc);
+                }
+            }
+            
             const statusTexts={open:'● Open to Opportunities',busy:'⚡ Currently Busy',available:'✓ Available for Projects',learning:'📚 Learning & Growing'};
             if(chipStatus)   chipStatus.textContent=statusTexts[p.status]||'● Open to Opportunities';
             if(chipLocation) chipLocation.textContent=`📍 ${p.location||'India'}`;
             if(chipEdu)      chipEdu.textContent=`🚀 ${p.education||'B.Tech'}`;
+        } else {
+            console.log('No profile data found, keeping defaults');
         }
-    } catch(e){ console.log('Using default profile data'); }
+    } catch(e){ 
+        console.error('Profile loading error:', e);
+    }
 }
 
 // ════════════════════════════════════════════════════════════
@@ -749,7 +772,7 @@ async function loadPortfolioData() {
 //  BOOT
 // ════════════════════════════════════════════════════════════
 initInterface();
-loadProfileData();
+// loadProfileData(); // Commented out to prevent animation interference
 loadPortfolioData();
 fetchBadges().then(buildBalls);
 
