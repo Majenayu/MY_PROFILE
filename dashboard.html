@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Dashboard — Ayush Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;background:#060a10;font-family:'Syne',sans-serif;color:#e8eaf0;overflow-x:hidden;}
+:root{
+  --bg:#060a10;--card:#0c1525;--surface:#0f1d30;--surface2:#0a1220;
+  --border:rgba(0,240,255,0.12);--accent:#00f0ff;--accent2:#7c3aed;
+  --danger:#f87171;--success:#4ade80;--warn:#fbbf24;
+  --text:#e8eaf0;--muted:#4f6080;
+  --mono:'Space Mono',monospace;--display:'Bebas Neue',sans-serif;
+}
+
+/* BG Grid */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(0,240,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,0.025) 1px,transparent 1px);
+  background-size:60px 60px;}
+
+/* Blobs */
+.blob{position:fixed;border-radius:50%;filter:blur(110px);pointer-events:none;z-index:0;}
+.b1{width:450px;height:450px;top:-120px;left:-80px;background:radial-gradient(circle,rgba(0,240,255,0.07),transparent 70%);animation:d1 20s ease-in-out infinite;}
+.b2{width:350px;height:350px;bottom:-60px;right:-40px;background:radial-gradient(circle,rgba(124,58,237,0.07),transparent 70%);animation:d2 25s ease-in-out infinite;}
+@keyframes d1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,40px)}}
+@keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,-30px)}}
+
+/* LAYOUT */
+.page{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:28px 20px 60px;}
+
+/* TOP BAR */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:32px;gap:12px;flex-wrap:wrap;
+  padding:14px 20px;background:var(--card);
+  border:1px solid var(--border);border-radius:14px;
+  box-shadow:0 4px 24px rgba(0,0,0,.4);
+}
+.topbar-left{display:flex;align-items:center;gap:12px;}
+.topbar-icon{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,rgba(0,240,255,.12),rgba(124,58,237,.12));border:1px solid rgba(0,240,255,.15);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.topbar-title{font-family:var(--display);font-size:1.5rem;letter-spacing:.08em;background:linear-gradient(130deg,#fff 20%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.topbar-sub{font-family:var(--mono);font-size:.48rem;letter-spacing:.14em;color:var(--muted);}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.view-btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;color:var(--muted);padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--surface);transition:color .2s,border-color .2s;}
+.view-btn:hover{color:var(--accent);border-color:rgba(0,240,255,.3);}
+.logout-btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;color:var(--muted);padding:7px 14px;border-radius:8px;border:1px solid rgba(248,113,113,.2);background:rgba(248,113,113,.05);cursor:pointer;transition:all .2s;}
+.logout-btn:hover{color:var(--danger);border-color:rgba(248,113,113,.4);}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+@media(max-width:700px){.stats-row{grid-template-columns:repeat(2,1fr);}}
+.stat-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:18px 20px;position:relative;overflow:hidden;
+  transition:border-color .2s,transform .2s;
+}
+.stat-card:hover{border-color:rgba(0,240,255,.22);transform:translateY(-2px);}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.stat-card.c-profile::before{background:linear-gradient(90deg,#00f0ff,transparent);}
+.stat-card.c-projects::before{background:linear-gradient(90deg,#7c3aed,transparent);}
+.stat-card.c-achievements::before{background:linear-gradient(90deg,#f59e0b,transparent);}
+.stat-card.c-events::before{background:linear-gradient(90deg,#4ade80,transparent);}
+.stat-emoji{font-size:1.5rem;margin-bottom:8px;}
+.stat-num{font-family:var(--display);font-size:2rem;letter-spacing:.04em;line-height:1;margin-bottom:4px;}
+.stat-label{font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;}
+.c-profile .stat-num{color:var(--accent);}
+.c-projects .stat-num{color:#a78bfa;}
+.c-achievements .stat-num{color:var(--warn);}
+.c-events .stat-num{color:var(--success);}
+
+/* SECTIONS GRID */
+.sections-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:750px){.sections-grid{grid-template-columns:1fr;}}
+
+/* SECTION PANEL */
+.panel{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,.3);
+}
+.panel-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;border-bottom:1px solid var(--border);
+  background:rgba(0,0,0,.2);
+}
+.panel-title{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;
+  color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:8px;
+}
+.panel-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent);}
+.panel-add-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.08em;
+  padding:5px 12px;border-radius:7px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,rgba(0,240,255,.12),rgba(124,58,237,.12));
+  color:var(--accent);border:1px solid rgba(0,240,255,.18);
+  transition:all .2s;text-decoration:none;
+}
+.panel-add-btn:hover{background:linear-gradient(135deg,rgba(0,240,255,.2),rgba(124,58,237,.2));border-color:rgba(0,240,255,.35);}
+
+/* LIST */
+.panel-list{padding:8px 0;max-height:340px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(0,240,255,.15) transparent;}
+.panel-list::-webkit-scrollbar{width:3px;}
+.panel-list::-webkit-scrollbar-thumb{background:rgba(0,240,255,.2);border-radius:2px;}
+
+.list-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 18px;transition:background .15s;position:relative;
+}
+.list-item:hover{background:rgba(0,240,255,.04);}
+.list-item-icon{
+  width:32px;height:32px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;background:var(--surface);border:1px solid var(--border);
+  overflow:hidden;
+}
+.list-item-icon img{width:100%;height:100%;object-fit:cover;}
+.list-item-info{flex:1;min-width:0;}
+.list-item-name{
+  font-size:.82rem;font-weight:600;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;color:var(--text);
+}
+.list-item-meta{
+  font-family:var(--mono);font-size:.46rem;letter-spacing:.06em;
+  color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.list-item-actions{display:flex;gap:5px;flex-shrink:0;}
+.act-btn{
+  width:28px;height:28px;border-radius:7px;border:1px solid var(--border);
+  background:var(--surface);cursor:pointer;display:flex;align-items:center;
+  justify-content:center;font-size:.75rem;transition:all .2s;
+  text-decoration:none;
+}
+.act-btn.edit:hover{border-color:rgba(0,240,255,.4);background:rgba(0,240,255,.08);color:var(--accent);}
+.act-btn.del:hover{border-color:rgba(248,113,113,.4);background:rgba(248,113,113,.08);color:var(--danger);}
+
+.empty-state{
+  text-align:center;padding:28px 16px;
+  font-family:var(--mono);font-size:.54rem;letter-spacing:.08em;color:var(--muted);
+}
+.empty-state .em-icon{font-size:1.8rem;margin-bottom:8px;opacity:.4;}
+
+/* PRIORITY BADGE */
+.priority-badge{
+  font-family:var(--mono);font-size:.42rem;letter-spacing:.06em;
+  padding:2px 7px;border-radius:6px;
+}
+.priority-badge.high{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);color:#f87171;}
+.priority-badge.medium{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);color:#fbbf24;}
+.priority-badge.low{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);color:#4ade80;}
+
+/* LOADING */
+.panel-loading{
+  text-align:center;padding:24px;
+  font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;color:var(--muted);
+}
+.spin-icon{display:inline-block;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* PROFILE PANEL (full width) */
+.panel-full{grid-column:1/-1;}
+
+/* PROFILE CARD */
+.profile-content{padding:18px;}
+.profile-info-row{display:flex;align-items:center;gap:16px;margin-bottom:14px;}
+.profile-avatar{width:56px;height:56px;border-radius:50%;border:2px solid var(--accent);overflow:hidden;flex-shrink:0;background:var(--surface);}
+.profile-avatar img{width:100%;height:100%;object-fit:cover;}
+.profile-name{font-family:var(--display);font-size:1.4rem;letter-spacing:.06em;line-height:1;color:var(--text);}
+.profile-title-txt{font-family:var(--mono);font-size:.52rem;letter-spacing:.08em;color:var(--muted);margin-top:4px;}
+.profile-desc{font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:14px;padding:10px 12px;background:var(--surface);border-radius:8px;border:1px solid var(--border);}
+.profile-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.profile-tag{font-family:var(--mono);font-size:.48rem;letter-spacing:.06em;padding:4px 10px;border-radius:8px;background:rgba(0,240,255,.06);border:1px solid rgba(0,240,255,.14);color:var(--muted);}
+.edit-profile-btn{
+  display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;
+  padding:9px 18px;border-radius:9px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  color:#060a10;font-weight:700;transition:opacity .2s,transform .2s;
+  text-decoration:none;
+}
+.edit-profile-btn:hover{opacity:.88;transform:translateY(-1px);}
+
+/* CONFIRM MODAL */
+.modal-overlay{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-box{
+  background:var(--card);border:1px solid rgba(248,113,113,.25);
+  border-radius:16px;padding:28px;max-width:340px;width:90%;
+  transform:scale(.95);transition:transform .25s;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+.modal-overlay.open .modal-box{transform:scale(1);}
+.modal-title{font-family:var(--display);font-size:1.4rem;letter-spacing:.06em;margin-bottom:8px;color:var(--danger);}
+.modal-body{font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:20px;}
+.modal-actions{display:flex;gap:10px;}
+.modal-cancel{flex:1;padding:10px;border-radius:9px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;cursor:pointer;transition:all .2s;}
+.modal-cancel:hover{border-color:var(--accent);color:var(--accent);}
+.modal-confirm{flex:1;padding:10px;border-radius:9px;border:none;background:linear-gradient(135deg,#b91c1c,var(--danger));color:#fff;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;cursor:pointer;font-weight:700;transition:opacity .2s;}
+.modal-confirm:hover{opacity:.88;}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(14px);font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;padding:9px 18px;border-radius:10px;z-index:200;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap;}
+.toast.ok{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:var(--success);}
+.toast.err{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--danger);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<div class="page">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-icon">⚙️</div>
+      <div>
+        <div class="topbar-title">Dashboard</div>
+        <div class="topbar-sub">Admin Panel · Portfolio Manager</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="/" class="view-btn">👁 View Portfolio</a>
+      <button class="logout-btn" id="logoutBtn">🚪 Logout</button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card c-profile">
+      <div class="stat-emoji">👤</div>
+      <div class="stat-num">1</div>
+      <div class="stat-label">Profile</div>
+    </div>
+    <div class="stat-card c-projects">
+      <div class="stat-emoji">🚀</div>
+      <div class="stat-num" id="statProjects">—</div>
+      <div class="stat-label">Projects</div>
+    </div>
+    <div class="stat-card c-achievements">
+      <div class="stat-emoji">🏆</div>
+      <div class="stat-num" id="statAchievements">—</div>
+      <div class="stat-label">Achievements</div>
+    </div>
+    <div class="stat-card c-events">
+      <div class="stat-emoji">📅</div>
+      <div class="stat-num" id="statEvents">—</div>
+      <div class="stat-label">Events</div>
+    </div>
+  </div>
+
+  <!-- SECTIONS GRID -->
+  <div class="sections-grid">
+
+    <!-- PROFILE (full width) -->
+    <div class="panel panel-full" id="profilePanel">
+      <div class="panel-header">
+        <div class="panel-title"><div class="panel-dot" style="background:#00f0ff;box-shadow:0 0 6px #00f0ff;"></div> Profile</div>
+        <a href="/profile-editor" class="panel-add-btn">✏️ Edit Profile</a>
+      </div>
+      <div class="profile-content" id="profileContent">
+        <div class="panel-loading"><span class="spin-icon">◌</span> Loading...</div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title"><div class="panel-dot" style="background:#a78bfa;box-shadow:0 0 6px #a78bfa;"></div> Projects</div>
+        <a href="/add-project" class="panel-add-btn" style="color:#a78bfa;border-color:rgba(124,58,237,.25);">+ Add</a>
+      </div>
+      <div class="panel-list" id="projectsList">
+        <div class="panel-loading"><span class="spin-icon">◌</span> Loading...</div>
+      </div>
+    </div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title"><div class="panel-dot" style="background:#fbbf24;box-shadow:0 0 6px #fbbf24;"></div> Achievements</div>
+        <a href="/register" class="panel-add-btn" style="color:#fbbf24;border-color:rgba(251,191,36,.25);">+ Add</a>
+      </div>
+      <div class="panel-list" id="achievementsList">
+        <div class="panel-loading"><span class="spin-icon">◌</span> Loading...</div>
+      </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title"><div class="panel-dot" style="background:#4ade80;box-shadow:0 0 6px #4ade80;"></div> Events</div>
+        <a href="/event-register" class="panel-add-btn" style="color:#4ade80;border-color:rgba(74,222,128,.25);">+ Add</a>
+      </div>
+      <div class="panel-list" id="eventsList">
+        <div class="panel-loading"><span class="spin-icon">◌</span> Loading...</div>
+      </div>
+    </div>
+
+    <!-- BADGES -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title"><div class="panel-dot" style="background:#f87171;box-shadow:0 0 6px #f87171;"></div> Badges</div>
+        <a href="/badge-register" class="panel-add-btn" style="color:#f87171;border-color:rgba(248,113,113,.25);">+ Add</a>
+      </div>
+      <div class="panel-list" id="badgesList">
+        <div class="panel-loading"><span class="spin-icon">◌</span> Loading...</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-title">Delete Item</div>
+    <div class="modal-body" id="modalBody">Are you sure you want to delete this item? This cannot be undone.</div>
+    <div class="modal-actions">
+      <button class="modal-cancel" id="modalCancel">Cancel</button>
+      <button class="modal-confirm" id="modalConfirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SESSION_KEY = 'ayush_admin_token';
+
+// Auth guard
+if (sessionStorage.getItem(SESSION_KEY) !== 'authenticated') {
+  window.location.href = '/login';
+}
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  sessionStorage.removeItem(SESSION_KEY);
+  window.location.href = '/login';
+});
+
+// ── DELETE MODAL ──────────────────────────────────────────
+let pendingDelete = null;
+
+function openDeleteModal(msg, onConfirm) {
+  document.getElementById('modalBody').textContent = msg;
+  pendingDelete = onConfirm;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+document.getElementById('modalCancel').addEventListener('click', () => {
+  document.getElementById('modalOverlay').classList.remove('open');
+  pendingDelete = null;
+});
+
+document.getElementById('modalConfirm').addEventListener('click', async () => {
+  document.getElementById('modalOverlay').classList.remove('open');
+  if (pendingDelete) await pendingDelete();
+  pendingDelete = null;
+});
+
+// ── TOAST ─────────────────────────────────────────────────
+function showToast(msg, type = 'ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast ${type}`;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ── HELPERS ───────────────────────────────────────────────
+function fmtDate(d) {
+  if (!d) return '';
+  return new Date(d).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+}
+
+// ── LOAD ALL ──────────────────────────────────────────────
+async function loadAll() {
+  await Promise.all([loadProfile(), loadProjects(), loadAchievements(), loadEvents(), loadBadges()]);
+}
+
+// ── PROFILE ───────────────────────────────────────────────
+async function loadProfile() {
+  try {
+    const res = await fetch('/api/profile');
+    const data = await res.json();
+    const p = data.profile;
+    const statusMap = {
+      open: '🟢 Open to Opportunities', busy: '⚡ Currently Busy',
+      available: '✅ Available', learning: '📚 Learning'
+    };
+    document.getElementById('profileContent').innerHTML = `
+      <div class="profile-info-row">
+        <div class="profile-avatar">
+          <img src="${p.characterImage}" alt="Avatar" onerror="this.style.display='none'"/>
+        </div>
+        <div>
+          <div class="profile-name">${p.fullName}</div>
+          <div class="profile-title-txt">${p.title}</div>
+        </div>
+      </div>
+      <div class="profile-desc">${p.description}</div>
+      <div class="profile-tags">
+        <div class="profile-tag">📍 ${p.location}</div>
+        <div class="profile-tag">🎓 ${p.education}</div>
+        <div class="profile-tag">${statusMap[p.status] || p.status}</div>
+      </div>
+      <a href="/profile-editor" class="edit-profile-btn">✏️ Edit Profile</a>
+    `;
+  } catch(e) {
+    document.getElementById('profileContent').innerHTML = `<div class="empty-state"><div class="em-icon">⚠️</div>Could not load profile.</div>`;
+  }
+}
+
+// ── PROJECTS ──────────────────────────────────────────────
+async function loadProjects() {
+  try {
+    const projects = await fetch('/api/projects').then(r => r.json());
+    document.getElementById('statProjects').textContent = projects.length;
+    const list = document.getElementById('projectsList');
+
+    if (!projects.length) {
+      list.innerHTML = `<div class="empty-state"><div class="em-icon">🚀</div>No projects yet.<br>Click + Add to create one.</div>`;
+      return;
+    }
+
+    list.innerHTML = projects.map(p => `
+      <div class="list-item" id="proj-${p._id}">
+        <div class="list-item-icon">
+          ${p.previewImage ? `<img src="${p.previewImage}" alt=""/>` : '🚀'}
+        </div>
+        <div class="list-item-info">
+          <div class="list-item-name">${p.name}</div>
+          <div class="list-item-meta">${(p.techStack||[]).slice(0,3).join(' · ')}${p.techStack?.length > 3 ? ' +' + (p.techStack.length-3) : ''}</div>
+        </div>
+        <div class="list-item-actions">
+          <a href="/add-project?edit=${p._id}" class="act-btn edit" title="Edit">✏️</a>
+          <button class="act-btn del" title="Delete" onclick="deleteProject('${p._id}','${p.name.replace(/'/g,"\\'")}')">🗑</button>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    document.getElementById('projectsList').innerHTML = `<div class="empty-state">Failed to load.</div>`;
+  }
+}
+
+async function deleteProject(id, name) {
+  openDeleteModal(`Delete project "${name}"? This cannot be undone.`, async () => {
+    const res = await fetch(`/api/projects/${id}`, { method:'DELETE' });
+    if (res.ok) {
+      showToast('✓ Project deleted', 'ok');
+      document.getElementById(`proj-${id}`)?.remove();
+      const cur = parseInt(document.getElementById('statProjects').textContent) || 0;
+      document.getElementById('statProjects').textContent = Math.max(0, cur - 1);
+    } else {
+      showToast('Failed to delete project', 'err');
+    }
+  });
+}
+
+// ── ACHIEVEMENTS ──────────────────────────────────────────
+async function loadAchievements() {
+  try {
+    const achs = await fetch('/api/achievements').then(r => r.json());
+    document.getElementById('statAchievements').textContent = achs.length;
+    const list = document.getElementById('achievementsList');
+
+    if (!achs.length) {
+      list.innerHTML = `<div class="empty-state"><div class="em-icon">🏆</div>No achievements yet.</div>`;
+      return;
+    }
+
+    list.innerHTML = achs.map(a => `
+      <div class="list-item" id="ach-${a._id}">
+        <div class="list-item-icon">🏆</div>
+        <div class="list-item-info">
+          <div class="list-item-name">${a.eventName}</div>
+          <div class="list-item-meta">${a.place} · ${fmtDate(a.date)}</div>
+        </div>
+        <div class="list-item-actions">
+          <span class="priority-badge ${a.priority}">${a.priority}</span>
+          <button class="act-btn del" title="Delete" onclick="deleteAchievement('${a._id}','${a.eventName.replace(/'/g,"\\'")}')">🗑</button>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    document.getElementById('achievementsList').innerHTML = `<div class="empty-state">Failed to load.</div>`;
+  }
+}
+
+async function deleteAchievement(id, name) {
+  openDeleteModal(`Delete achievement "${name}"?`, async () => {
+    const res = await fetch(`/api/achievements/${id}`, { method:'DELETE' });
+    if (res.ok) {
+      showToast('✓ Achievement deleted', 'ok');
+      document.getElementById(`ach-${id}`)?.remove();
+      const cur = parseInt(document.getElementById('statAchievements').textContent) || 0;
+      document.getElementById('statAchievements').textContent = Math.max(0, cur - 1);
+    } else {
+      showToast('Failed to delete', 'err');
+    }
+  });
+}
+
+// ── EVENTS ────────────────────────────────────────────────
+async function loadEvents() {
+  try {
+    const events = await fetch('/api/events').then(r => r.json());
+    document.getElementById('statEvents').textContent = events.length;
+    const list = document.getElementById('eventsList');
+
+    if (!events.length) {
+      list.innerHTML = `<div class="empty-state"><div class="em-icon">📅</div>No events yet.</div>`;
+      return;
+    }
+
+    list.innerHTML = events.map(e => `
+      <div class="list-item" id="evt-${e._id}">
+        <div class="list-item-icon">
+          ${e.photos?.[0] ? `<img src="${e.photos[0]}" alt=""/>` : '📅'}
+        </div>
+        <div class="list-item-info">
+          <div class="list-item-name">${e.eventName}</div>
+          <div class="list-item-meta">${e.teamName} · ${fmtDate(e.participatedDate)}</div>
+        </div>
+        <div class="list-item-actions">
+          <a href="/event-register?edit=${e._id}" class="act-btn edit" title="Edit">✏️</a>
+          <button class="act-btn del" title="Delete" onclick="deleteEvent('${e._id}','${e.eventName.replace(/'/g,"\\'")}')">🗑</button>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    document.getElementById('eventsList').innerHTML = `<div class="empty-state">Failed to load.</div>`;
+  }
+}
+
+async function deleteEvent(id, name) {
+  openDeleteModal(`Delete event "${name}"?`, async () => {
+    const res = await fetch(`/api/events/${id}`, { method:'DELETE' });
+    if (res.ok) {
+      showToast('✓ Event deleted', 'ok');
+      document.getElementById(`evt-${id}`)?.remove();
+      const cur = parseInt(document.getElementById('statEvents').textContent) || 0;
+      document.getElementById('statEvents').textContent = Math.max(0, cur - 1);
+    } else {
+      showToast('Failed to delete', 'err');
+    }
+  });
+}
+
+// ── BADGES ────────────────────────────────────────────────
+async function loadBadges() {
+  try {
+    const data = await fetch('/api/badges').then(r => r.json());
+    const badges = data.badges || [];
+    const list = document.getElementById('badgesList');
+
+    if (!badges.length) {
+      list.innerHTML = `<div class="empty-state"><div class="em-icon">🏅</div>No badges yet.</div>`;
+      return;
+    }
+
+    list.innerHTML = badges.map(b => `
+      <div class="list-item" id="badge-${b._id}">
+        <div class="list-item-icon">
+          ${b.imageUrl ? `<img src="${b.imageUrl}" alt=""/>` : (b.emoji || '🏅')}
+        </div>
+        <div class="list-item-info">
+          <div class="list-item-name">${b.title}</div>
+          <div class="list-item-meta">${b.tag} · ${fmtDate(b.createdAt)}</div>
+        </div>
+        <div class="list-item-actions">
+          <a href="/badge-register?edit=${b._id}" class="act-btn edit" title="Edit">✏️</a>
+          <button class="act-btn del" title="Delete" onclick="deleteBadge('${b._id}','${b.title.replace(/'/g,"\\'")}')">🗑</button>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    document.getElementById('badgesList').innerHTML = `<div class="empty-state">Failed to load.</div>`;
+  }
+}
+
+async function deleteBadge(id, name) {
+  openDeleteModal(`Delete badge "${name}"?`, async () => {
+    const res = await fetch(`/api/badges/${id}`, { method:'DELETE' });
+    if (res.ok) {
+      showToast('✓ Badge deleted', 'ok');
+      document.getElementById(`badge-${id}`)?.remove();
+    } else {
+      showToast('Failed to delete', 'err');
+    }
+  });
+}
+
+// ── INIT ──────────────────────────────────────────────────
+loadAll();
+</script>
+</body>
+</html>

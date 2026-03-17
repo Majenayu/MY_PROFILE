@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Login — Ayush Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;height:100%;}
+body{
+  min-height:100vh;background:#060a10;
+  font-family:'Syne',sans-serif;color:#e8eaf0;
+  overflow:hidden;display:flex;align-items:center;justify-content:center;
+}
+:root{
+  --bg:#060a10;--card:#0c1525;--surface:#0f1d30;
+  --border:rgba(0,240,255,0.13);--accent:#00f0ff;--accent2:#7c3aed;
+  --danger:#f87171;--success:#4ade80;--text:#e8eaf0;--muted:#4f6080;
+  --mono:'Space Mono',monospace;--display:'Bebas Neue',sans-serif;
+}
+
+/* Grid background */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(0,240,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,240,255,0.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+/* Noise texture */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.45;
+}
+
+/* Blobs */
+.blob{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;}
+.b1{width:500px;height:500px;top:-150px;left:-100px;background:radial-gradient(circle,rgba(0,240,255,0.09),transparent 70%);animation:d1 18s ease-in-out infinite;}
+.b2{width:400px;height:400px;bottom:-100px;right:-80px;background:radial-gradient(circle,rgba(124,58,237,0.09),transparent 70%);animation:d2 22s ease-in-out infinite;}
+.b3{width:250px;height:250px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,240,255,0.04),transparent 70%);animation:d3 30s linear infinite;}
+@keyframes d1{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,50px)}}
+@keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,-40px)}}
+@keyframes d3{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* CARD */
+.login-wrap{position:relative;z-index:1;width:100%;max-width:420px;padding:20px;}
+.login-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:36px 32px 32px;
+  box-shadow:
+    0 0 0 1px rgba(0,240,255,.04),
+    0 40px 80px rgba(0,0,0,.7),
+    inset 0 1px 0 rgba(0,240,255,.07);
+  backdrop-filter:blur(32px);
+  position:relative;overflow:hidden;
+}
+.login-card::before{
+  content:'';display:block;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent2) 30%,var(--accent) 70%,transparent);
+  margin-bottom:28px;border-radius:2px;
+}
+
+/* LOGO / TITLE */
+.login-logo{text-align:center;margin-bottom:28px;}
+.login-logo .icon{
+  width:56px;height:56px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(0,240,255,.12),rgba(124,58,237,.12));
+  border:1px solid rgba(0,240,255,.18);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:1.6rem;margin-bottom:14px;
+  box-shadow:0 0 24px rgba(0,240,255,.08);
+}
+.login-title{
+  font-family:var(--display);font-size:2rem;letter-spacing:.08em;
+  background:linear-gradient(130deg,#fff 20%,var(--accent) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:6px;
+}
+.login-sub{
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.18em;
+  color:var(--muted);text-transform:uppercase;
+}
+
+/* FIELDS */
+.field{margin-bottom:18px;}
+.field label{
+  display:block;font-family:var(--mono);font-size:.52rem;
+  letter-spacing:.14em;color:var(--muted);margin-bottom:7px;text-transform:uppercase;
+}
+.input-wrap{position:relative;}
+.input-wrap input{
+  width:100%;background:rgba(0,0,0,.3);
+  border:1px solid var(--border);border-radius:10px;
+  padding:11px 42px 11px 14px;
+  font-family:'Syne',sans-serif;font-size:.9rem;
+  color:var(--text);outline:none;
+  transition:border-color .25s,box-shadow .25s;
+  letter-spacing:.03em;
+}
+.input-wrap input::placeholder{color:var(--muted);opacity:.5;}
+.input-wrap input:focus{
+  border-color:rgba(0,240,255,.4);
+  box-shadow:0 0 0 3px rgba(0,240,255,.06),0 0 20px rgba(0,240,255,.05);
+}
+.input-wrap input.err{border-color:rgba(248,113,113,.4);}
+.toggle-pw{
+  position:absolute;right:13px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:.85rem;opacity:.6;padding:4px;transition:opacity .2s;
+}
+.toggle-pw:hover{opacity:1;}
+
+/* ERROR MESSAGE */
+.error-msg{
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.06em;
+  color:var(--danger);margin-top:6px;
+  background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2);
+  border-radius:8px;padding:8px 12px;display:none;
+}
+.error-msg.show{display:block;}
+
+/* SUBMIT */
+.login-btn{
+  width:100%;margin-top:6px;padding:13px;border-radius:10px;border:none;cursor:pointer;
+  font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.14em;
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  color:#060a10;transition:opacity .2s,transform .2s;
+  box-shadow:0 4px 24px rgba(0,240,255,.2),0 0 0 0 rgba(0,240,255,0);
+  position:relative;overflow:hidden;
+}
+.login-btn:hover:not(:disabled){opacity:.88;transform:translateY(-1px);box-shadow:0 6px 28px rgba(0,240,255,.28);}
+.login-btn:active{transform:translateY(0);}
+.login-btn:disabled{opacity:.45;cursor:not-allowed;}
+.login-btn .btn-loader{
+  display:none;width:16px;height:16px;
+  border:2px solid rgba(0,0,0,.25);border-top-color:#000;
+  border-radius:50%;animation:spin .6s linear infinite;margin:0 auto;
+}
+.login-btn.loading .btn-text{display:none;}
+.login-btn.loading .btn-loader{display:block;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* BACK LINK */
+.back-link{
+  display:block;text-align:center;margin-top:20px;
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;
+  color:var(--muted);text-decoration:none;transition:color .2s;
+}
+.back-link:hover{color:var(--accent);}
+
+/* SHAKE */
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%,60%{transform:translateX(-6px)}
+  40%,80%{transform:translateX(6px)}
+}
+.card-shake{animation:shake .35s ease;}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+
+<div class="login-wrap">
+  <div class="login-card" id="loginCard">
+    
+    <div class="login-logo">
+      <div class="icon">⚙️</div>
+      <div class="login-title">Admin Panel</div>
+      <div class="login-sub">Portfolio Management System</div>
+    </div>
+
+    <div class="field">
+      <label>Username</label>
+      <div class="input-wrap">
+        <input type="text" id="username" placeholder="Enter username" autocomplete="username" autocapitalize="none" spellcheck="false"/>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <div class="input-wrap">
+        <input type="password" id="password" placeholder="Enter password" autocomplete="current-password"/>
+        <button class="toggle-pw" id="togglePw" type="button" title="Toggle visibility">👁</button>
+      </div>
+    </div>
+
+    <div class="error-msg" id="errorMsg">⚠ Incorrect username or password.</div>
+
+    <button class="login-btn" id="loginBtn">
+      <span class="btn-text">🔓 LOGIN</span>
+      <div class="btn-loader"></div>
+    </button>
+
+  </div>
+  <a href="/" class="back-link">← Back to Portfolio</a>
+</div>
+
+<script>
+const ADMIN_USER = 'majen';
+const ADMIN_PASS = 'majen';
+const SESSION_KEY = 'ayush_admin_token';
+
+// If already logged in, redirect to dashboard
+if (sessionStorage.getItem(SESSION_KEY) === 'authenticated') {
+  window.location.href = '/dashboard';
+}
+
+// Toggle password visibility
+document.getElementById('togglePw').addEventListener('click', () => {
+  const pw = document.getElementById('password');
+  pw.type = pw.type === 'password' ? 'text' : 'password';
+});
+
+// Enter key support
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') doLogin();
+});
+
+// Login button
+document.getElementById('loginBtn').addEventListener('click', doLogin);
+
+function doLogin() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const btn = document.getElementById('loginBtn');
+  const errMsg = document.getElementById('errorMsg');
+  const card = document.getElementById('loginCard');
+
+  errMsg.classList.remove('show');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  // Simulate a tiny delay for UX
+  setTimeout(() => {
+    if (username === ADMIN_USER && password === ADMIN_PASS) {
+      sessionStorage.setItem(SESSION_KEY, 'authenticated');
+      window.location.href = '/dashboard';
+    } else {
+      errMsg.classList.add('show');
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      // Shake card
+      card.classList.remove('card-shake');
+      void card.offsetWidth;
+      card.classList.add('card-shake');
+      // Shake fields
+      document.getElementById('username').classList.add('err');
+      document.getElementById('password').classList.add('err');
+      document.getElementById('password').value = '';
+    }
+  }, 500);
+}
+</script>
+</body>
+</html>

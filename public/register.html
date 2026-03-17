@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Register — Ayush Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;background:#020810;font-family:'Syne',sans-serif;color:#e8eaf0;overflow-x:hidden;}
+:root{
+  --bg:#020810;--card:#0b131fef;--surface:#0f1c2e;--surface2:#111f33;
+  --border:rgba(0,240,255,0.13);--accent:#00f0ff;--accent2:#7c3aed;
+  --danger:#f87171;--success:#4ade80;--text:#e8eaf0;--muted:#4f6080;
+  --mono:'Space Mono',monospace;--display:'Bebas Neue',sans-serif;
+}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.04;}
+body::after{content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(0,240,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,.04) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;z-index:0;}
+.blob{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;}
+.b1{width:500px;height:500px;top:-150px;right:20%;background:radial-gradient(circle,rgba(0,212,255,0.07),transparent 70%);animation:bf1 12s ease-in-out infinite;}
+.b2{width:400px;height:400px;bottom:-100px;left:30%;background:radial-gradient(circle,rgba(124,58,237,0.06),transparent 70%);animation:bf2 16s ease-in-out infinite;}
+@keyframes bf1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-20px,15px) scale(.97)}}
+@keyframes bf2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-25px,-30px) scale(1.04)}}
+
+.page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:36px 24px 60px;}
+
+/* Header */
+.header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;gap:16px;flex-wrap:wrap;}
+.page-title{font-family:var(--display);font-size:3rem;letter-spacing:.05em;line-height:1;background:linear-gradient(130deg,#fff 20%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-sub{font-family:var(--mono);font-size:.52rem;color:var(--muted);letter-spacing:.12em;margin-top:3px;text-transform:uppercase;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;color:var(--muted);padding:7px 13px;border-radius:6px;border:1px solid var(--border);background:var(--card);transition:color .2s,border-color .2s;flex-shrink:0;}
+.back-btn:hover{color:var(--accent);border-color:rgba(0,240,255,.3);}
+
+/* Tabs */
+.tabs{display:flex;gap:0;margin-bottom:22px;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.tab{flex:1;padding:10px 16px;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:var(--surface);border:none;color:var(--muted);transition:all .2s;text-align:center;}
+.tab:first-child{border-right:1px solid var(--border);}
+.tab.active{background:rgba(0,240,255,.08);color:var(--accent);border-bottom:2px solid var(--accent);}
+.tab:hover:not(.active){color:var(--p-text);}
+
+/* Form card */
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:12px;border-bottom-right-radius:20px;padding:26px;box-shadow:0 8px 40px rgba(0,0,0,.5);position:relative;}
+.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent) 40%,var(--accent2) 80%,transparent);border-radius:12px 12px 0 0;}
+
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+.card-title{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;color:var(--accent);opacity:.7;margin-bottom:18px;text-transform:uppercase;}
+
+/* Fields */
+.field{margin-bottom:14px;}
+.field label{display:block;font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;color:var(--muted);margin-bottom:5px;text-transform:uppercase;}
+.field input,.field textarea,.field select{width:100%;background:rgba(0,240,255,.03);border:1px solid var(--border);border-radius:8px;padding:9px 13px;font-family:'Syne',sans-serif;font-size:.82rem;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;resize:none;}
+.field textarea{height:72px;line-height:1.5;}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:rgba(0,240,255,.4);box-shadow:0 0 0 3px rgba(0,240,255,.06);}
+.field select option{background:var(--surface);}
+.field small{font-family:var(--mono);font-size:.5rem;color:var(--muted);}
+
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:540px){.field-row{grid-template-columns:1fr;}}
+
+/* Buttons */
+.btn-row{display:flex;gap:10px;margin-top:20px;}
+.submit-btn{flex:1;padding:11px;border-radius:8px;border:none;cursor:pointer;font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.12em;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#020810;
+  transition:opacity .2s,transform .2s;box-shadow:0 4px 20px rgba(0,240,255,.2);position:relative;}
+.submit-btn:hover:not(:disabled){opacity:.88;transform:translateY(-1px);}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed;}
+.submit-btn .btn-loader{display:none;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-top-color:#020810;border-radius:50%;animation:spin .6s linear infinite;margin:0 auto;}
+.submit-btn.loading .btn-text{display:none;}
+.submit-btn.loading .btn-loader{display:block;}
+.cancel-btn{padding:11px 20px;border-radius:8px;border:1px solid var(--border);cursor:pointer;font-family:var(--mono);font-size:.62rem;background:var(--surface);color:var(--muted);transition:border-color .2s,color .2s;}
+.cancel-btn:hover{border-color:rgba(248,113,113,.3);color:var(--danger);}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Toast */
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(16px);font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;padding:9px 18px;border-radius:10px;z-index:200;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap;}
+.toast.ok{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:var(--success);}
+.toast.err{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--danger);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* Photo preview strip */
+.photo-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.photo-thumb{width:60px;height:60px;border-radius:6px;object-fit:cover;border:1px solid rgba(0,240,255,.2);}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="page-title" id="pageTitle">Register</div>
+      <div class="page-sub" id="pageSub">Add an achievement or course</div>
+    </div>
+    <a href="/" class="back-btn">← Back to Portfolio</a>
+  </div>
+
+  <!-- Tabs (hidden when editing specific type) -->
+  <div class="tabs" id="tabBar">
+    <button class="tab active" id="tabAchievement" onclick="switchTab('achievement')">🏆 Achievement</button>
+    <button class="tab"        id="tabCourse"      onclick="switchTab('course')">📚 Course</button>
+  </div>
+
+  <div class="form-card">
+
+    <!-- ACHIEVEMENT FORM -->
+    <div class="tab-content active" id="contentAchievement">
+      <div class="card-title" id="achFormTitle">Add Achievement</div>
+      <div class="field">
+        <label>Event Name *</label>
+        <input type="text" id="a-eventName" placeholder="e.g. National Hackathon 2025" maxlength="100">
+      </div>
+      <div class="field">
+        <label>Place / Position *</label>
+        <input type="text" id="a-place" placeholder="e.g. 1st Place" maxlength="50">
+      </div>
+      <div class="field">
+        <label>Description</label>
+        <textarea id="a-description" placeholder="Describe this achievement…" maxlength="400"></textarea>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Priority Level</label>
+          <select id="a-priority">
+            <option value="high">High Priority</option>
+            <option value="medium" selected>Medium Priority</option>
+            <option value="low">Low Priority</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="a-date">
+        </div>
+      </div>
+      <div class="field">
+        <label>Photos (multiple allowed)</label>
+        <input type="file" id="a-photos" multiple accept="image/*">
+        <div class="photo-strip" id="aPhotoStrip"></div>
+        <small>Tip: Add multiple photos to create a slideshow</small>
+      </div>
+      <div class="btn-row">
+        <button class="submit-btn" id="a-submit">
+          <span class="btn-text">+ Add Achievement</span>
+          <div class="btn-loader"></div>
+        </button>
+        <button class="cancel-btn" onclick="window.location.href='/'">Cancel</button>
+      </div>
+    </div>
+
+    <!-- COURSE FORM -->
+    <div class="tab-content" id="contentCourse">
+      <div class="card-title" id="courseFormTitle">Add Course</div>
+      <div class="field">
+        <label>Course Name *</label>
+        <input type="text" id="c-name" placeholder="e.g. Machine Learning Specialization" maxlength="100">
+      </div>
+      <div class="field">
+        <label>Description *</label>
+        <textarea id="c-description" placeholder="What did you learn? Key topics covered…" maxlength="500"></textarea>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Priority Level</label>
+          <select id="c-priority">
+            <option value="high">High Priority</option>
+            <option value="medium" selected>Medium Priority</option>
+            <option value="low">Low Priority</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Rank / Order (1 = top)</label>
+          <input type="number" id="c-rank" placeholder="e.g. 1" min="1" max="100">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Completion Date</label>
+          <input type="date" id="c-date">
+        </div>
+        <div class="field">
+          <label>Certificate (image or PDF)</label>
+          <input type="file" id="c-certificate" accept="image/*,application/pdf">
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="submit-btn" id="c-submit">
+          <span class="btn-text">+ Add Course</span>
+          <div class="btn-loader"></div>
+        </button>
+        <button class="cancel-btn" onclick="window.location.href='/'">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Read URL params ──────────────────────────────────────────
+const params = new URLSearchParams(window.location.search);
+const editType = params.get('edit');   // 'achievement' | 'course'
+const editId   = params.get('id');
+const tabParam = params.get('tab');    // 'achievement' | 'course'
+
+// ── Tab switching ────────────────────────────────────────────
+function switchTab(which) {
+  document.getElementById('contentAchievement').classList.toggle('active', which==='achievement');
+  document.getElementById('contentCourse').classList.toggle('active', which==='course');
+  document.getElementById('tabAchievement').classList.toggle('active', which==='achievement');
+  document.getElementById('tabCourse').classList.toggle('active', which==='course');
+}
+
+// ── Init based on URL ─────────────────────────────────────────
+if (editType === 'achievement' && editId) {
+  document.getElementById('pageTitle').textContent = 'Edit Achievement';
+  document.getElementById('pageSub').textContent   = 'Update achievement details';
+  document.getElementById('tabBar').style.display  = 'none';
+  document.getElementById('achFormTitle').textContent = 'Edit Achievement';
+  document.querySelector('#a-submit .btn-text').textContent = '💾 Save Changes';
+  switchTab('achievement');
+  loadAchievement(editId);
+} else if (editType === 'course' && editId) {
+  document.getElementById('pageTitle').textContent  = 'Edit Course';
+  document.getElementById('pageSub').textContent    = 'Update course details';
+  document.getElementById('tabBar').style.display   = 'none';
+  document.getElementById('courseFormTitle').textContent = 'Edit Course';
+  document.querySelector('#c-submit .btn-text').textContent = '💾 Save Changes';
+  switchTab('course');
+  loadCourse(editId);
+} else if (tabParam === 'course') {
+  switchTab('course');
+}
+
+// ── Load for editing ──────────────────────────────────────────
+async function loadAchievement(id) {
+  try {
+    const r = await fetch('/api/achievements');
+    const list = await r.json();
+    const item = list.find(x => x._id === id);
+    if (!item) { showToast('Achievement not found','err'); return; }
+    document.getElementById('a-eventName').value = item.eventName||'';
+    document.getElementById('a-place').value     = item.place||'';
+    document.getElementById('a-description').value = item.description||'';
+    document.getElementById('a-priority').value  = item.priority||'medium';
+    if (item.date) document.getElementById('a-date').value = item.date.substring(0,10);
+    // Show existing photos
+    if (item.photos?.length) {
+      const strip = document.getElementById('aPhotoStrip');
+      strip.innerHTML = item.photos.map(url=>`<img src="${url}" class="photo-thumb" alt="">`).join('');
+    }
+  } catch(e) { showToast('Failed to load achievement','err'); }
+}
+
+async function loadCourse(id) {
+  try {
+    const r = await fetch('/api/courses');
+    const list = await r.json();
+    const item = list.find(x => x._id === id);
+    if (!item) { showToast('Course not found','err'); return; }
+    document.getElementById('c-name').value        = item.courseName||'';
+    document.getElementById('c-description').value = item.description||'';
+    document.getElementById('c-priority').value    = item.priority||'medium';
+    document.getElementById('c-rank').value        = item.rank||'';
+    if (item.completionDate) document.getElementById('c-date').value = item.completionDate.substring(0,10);
+  } catch(e) { showToast('Failed to load course','err'); }
+}
+
+// ── Photo preview ─────────────────────────────────────────────
+document.getElementById('a-photos').addEventListener('change', e => {
+  const strip = document.getElementById('aPhotoStrip');
+  strip.innerHTML = '';
+  for (const file of e.target.files) {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = document.createElement('img'); img.src = ev.target.result; img.className = 'photo-thumb';
+      strip.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+// ── Achievement submit ────────────────────────────────────────
+document.getElementById('a-submit').addEventListener('click', async () => {
+  const eventName = document.getElementById('a-eventName').value.trim();
+  const place     = document.getElementById('a-place').value.trim();
+  if (!eventName) { showToast('Event name is required','err'); return; }
+  if (!place)     { showToast('Place / position is required','err'); return; }
+
+  const btn = document.getElementById('a-submit');
+  btn.classList.add('loading'); btn.disabled = true;
+
+  if (editType === 'achievement' && editId) {
+    // PUT (text only — no new photos in edit mode)
+    const body = { eventName, place, description: document.getElementById('a-description').value.trim(),
+      priority: document.getElementById('a-priority').value,
+      achievementDate: document.getElementById('a-date').value };
+    try {
+      const r = await fetch(`/api/achievements/${editId}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
+      const d = await r.json();
+      if (d._id||d.eventName) { showToast('✓ Achievement updated!','ok'); setTimeout(()=>window.location.href='/',1400); }
+      else showToast(d.error||'Update failed','err');
+    } catch(e) { showToast('Network error','err'); }
+  } else {
+    // POST
+    const fd = new FormData();
+    fd.append('eventName',eventName); fd.append('place',place);
+    fd.append('description',document.getElementById('a-description').value.trim());
+    fd.append('priority',document.getElementById('a-priority').value);
+    fd.append('achievementDate',document.getElementById('a-date').value);
+    const photos = document.getElementById('a-photos').files;
+    for (const f of photos) fd.append('photos',f);
+    try {
+      const r = await fetch('/api/achievements',{method:'POST',body:fd});
+      const d = await r.json();
+      if (d._id||d.eventName) { showToast('✓ Achievement added!','ok'); setTimeout(()=>window.location.href='/',1400); }
+      else showToast(d.error||'Failed','err');
+    } catch(e) { showToast('Network error','err'); }
+  }
+  btn.classList.remove('loading'); btn.disabled = false;
+});
+
+// ── Course submit ─────────────────────────────────────────────
+document.getElementById('c-submit').addEventListener('click', async () => {
+  const courseName  = document.getElementById('c-name').value.trim();
+  const description = document.getElementById('c-description').value.trim();
+  if (!courseName)  { showToast('Course name is required','err'); return; }
+  if (!description) { showToast('Description is required','err'); return; }
+
+  const btn = document.getElementById('c-submit');
+  btn.classList.add('loading'); btn.disabled = true;
+
+  if (editType === 'course' && editId) {
+    const body = { courseName, description,
+      priority: document.getElementById('c-priority').value,
+      rank: document.getElementById('c-rank').value||'0',
+      completionDate: document.getElementById('c-date').value };
+    try {
+      const r = await fetch(`/api/courses/${editId}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      const d = await r.json();
+      if (d._id||d.courseName) { showToast('✓ Course updated!','ok'); setTimeout(()=>window.location.href='/',1400); }
+      else showToast(d.error||'Update failed','err');
+    } catch(e) { showToast('Network error','err'); }
+  } else {
+    const fd = new FormData();
+    fd.append('courseName',courseName); fd.append('description',description);
+    fd.append('priority',document.getElementById('c-priority').value);
+    fd.append('rank',document.getElementById('c-rank').value||'0');
+    fd.append('completionDate',document.getElementById('c-date').value);
+    const cert = document.getElementById('c-certificate').files[0];
+    if (cert) fd.append('certificate',cert);
+    try {
+      const r = await fetch('/api/courses',{method:'POST',body:fd});
+      const d = await r.json();
+      if (d._id||d.courseName) { showToast('✓ Course added!','ok'); setTimeout(()=>window.location.href='/',1400); }
+      else showToast(d.error||'Failed','err');
+    } catch(e) { showToast('Network error','err'); }
+  }
+  btn.classList.remove('loading'); btn.disabled = false;
+});
+
+// ── Toast ─────────────────────────────────────────────────────
+function showToast(msg,type='ok') {
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className=`toast ${type}`;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+</script>
+</body>
+</html>

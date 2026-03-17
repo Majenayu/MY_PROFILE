@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Register Event — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;background:#020810;font-family:'Syne',sans-serif;color:#e8eaf0;overflow-x:hidden;}
+:root{
+  --bg:#020810;--card:#0b131fef;--surface:#0f1c2e;--surface2:#0f1d30;
+  --border:rgba(0,240,255,0.13);--accent:#00f0ff;--accent2:#7c3aed;
+  --danger:#f87171;--success:#4ade80;--text:#e8eaf0;--muted:#4f6080;
+  --mono:'Space Mono',monospace;--display:'Bebas Neue',sans-serif;
+}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(0,240,255,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,240,255,0.04) 1px,transparent 1px);
+  background-size:60px 60px;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.4;}
+
+.blob{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;}
+.b1{width:420px;height:420px;top:-120px;left:-80px;background:radial-gradient(circle,rgba(0,240,255,0.06),transparent 70%);animation:d1 22s ease-in-out infinite;}
+.b2{width:340px;height:340px;bottom:-60px;right:-60px;background:radial-gradient(circle,rgba(124,58,237,0.07),transparent 70%);animation:d2 28s ease-in-out infinite;}
+@keyframes d1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,40px)}}
+@keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,-30px)}}
+
+.page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:28px 22px 60px;}
+
+/* HEADER */
+.header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;gap:14px;flex-wrap:wrap;}
+.page-title{font-family:var(--display);font-size:3rem;letter-spacing:.06em;line-height:1;
+  background:linear-gradient(130deg,#fff 20%,var(--accent) 60%,var(--accent2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-sub{font-family:var(--mono);font-size:.5rem;color:var(--muted);letter-spacing:.16em;margin-top:4px;text-transform:uppercase;}
+.header-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+  font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;color:var(--muted);
+  padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--card);
+  transition:color .2s,border-color .2s;cursor:pointer;background:none;}
+.nav-btn:hover{color:var(--accent);border-color:rgba(0,240,255,.3);}
+.nav-btn.display{color:rgba(0,240,255,.6);border-color:rgba(0,240,255,.25);}
+.nav-btn.display:hover{color:var(--accent);border-color:rgba(0,240,255,.5);}
+
+/* FORM CARD */
+.form-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:4px 4px 20px 4px;padding:26px;
+  box-shadow:0 0 0 1px rgba(0,240,255,.04),0 40px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(0,240,255,.06);
+  backdrop-filter:blur(28px);position:relative;overflow:hidden;
+}
+.form-card::before{
+  content:'';display:block;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent) 40%,var(--accent2) 80%,transparent);
+  border-radius:2px 2px 0 0;margin-bottom:22px;opacity:.7;
+}
+
+/* SECTION */
+.section-lbl{
+  font-family:var(--mono);font-size:.56rem;letter-spacing:.18em;
+  color:var(--accent);opacity:.8;margin-bottom:14px;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+}
+.section-lbl::after{content:'';flex:1;height:1px;background:var(--border);}
+.form-section{margin-bottom:22px;}
+
+/* FIELDS */
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.field-row.three{grid-template-columns:1fr 1fr 1fr;}
+@media(max-width:640px){.field-row,.field-row.three{grid-template-columns:1fr;}}
+.field{margin-bottom:14px;}
+.field:last-child{margin-bottom:0;}
+.field label{
+  display:block;font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;
+  color:var(--muted);margin-bottom:6px;text-transform:uppercase;
+}
+.field input,.field textarea,.field select{
+  width:100%;background:rgba(0,240,255,.03);border:1px solid var(--border);
+  border-radius:6px;padding:9px 13px;font-family:'Syne',sans-serif;font-size:.82rem;
+  color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted);opacity:.6;}
+.field textarea{line-height:1.5;resize:vertical;min-height:72px;}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:rgba(0,240,255,.4);
+  box-shadow:0 0 0 3px rgba(0,240,255,.06),0 0 20px rgba(0,240,255,.06);
+}
+.field select option{background:var(--surface);}
+.field small{font-family:var(--mono);font-size:.46rem;color:var(--muted);margin-top:4px;display:block;letter-spacing:.06em;}
+.char-count{font-family:var(--mono);font-size:.46rem;color:var(--muted);text-align:right;margin-top:2px;}
+
+/* PHOTO UPLOAD */
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;}
+@media(max-width:500px){.photo-grid{grid-template-columns:repeat(2,1fr);}}
+.photo-slot{
+  aspect-ratio:4/3;border:1px dashed rgba(0,240,255,.2);border-radius:8px;
+  background:rgba(0,0,0,.15);position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.photo-slot:hover,.photo-slot.dragover{border-color:rgba(0,240,255,.4);background:rgba(0,240,255,.03);}
+.photo-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.photo-slot-icon{font-size:1.4rem;opacity:.3;pointer-events:none;}
+.photo-slot-label{font-family:var(--mono);font-size:.44rem;color:var(--muted);opacity:.6;margin-top:4px;pointer-events:none;}
+.photo-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.photo-slot .rm-photo{
+  position:absolute;top:5px;right:5px;width:22px;height:22px;border-radius:50%;
+  background:rgba(0,0,0,.75);border:1px solid rgba(248,113,113,.4);color:var(--danger);
+  cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;
+  z-index:2;opacity:0;transition:opacity .2s;
+}
+.photo-slot:hover .rm-photo{opacity:1;}
+.photo-count{font-family:var(--mono);font-size:.5rem;color:var(--muted);margin-top:8px;text-align:right;}
+
+/* TEAM MEMBERS */
+.team-members-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+.team-member-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;align-items:center;
+  background:rgba(0,240,255,.02);border:1px solid var(--border);
+  border-radius:8px;padding:10px;
+}
+@media(max-width:640px){.team-member-row{grid-template-columns:1fr 1fr;}}
+.team-member-row input{
+  background:rgba(0,0,0,.2);border:1px solid rgba(0,240,255,.1);border-radius:5px;
+  padding:7px 10px;font-family:'Syne',sans-serif;font-size:.78rem;color:var(--text);
+  outline:none;width:100%;transition:border-color .2s;
+}
+.team-member-row input:focus{border-color:rgba(0,240,255,.3);}
+.team-member-row input::placeholder{color:var(--muted);opacity:.5;font-size:.72rem;}
+.rm-member{
+  width:28px;height:28px;border-radius:6px;border:1px solid rgba(248,113,113,.25);
+  background:rgba(248,113,113,.05);color:var(--danger);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;
+  flex-shrink:0;transition:background .2s;
+}
+.rm-member:hover{background:rgba(248,113,113,.12);}
+.add-member-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;
+  padding:8px 16px;border-radius:7px;cursor:pointer;
+  background:rgba(0,240,255,.05);color:rgba(0,240,255,.6);
+  border:1px dashed rgba(0,240,255,.2);transition:all .2s;
+}
+.add-member-btn:hover{background:rgba(0,240,255,.08);border-color:rgba(0,240,255,.35);color:var(--accent);}
+
+/* ACTIONS */
+.form-actions{display:flex;gap:10px;margin-top:6px;padding-top:18px;border-top:1px solid var(--border);}
+.btn-submit{
+  flex:1;padding:11px;border-radius:8px;border:none;cursor:pointer;
+  font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.12em;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#020810;
+  transition:opacity .2s,transform .2s;
+  box-shadow:0 4px 20px rgba(0,240,255,.2);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-submit:hover:not(:disabled){opacity:.88;transform:translateY(-1px);}
+.btn-submit:disabled{opacity:.45;cursor:not-allowed;}
+.btn-loader{display:none;width:14px;height:14px;border:2px solid rgba(0,0,0,.25);
+  border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;}
+.btn-submit.loading .btn-label{display:none;}
+.btn-submit.loading .btn-loader{display:block;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn-reset{
+  padding:11px 20px;border-radius:8px;cursor:pointer;font-family:var(--mono);
+  font-size:.6rem;letter-spacing:.1em;background:transparent;color:var(--muted);
+  border:1px solid var(--border);transition:all .2s;
+}
+.btn-reset:hover{border-color:rgba(248,113,113,.3);color:var(--danger);}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(14px);
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;
+  padding:8px 18px;border-radius:10px;z-index:200;opacity:0;
+  transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap;
+}
+.toast.ok{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:var(--success);}
+.toast.err{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--danger);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="page-title" id="pageTitle">Register Event</div>
+      <div class="page-sub">Log an event to your portfolio timeline</div>
+    </div>
+    <div class="header-right">
+      <a href="/event-display" class="nav-btn display">◈ View Events</a>
+      <a href="/" class="nav-btn">← Back</a>
+    </div>
+  </div>
+
+  <div class="form-card">
+
+    <!-- BASIC INFO -->
+    <div class="form-section">
+      <div class="section-lbl">Event Info</div>
+      <div class="field-row">
+        <div class="field">
+          <label>Event Name *</label>
+          <input type="text" id="evName" placeholder="Hackathon / Competition / Workshop" maxlength="120" autocomplete="off"/>
+        </div>
+        <div class="field">
+          <label>Participated Date *</label>
+          <input type="date" id="evDate"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>Description *</label>
+        <textarea id="evDesc" placeholder="What happened? What did you build or learn? What was the outcome?" maxlength="600"></textarea>
+        <div class="char-count" id="descCount">0 / 600</div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Project / Result Link <small style="display:inline;text-transform:none;">(optional)</small></label>
+          <input type="url" id="evLink" placeholder="https://devpost.com/..."/>
+        </div>
+        <div class="field">
+          <label>Display Order <small style="display:inline;text-transform:none;">(lower = shown first)</small></label>
+          <input type="number" id="evOrder" value="0" min="0" max="999"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="form-section">
+      <div class="section-lbl">Team Details</div>
+      <div class="field" style="margin-bottom:16px;">
+        <label>Team Name *</label>
+        <input type="text" id="evTeamName" placeholder="e.g. CodeBreakers" maxlength="80" autocomplete="off"/>
+      </div>
+      <div class="section-lbl" style="font-size:.48rem;opacity:.5;">Team Members</div>
+      <div class="team-members-list" id="membersList"></div>
+      <button class="add-member-btn" type="button" id="addMemberBtn">+ Add Member</button>
+    </div>
+
+    <!-- PHOTOS -->
+    <div class="form-section">
+      <div class="section-lbl">Event Photos <small style="font-family:var(--mono);font-size:.44rem;color:var(--muted);opacity:.7;text-transform:none;">(up to 6)</small></div>
+      <div class="photo-grid" id="photoGrid"></div>
+      <div class="photo-count" id="photoCount">0 / 6 photos</div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="form-actions">
+      <button class="btn-reset" type="button" id="resetBtn">Reset</button>
+      <button class="btn-submit" id="submitBtn">
+        <span class="btn-label" id="submitLabel">Save Event</span>
+        <div class="btn-loader"></div>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── State ────────────────────────────────────────────
+let photoFiles = new Array(6).fill(null);
+let editEventId = null;
+
+// ── Init ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  renderPhotoGrid();
+  addMemberRow();
+  setupListeners();
+  checkEditMode();
+  document.getElementById('evDate').valueAsDate = new Date();
+});
+
+// ── Photo Grid ───────────────────────────────────────
+function renderPhotoGrid() {
+  const grid = document.getElementById('photoGrid');
+  grid.innerHTML = '';
+  for (let i = 0; i < 6; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'photo-slot';
+    slot.dataset.idx = i;
+
+    if (photoFiles[i]) {
+      const url = typeof photoFiles[i] === 'string' ? photoFiles[i] : URL.createObjectURL(photoFiles[i]);
+      slot.innerHTML = `
+        <img src="${url}" alt="Photo ${i+1}"/>
+        <button class="rm-photo" data-idx="${i}" type="button">×</button>`;
+    } else {
+      slot.innerHTML = `
+        <input type="file" accept="image/*" data-idx="${i}"/>
+        <div style="text-align:center;pointer-events:none;">
+          <div class="photo-slot-icon">📷</div>
+          <div class="photo-slot-label">${i === 0 ? 'Cover photo' : `Photo ${i+1}`}</div>
+        </div>`;
+    }
+    grid.appendChild(slot);
+  }
+  // Bind inputs
+  grid.querySelectorAll('input[type=file]').forEach(inp => {
+    inp.addEventListener('change', e => handlePhoto(parseInt(e.target.dataset.idx), e.target.files[0]));
+  });
+  grid.querySelectorAll('.rm-photo').forEach(btn => {
+    btn.addEventListener('click', e => { photoFiles[parseInt(e.target.dataset.idx)] = null; renderPhotoGrid(); updatePhotoCount(); });
+  });
+  updatePhotoCount();
+}
+
+function handlePhoto(idx, file) {
+  if (!file || !file.type.startsWith('image/')) return;
+  if (file.size > 10 * 1024 * 1024) { showToast('Image must be under 10MB', 'err'); return; }
+  photoFiles[idx] = file;
+  renderPhotoGrid();
+}
+
+function updatePhotoCount() {
+  const count = photoFiles.filter(Boolean).length;
+  document.getElementById('photoCount').textContent = `${count} / 6 photos`;
+}
+
+// ── Team Members ─────────────────────────────────────
+function addMemberRow(data = {}) {
+  const list = document.getElementById('membersList');
+  const row = document.createElement('div');
+  row.className = 'team-member-row';
+  row.innerHTML = `
+    <input type="text" placeholder="Name" value="${data.name||''}" class="m-name" maxlength="60"/>
+    <input type="text" placeholder="Role / Title" value="${data.role||''}" class="m-role" maxlength="60"/>
+    <input type="text" placeholder="Email (optional)" value="${data.email||''}" class="m-email" maxlength="80"/>
+    <button class="rm-member" type="button" title="Remove">×</button>`;
+  row.querySelector('.rm-member').addEventListener('click', () => {
+    if (document.querySelectorAll('.team-member-row').length > 1) row.remove();
+    else showToast('At least one member required', 'err');
+  });
+  list.appendChild(row);
+}
+
+function getMembers() {
+  return Array.from(document.querySelectorAll('.team-member-row')).map(r => ({
+    name:  r.querySelector('.m-name').value.trim(),
+    role:  r.querySelector('.m-role').value.trim(),
+    email: r.querySelector('.m-email').value.trim()
+  })).filter(m => m.name && m.role);
+}
+
+// ── Listeners ────────────────────────────────────────
+function setupListeners() {
+  document.getElementById('addMemberBtn').addEventListener('click', () => addMemberRow());
+
+  document.getElementById('evDesc').addEventListener('input', function() {
+    document.getElementById('descCount').textContent = `${this.value.length} / 600`;
+  });
+
+  document.getElementById('submitBtn').addEventListener('click', submitEvent);
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if (!confirm('Reset all fields?')) return;
+    document.getElementById('evName').value  = '';
+    document.getElementById('evDesc').value  = '';
+    document.getElementById('evLink').value  = '';
+    document.getElementById('evOrder').value = '0';
+    document.getElementById('evTeamName').value = '';
+    document.getElementById('descCount').textContent = '0 / 600';
+    photoFiles = new Array(6).fill(null);
+    renderPhotoGrid();
+    document.getElementById('membersList').innerHTML = '';
+    addMemberRow();
+    document.getElementById('evDate').valueAsDate = new Date();
+  });
+}
+
+// ── Submit ────────────────────────────────────────────
+async function submitEvent() {
+  const name     = document.getElementById('evName').value.trim();
+  const date     = document.getElementById('evDate').value;
+  const desc     = document.getElementById('evDesc').value.trim();
+  const teamName = document.getElementById('evTeamName').value.trim();
+  const members  = getMembers();
+
+  if (!name)     { showToast('Event name is required', 'err'); return; }
+  if (!date)     { showToast('Date is required', 'err'); return; }
+  if (!desc)     { showToast('Description is required', 'err'); return; }
+  if (!teamName) { showToast('Team name is required', 'err'); return; }
+  if (!members.length) { showToast('Add at least one team member with name + role', 'err'); return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.classList.add('loading'); btn.disabled = true;
+
+  const fd = new FormData();
+  fd.append('eventName',        name);
+  fd.append('participatedDate', date);
+  fd.append('description',      desc);
+  fd.append('projectLink',      document.getElementById('evLink').value.trim());
+  fd.append('displayOrder',     document.getElementById('evOrder').value || '0');
+  fd.append('teamName',         teamName);
+  fd.append('teamMembers',      JSON.stringify(members));
+
+  // Handle photos: new files vs existing URLs
+  const existingPhotos = [];
+  for (let i = 0; i < 6; i++) {
+    if (photoFiles[i]) {
+      if (typeof photoFiles[i] === 'string') {
+        existingPhotos.push(photoFiles[i]);
+      } else {
+        fd.append('photos', photoFiles[i]);
+      }
+    }
+  }
+  if (existingPhotos.length) fd.append('existingPhotos', JSON.stringify(existingPhotos));
+
+  try {
+    const url    = editEventId ? `/api/events/${editEventId}` : '/api/events';
+    const method = editEventId ? 'PUT' : 'POST';
+    const res    = await fetch(url, { method, body: fd });
+    const data   = await res.json();
+
+    if (res.ok && (data.event || data._id)) {
+      showToast(editEventId ? '✓ Event updated!' : '✓ Event registered!', 'ok');
+      setTimeout(() => window.location.href = '/event-display', 1500);
+    } else {
+      showToast('Error: ' + (data.error || 'Failed to save'), 'err');
+    }
+  } catch(e) {
+    showToast('Network error — try again', 'err');
+  }
+
+  btn.classList.remove('loading'); btn.disabled = false;
+}
+
+// ── Edit mode ────────────────────────────────────────
+async function checkEditMode() {
+  const params = new URLSearchParams(window.location.search);
+  editEventId = params.get('edit');
+  if (!editEventId) return;
+
+  document.getElementById('pageTitle').textContent    = 'Edit Event';
+  document.getElementById('submitLabel').textContent  = 'Update Event';
+
+  try {
+    const res = await fetch(`/api/events/${editEventId}`);
+    if (!res.ok) return;
+    const ev = await res.json();
+
+    document.getElementById('evName').value  = ev.eventName || '';
+    document.getElementById('evDesc').value  = ev.description || '';
+    document.getElementById('evLink').value  = ev.projectLink || '';
+    document.getElementById('evOrder').value = ev.displayOrder || '0';
+    document.getElementById('evTeamName').value = ev.teamName || '';
+    document.getElementById('descCount').textContent = `${(ev.description||'').length} / 600`;
+
+    if (ev.participatedDate) {
+      document.getElementById('evDate').value = ev.participatedDate.split('T')[0];
+    }
+
+    // Load existing photos as URLs
+    if (ev.photos && ev.photos.length) {
+      ev.photos.forEach((url, i) => { if (i < 6) photoFiles[i] = url; });
+      renderPhotoGrid();
+    }
+
+    // Load team members
+    if (ev.teamMembers && ev.teamMembers.length) {
+      document.getElementById('membersList').innerHTML = '';
+      ev.teamMembers.forEach(m => addMemberRow(m));
+    }
+  } catch(e) { console.error('Error loading event for edit:', e); }
+}
+
+// ── Toast ─────────────────────────────────────────────
+function showToast(msg, type = 'ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast ${type}`;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3200);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Badge Register — Ayush</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;background:#060a10;font-family:'Syne',sans-serif;color:#e8eaf0;overflow-x:hidden;}
+:root{
+  --bg:#060a10;--card:#0c1525;--surface:#0f1d30;--surface2:#111f33;
+  --border:rgba(0,240,255,0.13);--accent:#00f0ff;--accent2:#7c3aed;
+  --danger:#f87171;--success:#4ade80;--text:#e8eaf0;--muted:#4f6080;
+  --mono:'Space Mono',monospace;--display:'Bebas Neue',sans-serif;
+}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.45;}
+.blob{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;}
+.b1{width:400px;height:400px;top:-100px;left:-80px;background:radial-gradient(circle,rgba(0,240,255,0.08),transparent 70%);animation:d1 20s ease-in-out infinite;}
+.b2{width:300px;height:300px;bottom:0;right:0;background:radial-gradient(circle,rgba(124,58,237,0.08),transparent 70%);animation:d2 25s ease-in-out infinite;}
+@keyframes d1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,40px)}}
+@keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,-30px)}}
+
+.page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:36px 24px 60px;}
+
+/* HEADER */
+.header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;gap:16px;flex-wrap:wrap;}
+.page-title{font-family:var(--display);font-size:3rem;letter-spacing:.05em;line-height:1;background:linear-gradient(130deg,#fff 20%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-sub{font-family:var(--mono);font-size:.55rem;color:var(--muted);letter-spacing:.12em;margin-top:4px;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--muted);padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--card);transition:color .2s,border-color .2s;flex-shrink:0;}
+.back-btn:hover{color:var(--accent);border-color:rgba(0,240,255,.3);}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
+@media(max-width:620px){.layout{grid-template-columns:1fr;}}
+
+/* CARDS */
+.form-card,.list-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px;box-shadow:0 8px 40px rgba(0,0,0,.4);}
+.form-card::before{content:'';display:block;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;margin-bottom:22px;}
+
+.card-title{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;color:var(--accent);opacity:.7;margin-bottom:16px;}
+
+/* FIELDS */
+.field{margin-bottom:14px;}
+.field label{display:block;font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;color:var(--muted);margin-bottom:5px;text-transform:uppercase;}
+.field input,.field textarea{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:9px 13px;font-family:'Syne',sans-serif;font-size:.8rem;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;resize:none;}
+.field textarea{height:68px;line-height:1.5;}
+.field input:focus,.field textarea:focus{border-color:rgba(0,240,255,.4);box-shadow:0 0 0 3px rgba(0,240,255,.07);}
+.field input.err{border-color:rgba(248,113,113,.5);}
+
+/* EMOJI + IMAGE ROW */
+.media-row{display:flex;gap:10px;align-items:flex-start;}
+.emoji-box{flex-shrink:0;}
+.emoji-input{width:52px;height:42px;text-align:center;font-size:1.3rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);outline:none;padding:4px;transition:border-color .2s;cursor:text;}
+.emoji-input:focus{border-color:rgba(0,240,255,.4);}
+
+.img-drop{flex:1;border:1.5px dashed rgba(0,240,255,.18);border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:var(--surface);transition:border-color .2s,background .2s;position:relative;overflow:hidden;min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;}
+.img-drop:hover,.img-drop.drag{border-color:rgba(0,240,255,.4);background:rgba(0,240,255,.04);}
+.img-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon{font-size:1.1rem;}
+.drop-label{font-family:var(--mono);font-size:.52rem;color:var(--muted);letter-spacing:.06em;}
+.drop-name{font-family:var(--mono);font-size:.5rem;color:var(--accent);display:none;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;}
+.img-thumb{width:46px;height:46px;border-radius:8px;object-fit:cover;display:none;border:1px solid rgba(0,240,255,.2);}
+.img-clear{display:none;font-family:var(--mono);font-size:.48rem;color:var(--danger);cursor:pointer;margin-top:2px;}
+.img-clear:hover{text-decoration:underline;}
+
+/* COLOR CHIPS */
+.color-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px;}
+.cc{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s,border-color .15s;flex-shrink:0;}
+.cc:hover{transform:scale(1.2);}
+.cc.sel{border-color:#fff;transform:scale(1.15);}
+
+/* SUBMIT */
+.submit-btn{width:100%;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.12em;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000;margin-top:6px;transition:opacity .2s,transform .2s;box-shadow:0 4px 20px rgba(0,240,255,.2);position:relative;overflow:hidden;}
+.submit-btn:hover:not(:disabled){opacity:.88;transform:translateY(-1px);}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed;}
+.submit-btn .btn-loader{display:none;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;margin:0 auto;}
+.submit-btn.loading .btn-text{display:none;}
+.submit-btn.loading .btn-loader{display:block;}
+
+.cancel-btn{width:100%;padding:8px;border-radius:10px;border:1px solid var(--border);cursor:pointer;font-family:var(--mono);font-size:.6rem;font-weight:400;letter-spacing:.1em;background:var(--surface);color:var(--muted);margin-top:8px;transition:border-color .2s,color .2s;}
+.cancel-btn:hover{border-color:rgba(248,113,113,.3);color:var(--danger);}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* PREVIEW PANEL */
+.preview-wrap{margin-top:14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px;display:flex;align-items:center;gap:10px;}
+.preview-ball{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;overflow:hidden;transition:all .3s;position:relative;}
+.preview-ball img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.preview-ball .pb-shine{position:absolute;top:4px;left:6px;width:9px;height:5px;background:rgba(255,255,255,.45);border-radius:50%;filter:blur(2px);}
+.preview-info{}
+.preview-title{font-size:.78rem;font-weight:700;color:var(--text);}
+.preview-tag{font-family:var(--mono);font-size:.52rem;color:var(--muted);margin-top:2px;}
+
+/* LIST */
+.list-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.list-title-text{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;color:var(--accent);opacity:.7;}
+.badge-count{font-size:.52rem;padding:2px 8px;border-radius:10px;background:rgba(0,240,255,.1);border:1px solid rgba(0,240,255,.2);color:var(--accent);font-family:var(--mono);}
+
+.badge-list{display:flex;flex-direction:column;gap:8px;max-height:480px;overflow-y:auto;padding-right:3px;}
+.badge-list::-webkit-scrollbar{width:3px;}
+.badge-list::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:3px;}
+
+/* Global spinner for list */
+.list-spinner{display:flex;align-items:center;justify-content:center;padding:28px 0;}
+.list-spinner .spinner{width:20px;height:20px;border:2px solid rgba(0,240,255,.15);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;}
+
+.badge-item{display:flex;align-items:center;gap:10px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:10px 12px;transition:border-color .2s;}
+.badge-item:hover{border-color:rgba(0,240,255,.22);}
+.bi-img{width:36px;height:36px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;overflow:hidden;border:1px solid rgba(255,255,255,.08);}
+.bi-img img{width:100%;height:100%;object-fit:cover;}
+.bi-info{flex:1;min-width:0;}
+.bi-title{font-size:.78rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bi-desc{font-size:.62rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px;}
+.bi-tag{font-family:var(--mono);font-size:.48rem;letter-spacing:.06em;padding:1px 6px;border-radius:6px;border:1px solid;margin-top:3px;display:inline-block;}
+.bi-actions{display:flex;gap:4px;flex-shrink:0;}
+.bi-edit{flex-shrink:0;width:26px;height:26px;border-radius:7px;border:1px solid rgba(0,240,255,.2);background:rgba(0,240,255,.06);color:var(--accent);font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;}
+.bi-edit:hover{background:rgba(0,240,255,.18);border-color:rgba(0,240,255,.4);}
+.bi-edit:disabled{opacity:.4;cursor:not-allowed;}
+.bi-del{flex-shrink:0;width:26px;height:26px;border-radius:7px;border:1px solid rgba(248,113,113,.2);background:rgba(248,113,113,.06);color:var(--danger);font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;}
+.bi-del:hover{background:rgba(248,113,113,.18);border-color:rgba(248,113,113,.4);}
+.bi-del:disabled{opacity:.4;cursor:not-allowed;}
+
+.empty-state{text-align:center;padding:28px 0;font-family:var(--mono);font-size:.6rem;color:var(--muted);letter-spacing:.1em;opacity:.45;}
+
+/* TOAST */
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(16px);font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;padding:9px 18px;border-radius:10px;z-index:200;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap;}
+.toast.ok{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:var(--success);}
+.toast.err{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--danger);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<div class="page">
+
+  <div class="header">
+    <div>
+      <div class="page-title">Badge Register</div>
+      <div class="page-sub">Add &amp; manage your achievement badges</div>
+    </div>
+    <a href="/" class="back-btn">← Back to Profile</a>
+  </div>
+
+  <div class="layout">
+
+    <!-- ── FORM ── -->
+    <div class="form-card">
+
+      <div class="field">
+        <label>Badge Title *</label>
+        <input type="text" id="f-title" placeholder="e.g. Hackathon Winner" maxlength="60"/>
+      </div>
+
+      <div class="field">
+        <label>Description *</label>
+        <textarea id="f-desc" placeholder="Why does this achievement matter to you?"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Tag / Category</label>
+        <input type="text" id="f-tag" placeholder="e.g. National · AI" maxlength="40"/>
+      </div>
+
+      <div class="field">
+        <label>Emoji &amp; Image</label>
+        <div class="media-row">
+          <div class="emoji-box">
+            <input class="emoji-input" type="text" id="f-emoji" value="🏅" maxlength="2" title="Fallback emoji"/>
+          </div>
+          <div class="img-drop" id="drop-zone">
+            <input type="file" id="f-img" accept="image/*"/>
+            <img class="img-thumb" id="img-thumb" alt="preview"/>
+            <span class="drop-icon" id="drop-icon">🖼️</span>
+            <span class="drop-label" id="drop-label">Upload image (optional)</span>
+            <span class="drop-name" id="drop-name"></span>
+            <span class="img-clear" id="img-clear" onclick="clearImage()">✕ remove</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Accent Color</label>
+        <div class="color-chips" id="color-chips"></div>
+      </div>
+
+      <!-- Live preview -->
+      <div class="preview-wrap">
+        <div class="preview-ball" id="prev-ball">
+          <div class="pb-shine"></div>
+          <span id="prev-emoji">🏅</span>
+        </div>
+        <div class="preview-info">
+          <div class="preview-title" id="prev-title">Badge Preview</div>
+          <div class="preview-tag" id="prev-tag">Tag · Category</div>
+        </div>
+      </div>
+
+      <br/>
+      <button class="submit-btn" id="submit-btn">
+        <span class="btn-text" id="btn-text">+ Add Badge</span>
+        <div class="btn-loader"></div>
+      </button>
+      
+      <button class="cancel-btn" id="cancel-btn" style="display:none;">
+        <span>Cancel Edit</span>
+      </button>
+    </div>
+
+    <!-- ── LIST ── -->
+    <div class="list-card">
+      <div class="list-header">
+        <span class="list-title-text">Saved Badges</span>
+        <span class="badge-count" id="badge-count">0</span>
+      </div>
+      <div class="badge-list" id="badge-list">
+        <div class="list-spinner"><div class="spinner"></div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const COLORS=["#f7c948","#00f0ff","#a855f7","#4ade80","#f97316","#facc15","#38bdf8","#fb7185","#34d399","#f472b6","#c084fc","#60a5fa"];
+let selColor=COLORS[0];
+let imgFile=null;
+let editingBadge=null;
+
+// ── Color chips ──────────────────────────────
+const chipsWrap=document.getElementById("color-chips");
+COLORS.forEach((c,i)=>{
+  const ch=document.createElement("div");
+  ch.className="cc"+(i===0?" sel":"");
+  ch.style.background=c;
+  ch.addEventListener("click",()=>{
+    document.querySelectorAll(".cc").forEach(x=>x.classList.remove("sel"));
+    ch.classList.add("sel");selColor=c;
+    updatePreview();
+  });
+  chipsWrap.appendChild(ch);
+});
+
+// ── Image drop / upload ──────────────────────
+const fileInput=document.getElementById("f-img");
+const imgThumb=document.getElementById("img-thumb");
+const dropIcon=document.getElementById("drop-icon");
+const dropLabel=document.getElementById("drop-label");
+const dropName=document.getElementById("drop-name");
+const imgClear=document.getElementById("img-clear");
+const dropZone=document.getElementById("drop-zone");
+
+dropZone.addEventListener("dragover",e=>{e.preventDefault();dropZone.classList.add("drag");});
+dropZone.addEventListener("dragleave",()=>dropZone.classList.remove("drag"));
+dropZone.addEventListener("drop",e=>{
+  e.preventDefault();dropZone.classList.remove("drag");
+  const f=e.dataTransfer.files[0];if(f&&f.type.startsWith("image/")){setFile(f);}
+});
+
+fileInput.addEventListener("change",()=>{if(fileInput.files[0])setFile(fileInput.files[0]);});
+
+function setFile(f){
+  imgFile=f;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    imgThumb.src=e.target.result;imgThumb.style.display="block";
+    dropIcon.style.display="none";dropLabel.style.display="none";
+    dropName.textContent=f.name;dropName.style.display="block";
+    imgClear.style.display="block";
+
+    // preview ball
+    const pb=document.getElementById("prev-ball");
+    pb.innerHTML=`<div class="pb-shine"></div><img src="${e.target.result}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/>`;
+  };
+  reader.readAsDataURL(f);
+}
+
+function clearImage(){
+  imgFile=null;fileInput.value="";
+  imgThumb.style.display="none";imgThumb.src="";
+  dropIcon.style.display="";dropLabel.style.display="";
+  dropName.style.display="none";imgClear.style.display="none";
+  updatePreview();
+}
+
+// ── Live preview ─────────────────────────────
+function updatePreview(){
+  const pb=document.getElementById("prev-ball");
+  if(!imgFile){
+    const emoji=document.getElementById("f-emoji").value||"🏅";
+    pb.innerHTML=`<div class="pb-shine"></div><span id="prev-emoji">${emoji}</span>`;
+  }
+  pb.style.background=`radial-gradient(circle at 35% 30%,rgba(255,255,255,.3) 0%,transparent 50%),radial-gradient(circle at 65% 70%,${selColor}55 0%,transparent 60%),linear-gradient(135deg,${selColor},${selColor}bb)`;
+  pb.style.boxShadow=`0 0 12px ${selColor}80`;
+  const t=document.getElementById("f-title").value||"Badge Preview";
+  const tag=document.getElementById("f-tag").value||"Tag · Category";
+  document.getElementById("prev-title").textContent=t;
+  document.getElementById("prev-tag").textContent=tag;
+  document.getElementById("prev-tag").style.color=selColor;
+}
+
+["f-title","f-tag","f-emoji"].forEach(id=>document.getElementById(id).addEventListener("input",updatePreview));
+updatePreview();
+
+// ── API helpers ──────────────────────────────
+async function apiFetch(url,opts={}){
+  const r=await fetch(url,opts);
+  return r.json();
+}
+
+// ── Render badge list ─────────────────────────
+async function renderList(){
+  const list=document.getElementById("badge-list");
+  list.innerHTML=`<div class="list-spinner"><div class="spinner"></div></div>`;
+  const data=await apiFetch("/api/badges").catch(()=>({badges:[]}));
+  const badges=data.badges||[];
+  document.getElementById("badge-count").textContent=badges.length;
+  list.innerHTML="";
+  if(!badges.length){list.innerHTML=`<div class="empty-state">No badges yet — add your first one!</div>`;return;}
+
+  badges.forEach(b=>{
+    const col=b.color||"#00f0ff";
+    const item=document.createElement("div");item.className="badge-item";
+
+    const bi=document.createElement("div");bi.className="bi-img";
+    bi.style.background=col+"18";bi.style.borderColor=col+"44";
+    if(b.imgUrl){const im=document.createElement("img");im.src=b.imgUrl;im.alt="";bi.appendChild(im);}
+    else{bi.textContent=b.emoji||"🏅";}
+
+    const info=document.createElement("div");info.className="bi-info";
+    const title=document.createElement("div");title.className="bi-title";title.textContent=b.title;
+    const desc=document.createElement("div");desc.className="bi-desc";desc.textContent=b.desc;
+    const tag=document.createElement("div");tag.className="bi-tag";tag.textContent=b.tag||"Achievement";
+    tag.style.color=col;tag.style.borderColor=col+"44";tag.style.background=col+"11";
+    info.appendChild(title);info.appendChild(desc);info.appendChild(tag);
+
+    const del=document.createElement("button");del.className="bi-del";del.innerHTML="✕";del.title="Delete";
+    del.addEventListener("click",async()=>{
+      del.disabled=true;del.innerHTML="…";
+      const res=await apiFetch(`/api/badges/${b._id}`,{method:"DELETE"}).catch(()=>({success:false}));
+      if(res.success){showToast("Badge deleted","ok");renderList();}
+      else{showToast("Delete failed","err");del.disabled=false;del.innerHTML="✕";}
+    });
+
+    const edit=document.createElement("button");edit.className="bi-edit";edit.innerHTML="✎";edit.title="Edit";
+    edit.addEventListener("click",()=>editBadge(b));
+
+    const actions=document.createElement("div");actions.className="bi-actions";
+    actions.appendChild(edit);actions.appendChild(del);
+
+    item.appendChild(bi);item.appendChild(info);item.appendChild(actions);
+    list.appendChild(item);
+  });
+}
+
+// ── Edit badge ────────────────────────────────
+function editBadge(badge){
+  editingBadge=badge;
+  
+  // Fill form with badge data
+  document.getElementById("f-title").value=badge.title||"";
+  document.getElementById("f-desc").value=badge.desc||"";
+  document.getElementById("f-tag").value=badge.tag||"";
+  document.getElementById("f-emoji").value=badge.emoji||"🏅";
+  
+  // Set color
+  const colorIndex=COLORS.indexOf(badge.color);
+  if(colorIndex>=0){
+    document.querySelectorAll(".cc").forEach(x=>x.classList.remove("sel"));
+    document.querySelectorAll(".cc")[colorIndex].classList.add("sel");
+    selColor=badge.color;
+  }
+  
+  // Handle image
+  if(badge.imgUrl){
+    imgThumb.src=badge.imgUrl;imgThumb.style.display="block";
+    dropIcon.style.display="none";dropLabel.style.display="none";
+    dropName.textContent="Current image";dropName.style.display="block";
+    imgClear.style.display="block";
+    imgFile="existing"; // Flag to indicate existing image
+  }
+  
+  // Update UI
+  document.getElementById("btn-text").textContent="Update Badge";
+  document.getElementById("cancel-btn").style.display="block";
+  
+  updatePreview();
+  
+  // Scroll to form
+  document.querySelector(".form-card").scrollIntoView({behavior:"smooth"});
+}
+
+function cancelEdit(){
+  editingBadge=null;
+  
+  // Clear form
+  document.getElementById("f-title").value="";
+  document.getElementById("f-desc").value="";
+  document.getElementById("f-tag").value="";
+  document.getElementById("f-emoji").value="🏅";
+  
+  // Reset color to first
+  document.querySelectorAll(".cc").forEach(x=>x.classList.remove("sel"));
+  document.querySelectorAll(".cc")[0].classList.add("sel");
+  selColor=COLORS[0];
+  
+  clearImage();
+  
+  // Update UI
+  document.getElementById("btn-text").textContent="+ Add Badge";
+  document.getElementById("cancel-btn").style.display="none";
+  
+  updatePreview();
+}
+
+document.getElementById("cancel-btn").addEventListener("click",cancelEdit);
+
+// ── Submit ────────────────────────────────────
+document.getElementById("submit-btn").addEventListener("click",async()=>{
+  const title=document.getElementById("f-title").value.trim();
+  const desc=document.getElementById("f-desc").value.trim();
+  const tag=document.getElementById("f-tag").value.trim();
+  const emoji=document.getElementById("f-emoji").value.trim()||"🏅";
+
+  if(!title){shake("f-title");showToast("Title is required","err");return;}
+  if(!desc){shake("f-desc");showToast("Description is required","err");return;}
+
+  const btn=document.getElementById("submit-btn");
+  btn.classList.add("loading");btn.disabled=true;
+
+  const fd=new FormData();
+  fd.append("title",title);fd.append("desc",desc);fd.append("tag",tag);
+  fd.append("emoji",emoji);fd.append("color",selColor);
+  if(imgFile&&imgFile!=="existing")fd.append("image",imgFile);
+
+  const url=editingBadge?`/api/badges/${editingBadge._id}`:"/api/badges";
+  const method=editingBadge?"PUT":"POST";
+  
+  const res=await fetch(url,{method,body:fd}).then(r=>r.json()).catch(()=>({success:false,error:"Network error"}));
+
+  btn.classList.remove("loading");btn.disabled=false;
+
+  if(res.success){
+    showToast(editingBadge?"✓ Badge updated!":"✓ Badge saved!","ok");
+    cancelEdit(); // This will clear the form and reset UI
+    renderList();
+  } else {
+    showToast(res.error||"Something went wrong","err");
+  }
+});
+
+// ── Helpers ───────────────────────────────────
+function shake(id){
+  const el=document.getElementById(id);
+  el.classList.add("err");
+  el.style.animation="shake .3s ease";
+  el.addEventListener("animationend",()=>{el.style.animation="";},{ once:true });
+  setTimeout(()=>el.classList.remove("err"),1200);
+}
+function showToast(msg,type="ok"){
+  const t=document.getElementById("toast");
+  t.textContent=msg;t.className=`toast ${type}`;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2800);
+}
+
+// ── Shake keyframe ─────────────────────────────
+const s=document.createElement("style");
+s.textContent=`@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}`;
+document.head.appendChild(s);
+
+renderList();
+</script>
+</body>
+</html>

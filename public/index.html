@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayush — Portfolio Interface</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── Background canvas (z-index 0) ── -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROFILE PANEL — fixed top-left  330px × 50vh
+  ═══════════════════════════════════════════════════════ -->
+  <div class="panel" id="profilePanel">
+    <div class="panel-inner">
+
+      <!-- HERO ROW: char image LEFT + name/identity RIGHT -->
+      <div class="hero-row">
+        <div class="char-wrap">
+          <img class="char-img" id="profileCharImg"
+            src="https://storage.googleapis.com/anirive-outputs/users/HN9YKn8OyMfDhEb7ofw1ho2mzGQ2/chars/mmnd4h8r/anims/mmnd8v9a/animation.webp"
+            alt="Avatar"/>
+          <div class="char-shadow"></div>
+        </div>
+        <div class="identity-col">
+          <span class="name-tag">[ Portfolio ]</span>
+          <div class="name-main" id="profileName">P G AYUSH RAI</div>
+          <div class="name-sub"  id="profileTitle">B.Tech · Developer · Builder</div>
+          <div class="chips" id="profileChips" style="margin-top:6px;">
+            <div class="chip on"  id="chipStatus">● Open to Opportunities</div>
+            <div class="chip"     id="chipLocation">📍 India</div>
+            <div class="chip"     id="chipEdu">🚀 B.Tech</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABOUT — full width below hero -->
+      <div class="about-row">
+        <div class="about-label">About</div>
+        <p class="about-text" id="profileAbout">
+          <strong>P G Ayush Rai</strong> — technologist &amp; builder at the intersection of AI, software, and engineering.
+        </p>
+      </div>
+
+      <div class="div"></div>
+
+      <!-- Badge tube -->
+      <div class="ach-wrap">
+        <div class="ach-label">Achievements</div>
+        <div class="ach-row">
+          <div class="htube">
+            <div class="tcap left"></div>
+            <div class="tshaft-horizontal" id="shaft">
+              <div class="tube-loader"><div class="spinner"></div></div>
+            </div>
+            <div class="tcap right"></div>
+          </div>
+        </div>
+        <div class="ach-detail-area">
+          <div class="ach-hint" id="hint">← tap a badge to inspect</div>
+          <div class="ach-card" id="card">
+            <div class="ach-top">
+              <div class="ach-img-wrap" id="cimg"></div>
+              <div class="ach-title"    id="ct"></div>
+            </div>
+            <div class="ach-desc" id="cd"></div>
+            <div class="ach-tag"  id="ctag"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pfooter">
+        <div class="pf-copy">© 2025 PG Ayush Rai</div>
+        <div class="pf-actions">
+          <a href="/login" class="pf-edit" style="opacity:0.55;font-size:0.55rem;letter-spacing:0.1em;">⚙ Admin</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- END PROFILE PANEL -->
+
+  <!-- ═══════════════════════════════════════════════════════
+       ACHIEVEMENTS + COURSES — fixed top-right 52% × 50vh
+  ═══════════════════════════════════════════════════════ -->
+  <div class="container" id="portfolioPanel">
+    <section id="splitScreen" class="section active">
+      <div class="split-container">
+
+        <!-- Left: Achievements -->
+        <div class="split-left">
+          <div class="section-header">
+            <h2>My Achievements</h2>
+            <div class="stats-display">
+              <span class="stat-number" id="totalAchievements">0</span>
+              <span class="stat-label">total</span>
+            </div>
+          </div>
+          <div class="achievement-slideshow-container">
+            <div class="slideshow-wrapper">
+              <div class="achievement-slideshow" id="achievementSlideshow"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Courses -->
+        <div class="split-right">
+          <div class="section-header">
+            <h2>Learning Journey</h2>
+            <div class="stats-display">
+              <span class="stat-number" id="totalCourses">0</span>
+              <span class="stat-label">courses</span>
+            </div>
+          </div>
+          <div class="courses-list-container">
+            <div class="courses-list" id="coursesList"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+  <!-- END PORTFOLIO PANEL -->
+
+  <!-- ═══════════════════════════════════════════════════════
+       JARVIS CENTER INTERFACE
+  ═══════════════════════════════════════════════════════ -->
+  <div class="main-interface" id="mainInterface">
+    <div class="center-container">
+
+      <svg class="background-rings" viewBox="0 0 600 600">
+        <circle cx="300" cy="300" r="280" fill="none" stroke="rgba(0,212,255,0.10)" stroke-width="1"/>
+        <circle cx="300" cy="300" r="220" fill="none" stroke="rgba(0,212,255,0.15)" stroke-width="1" stroke-dasharray="5 10"/>
+        <circle cx="300" cy="300" r="160" fill="none" stroke="rgba(255,149,0,0.10)" stroke-width="1"/>
+      </svg>
+
+      <!-- Center core -->
+      <div class="center-core">
+        <div class="core-glow"></div>
+        <div class="core-inner">
+          <div class="rotating-coin" id="rotatingCoin">
+
+            <!-- Front: CodeBreakers -->
+            <div class="coin-side coin-front">
+              <svg viewBox="0 0 160 160" class="coin-logo">
+                <defs>
+                  <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"   stop-color="#00d4ff"/>
+                    <stop offset="50%"  stop-color="#00ffaa"/>
+                    <stop offset="100%" stop-color="#0099ff"/>
+                  </linearGradient>
+                  <filter id="cglow"><feGaussianBlur stdDeviation="4" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+                <circle cx="80" cy="80" r="75" stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
+                <circle cx="80" cy="80" r="65" stroke="url(#cg)" stroke-width="1" fill="none" opacity=".6"/>
+                <path d="M35 45 Q30 45 30 50 L30 65 Q30 70 25 70 Q30 70 30 75 L30 90 Q30 95 35 95"
+                      stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
+                <path d="M125 45 Q130 45 130 50 L130 65 Q130 70 135 70 Q130 70 130 75 L130 90 Q130 95 125 95"
+                      stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
+                <path d="M70 50 L90 50 L80 70 L95 70 L70 90 L85 70 L70 70 Z"
+                      fill="url(#cg)" filter="url(#cglow)"/>
+                <text x="50"  y="40"  font-family="monospace" font-size="6" fill="rgba(0,212,255,0.6)">101101</text>
+                <text x="50"  y="110" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.6)">011010</text>
+                <text x="100" y="40"  font-family="monospace" font-size="6" fill="rgba(0,212,255,0.6)">110011</text>
+                <text x="100" y="110" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.6)">101100</text>
+                <text x="80" y="120" text-anchor="middle" font-family="Orbitron,monospace" font-size="10"
+                      font-weight="bold" fill="url(#cg)" filter="url(#cglow)">CODE<tspan fill="#ff9500">BREAKERS</tspan></text>
+              </svg>
+            </div>
+
+            <!-- Back: MAJEN -->
+            <div class="coin-side coin-back">
+              <svg viewBox="0 0 160 160" class="coin-name">
+                <defs>
+                  <linearGradient id="ng" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"   stop-color="#ff9500"/>
+                    <stop offset="50%"  stop-color="#ffaa00"/>
+                    <stop offset="100%" stop-color="#ff6600"/>
+                  </linearGradient>
+                  <filter id="nglow"><feGaussianBlur stdDeviation="4" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+                <circle cx="80" cy="80" r="75" stroke="url(#ng)" stroke-width="3" fill="none" filter="url(#nglow)"/>
+                <circle cx="80" cy="80" r="65" stroke="url(#ng)" stroke-width="1" fill="none" opacity=".6"/>
+                <polygon points="80,30 85,40 95,40 87,48 90,58 80,52 70,58 73,48 65,40 75,40" fill="url(#ng)" filter="url(#nglow)"/>
+                <polygon points="80,130 85,120 95,120 87,112 90,102 80,108 70,102 73,112 65,120 75,120" fill="url(#ng)" filter="url(#nglow)"/>
+                <text x="80" y="85" text-anchor="middle" font-family="Orbitron,monospace" font-size="24"
+                      font-weight="900" fill="url(#ng)" filter="url(#nglow)" letter-spacing="2px">MAJEN</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orbiting nodes -->
+      <div class="menu-nodes">
+        <div class="node" data-panel="documents">
+          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg></div>
+        </div>
+        <div class="node" data-panel="youtube">
+          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/></svg></div>
+        </div>
+        <div class="node" data-panel="github">
+          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/></svg></div>
+        </div>
+        <div class="node" data-panel="linkedin">
+          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg></div>
+        </div>
+        <div class="node" data-panel="settings">
+          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.04 4.95,18.95L7.44,17.95C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.95L19.05,18.95C19.27,19.04 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/></svg></div>
+        </div>
+        <div class="node" data-panel="contact">
+          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/></svg></div>
+        </div>
+        <div class="node" id="gameNode" data-action="game">
+          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.97,16L5,19C4.67,19.3 4.23,19.5 3.75,19.5A1.75,1.75 0 0,1 2,17.75V17.5L3,10.12C3.21,7.81 5.14,6 7.5,6H16.5C18.86,6 20.79,7.81 21,10.12L22,17.5V17.75A1.75,1.75 0 0,1 20.25,19.5C19.77,19.5 19.33,19.3 19,19L16.03,16H7.97M7,9V11H5V13H7V15H9V13H11V11H9V9H7M14.5,12A1.5,1.5 0 0,0 13,13.5A1.5,1.5 0 0,0 14.5,15A1.5,1.5 0 0,0 16,13.5A1.5,1.5 0 0,0 14.5,12M17.5,9A1.5,1.5 0 0,0 16,10.5A1.5,1.5 0 0,0 17.5,12A1.5,1.5 0 0,0 19,10.5A1.5,1.5 0 0,0 17.5,9Z"/></svg></div>
+        </div>
+        
+       
+      </div>
+
+    </div>
+  </div>
+  <!-- END JARVIS -->
+
+  <!-- ═══════════════════════════════════════════════════════
+       MODALS
+  ═══════════════════════════════════════════════════════ -->
+
+  <!-- Add Achievement Modal -->
+  <div id="achievementModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('achievementModal')">&times;</span>
+      <h3>Add Achievement</h3>
+      <form id="achievementForm" enctype="multipart/form-data" class="project-form">
+        <div class="form-group">
+          <label for="eventName">Event Name *</label>
+          <input type="text" id="eventName" placeholder="Event Name" required maxlength="100">
+        </div>
+        <div class="form-group">
+          <label for="place">Place / Position *</label>
+          <input type="text" id="place" placeholder="e.g. 1st Place" required maxlength="50">
+        </div>
+        <div class="form-group">
+          <label for="achievementDescription">Description</label>
+          <textarea id="achievementDescription" placeholder="Describe this achievement…" maxlength="400" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="priority">Priority Level</label>
+          <select id="priority">
+            <option value="high">High Priority</option>
+            <option value="medium" selected>Medium Priority</option>
+            <option value="low">Low Priority</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="photos">Photos (multiple allowed)</label>
+          <input type="file" id="photos" multiple accept="image/*">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Add Achievement</button>
+          <button type="button" class="btn-secondary" onclick="closeModal('achievementModal')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Course Modal -->
+  <div id="courseModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('courseModal')">&times;</span>
+      <h3>Add Course</h3>
+      <form id="courseForm" enctype="multipart/form-data" class="project-form">
+        <div class="form-group">
+          <label for="courseName">Course Name *</label>
+          <input type="text" id="courseName" placeholder="Course Name" required maxlength="100">
+        </div>
+        <div class="form-group">
+          <label for="courseDescription">Description *</label>
+          <textarea id="courseDescription" placeholder="Course Description" required maxlength="500"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="coursePriority">Priority Level</label>
+          <select id="coursePriority">
+            <option value="high">High Priority</option>
+            <option value="medium" selected>Medium Priority</option>
+            <option value="low">Low Priority</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="courseRank">Rank / Order (1 = top)</label>
+          <input type="number" id="courseRank" placeholder="e.g. 1" min="1" max="100">
+        </div>
+        <div class="form-group">
+          <label for="certificate">Certificate (image or PDF)</label>
+          <input type="file" id="certificate" accept="image/*,application/pdf">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Add Course</button>
+          <button type="button" class="btn-secondary" onclick="closeModal('courseModal')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+  <!-- ═══════════════════════════════════════════════════════
+       PROJECTS PANEL — full-width bottom bar
+  ═══════════════════════════════════════════════════════ -->
+  <div class="proj-panel" id="projectsPanel">
+    <div class="proj-panel-inner">
+
+      <!-- HEADER -->
+      <div class="proj-header">
+        <div class="proj-title-group">
+          <span class="proj-label">[ Projects ]</span>
+          <span class="proj-live-dot"></span>
+        </div>
+        <div class="proj-actions">
+          <span id="projCount" class="proj-count">—</span>
+          <button id="projGameBtn" class="proj-icon-btn proj-btn-game" title="Tech Stack Blaster">🕹</button>
+        </div>
+      </div>
+
+      <!-- BODY: drag-info LEFT + preview RIGHT -->
+      <div class="proj-body" id="projBody">
+
+        <!-- LEFT: draggable info area -->
+        <div class="proj-drag-area" id="projDragArea">
+          <div class="proj-project" id="projProject">
+            <div class="proj-name-row">
+              <h2 class="proj-name" id="projName">—</h2>
+              <div class="proj-links">
+                <a id="projWebLink"    href="#" target="_blank" class="plink" style="display:none" title="Live demo">↗</a>
+                <a id="projGithubLink" href="#" target="_blank" class="plink" style="display:none" title="GitHub">⌥</a>
+              </div>
+            </div>
+            <div class="proj-meta-row" id="projMetaRow"></div>
+            <p class="proj-desc" id="projDesc">—</p>
+            <div class="proj-tech-inline">
+              <div class="proj-tech-tags" id="projTechTags"></div>
+            </div>
+          </div>
+          <div class="proj-bottom-row">
+            <div class="proj-drag-hint" id="projDragHint">
+              <span class="dh-arrow">‹</span>
+              <span class="dh-text">DRAG</span>
+              <span class="dh-arrow">›</span>
+            </div>
+            <div class="proj-dots" id="projDots"></div>
+          </div>
+        </div>
+
+        <!-- DIVIDER -->
+        <div class="proj-divider"></div>
+
+        <!-- RIGHT: preview (iframe + image + placeholder) -->
+        <div class="proj-preview-section" id="projPreviewSection">
+          <div class="proj-preview-label">PREVIEW</div>
+          <iframe id="projWebsitePreview" style="display:none;" title="Project Preview" scrolling="yes"></iframe>
+          <img    id="projPreviewImg"     src="" alt="Project Preview" style="display:none;">
+          <div    id="projPreviewPh"      class="proj-ph">
+            <span class="ph-bracket">[</span>
+            <span class="ph-icon">◈</span>
+            <span class="ph-bracket">]</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <!-- END PROJECTS PANEL -->
+
+  <!-- ═══════════════════════════════════════════════════════
+       EVENTS WIDGET — bottom-right (2-column: info+team | photo)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="events-widget" id="eventsWidget" style="display:none;">
+
+    <!-- Header: title + counter + register only (no nav — auto-rotates) -->
+    <div class="ew-header">
+      <div class="ew-title">
+        <span class="ew-title-text">EVENTS</span>
+        <span class="ew-live-dot"></span>
+      </div>
+      
+    </div>
+
+    <!-- Body: 2 columns (info+team left | photo right) -->
+    <div class="ew-body">
+
+      <!-- COL 1: event info + team members + dots -->
+      <div class="ew-info-col" id="ewInfoCol">
+        <div class="ew-info-scroll">
+          <div class="ew-event-label" id="ewLabel">CodeBreakers · Event</div>
+          <div class="ew-event-name" id="ewName">—</div>
+          <div class="ew-event-meta" id="ewMeta"></div>
+          <div class="ew-team" id="ewTeamTag"></div>
+          <p class="ew-desc" id="ewDesc">—</p>
+          <!-- Team members inline below description -->
+          <div class="ew-team-inline" id="ewTeamInline"></div>
+          <a id="ewProjLink" href="#" target="_blank" class="ew-proj-link" style="display:none;">↗ View Project</a>
+        </div>
+        <div class="ew-nav-row">
+          <div class="ew-dots" id="ewDotTrack"></div>
+        </div>
+      </div>
+
+      <div class="ew-divider"></div>
+
+      <!-- COL 2: photo carousel (full right side) -->
+      <div class="ew-photo-col" id="ewPhotoCol">
+        <div class="ew-carousel-track" id="ewCarouselTrack"></div>
+        <div class="ew-photo-strip" id="ewPhotoStrip"></div>
+        <button class="ew-photo-nav ew-photo-nav-l" id="ewPhotoLeft" style="display:none;">‹</button>
+        <button class="ew-photo-nav ew-photo-nav-r" id="ewPhotoRight" style="display:none;">›</button>
+        <div class="ew-stamp" id="ewStamp"></div>
+        <div class="ew-progress" id="ewProgressBar"></div>
+      </div>
+
+    </div>
+  </div><!-- end events widget -->
+
+  <!-- GAME CONSOLE OVERLAY -->
+  <div id="projGameConsole" class="game-console" style="display:none;">
+    <div class="game-console-inner">
+      <div class="game-header">
+        <span class="game-title">◈ TECH STACK BLASTER</span>
+        <button id="projCloseGame" class="game-close">✕</button>
+      </div>
+      <div class="game-screen-wrap">
+        <canvas id="projGameCanvas" class="game-canvas"></canvas>
+        <div class="game-scanlines"></div>
+      </div>
+      <div class="game-hud">
+        <div class="hud-block"><div class="hud-label">SCORE</div><div class="hud-value" id="projGameScore">000000</div></div>
+        <div class="hud-block"><div class="hud-label">LEVEL</div><div class="hud-value" id="projGameLevel">01</div></div>
+        <div class="hud-block"><div class="hud-label">LIVES</div><div class="hud-value" id="projGameLives">♥ ♥ ♥</div></div>
+      </div>
+      <div class="game-controls-hint">← → MOVE &nbsp;│&nbsp; SPACE SHOOT &nbsp;│&nbsp; R RESTART &nbsp;│&nbsp; ESC CLOSE</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Add Project — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;background:#020810;font-family:'Syne',sans-serif;color:#e8eaf0;overflow-x:hidden;}
+
+:root{
+  --bg:#020810;--card:#0b131fef;--surface:#0f1c2e;--surface2:#0f1d30;
+  --border:rgba(0,240,255,0.13);--accent:#00f0ff;--accent2:#7c3aed;
+  --danger:#f87171;--success:#4ade80;--text:#e8eaf0;--muted:#4f6080;
+  --mono:'Space Mono',monospace;--display:'Bebas Neue',sans-serif;
+}
+
+/* Grid background */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(0,240,255,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,240,255,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+/* Blobs */
+.blob{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;}
+.b1{width:400px;height:400px;top:-100px;left:-80px;background:radial-gradient(circle,rgba(0,240,255,0.06),transparent 70%);animation:d1 20s ease-in-out infinite;}
+.b2{width:300px;height:300px;bottom:0;right:0;background:radial-gradient(circle,rgba(124,58,237,0.07),transparent 70%);animation:d2 25s ease-in-out infinite;}
+@keyframes d1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,40px)}}
+@keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,-30px)}}
+
+.page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:32px 20px 60px;}
+
+/* HEADER */
+.header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;gap:16px;flex-wrap:wrap;}
+.page-title{font-family:var(--display);font-size:2.8rem;letter-spacing:.05em;line-height:1;background:linear-gradient(130deg,#fff 20%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-sub{font-family:var(--mono);font-size:.52rem;color:var(--muted);letter-spacing:.14em;margin-top:4px;text-transform:uppercase;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;color:var(--muted);padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:var(--card);transition:color .2s,border-color .2s;flex-shrink:0;}
+.back-btn:hover{color:var(--accent);border-color:rgba(0,240,255,.3);}
+
+/* FORM CARD */
+.form-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:4px 4px 20px 4px;
+  padding:28px;
+  box-shadow:0 0 0 1px rgba(0,240,255,.04),0 40px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(0,240,255,.06);
+  backdrop-filter:blur(28px);
+  position:relative;overflow:hidden;
+}
+.form-card::before{
+  content:'';display:block;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent2) 40%,var(--accent) 80%,transparent);
+  border-radius:2px 2px 0 0;margin-bottom:24px;opacity:.7;
+}
+
+/* SECTION TITLES */
+.section-lbl{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;
+  color:var(--accent2);opacity:.8;margin-bottom:14px;
+  text-transform:uppercase;display:flex;align-items:center;gap:8px;
+}
+.section-lbl::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* FIELDS */
+.form-section{margin-bottom:24px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:600px){.field-row{grid-template-columns:1fr;}}
+.field{margin-bottom:14px;}
+.field:last-child{margin-bottom:0;}
+.field label{
+  display:block;font-family:var(--mono);font-size:.52rem;
+  letter-spacing:.12em;color:var(--muted);margin-bottom:6px;text-transform:uppercase;
+}
+.field input,.field textarea,.field select{
+  width:100%;background:rgba(0,240,255,.03);
+  border:1px solid var(--border);border-radius:6px;
+  padding:9px 13px;font-family:'Syne',sans-serif;font-size:.82rem;
+  color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted);opacity:.6;}
+.field textarea{height:76px;line-height:1.5;resize:vertical;}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:rgba(124,58,237,.5);
+  box-shadow:0 0 0 3px rgba(124,58,237,.06),0 0 20px rgba(124,58,237,.08);
+}
+.field select option{background:var(--surface);}
+.field small{font-family:var(--mono);font-size:.48rem;color:var(--muted);margin-top:4px;display:block;letter-spacing:.06em;}
+.field .char-count{font-family:var(--mono);font-size:.48rem;color:var(--muted);text-align:right;margin-top:2px;}
+
+/* TECH STACK */
+.tech-search-wrap{position:relative;margin-bottom:10px;}
+.tech-search-wrap input{padding-right:32px;}
+.tech-search-wrap .clear-btn{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:1rem;line-height:1;padding:2px;
+}
+.tech-search-wrap .clear-btn:hover{color:var(--danger);}
+
+.tech-grid{
+  display:flex;flex-wrap:wrap;gap:5px;
+  max-height:150px;overflow-y:auto;
+  padding:8px;background:rgba(0,0,0,.2);
+  border:1px solid var(--border);border-radius:6px;
+  scrollbar-width:thin;scrollbar-color:rgba(0,240,255,.15) transparent;
+}
+.tech-grid::-webkit-scrollbar{width:3px;}
+.tech-grid::-webkit-scrollbar-thumb{background:rgba(0,240,255,.2);border-radius:2px;}
+
+.tech-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.04em;
+  padding:4px 10px;border-radius:12px;cursor:pointer;
+  background:rgba(0,240,255,.04);border:1px solid rgba(0,240,255,.12);
+  color:var(--muted);transition:all .18s;user-select:none;
+}
+.tech-chip:hover{border-color:rgba(124,58,237,.3);color:rgba(200,180,255,.8);}
+.tech-chip.selected{
+  background:rgba(124,58,237,.15);border-color:rgba(124,58,237,.4);
+  color:rgba(200,180,255,1);
+}
+.tech-chip.selected::before{content:'✓ ';}
+.tech-chip.hidden{display:none;}
+
+.selected-tags{
+  display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;min-height:20px;
+}
+.selected-tag{
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.04em;
+  padding:3px 9px;border-radius:10px;
+  background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);
+  color:rgba(200,180,255,.9);display:inline-flex;align-items:center;gap:5px;
+}
+.selected-tag .rm-tag{
+  cursor:pointer;opacity:.6;font-size:.7rem;line-height:1;
+  background:none;border:none;color:inherit;padding:0;
+}
+.selected-tag .rm-tag:hover{opacity:1;color:var(--danger);}
+
+.custom-tech-row{display:flex;gap:8px;margin-top:8px;}
+.custom-tech-row input{flex:1;}
+.custom-tech-row button{
+  flex-shrink:0;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;
+  padding:8px 16px;border-radius:6px;cursor:pointer;
+  background:rgba(124,58,237,.12);color:rgba(200,180,255,.8);
+  border:1px solid rgba(124,58,237,.25);transition:all .2s;
+}
+.custom-tech-row button:hover{background:rgba(124,58,237,.22);border-color:rgba(124,58,237,.4);}
+
+/* FILE UPLOAD */
+.file-upload-zone{
+  border:1px dashed rgba(0,240,255,.2);border-radius:8px;
+  padding:18px;text-align:center;cursor:pointer;
+  transition:all .2s;background:rgba(0,0,0,.15);
+  position:relative;overflow:hidden;
+}
+.file-upload-zone:hover,.file-upload-zone.dragover{
+  border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.04);
+}
+.file-upload-zone input[type=file]{
+  position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
+}
+.upload-icon{font-size:1.8rem;opacity:.4;margin-bottom:6px;}
+.upload-text{font-family:var(--mono);font-size:.55rem;color:var(--muted);letter-spacing:.08em;}
+.upload-text strong{color:rgba(0,240,255,.5);}
+.file-preview-area{
+  display:none;position:relative;border-radius:8px;overflow:hidden;
+  border:1px solid var(--border);max-height:140px;
+}
+.file-preview-area img{width:100%;height:140px;object-fit:cover;display:block;}
+.file-preview-area .remove-img{
+  position:absolute;top:7px;right:7px;
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(0,0,0,.7);border:1px solid rgba(248,113,113,.4);
+  color:var(--danger);cursor:pointer;font-size:.9rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.file-preview-area .remove-img:hover{background:rgba(248,113,113,.15);}
+
+/* ACTIONS */
+.form-actions{
+  display:flex;gap:10px;margin-top:6px;
+  padding-top:20px;border-top:1px solid var(--border);
+}
+.btn-submit{
+  flex:1;padding:12px;border-radius:8px;border:none;cursor:pointer;
+  font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.12em;
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  color:#020810;transition:opacity .2s,transform .2s;
+  box-shadow:0 4px 20px rgba(124,58,237,.3);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-submit:hover:not(:disabled){opacity:.88;transform:translateY(-1px);}
+.btn-submit:disabled{opacity:.45;cursor:not-allowed;}
+.btn-submit .loader{
+  display:none;width:14px;height:14px;
+  border:2px solid rgba(0,0,0,.25);border-top-color:#000;
+  border-radius:50%;animation:spin .6s linear infinite;
+}
+.btn-submit.loading .btn-label{display:none;}
+.btn-submit.loading .loader{display:block;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.btn-reset{
+  padding:12px 20px;border-radius:8px;cursor:pointer;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;
+  background:transparent;color:var(--muted);
+  border:1px solid var(--border);transition:all .2s;
+}
+.btn-reset:hover{border-color:rgba(248,113,113,.3);color:var(--danger);}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(14px);
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;
+  padding:9px 18px;border-radius:10px;z-index:200;opacity:0;
+  transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap;
+}
+.toast.ok{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:var(--success);}
+.toast.err{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--danger);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="page-title" id="pageTitle">Add Project</div>
+      <div class="page-sub">Register a project to your portfolio</div>
+    </div>
+    <a href="/" class="back-btn">← Back to Portfolio</a>
+  </div>
+
+  <div class="form-card">
+
+    <!-- BASIC INFO -->
+    <div class="form-section">
+      <div class="section-lbl">Basic Information</div>
+      <div class="field-row">
+        <div class="field">
+          <label>Project Name *</label>
+          <input type="text" id="projNameInput" placeholder="My Awesome Project" maxlength="100" autocomplete="off"/>
+        </div>
+        <div class="field">
+          <label>Priority <small style="display:inline;text-transform:none;font-size:.48rem;">(higher = shown first)</small></label>
+          <input type="number" id="projPriorityInput" value="0" min="0" max="100"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>Description *</label>
+        <textarea id="projDescInput" placeholder="Describe what your project does and its key features..." maxlength="500"></textarea>
+        <div class="char-count" id="descCount">0 / 500</div>
+      </div>
+    </div>
+
+    <!-- LINKS -->
+    <div class="form-section">
+      <div class="section-lbl">Links</div>
+      <div class="field-row">
+        <div class="field">
+          <label>Website / Demo</label>
+          <input type="url" id="projWebsiteInput" placeholder="https://example.com"/>
+        </div>
+        <div class="field">
+          <label>GitHub Repository</label>
+          <input type="url" id="projGithubInput" placeholder="https://github.com/user/repo"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECH STACK -->
+    <div class="form-section">
+      <div class="section-lbl">Tech Stack *</div>
+      <div class="tech-search-wrap">
+        <input type="text" id="techSearch" placeholder="Search technologies..."/>
+        <button class="clear-btn" id="techClearBtn" type="button">×</button>
+      </div>
+      <div class="tech-grid" id="techGrid"></div>
+      <div class="selected-tags" id="selectedTags"></div>
+      <div class="custom-tech-row">
+        <input type="text" id="customTechInput" placeholder="Add custom technology..."/>
+        <button type="button" id="addCustomBtn">+ Add</button>
+      </div>
+    </div>
+
+    <!-- REQUIREMENTS -->
+    <div class="form-section">
+      <div class="section-lbl">Requirements (Optional)</div>
+      <div class="field-row">
+        <div class="field">
+          <label>Hardware</label>
+          <input type="text" id="projHardwareInput" placeholder="e.g., 8GB RAM, GPU required" maxlength="200"/>
+        </div>
+        <div class="field">
+          <label>Software</label>
+          <input type="text" id="projSoftwareInput" placeholder="e.g., Node.js 16+, Docker" maxlength="200"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREVIEW IMAGE -->
+    <div class="form-section">
+      <div class="section-lbl">Preview Image (Optional)</div>
+      <div class="file-upload-zone" id="uploadZone">
+        <input type="file" id="projImageInput" accept="image/*"/>
+        <div id="uploadPrompt">
+          <div class="upload-icon">📁</div>
+          <div class="upload-text"><strong>Click to upload</strong> or drag and drop<br>PNG, JPG, GIF, WebP · Max 5MB</div>
+        </div>
+      </div>
+      <div class="file-preview-area" id="filePreview">
+        <img id="previewImg" alt="Preview"/>
+        <button class="remove-img" id="removeImgBtn" type="button">×</button>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="form-actions">
+      <button class="btn-reset" type="button" id="resetBtn">Reset</button>
+      <button class="btn-submit" id="submitBtn">
+        <span class="btn-label" id="submitLabel">Save Project</span>
+        <div class="loader"></div>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="add-project.js"></script>
+</body>
+</html>
