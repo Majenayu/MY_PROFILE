@@ -689,6 +689,45 @@ function buildBalls(badges) {
         else { be.textContent=a.emoji||'🏅'; }
         const bs=document.createElement('div'); bs.className='bs';
         b.appendChild(bs); b.appendChild(be); shaft.appendChild(b);
+        
+        // Add tooltip functionality
+        let tooltip = null;
+        b.addEventListener('mouseenter', () => {
+            // Create tooltip
+            tooltip = document.createElement('div');
+            tooltip.className = 'badge-tooltip';
+            tooltip.innerHTML = `
+                <div class="badge-tooltip-title">${a.title}</div>
+                <div class="badge-tooltip-desc">${a.desc || 'No description available'}</div>
+                <div class="badge-tooltip-tag">${a.tag || 'Achievement'}</div>
+            `;
+            document.body.appendChild(tooltip);
+            
+            // Position tooltip above the badge
+            const rect = b.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+            const top = rect.top - tooltipRect.height - 12;
+            
+            tooltip.style.left = Math.max(10, Math.min(left, window.innerWidth - tooltipRect.width - 10)) + 'px';
+            tooltip.style.top = Math.max(10, top) + 'px';
+            
+            // Show tooltip with animation
+            setTimeout(() => tooltip.classList.add('show'), 10);
+        });
+        
+        b.addEventListener('mouseleave', () => {
+            if (tooltip) {
+                tooltip.classList.remove('show');
+                setTimeout(() => {
+                    if (tooltip && tooltip.parentNode) {
+                        tooltip.parentNode.removeChild(tooltip);
+                    }
+                    tooltip = null;
+                }, 300);
+            }
+        });
+        
         b.addEventListener('click',()=>{
             cimg.innerHTML='';
             if(a.imgUrl||a.imageUrl){ const im=document.createElement('img'); im.src=a.imgUrl||a.imageUrl; cimg.appendChild(im); }
@@ -730,21 +769,18 @@ async function loadProfileData() {
             const chipLocation=document.getElementById('chipLocation');
             const chipEdu=document.getElementById('chipEdu');
             
+            // Update text content
             if(nameEl)  nameEl.textContent=p.fullName||'P G AYUSH RAI';
             if(titleEl) titleEl.textContent=p.title||'B.Tech · Developer · Builder';
             if(aboutEl) aboutEl.innerHTML=`<strong>${p.fullName||'P G Ayush Rai'}</strong> — ${p.description||'technologist &amp; builder.'}`;
             
+            // Character image handling - NEVER change the animation in index.html
             if(charEl) {
-                // Always preserve the current animation if no new image is provided
-                const currentSrc = charEl.src;
-                if(p.characterImage && p.characterImage !== currentSrc) {
-                    console.log('Setting character image to:', p.characterImage);
-                    charEl.src = p.characterImage;
-                } else {
-                    console.log('Keeping current character animation:', currentSrc);
-                }
+                console.log('Preserving fixed Anirive animation in index.html');
+                // Don't touch the character image - it's fixed in the HTML
             }
             
+            // Update status chips
             const statusTexts={open:'● Open to Opportunities',busy:'⚡ Currently Busy',available:'✓ Available for Projects',learning:'📚 Learning & Growing'};
             if(chipStatus)   chipStatus.textContent=statusTexts[p.status]||'● Open to Opportunities';
             if(chipLocation) chipLocation.textContent=`📍 ${p.location||'India'}`;
@@ -769,10 +805,42 @@ async function loadPortfolioData() {
 }
 
 // ════════════════════════════════════════════════════════════
+//  THEME TOGGLE
+// ════════════════════════════════════════════════════════════
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    // Update button text
+    const themeBtn = document.querySelector('[onclick="toggleTheme()"]');
+    if (themeBtn) {
+        themeBtn.innerHTML = newTheme === 'light' ? '🌙 Dark' : '☀️ Light';
+    }
+    
+    console.log('Theme switched to:', newTheme);
+}
+
+// Load saved theme on page load
+function loadTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    // Update button text
+    const themeBtn = document.querySelector('[onclick="toggleTheme()"]');
+    if (themeBtn) {
+        themeBtn.innerHTML = savedTheme === 'light' ? '🌙 Dark' : '☀️ Light';
+    }
+}
+
+// ════════════════════════════════════════════════════════════
 //  BOOT
 // ════════════════════════════════════════════════════════════
+loadTheme(); // Load theme first
 initInterface();
-// loadProfileData(); // Commented out to prevent animation interference
+loadProfileData(); // Auto-load profile data but never touch the animation
 loadPortfolioData();
 fetchBadges().then(buildBalls);
 
