@@ -113,14 +113,22 @@ const jarvis = {
 //  PANEL CONTENT DEFINITIONS
 // ════════════════════════════════════════════════════════════
 const panels = {
-    documents: {
-        title: 'DOCUMENTS',
-        content: `<div style="text-align:center;padding:28px 16px;">
-            <div style="font-size:2.5rem;margin-bottom:16px;">📁</div>
-            <h3 style="color:var(--cyan);margin-bottom:10px;letter-spacing:0.15em;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;">DRIVE ACCESS</h3>
-            <p style="font-size:0.82rem;color:rgba(0,212,255,0.6);line-height:1.6;margin-bottom:22px;">Secure document repository.<br>Drive link will be available soon.</p>
-            <div style="border:1px dashed rgba(0,212,255,0.3);padding:14px;background:rgba(0,212,255,0.03);font-size:0.72rem;color:rgba(0,212,255,0.4);letter-spacing:0.1em;">
-                LINK PENDING — CHECK BACK SOON</div></div>`
+    resume: {
+        title: 'RESUME',
+        content: `<div style="text-align:center;padding:20px 16px;">
+            <div style="font-size:2.5rem;margin-bottom:16px;">📄</div>
+            <h3 style="color:var(--cyan);margin-bottom:10px;letter-spacing:0.15em;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;">PROFESSIONAL RESUME</h3>
+            <p style="font-size:0.82rem;color:rgba(0,212,255,0.6);line-height:1.6;margin-bottom:22px;">View my complete professional resume<br>with experience, skills, and achievements.</p>
+            <div style="margin-bottom:20px;">
+                <iframe src="https://www.canva.com/design/DAGnTB1gSSg/yaJ5iSTqmJVcGWfpTqO5fA/view?embed" 
+                        style="width:100%;height:400px;border:1px solid rgba(0,212,255,0.3);border-radius:8px;background:rgba(0,212,255,0.03);"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <div style="text-align:center;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+                <button class="panel-btn" data-url="https://www.canva.com/design/DAGnTB1gSSg/yaJ5iSTqmJVcGWfpTqO5fA/view?utm_content=DAGnTB1gSSg&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">VIEW FULL RESUME</button>
+                <button class="panel-btn" data-url="https://www.canva.com/design/DAGnTB1gSSg/yaJ5iSTqmJVcGWfpTqO5fA/view?utm_content=DAGnTB1gSSg&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview">DOWNLOAD PDF</button>
+            </div></div>`
     },
     youtube: {
         title: 'YOUTUBE',
