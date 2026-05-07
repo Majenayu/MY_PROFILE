@@ -402,6 +402,24 @@ body::after {
   pointer-events: none; z-index: 0;
 }
 
+/* Tech circuit pattern overlay for panels */
+.panel .tech-circuit,
+.container .tech-circuit,
+.proj-panel .tech-circuit,
+.events-widget .tech-circuit {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  z-index: 1;
+  background-image:
+    linear-gradient(0deg, transparent 49%, rgba(22, 241, 208, 1) 50%, transparent 51%),
+    linear-gradient(90deg, transparent 49%, rgba(139, 92, 246, 1) 50%, transparent 51%);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+}
+
 .panel-inner {
   flex: 1;
   display: flex; flex-direction: column;
@@ -456,17 +474,85 @@ body::after {
   flex-shrink: 0;
 }
 
-/* Character avatar */
+/* Character avatar - Holographic Tech Design */
 .char-wrap {
   flex-shrink: 0; position: relative;
   width: 88px; height: 88px;
-  display: flex; align-items: flex-end; justify-content: center;
-  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 18px;
   background:
-    radial-gradient(circle at 50% 30%, rgba(22, 241, 208, 0.2), transparent 70%),
-    linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(255, 61, 139, 0.08));
-  border: 1px solid rgba(22, 241, 208, 0.22);
+    radial-gradient(circle at 50% 50%, rgba(22, 241, 208, 0.12), transparent 70%),
+    linear-gradient(135deg, rgba(14, 16, 38, 0.85), rgba(3, 4, 16, 0.9));
+  border: 1px solid rgba(22, 241, 208, 0.3);
   overflow: hidden;
+  box-shadow:
+    0 0 20px rgba(22, 241, 208, 0.2),
+    inset 0 0 20px rgba(139, 92, 246, 0.08);
+}
+/* Holographic scan grid overlay */
+.char-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(22, 241, 208, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 241, 208, 0.08) 1px, transparent 1px);
+  background-size: 8px 8px;
+  pointer-events: none;
+  opacity: 0.6;
+}
+.char-wrap::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(22, 241, 208, 0.12) 30deg,
+    transparent 60deg,
+    transparent 180deg,
+    rgba(139, 92, 246, 0.12) 210deg,
+    transparent 240deg,
+    transparent 360deg
+  );
+  animation: holoScan 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes holoScan { to { transform: rotate(360deg); } }
+.char-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #16f1d0, transparent);
+  box-shadow: 0 0 8px #16f1d0;
+  animation: scanBar 2.8s linear infinite;
+  pointer-events: none;
+}
+@keyframes scanBar {
+  0% { top: 0; opacity: 1; }
+  50% { top: 100%; opacity: 1; }
+  50.01% { opacity: 0; }
+  50.02% { top: 0; opacity: 0; }
+  51% { opacity: 1; }
+  100% { top: 100%; opacity: 1; }
+}
+.char-holo {
+  position: relative;
+  width: 80px; height: 80px;
+  z-index: 2;
+  filter: drop-shadow(0 0 6px rgba(22, 241, 208, 0.6));
+  animation: holoFloat 4s ease-in-out infinite;
+}
+@keyframes holoFloat {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-3px); }
+}
+.char-img {
+  width: 82px; height: 82px; object-fit: contain;
+  filter: drop-shadow(0 4px 20px rgba(22, 241, 208, 0.45));
+  animation: charFloat 3.5s ease-in-out infinite;
+  image-rendering: -webkit-optimize-contrast;
+  display: none;
 }
 .char-wrap.no-img::before {
   content: '◉';
@@ -479,12 +565,6 @@ body::after {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: drop-shadow(0 0 10px rgba(22,241,208,0.4));
-}
-.char-img {
-  width: 82px; height: 82px; object-fit: contain;
-  filter: drop-shadow(0 4px 20px rgba(22, 241, 208, 0.45));
-  animation: charFloat 3.5s ease-in-out infinite;
-  image-rendering: -webkit-optimize-contrast;
 }
 @keyframes charFloat {
   0%,100% { transform: translateY(0); }
@@ -509,7 +589,7 @@ body::after {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-height: 100px;
+  max-height: 72px;
 }
 .about-label {
   font-family: var(--mono);
@@ -518,19 +598,20 @@ body::after {
   letter-spacing: 0.26em;
   color: var(--mint);
   opacity: 0.7;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   text-transform: uppercase;
   flex-shrink: 0;
 }
 .about-text {
   font-family: var(--serif);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 300;
-  line-height: 1.45;
+  line-height: 1.4;
   color: var(--ink-dim);
   letter-spacing: 0.005em;
   overflow-y: auto;
-  max-height: 100%;
+  flex: 1;
+  min-height: 0;
   padding-right: 6px;
   scrollbar-width: thin;
   scrollbar-color: rgba(22,241,208,0.3) transparent;
@@ -575,10 +656,10 @@ body::after {
 
 /* Badge tube */
 .ach-wrap {
-  flex: 1;
+  flex-shrink: 0;
   display: flex; flex-direction: column;
-  min-height: 0;
-  gap: 8px;
+  gap: 6px;
+  margin-top: 2px;
 }
 .ach-label {
   font-family: var(--mono);
@@ -592,13 +673,25 @@ body::after {
 }
 .ach-row { flex-shrink: 0; }
 .htube {
-  height: 48px;
+  height: 44px;
   display: flex; align-items: center;
-  border-radius: 24px;
+  border-radius: 22px;
   background: rgba(3, 4, 16, 0.6);
   border: 1px solid var(--line-strong);
   padding: 0 4px;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(22, 241, 208, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.htube::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(22, 241, 208, 0.04), transparent);
+  animation: scanLine 3s linear infinite;
+  pointer-events: none;
 }
 .tcap { display: none; }
 .tshaft-horizontal {
@@ -643,8 +736,11 @@ body::after {
 
 /* Badge detail card */
 .ach-detail-area {
-  flex: 1; display: flex; flex-direction: column; justify-content: center;
-  min-height: 0; margin-top: 4px;
+  flex: 1;
+  display: flex; flex-direction: column; justify-content: flex-start;
+  min-height: 0;
+  margin-top: 2px;
+  overflow: hidden;
 }
 .ach-hint {
   font-family: var(--mono);

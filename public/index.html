@@ -23,11 +23,62 @@
       <!-- HERO ROW: char image LEFT + name/identity RIGHT -->
       <div class="hero-row">
         <div class="char-wrap">
-          <img class="char-img" id="profileCharImg"
-            src="https://storage.googleapis.com/anirive-outputs/users/8ENEUTvq42OIhrEJRP0xBvs1bew2/chars/mmuuwver/anims/mmuuyw68/animation.webp"
-            alt=""
-            onload="this.classList.add('loaded');"
-            onerror="this.style.display='none'; this.parentElement.classList.add('no-img');" />
+          <!-- Holographic Tech Avatar (pure SVG, never fails to load) -->
+          <svg class="char-holo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="holoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#16f1d0"/>
+                <stop offset="50%"  stop-color="#8b5cf6"/>
+                <stop offset="100%" stop-color="#ff3d8b"/>
+              </linearGradient>
+              <linearGradient id="holoGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stop-color="#16f1d0" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#ffd93d" stop-opacity="0.9"/>
+              </linearGradient>
+              <filter id="holoGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.2" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <!-- Orbit rings -->
+            <circle cx="50" cy="50" r="44" fill="none" stroke="url(#holoGrad)" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.55">
+              <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="18s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#8b5cf6" stroke-width="0.4" stroke-dasharray="1 2" opacity="0.45">
+              <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="22s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Head -->
+            <circle cx="50" cy="40" r="14" fill="none" stroke="url(#holoGrad)" stroke-width="1.4" filter="url(#holoGlow)"/>
+            <circle cx="50" cy="40" r="10" fill="url(#holoGrad)" opacity="0.18"/>
+            <!-- Eyes -->
+            <circle cx="45" cy="39" r="1.4" fill="#16f1d0">
+              <animate attributeName="opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="55" cy="39" r="1.4" fill="#16f1d0">
+              <animate attributeName="opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Scanner line over face -->
+            <rect x="36" y="34" width="28" height="0.6" fill="#16f1d0" opacity="0.7">
+              <animate attributeName="y" values="30;48;30" dur="2.4s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.4s" repeatCount="indefinite"/>
+            </rect>
+            <!-- Body/Shoulders -->
+            <path d="M28 86 Q28 62 50 62 Q72 62 72 86 Z" fill="none" stroke="url(#holoGrad)" stroke-width="1.3" filter="url(#holoGlow)"/>
+            <path d="M30 86 Q32 68 50 66 Q68 68 70 86 Z" fill="url(#holoGrad2)" opacity="0.15"/>
+            <!-- Chest circuit -->
+            <circle cx="50" cy="74" r="2.5" fill="none" stroke="#ff3d8b" stroke-width="0.7">
+              <animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <line x1="50" y1="71.5" x2="50" y2="69" stroke="#ff3d8b" stroke-width="0.5"/>
+            <line x1="50" y1="76.5" x2="50" y2="79" stroke="#ff3d8b" stroke-width="0.5"/>
+            <line x1="47.5" y1="74" x2="45" y2="74" stroke="#ff3d8b" stroke-width="0.5"/>
+            <line x1="52.5" y1="74" x2="55" y2="74" stroke="#ff3d8b" stroke-width="0.5"/>
+            <!-- Data nodes -->
+            <circle cx="18" cy="50" r="1" fill="#16f1d0"><animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite"/></circle>
+            <circle cx="82" cy="50" r="1" fill="#ffd93d"><animate attributeName="opacity" values="1;0.2;1" dur="2.2s" repeatCount="indefinite"/></circle>
+            <circle cx="50" cy="12" r="1" fill="#ff3d8b"><animate attributeName="opacity" values="0.2;1;0.2" dur="1.8s" repeatCount="indefinite"/></circle>
+          </svg>
+          <div class="char-grid"></div>
           <div class="char-shadow"></div>
         </div>
         <div class="identity-col">
