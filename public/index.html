@@ -25,8 +25,9 @@
         <div class="char-wrap">
           <img class="char-img" id="profileCharImg"
             src="https://storage.googleapis.com/anirive-outputs/users/8ENEUTvq42OIhrEJRP0xBvs1bew2/chars/mmuuwver/anims/mmuuyw68/animation.webp"
-            alt="Avatar"
-            onload="console.log('Avatar animation loaded successfully');" />
+            alt=""
+            onload="this.classList.add('loaded');"
+            onerror="this.style.display='none'; this.parentElement.classList.add('no-img');" />
           <div class="char-shadow"></div>
         </div>
         <div class="identity-col">

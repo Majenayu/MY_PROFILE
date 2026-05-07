@@ -468,6 +468,18 @@ body::after {
   border: 1px solid rgba(22, 241, 208, 0.22);
   overflow: hidden;
 }
+.char-wrap.no-img::before {
+  content: '◉';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, var(--mint), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 10px rgba(22,241,208,0.4));
+}
 .char-img {
   width: 96px; height: 96px; object-fit: contain;
   filter: drop-shadow(0 4px 20px rgba(22, 241, 208, 0.45));
@@ -491,7 +503,7 @@ body::after {
 }
 
 /* About block */
-.about-row { flex-shrink: 0; }
+.about-row { flex-shrink: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
 .about-label {
   font-family: var(--mono);
   font-size: 0.6rem;
@@ -501,15 +513,24 @@ body::after {
   opacity: 0.7;
   margin-bottom: 6px;
   text-transform: uppercase;
+  flex-shrink: 0;
 }
 .about-text {
   font-family: var(--serif);
-  font-size: 0.98rem;
+  font-size: 0.92rem;
   font-weight: 300;
-  line-height: 1.55;
+  line-height: 1.5;
   color: var(--ink-dim);
   letter-spacing: 0.005em;
+  overflow-y: auto;
+  max-height: 100%;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(22,241,208,0.3) transparent;
 }
+.about-text::-webkit-scrollbar { width: 4px; }
+.about-text::-webkit-scrollbar-thumb { background: rgba(22,241,208,0.3); border-radius: 4px; }
+.about-text::-webkit-scrollbar-track { background: transparent; }
 .about-text strong {
   color: var(--ink);
   font-weight: 500;
@@ -1489,7 +1510,9 @@ body::after {
   min-width: 0;
   border-radius: var(--r-md);
   overflow: hidden;
-  background: rgba(3, 4, 16, 0.6);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(22,241,208,0.08), transparent 70%),
+    rgba(3, 4, 16, 0.75);
   border: 1px solid var(--line);
 }
 .ew-carousel-track {
@@ -1500,10 +1523,14 @@ body::after {
 .ew-carousel-track > * {
   min-width: 100%; height: 100%;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3, 4, 16, 0.6);
 }
 .ew-carousel-track img {
   width: 100%; height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 .ew-photo-strip { display: none; }
