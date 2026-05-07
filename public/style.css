@@ -143,6 +143,15 @@ body {
   mix-blend-mode: multiply;
 }
 
+#bgCanvas {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.22;
+  mix-blend-mode: screen;
+}
+[data-theme="light"] #bgCanvas { opacity: 0.1; mix-blend-mode: multiply; }
+
 .skip-link {
   position: absolute; top: -40px; left: 16px;
   background: var(--accent-teal);
