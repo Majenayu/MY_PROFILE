@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>P G Ayush Rai — Developer · Builder · Engineer</title>
+  <title>P G Ayush Rai · Developer · Builder · Engineer</title>
+  <meta name="description" content="P G Ayush Rai — CSE-AIML · Developer · NCC Naval Cadet Captain · Vice President. AI/ML, full-stack web, computer vision, defense tech.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&family=Fraunces:ital,wght@0,300;0,500;1,400&display=swap" rel="stylesheet">
@@ -11,603 +12,517 @@
 </head>
 <body>
 
-  <!-- Global aurora background + particle canvas -->
+  <!-- ═══ BACKGROUND LAYERS ═══ -->
   <canvas id="bgCanvas"></canvas>
   <canvas id="matrixCanvas"></canvas>
+  <!-- Cursor spotlight (follows mouse) -->
+  <div id="cursorSpot"></div>
 
-  <!-- Sticky top nav (appears after scroll) -->
-  <nav class="top-nav" id="topNav">
-    <a href="#hero" class="nav-brand">
-      <span class="nav-dot"></span>
-      <span class="nav-brand-text">AYUSH<span class="nav-brand-accent">.dev</span></span>
-    </a>
-    <div class="nav-links">
-      <a href="#about"       class="nav-link">About</a>
-      <a href="#achievements" class="nav-link">Wins</a>
-      <a href="#skills"      class="nav-link">Stack</a>
-      <a href="#projects"    class="nav-link">Projects</a>
-      <a href="#events"      class="nav-link">Events</a>
-      <a href="#contact"     class="nav-link">Contact</a>
-    </div>
-    <div class="nav-actions">
-      <button onclick="toggleTheme()" class="nav-btn" id="themeToggleBtn" title="Toggle theme">☾</button>
-      <a href="/login" class="nav-btn" title="Admin">⚙</a>
-    </div>
-  </nav>
+  <!-- ═══ SKIP LINK (a11y) ═══ -->
+  <a href="#content" class="skip-link">Skip to content</a>
 
-  <!-- ╔══════════════════════════════════════════════════════╗
-       HERO — JARVIS Mission Control (100vh)
-       ╚══════════════════════════════════════════════════════╝ -->
-  <section class="hero-section" id="hero">
+  <!-- ═══ APP FRAME (sticky sidebar + scrolling content) ═══ -->
+  <div class="app-frame">
 
-    <!-- Status strip -->
-    <div class="hero-status">
-      <span class="status-led"></span>
-      <span class="status-text">SYSTEM ONLINE · CODEBREAKERS MAINFRAME</span>
-      <span class="status-sep">·</span>
-      <span class="status-text">UPTIME <span id="uptimeCounter" class="status-time">00:00:00</span></span>
-      <span class="status-sep">·</span>
-      <span class="status-time" id="heroClock">00:00:00</span>
-    </div>
+    <!-- ╔════════════════════════════════════════╗
+         LEFT STICKY SIDEBAR
+         ╚════════════════════════════════════════╝ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-inner">
 
-    <!-- Left identity rail -->
-    <div class="hero-rail hero-rail-left">
-      <div class="rail-label">[ PORTFOLIO · 2026 ]</div>
-      <div class="rail-name">
-        <span class="rail-name-tag">◆ OPERATOR</span>
-        <h1 class="rail-name-main" id="profileName">P G AYUSH RAI</h1>
-        <div class="rail-name-sub" id="profileTitle">B.Tech · Developer · Builder</div>
-      </div>
-      <div class="rail-chips" id="profileChips">
-        <span class="chip on" id="chipStatus">● Open to Opportunities</span>
-        <span class="chip"    id="chipLocation">📍 India</span>
-        <span class="chip"    id="chipEdu">🚀 B.Tech</span>
-      </div>
-      <div class="rail-cta">
-        <a href="#projects"   class="cta cta-primary">VIEW WORK <span>→</span></a>
-        <a href="#contact"    class="cta cta-ghost">GET IN TOUCH</a>
-      </div>
-    </div>
+        <!-- Identity card -->
+        <header class="side-hero">
+          <div class="status-pill">
+            <span class="status-led"></span>
+            <span>Available for opportunities</span>
+          </div>
+          <h1 class="side-name" id="profileName">P G Ayush Rai</h1>
+          <p class="side-title" id="profileTitle">Developer · Builder · NCC Naval Cadet Captain</p>
+          <p class="side-bio">
+            I build accessible, pixel-perfect AI-powered products at the intersection of software, engineering, and civic impact.
+          </p>
 
-    <!-- Right stats rail -->
-    <div class="hero-rail hero-rail-right">
-      <div class="rail-label">[ METRICS ]</div>
-      <div class="rail-stats">
-        <div class="rail-stat">
-          <div class="rs-num" id="heroAchCount">0</div>
-          <div class="rs-label">Achievements</div>
-        </div>
-        <div class="rail-stat">
-          <div class="rs-num" id="heroProjCount">0</div>
-          <div class="rs-label">Projects Shipped</div>
-        </div>
-        <div class="rail-stat">
-          <div class="rs-num" id="heroCourseCount">0</div>
-          <div class="rs-label">Courses Done</div>
-        </div>
-        <div class="rail-stat">
-          <div class="rs-num" id="heroEventCount">0</div>
-          <div class="rs-label">Events</div>
-        </div>
-      </div>
-      <div class="rail-hint">→ Click coin · Tap nodes to explore</div>
-    </div>
+          <div class="side-meta">
+            <span class="chip on"  id="chipStatus">● Open to Opportunities</span>
+            <span class="chip"     id="chipLocation">📍 India</span>
+            <span class="chip"     id="chipEdu">🚀 B.Tech CSE-AIML</span>
+          </div>
+        </header>
 
-    <!-- Scroll indicator -->
-    <div class="hero-scroll">
-      <span class="hs-text">SCROLL TO DEPLOY</span>
-      <div class="hs-bar"><span></span></div>
-    </div>
+        <!-- Nav with scroll-spy -->
+        <nav class="side-nav" aria-label="In-page navigation">
+          <ul>
+            <li><a href="#about"       class="sn-link active" data-spy="about"><span class="sn-bar"></span><span class="sn-text">About</span></a></li>
+            <li><a href="#experience"  class="sn-link"        data-spy="experience"><span class="sn-bar"></span><span class="sn-text">Experience</span></a></li>
+            <li><a href="#skills"      class="sn-link"        data-spy="skills"><span class="sn-bar"></span><span class="sn-text">Stack</span></a></li>
+            <li><a href="#projects"    class="sn-link"        data-spy="projects"><span class="sn-bar"></span><span class="sn-text">Projects</span></a></li>
+            <li><a href="#achievements" class="sn-link"       data-spy="achievements"><span class="sn-bar"></span><span class="sn-text">Wins</span></a></li>
+            <li><a href="#events"      class="sn-link"        data-spy="events"><span class="sn-bar"></span><span class="sn-text">Events</span></a></li>
+            <li><a href="#contact"     class="sn-link"        data-spy="contact"><span class="sn-bar"></span><span class="sn-text">Contact</span></a></li>
+          </ul>
+        </nav>
 
-    <!-- ═ JARVIS CENTER INTERFACE ═ -->
-    <div class="main-interface" id="mainInterface">
-      <div class="center-container">
+        <!-- Socials + theme toggle -->
+        <footer class="side-socials">
+          <a href="https://github.com/Majenayu" target="_blank" aria-label="GitHub" class="soc">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" aria-label="LinkedIn" class="soc">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/channel/UCjioxN6gRm-o3SHBBlR6vhw" target="_blank" aria-label="YouTube" class="soc">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/></svg>
+          </a>
+          <a href="mailto:pgayushrai@gmail.com" aria-label="Email" class="soc" data-copy="pgayushrai@gmail.com">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/></svg>
+          </a>
+          <a href="https://www.canva.com/design/DAGnTB1gSSg/yaJ5iSTqmJVcGWfpTqO5fA/view" target="_blank" aria-label="Resume" class="soc">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z M9,13V15H15V13H9M9,16V18H13V16H9Z"/></svg>
+          </a>
+          <button onclick="toggleTheme()" class="soc" id="themeToggleBtn" aria-label="Toggle theme">☾</button>
+          <a href="/login" class="soc" aria-label="Admin">⚙</a>
+        </footer>
 
-        <svg class="background-rings" viewBox="0 0 600 600">
-          <circle cx="300" cy="300" r="280" fill="none" stroke="rgba(22,241,208,0.12)" stroke-width="1"/>
-          <circle cx="300" cy="300" r="220" fill="none" stroke="rgba(139,92,246,0.15)" stroke-width="1" stroke-dasharray="5 10"/>
-          <circle cx="300" cy="300" r="160" fill="none" stroke="rgba(255,217,61,0.12)" stroke-width="1"/>
-        </svg>
-
-        <div class="center-core">
-          <div class="core-glow"></div>
-          <div class="core-inner">
-            <div class="rotating-coin" id="rotatingCoin">
-              <!-- Front: CodeBreakers -->
-              <div class="coin-side coin-front">
-                <svg viewBox="0 0 160 160" class="coin-logo">
-                  <defs>
-                    <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%"   stop-color="#16f1d0"/>
-                      <stop offset="50%"  stop-color="#8b5cf6"/>
-                      <stop offset="100%" stop-color="#ff3d8b"/>
-                    </linearGradient>
-                    <filter id="cglow"><feGaussianBlur stdDeviation="4" result="b"/>
-                      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                    </filter>
-                  </defs>
-                  <circle cx="80" cy="80" r="75" stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
-                  <circle cx="80" cy="80" r="65" stroke="url(#cg)" stroke-width="1" fill="none" opacity=".6"/>
-                  <path d="M35 45 Q30 45 30 50 L30 65 Q30 70 25 70 Q30 70 30 75 L30 90 Q30 95 35 95"
-                        stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
-                  <path d="M125 45 Q130 45 130 50 L130 65 Q130 70 135 70 Q130 70 130 75 L130 90 Q130 95 125 95"
-                        stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
-                  <path d="M70 50 L90 50 L80 70 L95 70 L70 90 L85 70 L70 70 Z"
-                        fill="url(#cg)" filter="url(#cglow)"/>
-                  <text x="50"  y="40"  font-family="monospace" font-size="6" fill="rgba(22,241,208,0.6)">101101</text>
-                  <text x="50"  y="110" font-family="monospace" font-size="6" fill="rgba(22,241,208,0.6)">011010</text>
-                  <text x="100" y="40"  font-family="monospace" font-size="6" fill="rgba(22,241,208,0.6)">110011</text>
-                  <text x="100" y="110" font-family="monospace" font-size="6" fill="rgba(22,241,208,0.6)">101100</text>
-                  <text x="80" y="120" text-anchor="middle" font-family="Orbitron,monospace" font-size="10"
-                        font-weight="bold" fill="url(#cg)" filter="url(#cglow)">CODE<tspan fill="#ffd93d">BREAKERS</tspan></text>
-                </svg>
-              </div>
-              <!-- Back: MAJEN -->
-              <div class="coin-side coin-back">
-                <svg viewBox="0 0 160 160" class="coin-name">
-                  <defs>
-                    <linearGradient id="ng" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%"   stop-color="#ff3d8b"/>
-                      <stop offset="50%"  stop-color="#ffd93d"/>
-                      <stop offset="100%" stop-color="#16f1d0"/>
-                    </linearGradient>
-                    <filter id="nglow"><feGaussianBlur stdDeviation="4" result="b"/>
-                      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                    </filter>
-                  </defs>
-                  <circle cx="80" cy="80" r="75" stroke="url(#ng)" stroke-width="3" fill="none" filter="url(#nglow)"/>
-                  <circle cx="80" cy="80" r="65" stroke="url(#ng)" stroke-width="1" fill="none" opacity=".6"/>
-                  <polygon points="80,30 85,40 95,40 87,48 90,58 80,52 70,58 73,48 65,40 75,40" fill="url(#ng)" filter="url(#nglow)"/>
-                  <polygon points="80,130 85,120 95,120 87,112 90,102 80,108 70,102 73,112 65,120 75,120" fill="url(#ng)" filter="url(#nglow)"/>
-                  <text x="80" y="85" text-anchor="middle" font-family="Orbitron,monospace" font-size="24"
-                        font-weight="900" fill="url(#ng)" filter="url(#nglow)" letter-spacing="2px">MAJEN</text>
-                </svg>
-              </div>
+        <!-- Live stats dash -->
+        <div class="side-metrics">
+          <div class="sm-label">// live metrics</div>
+          <div class="sm-grid">
+            <div class="sm-cell">
+              <span class="sm-num" id="mAch">0</span>
+              <span class="sm-key">wins</span>
+            </div>
+            <div class="sm-cell">
+              <span class="sm-num" id="mProj">0</span>
+              <span class="sm-key">projects</span>
+            </div>
+            <div class="sm-cell">
+              <span class="sm-num" id="mCourse">0</span>
+              <span class="sm-key">courses</span>
+            </div>
+            <div class="sm-cell">
+              <span class="sm-num" id="mEvt">0</span>
+              <span class="sm-key">events</span>
             </div>
           </div>
-        </div>
-
-        <!-- Orbiting nodes -->
-        <div class="menu-nodes">
-          <div class="node" data-panel="resume" data-tip="Resume">
-            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z M9,13V15H15V13H9M9,16V18H13V16H9Z"/></svg></div>
-          </div>
-          <div class="node" data-panel="youtube" data-tip="YouTube">
-            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/></svg></div>
-          </div>
-          <div class="node" data-panel="github" data-tip="GitHub">
-            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/></svg></div>
-          </div>
-          <div class="node" data-panel="linkedin" data-tip="LinkedIn">
-            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg></div>
-          </div>
-          <div class="node" data-panel="settings" data-tip="Settings">
-            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.04 4.95,18.95L7.44,17.95C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.95L19.05,18.95C19.27,19.04 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/></svg></div>
-          </div>
-          <div class="node" data-panel="contact" data-tip="Contact">
-            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/></svg></div>
-          </div>
-          <div class="node" id="gameNode" data-action="game" data-tip="Arcade">
-            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.97,16L5,19C4.67,19.3 4.23,19.5 3.75,19.5A1.75,1.75 0 0,1 2,17.75V17.5L3,10.12C3.21,7.81 5.14,6 7.5,6H16.5C18.86,6 20.79,7.81 21,10.12L22,17.5V17.75A1.75,1.75 0 0,1 20.25,19.5C19.77,19.5 19.33,19.3 19,19L16.03,16H7.97M7,9V11H5V13H7V15H9V13H11V11H9V9H7M14.5,12A1.5,1.5 0 0,0 13,13.5A1.5,1.5 0 0,0 14.5,15A1.5,1.5 0 0,0 16,13.5A1.5,1.5 0 0,0 14.5,12M17.5,9A1.5,1.5 0 0,0 16,10.5A1.5,1.5 0 0,0 17.5,12A1.5,1.5 0 0,0 19,10.5A1.5,1.5 0 0,0 17.5,9Z"/></svg></div>
+          <div class="sm-time">
+            <span class="sm-time-label">IST</span>
+            <span class="sm-time-val" id="heroClock">00:00:00</span>
           </div>
         </div>
 
       </div>
-    </div>
+    </aside>
 
-  </section>
-  <!-- END HERO -->
+    <!-- ╔════════════════════════════════════════╗
+         RIGHT SCROLLABLE CONTENT
+         ╚════════════════════════════════════════╝ -->
+    <main class="content" id="content">
 
-  <!-- ╔══════════════════════════════════════════════════════╗
-       ABOUT + IDENTITY BENTO
-       ╚══════════════════════════════════════════════════════╝ -->
-  <section class="deck-section" id="about">
-    <div class="deck-head">
-      <span class="deck-num">01</span>
-      <h2 class="deck-title">About <span>/ operator profile</span></h2>
-      <div class="deck-line"></div>
-    </div>
-
-    <div class="bento about-bento">
-      <!-- Avatar hologram card -->
-      <div class="bento-card bento-avatar">
-        <div class="char-wrap">
-          <svg class="char-holo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <linearGradient id="holoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%"   stop-color="#16f1d0"/>
-                <stop offset="50%"  stop-color="#8b5cf6"/>
-                <stop offset="100%" stop-color="#ff3d8b"/>
-              </linearGradient>
-              <linearGradient id="holoGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%"   stop-color="#16f1d0" stop-opacity="0.9"/>
-                <stop offset="100%" stop-color="#ffd93d" stop-opacity="0.9"/>
-              </linearGradient>
-              <filter id="holoGlow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="1.2" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-            <circle cx="50" cy="50" r="44" fill="none" stroke="url(#holoGrad)" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.55">
-              <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="18s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="50" cy="50" r="38" fill="none" stroke="#8b5cf6" stroke-width="0.4" stroke-dasharray="1 2" opacity="0.45">
-              <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="22s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="50" cy="40" r="14" fill="none" stroke="url(#holoGrad)" stroke-width="1.4" filter="url(#holoGlow)"/>
-            <circle cx="50" cy="40" r="10" fill="url(#holoGrad)" opacity="0.18"/>
-            <circle cx="45" cy="39" r="1.4" fill="#16f1d0"><animate attributeName="opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/></circle>
-            <circle cx="55" cy="39" r="1.4" fill="#16f1d0"><animate attributeName="opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/></circle>
-            <rect x="36" y="34" width="28" height="0.6" fill="#16f1d0" opacity="0.7">
-              <animate attributeName="y" values="30;48;30" dur="2.4s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.4s" repeatCount="indefinite"/>
-            </rect>
-            <path d="M28 86 Q28 62 50 62 Q72 62 72 86 Z" fill="none" stroke="url(#holoGrad)" stroke-width="1.3" filter="url(#holoGlow)"/>
-            <path d="M30 86 Q32 68 50 66 Q68 68 70 86 Z" fill="url(#holoGrad2)" opacity="0.15"/>
-            <circle cx="50" cy="74" r="2.5" fill="none" stroke="#ff3d8b" stroke-width="0.7">
-              <animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite"/>
-            </circle>
-          </svg>
-          <div class="char-grid"></div>
+      <!-- === ABOUT === -->
+      <section id="about" class="sect" data-sect="about">
+        <div class="sect-anchor">
+          <span class="sa-num">01</span>
+          <span class="sa-label">About</span>
         </div>
-        <div class="bento-avatar-footer">
-          <span class="live-pulse"></span>
-          <span>ONLINE · BENGALURU · IST</span>
-        </div>
-      </div>
 
-      <!-- Bio card -->
-      <div class="bento-card bento-bio">
-        <div class="bento-eyebrow">◆ Bio · Manifesto</div>
-        <p class="about-text" id="profileAbout">
-          <strong>P G Ayush Rai</strong> — technologist &amp; builder at the intersection of AI, software, and engineering.
-        </p>
-        <div class="bento-sig">— P G Ayush Rai</div>
-      </div>
+        <div class="sect-body prose">
+          <p>
+            Hi, I'm <strong>Ayush</strong> — a builder at the crossroads of AI, defense tech, and civic good. Currently pursuing <strong>B.E. CSE-AIML at VVCE</strong>, I serve as <strong>NCC Naval Cadet Captain</strong> and <strong>Vice President (VF)</strong>, where engineering and leadership meet every week.
+          </p>
+          <p>
+            I build real products that ship. Posture detection that coaches athletes, face recognition systems deployed in auditoriums, bus tracking that saves commuters hours, line-following robots that helped us win hackathons. My stack spans <strong>Python / AI-ML</strong>, <strong>React / Node.js</strong>, <strong>Computer Vision</strong>, and <strong>cloud infra</strong>.
+          </p>
+          <p>
+            In 2025 alone I took home wins at <em>Teck Spark</em>, <em>Prayog</em>, <em>Anveshan</em>, and topped the <em>Pals Case Study Challenge</em>. As Cadet Captain I led <strong>4 national camps</strong> and <strong>2 basic camps</strong>. I care about <em>defense, innovation, and civic tech</em> — and I'm always looking for the next hard problem worth solving.
+          </p>
 
-      <!-- Focus card -->
-      <div class="bento-card bento-focus">
-        <div class="bento-eyebrow">◆ Focus Areas</div>
-        <ul class="focus-list">
-          <li><span class="fl-dot" style="background:var(--mint)"></span>Full-stack Web · AI/ML Integration</li>
-          <li><span class="fl-dot" style="background:var(--violet)"></span>Computer Vision · Posture Detection</li>
-          <li><span class="fl-dot" style="background:var(--rose)"></span>Face Recognition · Line Following</li>
-          <li><span class="fl-dot" style="background:var(--sun)"></span>Civic Tech · Defense Innovation</li>
-        </ul>
-      </div>
-
-      <!-- Timeline card -->
-      <div class="bento-card bento-time">
-        <div class="bento-eyebrow">◆ Current Mission</div>
-        <div class="time-badge">B.E · VVCE · CSE-AIML</div>
-        <div class="time-sub">NCC Naval Cadet Captain · Vice President (VF)</div>
-        <div class="time-progress">
-          <div class="time-progress-bar"><span></span></div>
-          <div class="time-progress-labels">
-            <span>2022</span><span class="tp-now">NOW</span><span>2026</span>
+          <div class="prose-bullets">
+            <div class="pb-row"><span class="pb-dot" style="--c:var(--mint)"></span><span>Full-stack web + AI/ML integration</span></div>
+            <div class="pb-row"><span class="pb-dot" style="--c:var(--violet)"></span><span>Computer vision · Posture detection · Face recognition</span></div>
+            <div class="pb-row"><span class="pb-dot" style="--c:var(--rose)"></span><span>Bus + asset tracking · Line-following robotics</span></div>
+            <div class="pb-row"><span class="pb-dot" style="--c:var(--sun)"></span><span>Civic tech · Defense innovation · Case study research</span></div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- ╔══════════════════════════════════════════════════════╗
-       ACHIEVEMENTS — badge tube + slideshow
-       ╚══════════════════════════════════════════════════════╝ -->
-  <section class="deck-section" id="achievements">
-    <div class="deck-head">
-      <span class="deck-num">02</span>
-      <h2 class="deck-title">Wins <span>/ achievements · competitions</span></h2>
-      <div class="deck-line"></div>
-      <div class="deck-stat">
-        <span class="stat-number" id="totalAchievements">0</span>
-        <span class="stat-label">total</span>
-      </div>
-    </div>
-
-    <!-- Badge tube (horizontal scrollable) -->
-    <div class="ach-wrap">
-      <div class="ach-label">◆ Badge Constellation — tap to inspect</div>
-      <div class="ach-row">
-        <div class="htube">
-          <div class="tcap left"></div>
-          <div class="tshaft-horizontal" id="shaft">
-            <div class="tube-loader"><div class="spinner"></div></div>
-          </div>
-          <div class="tcap right"></div>
+      <!-- === EXPERIENCE / LEADERSHIP === -->
+      <section id="experience" class="sect" data-sect="experience">
+        <div class="sect-anchor">
+          <span class="sa-num">02</span>
+          <span class="sa-label">Experience</span>
         </div>
-      </div>
-      <div class="ach-detail-area">
-        <div class="ach-hint" id="hint">← tap a badge to inspect</div>
-        <div class="ach-card" id="card">
-          <div class="ach-top">
-            <div class="ach-img-wrap" id="cimg"></div>
-            <div class="ach-title"    id="ct"></div>
-          </div>
-          <div class="ach-desc" id="cd"></div>
-          <div class="ach-tag"  id="ctag"></div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Full-width achievement slideshow -->
-    <div class="container" id="portfolioPanel">
-      <section id="splitScreen" class="section active">
-        <div class="split-container">
-          <div class="split-left">
-            <div class="section-header">
-              <h2>My Achievements</h2>
-              <div class="stats-display">
-                <span class="stat-number" id="totalAchievements2">0</span>
-                <span class="stat-label">shown</span>
+        <div class="sect-body">
+          <div class="timeline">
+
+            <a class="xp" href="https://vvce.ac.in" target="_blank">
+              <div class="xp-when">2022<br>— 2026</div>
+              <div class="xp-body">
+                <h3 class="xp-role">B.E. · CSE-AIML <span class="xp-co">@ VVCE</span><span class="xp-arrow">→</span></h3>
+                <p class="xp-desc">Specialised in Artificial Intelligence & Machine Learning. Shipped production-grade AI systems including posture detection, face recognition, bus tracking, and auto-tracking systems. Currently ranked top of class in applied AI coursework.</p>
+                <div class="xp-tags">
+                  <span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>React</span><span>Node.js</span><span>MongoDB</span>
+                </div>
+              </div>
+            </a>
+
+            <div class="xp">
+              <div class="xp-when">2024<br>— Now</div>
+              <div class="xp-body">
+                <h3 class="xp-role">Naval Cadet Captain <span class="xp-co">@ NCC VVCE</span></h3>
+                <p class="xp-desc">Lead engineering cadet cohort for NCC. Completed <strong>4 national-level camps</strong> and <strong>2 basic camps</strong>. Represented contingent at inter-college drill and tech demos. Bridge discipline, systems thinking, and field leadership.</p>
+                <div class="xp-tags">
+                  <span>Leadership</span><span>Field Ops</span><span>Training</span><span>Public Speaking</span>
+                </div>
               </div>
             </div>
-            <div class="achievement-slideshow-container">
-              <div class="slideshow-wrapper">
-                <div class="achievement-slideshow" id="achievementSlideshow"></div>
+
+            <div class="xp">
+              <div class="xp-when">2025<br>— Now</div>
+              <div class="xp-body">
+                <h3 class="xp-role">Vice President <span class="xp-co">@ VF (VVCE Forum)</span></h3>
+                <p class="xp-desc">Directing a student-led technology forum focused on defense innovation, civic tech research, and applied AI for public good. Organise hackathons, mentor junior builders, and partner with faculty on applied research.</p>
+                <div class="xp-tags">
+                  <span>Strategy</span><span>Mentoring</span><span>Research</span><span>Community</span>
+                </div>
               </div>
             </div>
+
+            <div class="xp">
+              <div class="xp-when">2025</div>
+              <div class="xp-body">
+                <h3 class="xp-role">Champion × 4 <span class="xp-co">@ Multi-event · 2025</span></h3>
+                <p class="xp-desc">Back-to-back wins: <strong>Teck Spark</strong> (AI/ML), <strong>Prayog</strong>, <strong>Anveshan</strong>, and <strong>Top Scorer</strong> in the Pals Case Study Challenge. Each win shipped a working prototype — not just slides.</p>
+                <div class="xp-tags">
+                  <span>AI/ML</span><span>Case Study</span><span>Pitching</span><span>Prototyping</span>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <div class="split-right">
-            <div class="section-header">
-              <h2>Learning Journey</h2>
-              <div class="stats-display">
-                <span class="stat-number" id="totalCourses">0</span>
-                <span class="stat-label">courses</span>
+        </div>
+      </section>
+
+      <!-- === SKILLS === -->
+      <section id="skills" class="sect" data-sect="skills">
+        <div class="sect-anchor">
+          <span class="sa-num">03</span>
+          <span class="sa-label">Stack</span>
+        </div>
+        <div class="sect-body">
+          <div class="skills-grid">
+
+            <article class="skill-card">
+              <div class="sk-head">
+                <span class="sk-icon" style="--c1:#16f1d0;--c2:#8b5cf6">&lt;/&gt;</span>
+                <div>
+                  <h3 class="sk-name">Frontend</h3>
+                  <span class="sk-lvl">Advanced · 4 yrs</span>
+                </div>
               </div>
-            </div>
-            <div class="courses-list-container">
-              <div class="courses-list" id="coursesList"></div>
+              <p class="sk-desc">Pixel-perfect, accessible UIs. Component systems, motion design, and modern build pipelines.</p>
+              <div class="sk-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span><span>Material UI</span><span>Vue</span><span>GSAP</span></div>
+            </article>
+
+            <article class="skill-card">
+              <div class="sk-head">
+                <span class="sk-icon" style="--c1:#3776ab;--c2:#ffd43b">🐍</span>
+                <div>
+                  <h3 class="sk-name">AI / ML</h3>
+                  <span class="sk-lvl">Advanced · production</span>
+                </div>
+              </div>
+              <p class="sk-desc">Computer vision, pose estimation, face recognition, and ML pipelines shipped to production.</p>
+              <div class="sk-tags"><span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>Mediapipe</span><span>scikit-learn</span><span>Pandas</span><span>NumPy</span></div>
+            </article>
+
+            <article class="skill-card">
+              <div class="sk-head">
+                <span class="sk-icon" style="--c1:#68a063;--c2:#a4ca39">◈</span>
+                <div>
+                  <h3 class="sk-name">Backend</h3>
+                  <span class="sk-lvl">Proficient</span>
+                </div>
+              </div>
+              <p class="sk-desc">Node & Java APIs, MongoDB persistence, auth, file uploads, real-time tracking services.</p>
+              <div class="sk-tags"><span>Node.js</span><span>Express</span><span>Java</span><span>MongoDB</span><span>REST</span><span>Mongoose</span><span>JWT</span></div>
+            </article>
+
+            <article class="skill-card">
+              <div class="sk-head">
+                <span class="sk-icon" style="--c1:#623ce4;--c2:#7c3aed">⚡</span>
+                <div>
+                  <h3 class="sk-name">DevOps</h3>
+                  <span class="sk-lvl">Working</span>
+                </div>
+              </div>
+              <p class="sk-desc">CI/CD with GitHub Actions. Cloud deploys on Render, assets on Cloudinary, infra-as-code basics.</p>
+              <div class="sk-tags"><span>Git</span><span>GitHub Actions</span><span>Terraform</span><span>Render</span><span>Cloudinary</span><span>Docker</span></div>
+            </article>
+
+            <article class="skill-card">
+              <div class="sk-head">
+                <span class="sk-icon" style="--c1:#ff6b4a;--c2:#ff3d8b">🎯</span>
+                <div>
+                  <h3 class="sk-name">Applied Domains</h3>
+                  <span class="sk-lvl">Real deployments</span>
+                </div>
+              </div>
+              <p class="sk-desc">Problem domains where my code has shipped to real users — from campus transit to cadet drill systems.</p>
+              <div class="sk-tags"><span>Computer Vision</span><span>Bus Tracking</span><span>Civic Tech</span><span>Defense Tech</span><span>Robotics</span></div>
+            </article>
+
+            <article class="skill-card">
+              <div class="sk-head">
+                <span class="sk-icon" style="--c1:#ffd93d;--c2:#ff3d8b">★</span>
+                <div>
+                  <h3 class="sk-name">Leadership</h3>
+                  <span class="sk-lvl">Senior cadet · VP</span>
+                </div>
+              </div>
+              <p class="sk-desc">NCC Naval Cadet Captain · VP of VVCE Forum. Mentoring, public speaking, and running engineering cohorts.</p>
+              <div class="sk-tags"><span>NCC Captain</span><span>VP (VF)</span><span>Mentoring</span><span>Public Speaking</span><span>Event Hosting</span></div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- === PROJECTS === -->
+      <section id="projects" class="sect" data-sect="projects">
+        <div class="sect-anchor">
+          <span class="sa-num">04</span>
+          <span class="sa-label">Projects</span>
+        </div>
+        <div class="sect-body">
+          <div class="proj-panel" id="projectsPanel">
+            <div class="proj-panel-inner">
+              <div class="proj-header">
+                <div class="proj-title-group">
+                  <span class="proj-label">[ SHIPPED · LIVE · OPEN SOURCE ]</span>
+                  <span class="proj-live-dot"></span>
+                </div>
+                <div class="proj-actions">
+                  <span id="projCount" class="proj-count">—</span>
+                  <button id="projGameBtn" class="proj-icon-btn proj-btn-game" title="Tech Stack Blaster">🕹 Arcade</button>
+                </div>
+              </div>
+              <div class="proj-body" id="projBody">
+                <div class="proj-drag-area" id="projDragArea">
+                  <div class="proj-project" id="projProject">
+                    <div class="proj-name-row">
+                      <h2 class="proj-name" id="projName">—</h2>
+                      <div class="proj-links">
+                        <a id="projWebLink"    href="#" target="_blank" class="plink" style="display:none" title="Live demo">↗</a>
+                        <a id="projGithubLink" href="#" target="_blank" class="plink" style="display:none" title="GitHub">⌥</a>
+                      </div>
+                    </div>
+                    <div class="proj-meta-row" id="projMetaRow"></div>
+                    <p class="proj-desc" id="projDesc">—</p>
+                    <div class="proj-tech-inline">
+                      <div class="proj-tech-tags" id="projTechTags"></div>
+                    </div>
+                  </div>
+                  <div class="proj-bottom-row">
+                    <div class="proj-drag-hint" id="projDragHint">
+                      <span class="dh-arrow">‹</span>
+                      <span class="dh-text">DRAG</span>
+                      <span class="dh-arrow">›</span>
+                    </div>
+                    <div class="proj-dots" id="projDots"></div>
+                  </div>
+                </div>
+                <div class="proj-divider"></div>
+                <div class="proj-preview-section" id="projPreviewSection">
+                  <div class="proj-preview-label">LIVE PREVIEW</div>
+                  <iframe id="projWebsitePreview" style="display:none;" title="Project Preview" scrolling="yes"></iframe>
+                  <img    id="projPreviewImg"     src="" alt="Project Preview" style="display:none;">
+                  <div    id="projPreviewPh"      class="proj-ph">
+                    <span class="ph-bracket">[</span>
+                    <span class="ph-icon">◈</span>
+                    <span class="ph-bracket">]</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
-    </div>
-  </section>
 
-  <!-- ╔══════════════════════════════════════════════════════╗
-       SKILLS MATRIX — Tech Stack Radar
-       ╚══════════════════════════════════════════════════════╝ -->
-  <section class="deck-section" id="skills">
-    <div class="deck-head">
-      <span class="deck-num">03</span>
-      <h2 class="deck-title">Stack <span>/ tech arsenal · capabilities</span></h2>
-      <div class="deck-line"></div>
-    </div>
+      <!-- === ACHIEVEMENTS / WINS === -->
+      <section id="achievements" class="sect" data-sect="achievements">
+        <div class="sect-anchor">
+          <span class="sa-num">05</span>
+          <span class="sa-label">Wins</span>
+        </div>
+        <div class="sect-body">
 
-    <div class="skills-grid">
-      <div class="skill-card">
-        <div class="skill-head">
-          <span class="skill-icon" style="background:linear-gradient(135deg,#e34c26,#f06529)">&lt;/&gt;</span>
-          <span class="skill-name">Frontend</span>
-          <span class="skill-lvl">Advanced</span>
-        </div>
-        <div class="skill-tags">
-          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span><span>Material UI</span><span>Vue</span>
-        </div>
-        <div class="skill-bar"><span style="width:88%;background:linear-gradient(90deg,var(--mint),var(--violet))"></span></div>
-      </div>
+          <!-- Badge constellation -->
+          <div class="ach-wrap">
+            <div class="ach-label">◆ Badge constellation · tap to inspect</div>
+            <div class="ach-row">
+              <div class="htube">
+                <div class="tcap left"></div>
+                <div class="tshaft-horizontal" id="shaft">
+                  <div class="tube-loader"><div class="spinner"></div></div>
+                </div>
+                <div class="tcap right"></div>
+              </div>
+            </div>
+            <div class="ach-detail-area">
+              <div class="ach-hint" id="hint">← tap a badge to inspect</div>
+              <div class="ach-card" id="card">
+                <div class="ach-top">
+                  <div class="ach-img-wrap" id="cimg"></div>
+                  <div class="ach-title"    id="ct"></div>
+                </div>
+                <div class="ach-desc" id="cd"></div>
+                <div class="ach-tag"  id="ctag"></div>
+              </div>
+            </div>
+          </div>
 
-      <div class="skill-card">
-        <div class="skill-head">
-          <span class="skill-icon" style="background:linear-gradient(135deg,#3776ab,#ffd43b)">🐍</span>
-          <span class="skill-name">AI / ML</span>
-          <span class="skill-lvl">Advanced</span>
-        </div>
-        <div class="skill-tags">
-          <span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Face Recognition</span><span>Posture Detection</span>
-        </div>
-        <div class="skill-bar"><span style="width:85%;background:linear-gradient(90deg,var(--violet),var(--rose))"></span></div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-head">
-          <span class="skill-icon" style="background:linear-gradient(135deg,#68a063,#a4ca39)">◈</span>
-          <span class="skill-name">Backend</span>
-          <span class="skill-lvl">Proficient</span>
-        </div>
-        <div class="skill-tags">
-          <span>Node.js</span><span>Express</span><span>Java</span><span>MongoDB</span><span>REST APIs</span>
-        </div>
-        <div class="skill-bar"><span style="width:78%;background:linear-gradient(90deg,var(--mint),var(--sun))"></span></div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-head">
-          <span class="skill-icon" style="background:linear-gradient(135deg,#623ce4,#7c3aed)">⚡</span>
-          <span class="skill-name">DevOps / Cloud</span>
-          <span class="skill-lvl">Working</span>
-        </div>
-        <div class="skill-tags">
-          <span>Git</span><span>GitHub Actions</span><span>Terraform</span><span>Render</span><span>Cloudinary</span>
-        </div>
-        <div class="skill-bar"><span style="width:70%;background:linear-gradient(90deg,var(--rose),var(--sun))"></span></div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-head">
-          <span class="skill-icon" style="background:linear-gradient(135deg,#f7df1e,#1572b6)">🎯</span>
-          <span class="skill-name">Domains</span>
-          <span class="skill-lvl">Applied</span>
-        </div>
-        <div class="skill-tags">
-          <span>Computer Vision</span><span>Bus Tracking</span><span>Civic Tech</span><span>Defense Tech</span>
-        </div>
-        <div class="skill-bar"><span style="width:82%;background:linear-gradient(90deg,var(--mint),var(--rose))"></span></div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-head">
-          <span class="skill-icon" style="background:linear-gradient(135deg,#ffd93d,#ff3d8b)">★</span>
-          <span class="skill-name">Leadership</span>
-          <span class="skill-lvl">Senior</span>
-        </div>
-        <div class="skill-tags">
-          <span>NCC Captain</span><span>VP (VF)</span><span>Mentoring</span><span>Public Speaking</span>
-        </div>
-        <div class="skill-bar"><span style="width:90%;background:linear-gradient(90deg,var(--sun),var(--mint))"></span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ╔══════════════════════════════════════════════════════╗
-       PROJECTS
-       ╚══════════════════════════════════════════════════════╝ -->
-  <section class="deck-section" id="projects">
-    <div class="deck-head">
-      <span class="deck-num">04</span>
-      <h2 class="deck-title">Projects <span>/ shipped · live · open source</span></h2>
-      <div class="deck-line"></div>
-      <div class="deck-stat">
-        <span class="stat-number" id="projCount">0</span>
-        <span class="stat-label">live</span>
-      </div>
-      <button id="projGameBtn" class="deck-action" title="Tech Stack Blaster arcade">🕹 ARCADE</button>
-    </div>
-
-    <div class="proj-panel" id="projectsPanel">
-      <div class="proj-panel-inner">
-        <div class="proj-body" id="projBody">
-          <!-- LEFT: project info with drag -->
-          <div class="proj-drag-area" id="projDragArea">
-            <div class="proj-project" id="projProject">
-              <div class="proj-name-row">
-                <h2 class="proj-name" id="projName">—</h2>
-                <div class="proj-links">
-                  <a id="projWebLink"    href="#" target="_blank" class="plink" style="display:none" title="Live demo">↗</a>
-                  <a id="projGithubLink" href="#" target="_blank" class="plink" style="display:none" title="GitHub">⌥</a>
+          <!-- Achievement slideshow + courses -->
+          <div class="container" id="portfolioPanel">
+            <div class="split-container">
+              <div class="split-left">
+                <div class="section-header">
+                  <h2>My Achievements</h2>
+                  <div class="stats-display">
+                    <span class="stat-number" id="totalAchievements">0</span>
+                    <span class="stat-label">total</span>
+                  </div>
+                </div>
+                <div class="achievement-slideshow-container">
+                  <div class="slideshow-wrapper">
+                    <div class="achievement-slideshow" id="achievementSlideshow"></div>
+                  </div>
                 </div>
               </div>
-              <div class="proj-meta-row" id="projMetaRow"></div>
-              <p class="proj-desc" id="projDesc">—</p>
-              <div class="proj-tech-inline">
-                <div class="proj-tech-tags" id="projTechTags"></div>
+              <div class="split-right">
+                <div class="section-header">
+                  <h2>Learning Journey</h2>
+                  <div class="stats-display">
+                    <span class="stat-number" id="totalCourses">0</span>
+                    <span class="stat-label">courses</span>
+                  </div>
+                </div>
+                <div class="courses-list-container">
+                  <div class="courses-list" id="coursesList"></div>
+                </div>
               </div>
             </div>
-            <div class="proj-bottom-row">
-              <div class="proj-drag-hint" id="projDragHint">
-                <span class="dh-arrow">‹</span>
-                <span class="dh-text">DRAG</span>
-                <span class="dh-arrow">›</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- === EVENTS === -->
+      <section id="events" class="sect" data-sect="events">
+        <div class="sect-anchor">
+          <span class="sa-num">06</span>
+          <span class="sa-label">Events</span>
+        </div>
+        <div class="sect-body">
+          <div class="events-widget" id="eventsWidget">
+            <div class="ew-header">
+              <div class="ew-title">
+                <span class="ew-title-text">EVENTS · HACKATHONS · CAMPS</span>
+                <span class="ew-live-dot"></span>
               </div>
-              <div class="proj-dots" id="projDots"></div>
+            </div>
+            <div class="ew-body">
+              <div class="ew-info-col" id="ewInfoCol">
+                <div class="ew-info-scroll">
+                  <div class="ew-event-label" id="ewLabel">CodeBreakers · Event</div>
+                  <div class="ew-event-name" id="ewName">—</div>
+                  <div class="ew-event-meta" id="ewMeta"></div>
+                  <div class="ew-team" id="ewTeamTag"></div>
+                  <p class="ew-desc" id="ewDesc">—</p>
+                  <div class="ew-team-inline" id="ewTeamInline"></div>
+                  <a id="ewProjLink" href="#" target="_blank" class="ew-proj-link" style="display:none;">↗ View Project</a>
+                </div>
+                <div class="ew-nav-row">
+                  <div class="ew-dots" id="ewDotTrack"></div>
+                </div>
+              </div>
+              <div class="ew-divider"></div>
+              <div class="ew-photo-col" id="ewPhotoCol">
+                <div class="ew-carousel-track" id="ewCarouselTrack"></div>
+                <div class="ew-photo-strip" id="ewPhotoStrip"></div>
+                <button class="ew-photo-nav ew-photo-nav-l" id="ewPhotoLeft" style="display:none;">‹</button>
+                <button class="ew-photo-nav ew-photo-nav-r" id="ewPhotoRight" style="display:none;">›</button>
+                <div class="ew-stamp" id="ewStamp"></div>
+                <div class="ew-progress" id="ewProgressBar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === CONTACT === -->
+      <section id="contact" class="sect sect-contact" data-sect="contact">
+        <div class="sect-anchor">
+          <span class="sa-num">07</span>
+          <span class="sa-label">Contact</span>
+        </div>
+        <div class="sect-body">
+          <div class="contact-hero">
+            <h2 class="contact-big">Let's build something<br><em>that matters.</em></h2>
+            <p class="contact-lead">
+              I'm currently open to internships, collaborations, and applied research in <strong>AI, defense tech, and civic engineering</strong>. If you have a problem worth solving, my inbox is open.
+            </p>
+            <div class="contact-cta-row">
+              <a href="mailto:pgayushrai@gmail.com" class="cta cta-primary">Say hello <span>→</span></a>
+              <button class="cta cta-ghost" data-copy="pgayushrai@gmail.com">Copy email</button>
+              <a href="https://www.canva.com/design/DAGnTB1gSSg/yaJ5iSTqmJVcGWfpTqO5fA/view" target="_blank" class="cta cta-ghost">View Resume</a>
             </div>
           </div>
 
-          <div class="proj-divider"></div>
+          <div class="contact-grid">
+            <a href="mailto:pgayushrai@gmail.com" class="contact-tile" data-copy="pgayushrai@gmail.com">
+              <div class="ct-icon" style="background:linear-gradient(135deg,var(--mint),var(--violet))">✉</div>
+              <div class="ct-label">Email · click to copy</div>
+              <div class="ct-value">pgayushrai@gmail.com</div>
+            </a>
+            <a href="https://github.com/Majenayu" target="_blank" class="contact-tile">
+              <div class="ct-icon" style="background:linear-gradient(135deg,#161b22,var(--violet))">⌥</div>
+              <div class="ct-label">GitHub</div>
+              <div class="ct-value">@Majenayu</div>
+            </a>
+            <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" class="contact-tile">
+              <div class="ct-icon" style="background:linear-gradient(135deg,#0077b5,var(--mint))">in</div>
+              <div class="ct-label">LinkedIn</div>
+              <div class="ct-value">P G Ayush Rai</div>
+            </a>
+            <a href="https://www.youtube.com/channel/UCjioxN6gRm-o3SHBBlR6vhw" target="_blank" class="contact-tile">
+              <div class="ct-icon" style="background:linear-gradient(135deg,#ff0000,var(--rose))">▶</div>
+              <div class="ct-label">YouTube</div>
+              <div class="ct-value">MAJEN · CodeBreakers</div>
+            </a>
+          </div>
 
-          <!-- RIGHT: preview -->
-          <div class="proj-preview-section" id="projPreviewSection">
-            <div class="proj-preview-label">LIVE PREVIEW</div>
-            <iframe id="projWebsitePreview" style="display:none;" title="Project Preview" scrolling="yes"></iframe>
-            <img    id="projPreviewImg"     src="" alt="Project Preview" style="display:none;">
-            <div    id="projPreviewPh"      class="proj-ph">
-              <span class="ph-bracket">[</span>
-              <span class="ph-icon">◈</span>
-              <span class="ph-bracket">]</span>
+          <footer class="page-footer">
+            <div class="pf-left">
+              <p class="pf-built">
+                Built with <span class="pf-heart">♥</span> using
+                <span class="pf-stack">Node</span>
+                <span class="pf-stack">Express</span>
+                <span class="pf-stack">MongoDB</span>
+                <span class="pf-stack">Cloudinary</span>
+                <span class="pf-stack">Vanilla JS</span>
+              </p>
+              <p class="pf-copy">© 2026 P G Ayush Rai · All rights reserved</p>
             </div>
-          </div>
+            <div class="pf-right">
+              <kbd>/</kbd> for command palette
+            </div>
+          </footer>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- ╔══════════════════════════════════════════════════════╗
-       EVENTS
-       ╚══════════════════════════════════════════════════════╝ -->
-  <section class="deck-section" id="events">
-    <div class="deck-head">
-      <span class="deck-num">05</span>
-      <h2 class="deck-title">Events <span>/ hackathons · camps · conferences</span></h2>
-      <div class="deck-line"></div>
-    </div>
-
-    <div class="events-widget" id="eventsWidget">
-      <div class="ew-header">
-        <div class="ew-title">
-          <span class="ew-title-text">EVENTS</span>
-          <span class="ew-live-dot"></span>
-        </div>
-      </div>
-      <div class="ew-body">
-        <div class="ew-info-col" id="ewInfoCol">
-          <div class="ew-info-scroll">
-            <div class="ew-event-label" id="ewLabel">CodeBreakers · Event</div>
-            <div class="ew-event-name" id="ewName">—</div>
-            <div class="ew-event-meta" id="ewMeta"></div>
-            <div class="ew-team" id="ewTeamTag"></div>
-            <p class="ew-desc" id="ewDesc">—</p>
-            <div class="ew-team-inline" id="ewTeamInline"></div>
-            <a id="ewProjLink" href="#" target="_blank" class="ew-proj-link" style="display:none;">↗ View Project</a>
-          </div>
-          <div class="ew-nav-row">
-            <div class="ew-dots" id="ewDotTrack"></div>
-          </div>
-        </div>
-        <div class="ew-divider"></div>
-        <div class="ew-photo-col" id="ewPhotoCol">
-          <div class="ew-carousel-track" id="ewCarouselTrack"></div>
-          <div class="ew-photo-strip" id="ewPhotoStrip"></div>
-          <button class="ew-photo-nav ew-photo-nav-l" id="ewPhotoLeft" style="display:none;">‹</button>
-          <button class="ew-photo-nav ew-photo-nav-r" id="ewPhotoRight" style="display:none;">›</button>
-          <div class="ew-stamp" id="ewStamp"></div>
-          <div class="ew-progress" id="ewProgressBar"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ╔══════════════════════════════════════════════════════╗
-       CONTACT / CTA
-       ╚══════════════════════════════════════════════════════╝ -->
-  <section class="deck-section deck-contact" id="contact">
-    <div class="deck-head">
-      <span class="deck-num">06</span>
-      <h2 class="deck-title">Contact <span>/ let's build something</span></h2>
-      <div class="deck-line"></div>
-    </div>
-
-    <div class="contact-grid">
-      <div class="contact-card contact-primary">
-        <div class="bento-eyebrow">◆ Available for</div>
-        <h3 class="contact-h">Internships · Collaborations · Research</h3>
-        <p class="contact-p">Building at the intersection of AI, defense tech, and civic good. Reach out if you want to ship something that matters.</p>
-        <div class="contact-buttons">
-          <a href="mailto:pgayushrai@gmail.com" class="cta cta-primary">EMAIL ME <span>→</span></a>
-          <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" class="cta cta-ghost">LINKEDIN</a>
-        </div>
-      </div>
-
-      <a href="mailto:pgayushrai@gmail.com" class="contact-tile" data-copy="pgayushrai@gmail.com">
-        <div class="ct-icon" style="background:linear-gradient(135deg,var(--mint),var(--violet))">✉</div>
-        <div class="ct-label">Email <span class="ct-copy-hint">· click to copy</span></div>
-        <div class="ct-value">pgayushrai@gmail.com</div>
-      </a>
-      <a href="https://github.com/Majenayu" target="_blank" class="contact-tile">
-        <div class="ct-icon" style="background:linear-gradient(135deg,#161b22,var(--violet))">⌥</div>
-        <div class="ct-label">GitHub</div>
-        <div class="ct-value">@Majenayu</div>
-      </a>
-      <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" class="contact-tile">
-        <div class="ct-icon" style="background:linear-gradient(135deg,#0077b5,var(--mint))">in</div>
-        <div class="ct-label">LinkedIn</div>
-        <div class="ct-value">P G Ayush Rai</div>
-      </a>
-      <a href="https://www.youtube.com/channel/UCjioxN6gRm-o3SHBBlR6vhw" target="_blank" class="contact-tile">
-        <div class="ct-icon" style="background:linear-gradient(135deg,#ff0000,var(--rose))">▶</div>
-        <div class="ct-label">YouTube</div>
-        <div class="ct-value">MAJEN · CodeBreakers</div>
-      </a>
-    </div>
-
-    <footer class="deck-footer">
-      <div class="df-left">© 2026 P G Ayush Rai · Built with ♥ on Node · Express · MongoDB · Cloudinary</div>
-      <div class="df-right">
-        <button onclick="toggleTheme()" class="footer-btn">☾ Theme</button>
-        <a href="/login" class="footer-btn">⚙ Admin</a>
-      </div>
-    </footer>
-  </section>
+    </main>
+  </div>
 
   <!-- ═══ MODALS ═══ -->
   <div id="achievementModal" class="modal">
@@ -660,49 +575,63 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
-  <script src="effects.js"></script>
+  <!-- Hidden but kept for script.js compatibility -->
+  <div class="main-interface" id="mainInterface" style="display:none;" aria-hidden="true">
+    <div class="center-container">
+      <div class="rotating-coin" id="rotatingCoin"></div>
+      <div class="menu-nodes">
+        <div class="node" data-panel="resume"></div>
+        <div class="node" data-panel="youtube"></div>
+        <div class="node" data-panel="github"></div>
+        <div class="node" data-panel="linkedin"></div>
+        <div class="node" data-panel="settings"></div>
+        <div class="node" data-panel="contact"></div>
+        <div class="node" id="gameNode" data-action="game"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mirror counters into sidebar metrics -->
   <script>
-    // Simple hero clock + nav behavior
     (function(){
-      const clock = document.getElementById('heroClock');
-      function tick(){
-        if(!clock) return;
-        const d = new Date();
-        clock.textContent = d.toTimeString().slice(0,8) + ' IST';
+      function tick() {
+        const el = document.getElementById('heroClock');
+        if (el) el.textContent = new Date().toTimeString().slice(0,8);
       }
       tick(); setInterval(tick, 1000);
 
-      const nav = document.getElementById('topNav');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 200) nav.classList.add('scrolled');
-        else nav.classList.remove('scrolled');
-      });
-
-      // Mirror counters into hero stats after portfolio data loads
-      const mirrorStats = () => {
-        const a = document.getElementById('totalAchievements');
-        const c = document.getElementById('totalCourses');
-        const p = document.getElementById('projCount');
-        const ha = document.getElementById('heroAchCount');
-        const hc = document.getElementById('heroCourseCount');
-        const hp = document.getElementById('heroProjCount');
-        const ha2 = document.getElementById('totalAchievements2');
-        if (ha && a) ha.textContent = a.textContent;
-        if (hc && c) hc.textContent = c.textContent;
-        if (hp && p) hp.textContent = (p.textContent || '0').replace(/\D/g,'') || '0';
-        if (ha2 && a) ha2.textContent = a.textContent;
-      };
-      setInterval(mirrorStats, 1500);
-
-      // Scroll-reveal for sections
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+      function mirrorMetrics(){
+        const pairs = [
+          ['totalAchievements', 'mAch'],
+          ['totalCourses', 'mCourse'],
+          ['projCount', 'mProj']
+        ];
+        pairs.forEach(([src, dst])=>{
+          const s = document.getElementById(src);
+          const d = document.getElementById(dst);
+          if (s && d) {
+            const val = (s.textContent || '0').replace(/\D/g,'') || '0';
+            if (d.textContent !== val) d.textContent = val;
+          }
         });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.deck-section, .bento-card, .skill-card, .contact-tile').forEach(el => io.observe(el));
+      }
+      setInterval(mirrorMetrics, 1200);
+
+      // Scroll-spy for sidebar nav
+      const links = document.querySelectorAll('.sn-link');
+      const spyObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const id = e.target.id;
+            links.forEach(l => l.classList.toggle('active', l.dataset.spy === id));
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+      document.querySelectorAll('.sect').forEach(s => spyObs.observe(s));
     })();
   </script>
+
+  <script src="script.js"></script>
+  <script src="effects.js"></script>
 </body>
 </html>

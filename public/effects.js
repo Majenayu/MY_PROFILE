@@ -125,7 +125,7 @@
   // 3) TYPEWRITER — hero title
   // ══════════════════════════════════════════════════════
   function initTypewriter() {
-    const el = $('.rail-name-main');
+    const el = $('.side-name') || $('.rail-name-main');
     if (!el) return;
     const full = el.textContent;
     el.textContent = '';
@@ -182,7 +182,7 @@
     update();
   }
   function initScramble() {
-    $$('.deck-title, .deck-num').forEach(el => {
+    $$('.sa-label, .sa-num, .contact-big').forEach(el => {
       el.addEventListener('mouseenter', () => scrambleText(el));
     });
   }
@@ -213,32 +213,21 @@
       });
     }, { threshold: 0.4 });
     // Defer observation so data loads first
-    setTimeout(() => $$('.rs-num, .stat-number').forEach(el => obs.observe(el)), 2500);
+    setTimeout(() => $$('.sm-num, .stat-number, .proj-count').forEach(el => obs.observe(el)), 2500);
   }
 
   // ══════════════════════════════════════════════════════
   // 6) 3D TILT — cards follow cursor
   // ══════════════════════════════════════════════════════
   function initTilt() {
-    $$('.bento-card, .skill-card, .contact-tile, .rail-stat').forEach(card => {
+    $$('.skill-card, .contact-tile, .xp, .course-item').forEach(card => {
       let rafId;
       card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
         const x = (e.clientX - r.left) / r.width;
         const y = (e.clientY - r.top) / r.height;
-        const rx = (0.5 - y) * 8;
-        const ry = (x - 0.5) * 10;
-        cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(() => {
-          card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(2px)`;
-          card.style.setProperty('--mx', `${x * 100}%`);
-          card.style.setProperty('--my', `${y * 100}%`);
-        });
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-        card.style.setProperty('--mx', '50%');
-        card.style.setProperty('--my', '50%');
+        card.style.setProperty('--mx', `${x * 100}%`);
+        card.style.setProperty('--my', `${y * 100}%`);
       });
     });
   }
@@ -247,12 +236,12 @@
   // 7) MAGNETIC CTA buttons
   // ══════════════════════════════════════════════════════
   function initMagnetic() {
-    $$('.cta, .nav-btn, .deck-action, .footer-btn').forEach(btn => {
+    $$('.cta, .soc, .proj-icon-btn').forEach(btn => {
       btn.addEventListener('mousemove', e => {
         const r = btn.getBoundingClientRect();
         const x = e.clientX - (r.left + r.width / 2);
         const y = e.clientY - (r.top + r.height / 2);
-        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.25}px)`;
+        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.3}px)`;
       });
       btn.addEventListener('mouseleave', () => {
         btn.style.transform = '';
@@ -264,7 +253,22 @@
   // 8) CURSOR SPOTLIGHT + TRAIL
   // ══════════════════════════════════════════════════════
   function initCursor() {
-    if (window.matchMedia('(pointer: coarse)').matches) return; // skip on touch
+    // Soft spotlight that always follows mouse
+    const spot = $('#cursorSpot');
+    if (spot) {
+      let tx = window.innerWidth / 2, ty = window.innerHeight / 2;
+      let sx = tx, sy = ty;
+      window.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
+      function animate() {
+        sx += (tx - sx) * 0.12;
+        sy += (ty - sy) * 0.12;
+        spot.style.transform = `translate(${sx}px, ${sy}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    if (window.matchMedia('(pointer: coarse)').matches) return;
     const dot = document.createElement('div');
     dot.className = 'cursor-dot';
     const ring = document.createElement('div');
@@ -279,7 +283,7 @@
       requestAnimationFrame(loop);
     }
     loop();
-    $$('a, button, .node, .vball, .chip, [onclick]').forEach(el => {
+    $$('a, button, .soc, .sn-link, .vball, .chip, [onclick]').forEach(el => {
       el.addEventListener('mouseenter', () => ring.classList.add('hover'));
       el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
     });
