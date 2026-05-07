@@ -405,19 +405,19 @@ body::after {
 .panel-inner {
   flex: 1;
   display: flex; flex-direction: column;
-  padding: 20px 22px 16px;
-  gap: 14px; overflow: hidden;
+  padding: 16px 18px 12px;
+  gap: 10px; overflow: hidden;
   position: relative; z-index: 1;
 }
 
 /* Hero row */
 .hero-row {
   display: grid;
-  grid-template-columns: 104px 1fr;
-  gap: 18px; align-items: center;
+  grid-template-columns: 88px 1fr;
+  gap: 16px; align-items: center;
   flex-shrink: 0;
 }
-.identity-col { display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.identity-col { display: flex; flex-direction: column; justify-content: center; gap: 3px; min-width: 0; }
 
 .name-tag {
   font-family: var(--mono);
@@ -431,7 +431,7 @@ body::after {
 
 .name-main {
   font-family: var(--display);
-  font-size: 2.6rem;
+  font-size: 2.2rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1;
@@ -444,7 +444,7 @@ body::after {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 300;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   color: var(--ink-dim);
   letter-spacing: 0.01em;
   margin-top: 4px;
@@ -459,9 +459,9 @@ body::after {
 /* Character avatar */
 .char-wrap {
   flex-shrink: 0; position: relative;
-  width: 104px; height: 104px;
+  width: 88px; height: 88px;
   display: flex; align-items: flex-end; justify-content: center;
-  border-radius: 24px;
+  border-radius: 20px;
   background:
     radial-gradient(circle at 50% 30%, rgba(22, 241, 208, 0.2), transparent 70%),
     linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(255, 61, 139, 0.08));
@@ -473,7 +473,7 @@ body::after {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2.5rem;
+  font-size: 2rem;
   background: linear-gradient(135deg, var(--mint), var(--violet));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -481,7 +481,7 @@ body::after {
   filter: drop-shadow(0 0 10px rgba(22,241,208,0.4));
 }
 .char-img {
-  width: 96px; height: 96px; object-fit: contain;
+  width: 82px; height: 82px; object-fit: contain;
   filter: drop-shadow(0 4px 20px rgba(22, 241, 208, 0.45));
   animation: charFloat 3.5s ease-in-out infinite;
   image-rendering: -webkit-optimize-contrast;
@@ -503,7 +503,14 @@ body::after {
 }
 
 /* About block */
-.about-row { flex-shrink: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
+.about-row {
+  flex-shrink: 0;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 100px;
+}
 .about-label {
   font-family: var(--mono);
   font-size: 0.6rem;
@@ -517,14 +524,14 @@ body::after {
 }
 .about-text {
   font-family: var(--serif);
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   font-weight: 300;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--ink-dim);
   letter-spacing: 0.005em;
   overflow-y: auto;
   max-height: 100%;
-  padding-right: 4px;
+  padding-right: 6px;
   scrollbar-width: thin;
   scrollbar-color: rgba(22,241,208,0.3) transparent;
 }
@@ -539,18 +546,19 @@ body::after {
 }
 
 /* Chips */
-.chips { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+.chips { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; }
 .chip {
   font-family: var(--mono);
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 400;
   letter-spacing: 0.04em;
-  padding: 6px 12px;
+  padding: 5px 10px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--line-strong);
   color: var(--ink-dim);
   transition: all 0.25s var(--ease);
+  white-space: nowrap;
 }
 .chip:hover {
   border-color: rgba(22, 241, 208, 0.35);
@@ -1519,6 +1527,39 @@ body::after {
   position: absolute; inset: 0;
   display: flex;
   transition: transform 0.6s var(--ease);
+}
+.ew-carousel-slide {
+  position: relative;
+  min-width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: rgba(3, 4, 16, 0.6);
+}
+.ew-carousel-slide img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+.ew-carousel-slide .no-photo-ph {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.ew-carousel-slide .no-photo-ph .icon {
+  font-size: 2rem;
+  color: var(--violet);
+  opacity: 0.5;
+  filter: drop-shadow(0 0 12px var(--violet));
 }
 .ew-carousel-track > * {
   min-width: 100%; height: 100%;
