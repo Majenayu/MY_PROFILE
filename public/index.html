@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ayush — Portfolio Interface</title>
+  <title>P G Ayush Rai — Developer · Builder · Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&family=Fraunces:ital,wght@0,300;0,500;1,400&display=swap" rel="stylesheet">
@@ -11,19 +11,203 @@
 </head>
 <body>
 
-  <!-- ── Background canvas (z-index 0) ── -->
+  <!-- Global aurora background + particle canvas -->
   <canvas id="bgCanvas"></canvas>
 
-  <!-- ═══════════════════════════════════════════════════════
-       PROFILE PANEL — fixed top-left  330px × 50vh
-  ═══════════════════════════════════════════════════════ -->
-  <div class="panel" id="profilePanel">
-    <div class="panel-inner">
+  <!-- Sticky top nav (appears after scroll) -->
+  <nav class="top-nav" id="topNav">
+    <a href="#hero" class="nav-brand">
+      <span class="nav-dot"></span>
+      <span class="nav-brand-text">AYUSH<span class="nav-brand-accent">.dev</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#about"       class="nav-link">About</a>
+      <a href="#achievements" class="nav-link">Wins</a>
+      <a href="#skills"      class="nav-link">Stack</a>
+      <a href="#projects"    class="nav-link">Projects</a>
+      <a href="#events"      class="nav-link">Events</a>
+      <a href="#contact"     class="nav-link">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button onclick="toggleTheme()" class="nav-btn" id="themeToggleBtn" title="Toggle theme">☾</button>
+      <a href="/login" class="nav-btn" title="Admin">⚙</a>
+    </div>
+  </nav>
 
-      <!-- HERO ROW: char image LEFT + name/identity RIGHT -->
-      <div class="hero-row">
+  <!-- ╔══════════════════════════════════════════════════════╗
+       HERO — JARVIS Mission Control (100vh)
+       ╚══════════════════════════════════════════════════════╝ -->
+  <section class="hero-section" id="hero">
+
+    <!-- Status strip -->
+    <div class="hero-status">
+      <span class="status-led"></span>
+      <span class="status-text">SYSTEM ONLINE · CODEBREAKERS MAINFRAME</span>
+      <span class="status-time" id="heroClock">00:00:00</span>
+    </div>
+
+    <!-- Left identity rail -->
+    <div class="hero-rail hero-rail-left">
+      <div class="rail-label">[ PORTFOLIO · 2026 ]</div>
+      <div class="rail-name">
+        <span class="rail-name-tag">◆ OPERATOR</span>
+        <h1 class="rail-name-main" id="profileName">P G AYUSH RAI</h1>
+        <div class="rail-name-sub" id="profileTitle">B.Tech · Developer · Builder</div>
+      </div>
+      <div class="rail-chips" id="profileChips">
+        <span class="chip on" id="chipStatus">● Open to Opportunities</span>
+        <span class="chip"    id="chipLocation">📍 India</span>
+        <span class="chip"    id="chipEdu">🚀 B.Tech</span>
+      </div>
+      <div class="rail-cta">
+        <a href="#projects"   class="cta cta-primary">VIEW WORK <span>→</span></a>
+        <a href="#contact"    class="cta cta-ghost">GET IN TOUCH</a>
+      </div>
+    </div>
+
+    <!-- Right stats rail -->
+    <div class="hero-rail hero-rail-right">
+      <div class="rail-label">[ METRICS ]</div>
+      <div class="rail-stats">
+        <div class="rail-stat">
+          <div class="rs-num" id="heroAchCount">0</div>
+          <div class="rs-label">Achievements</div>
+        </div>
+        <div class="rail-stat">
+          <div class="rs-num" id="heroProjCount">0</div>
+          <div class="rs-label">Projects Shipped</div>
+        </div>
+        <div class="rail-stat">
+          <div class="rs-num" id="heroCourseCount">0</div>
+          <div class="rs-label">Courses Done</div>
+        </div>
+        <div class="rail-stat">
+          <div class="rs-num" id="heroEventCount">0</div>
+          <div class="rs-label">Events</div>
+        </div>
+      </div>
+      <div class="rail-hint">→ Click coin · Tap nodes to explore</div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero-scroll">
+      <span class="hs-text">SCROLL TO DEPLOY</span>
+      <div class="hs-bar"><span></span></div>
+    </div>
+
+    <!-- ═ JARVIS CENTER INTERFACE ═ -->
+    <div class="main-interface" id="mainInterface">
+      <div class="center-container">
+
+        <svg class="background-rings" viewBox="0 0 600 600">
+          <circle cx="300" cy="300" r="280" fill="none" stroke="rgba(22,241,208,0.12)" stroke-width="1"/>
+          <circle cx="300" cy="300" r="220" fill="none" stroke="rgba(139,92,246,0.15)" stroke-width="1" stroke-dasharray="5 10"/>
+          <circle cx="300" cy="300" r="160" fill="none" stroke="rgba(255,217,61,0.12)" stroke-width="1"/>
+        </svg>
+
+        <div class="center-core">
+          <div class="core-glow"></div>
+          <div class="core-inner">
+            <div class="rotating-coin" id="rotatingCoin">
+              <!-- Front: CodeBreakers -->
+              <div class="coin-side coin-front">
+                <svg viewBox="0 0 160 160" class="coin-logo">
+                  <defs>
+                    <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%"   stop-color="#16f1d0"/>
+                      <stop offset="50%"  stop-color="#8b5cf6"/>
+                      <stop offset="100%" stop-color="#ff3d8b"/>
+                    </linearGradient>
+                    <filter id="cglow"><feGaussianBlur stdDeviation="4" result="b"/>
+                      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                  </defs>
+                  <circle cx="80" cy="80" r="75" stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
+                  <circle cx="80" cy="80" r="65" stroke="url(#cg)" stroke-width="1" fill="none" opacity=".6"/>
+                  <path d="M35 45 Q30 45 30 50 L30 65 Q30 70 25 70 Q30 70 30 75 L30 90 Q30 95 35 95"
+                        stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
+                  <path d="M125 45 Q130 45 130 50 L130 65 Q130 70 135 70 Q130 70 130 75 L130 90 Q130 95 125 95"
+                        stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
+                  <path d="M70 50 L90 50 L80 70 L95 70 L70 90 L85 70 L70 70 Z"
+                        fill="url(#cg)" filter="url(#cglow)"/>
+                  <text x="50"  y="40"  font-family="monospace" font-size="6" fill="rgba(22,241,208,0.6)">101101</text>
+                  <text x="50"  y="110" font-family="monospace" font-size="6" fill="rgba(22,241,208,0.6)">011010</text>
+                  <text x="100" y="40"  font-family="monospace" font-size="6" fill="rgba(22,241,208,0.6)">110011</text>
+                  <text x="100" y="110" font-family="monospace" font-size="6" fill="rgba(22,241,208,0.6)">101100</text>
+                  <text x="80" y="120" text-anchor="middle" font-family="Orbitron,monospace" font-size="10"
+                        font-weight="bold" fill="url(#cg)" filter="url(#cglow)">CODE<tspan fill="#ffd93d">BREAKERS</tspan></text>
+                </svg>
+              </div>
+              <!-- Back: MAJEN -->
+              <div class="coin-side coin-back">
+                <svg viewBox="0 0 160 160" class="coin-name">
+                  <defs>
+                    <linearGradient id="ng" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%"   stop-color="#ff3d8b"/>
+                      <stop offset="50%"  stop-color="#ffd93d"/>
+                      <stop offset="100%" stop-color="#16f1d0"/>
+                    </linearGradient>
+                    <filter id="nglow"><feGaussianBlur stdDeviation="4" result="b"/>
+                      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                  </defs>
+                  <circle cx="80" cy="80" r="75" stroke="url(#ng)" stroke-width="3" fill="none" filter="url(#nglow)"/>
+                  <circle cx="80" cy="80" r="65" stroke="url(#ng)" stroke-width="1" fill="none" opacity=".6"/>
+                  <polygon points="80,30 85,40 95,40 87,48 90,58 80,52 70,58 73,48 65,40 75,40" fill="url(#ng)" filter="url(#nglow)"/>
+                  <polygon points="80,130 85,120 95,120 87,112 90,102 80,108 70,102 73,112 65,120 75,120" fill="url(#ng)" filter="url(#nglow)"/>
+                  <text x="80" y="85" text-anchor="middle" font-family="Orbitron,monospace" font-size="24"
+                        font-weight="900" fill="url(#ng)" filter="url(#nglow)" letter-spacing="2px">MAJEN</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orbiting nodes -->
+        <div class="menu-nodes">
+          <div class="node" data-panel="resume" data-tip="Resume">
+            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z M9,13V15H15V13H9M9,16V18H13V16H9Z"/></svg></div>
+          </div>
+          <div class="node" data-panel="youtube" data-tip="YouTube">
+            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/></svg></div>
+          </div>
+          <div class="node" data-panel="github" data-tip="GitHub">
+            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/></svg></div>
+          </div>
+          <div class="node" data-panel="linkedin" data-tip="LinkedIn">
+            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg></div>
+          </div>
+          <div class="node" data-panel="settings" data-tip="Settings">
+            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.04 4.95,18.95L7.44,17.95C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.95L19.05,18.95C19.27,19.04 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/></svg></div>
+          </div>
+          <div class="node" data-panel="contact" data-tip="Contact">
+            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/></svg></div>
+          </div>
+          <div class="node" id="gameNode" data-action="game" data-tip="Arcade">
+            <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.97,16L5,19C4.67,19.3 4.23,19.5 3.75,19.5A1.75,1.75 0 0,1 2,17.75V17.5L3,10.12C3.21,7.81 5.14,6 7.5,6H16.5C18.86,6 20.79,7.81 21,10.12L22,17.5V17.75A1.75,1.75 0 0,1 20.25,19.5C19.77,19.5 19.33,19.3 19,19L16.03,16H7.97M7,9V11H5V13H7V15H9V13H11V11H9V9H7M14.5,12A1.5,1.5 0 0,0 13,13.5A1.5,1.5 0 0,0 14.5,15A1.5,1.5 0 0,0 16,13.5A1.5,1.5 0 0,0 14.5,12M17.5,9A1.5,1.5 0 0,0 16,10.5A1.5,1.5 0 0,0 17.5,12A1.5,1.5 0 0,0 19,10.5A1.5,1.5 0 0,0 17.5,9Z"/></svg></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+  <!-- END HERO -->
+
+  <!-- ╔══════════════════════════════════════════════════════╗
+       ABOUT + IDENTITY BENTO
+       ╚══════════════════════════════════════════════════════╝ -->
+  <section class="deck-section" id="about">
+    <div class="deck-head">
+      <span class="deck-num">01</span>
+      <h2 class="deck-title">About <span>/ operator profile</span></h2>
+      <div class="deck-line"></div>
+    </div>
+
+    <div class="bento about-bento">
+      <!-- Avatar hologram card -->
+      <div class="bento-card bento-avatar">
         <div class="char-wrap">
-          <!-- Holographic Tech Avatar (pure SVG, never fails to load) -->
           <svg class="char-holo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <linearGradient id="holoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -40,451 +224,419 @@
                 <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
             </defs>
-            <!-- Orbit rings -->
             <circle cx="50" cy="50" r="44" fill="none" stroke="url(#holoGrad)" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.55">
               <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="18s" repeatCount="indefinite"/>
             </circle>
             <circle cx="50" cy="50" r="38" fill="none" stroke="#8b5cf6" stroke-width="0.4" stroke-dasharray="1 2" opacity="0.45">
               <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="22s" repeatCount="indefinite"/>
             </circle>
-            <!-- Head -->
             <circle cx="50" cy="40" r="14" fill="none" stroke="url(#holoGrad)" stroke-width="1.4" filter="url(#holoGlow)"/>
             <circle cx="50" cy="40" r="10" fill="url(#holoGrad)" opacity="0.18"/>
-            <!-- Eyes -->
-            <circle cx="45" cy="39" r="1.4" fill="#16f1d0">
-              <animate attributeName="opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="55" cy="39" r="1.4" fill="#16f1d0">
-              <animate attributeName="opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Scanner line over face -->
+            <circle cx="45" cy="39" r="1.4" fill="#16f1d0"><animate attributeName="opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/></circle>
+            <circle cx="55" cy="39" r="1.4" fill="#16f1d0"><animate attributeName="opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/></circle>
             <rect x="36" y="34" width="28" height="0.6" fill="#16f1d0" opacity="0.7">
               <animate attributeName="y" values="30;48;30" dur="2.4s" repeatCount="indefinite"/>
               <animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.4s" repeatCount="indefinite"/>
             </rect>
-            <!-- Body/Shoulders -->
             <path d="M28 86 Q28 62 50 62 Q72 62 72 86 Z" fill="none" stroke="url(#holoGrad)" stroke-width="1.3" filter="url(#holoGlow)"/>
             <path d="M30 86 Q32 68 50 66 Q68 68 70 86 Z" fill="url(#holoGrad2)" opacity="0.15"/>
-            <!-- Chest circuit -->
             <circle cx="50" cy="74" r="2.5" fill="none" stroke="#ff3d8b" stroke-width="0.7">
               <animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite"/>
             </circle>
-            <line x1="50" y1="71.5" x2="50" y2="69" stroke="#ff3d8b" stroke-width="0.5"/>
-            <line x1="50" y1="76.5" x2="50" y2="79" stroke="#ff3d8b" stroke-width="0.5"/>
-            <line x1="47.5" y1="74" x2="45" y2="74" stroke="#ff3d8b" stroke-width="0.5"/>
-            <line x1="52.5" y1="74" x2="55" y2="74" stroke="#ff3d8b" stroke-width="0.5"/>
-            <!-- Data nodes -->
-            <circle cx="18" cy="50" r="1" fill="#16f1d0"><animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite"/></circle>
-            <circle cx="82" cy="50" r="1" fill="#ffd93d"><animate attributeName="opacity" values="1;0.2;1" dur="2.2s" repeatCount="indefinite"/></circle>
-            <circle cx="50" cy="12" r="1" fill="#ff3d8b"><animate attributeName="opacity" values="0.2;1;0.2" dur="1.8s" repeatCount="indefinite"/></circle>
           </svg>
           <div class="char-grid"></div>
-          <div class="char-shadow"></div>
         </div>
-        <div class="identity-col">
-          <span class="name-tag">[ Portfolio ]</span>
-          <div class="name-main" id="profileName">P G AYUSH RAI</div>
-          <div class="name-sub"  id="profileTitle">B.Tech · Developer · Builder</div>
-          <div class="chips" id="profileChips" style="margin-top:6px;">
-            <div class="chip on"  id="chipStatus">● Open to Opportunities</div>
-            <div class="chip"     id="chipLocation">📍 India</div>
-            <div class="chip"     id="chipEdu">🚀 B.Tech</div>
-          </div>
+        <div class="bento-avatar-footer">
+          <span class="live-pulse"></span>
+          <span>ONLINE · BENGALURU · IST</span>
         </div>
       </div>
 
-      <!-- ABOUT — full width below hero -->
-      <div class="about-row">
-        <div class="about-label">About</div>
+      <!-- Bio card -->
+      <div class="bento-card bento-bio">
+        <div class="bento-eyebrow">◆ Bio · Manifesto</div>
         <p class="about-text" id="profileAbout">
           <strong>P G Ayush Rai</strong> — technologist &amp; builder at the intersection of AI, software, and engineering.
         </p>
+        <div class="bento-sig">— P G Ayush Rai</div>
       </div>
 
-      <div class="div"></div>
+      <!-- Focus card -->
+      <div class="bento-card bento-focus">
+        <div class="bento-eyebrow">◆ Focus Areas</div>
+        <ul class="focus-list">
+          <li><span class="fl-dot" style="background:var(--mint)"></span>Full-stack Web · AI/ML Integration</li>
+          <li><span class="fl-dot" style="background:var(--violet)"></span>Computer Vision · Posture Detection</li>
+          <li><span class="fl-dot" style="background:var(--rose)"></span>Face Recognition · Line Following</li>
+          <li><span class="fl-dot" style="background:var(--sun)"></span>Civic Tech · Defense Innovation</li>
+        </ul>
+      </div>
 
-      <!-- Badge tube -->
-      <div class="ach-wrap">
-        <div class="ach-label">Achievements</div>
-        <div class="ach-row">
-          <div class="htube">
-            <div class="tcap left"></div>
-            <div class="tshaft-horizontal" id="shaft">
-              <div class="tube-loader"><div class="spinner"></div></div>
-            </div>
-            <div class="tcap right"></div>
+      <!-- Timeline card -->
+      <div class="bento-card bento-time">
+        <div class="bento-eyebrow">◆ Current Mission</div>
+        <div class="time-badge">B.E · VVCE · CSE-AIML</div>
+        <div class="time-sub">NCC Naval Cadet Captain · Vice President (VF)</div>
+        <div class="time-progress">
+          <div class="time-progress-bar"><span></span></div>
+          <div class="time-progress-labels">
+            <span>2022</span><span class="tp-now">NOW</span><span>2026</span>
           </div>
         </div>
-        <div class="ach-detail-area">
-          <div class="ach-hint" id="hint">← tap a badge to inspect</div>
-          <div class="ach-card" id="card">
-            <div class="ach-top">
-              <div class="ach-img-wrap" id="cimg"></div>
-              <div class="ach-title"    id="ct"></div>
-            </div>
-            <div class="ach-desc" id="cd"></div>
-            <div class="ach-tag"  id="ctag"></div>
-          </div>
-        </div>
       </div>
-
-      <div class="pfooter">
-        <div class="pf-copy">© 2025 PG Ayush Rai</div>
-        <div class="pf-actions">
-          <button onclick="toggleTheme()" class="pf-edit" id="themeToggleBtn">☾ Theme</button>
-          <a href="/login" class="pf-edit">⚙ Admin</a>
-        </div>
-      </div>
-
     </div>
-  </div>
-  <!-- END PROFILE PANEL -->
+  </section>
 
-  <!-- ═══════════════════════════════════════════════════════
-       ACHIEVEMENTS + COURSES — fixed top-right 52% × 50vh
-  ═══════════════════════════════════════════════════════ -->
-  <div class="container" id="portfolioPanel">
-    <section id="splitScreen" class="section active">
-      <div class="split-container">
-
-        <!-- Left: Achievements -->
-        <div class="split-left">
-          <div class="section-header">
-            <h2>My Achievements</h2>
-            <div class="stats-display">
-              <span class="stat-number" id="totalAchievements">0</span>
-              <span class="stat-label">total</span>
-            </div>
-          </div>
-          <div class="achievement-slideshow-container">
-            <div class="slideshow-wrapper">
-              <div class="achievement-slideshow" id="achievementSlideshow"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: Courses -->
-        <div class="split-right">
-          <div class="section-header">
-            <h2>Learning Journey</h2>
-            <div class="stats-display">
-              <span class="stat-number" id="totalCourses">0</span>
-              <span class="stat-label">courses</span>
-            </div>
-          </div>
-          <div class="courses-list-container">
-            <div class="courses-list" id="coursesList"></div>
-          </div>
-        </div>
-
+  <!-- ╔══════════════════════════════════════════════════════╗
+       ACHIEVEMENTS — badge tube + slideshow
+       ╚══════════════════════════════════════════════════════╝ -->
+  <section class="deck-section" id="achievements">
+    <div class="deck-head">
+      <span class="deck-num">02</span>
+      <h2 class="deck-title">Wins <span>/ achievements · competitions</span></h2>
+      <div class="deck-line"></div>
+      <div class="deck-stat">
+        <span class="stat-number" id="totalAchievements">0</span>
+        <span class="stat-label">total</span>
       </div>
-    </section>
-  </div>
-  <!-- END PORTFOLIO PANEL -->
-
-  <!-- ═══════════════════════════════════════════════════════
-       JARVIS CENTER INTERFACE
-  ═══════════════════════════════════════════════════════ -->
-  <div class="main-interface" id="mainInterface">
-    <div class="center-container">
-
-      <svg class="background-rings" viewBox="0 0 600 600">
-        <circle cx="300" cy="300" r="280" fill="none" stroke="rgba(0,212,255,0.10)" stroke-width="1"/>
-        <circle cx="300" cy="300" r="220" fill="none" stroke="rgba(0,212,255,0.15)" stroke-width="1" stroke-dasharray="5 10"/>
-        <circle cx="300" cy="300" r="160" fill="none" stroke="rgba(255,149,0,0.10)" stroke-width="1"/>
-      </svg>
-
-      <!-- Center core -->
-      <div class="center-core">
-        <div class="core-glow"></div>
-        <div class="core-inner">
-          <div class="rotating-coin" id="rotatingCoin">
-
-            <!-- Front: CodeBreakers -->
-            <div class="coin-side coin-front">
-              <svg viewBox="0 0 160 160" class="coin-logo">
-                <defs>
-                  <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%"   stop-color="#00d4ff"/>
-                    <stop offset="50%"  stop-color="#00ffaa"/>
-                    <stop offset="100%" stop-color="#0099ff"/>
-                  </linearGradient>
-                  <filter id="cglow"><feGaussianBlur stdDeviation="4" result="b"/>
-                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                  </filter>
-                </defs>
-                <circle cx="80" cy="80" r="75" stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
-                <circle cx="80" cy="80" r="65" stroke="url(#cg)" stroke-width="1" fill="none" opacity=".6"/>
-                <path d="M35 45 Q30 45 30 50 L30 65 Q30 70 25 70 Q30 70 30 75 L30 90 Q30 95 35 95"
-                      stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
-                <path d="M125 45 Q130 45 130 50 L130 65 Q130 70 135 70 Q130 70 130 75 L130 90 Q130 95 125 95"
-                      stroke="url(#cg)" stroke-width="3" fill="none" filter="url(#cglow)"/>
-                <path d="M70 50 L90 50 L80 70 L95 70 L70 90 L85 70 L70 70 Z"
-                      fill="url(#cg)" filter="url(#cglow)"/>
-                <text x="50"  y="40"  font-family="monospace" font-size="6" fill="rgba(0,212,255,0.6)">101101</text>
-                <text x="50"  y="110" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.6)">011010</text>
-                <text x="100" y="40"  font-family="monospace" font-size="6" fill="rgba(0,212,255,0.6)">110011</text>
-                <text x="100" y="110" font-family="monospace" font-size="6" fill="rgba(0,212,255,0.6)">101100</text>
-                <text x="80" y="120" text-anchor="middle" font-family="Orbitron,monospace" font-size="10"
-                      font-weight="bold" fill="url(#cg)" filter="url(#cglow)">CODE<tspan fill="#ff9500">BREAKERS</tspan></text>
-              </svg>
-            </div>
-
-            <!-- Back: MAJEN -->
-            <div class="coin-side coin-back">
-              <svg viewBox="0 0 160 160" class="coin-name">
-                <defs>
-                  <linearGradient id="ng" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%"   stop-color="#ff9500"/>
-                    <stop offset="50%"  stop-color="#ffaa00"/>
-                    <stop offset="100%" stop-color="#ff6600"/>
-                  </linearGradient>
-                  <filter id="nglow"><feGaussianBlur stdDeviation="4" result="b"/>
-                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                  </filter>
-                </defs>
-                <circle cx="80" cy="80" r="75" stroke="url(#ng)" stroke-width="3" fill="none" filter="url(#nglow)"/>
-                <circle cx="80" cy="80" r="65" stroke="url(#ng)" stroke-width="1" fill="none" opacity=".6"/>
-                <polygon points="80,30 85,40 95,40 87,48 90,58 80,52 70,58 73,48 65,40 75,40" fill="url(#ng)" filter="url(#nglow)"/>
-                <polygon points="80,130 85,120 95,120 87,112 90,102 80,108 70,102 73,112 65,120 75,120" fill="url(#ng)" filter="url(#nglow)"/>
-                <text x="80" y="85" text-anchor="middle" font-family="Orbitron,monospace" font-size="24"
-                      font-weight="900" fill="url(#ng)" filter="url(#nglow)" letter-spacing="2px">MAJEN</text>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Orbiting nodes -->
-      <div class="menu-nodes">
-        <div class="node" data-panel="resume">
-          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z M9,13V15H15V13H9M9,16V18H13V16H9Z"/></svg></div>
-        </div>
-        <div class="node" data-panel="youtube">
-          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/></svg></div>
-        </div>
-        <div class="node" data-panel="github">
-          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/></svg></div>
-        </div>
-        <div class="node" data-panel="linkedin">
-          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg></div>
-        </div>
-        <div class="node" data-panel="settings">
-          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.04 4.95,18.95L7.44,17.95C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.95L19.05,18.95C19.27,19.04 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/></svg></div>
-        </div>
-        <div class="node" data-panel="contact">
-          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/></svg></div>
-        </div>
-        <div class="node" id="gameNode" data-action="game">
-          <div class="node-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.97,16L5,19C4.67,19.3 4.23,19.5 3.75,19.5A1.75,1.75 0 0,1 2,17.75V17.5L3,10.12C3.21,7.81 5.14,6 7.5,6H16.5C18.86,6 20.79,7.81 21,10.12L22,17.5V17.75A1.75,1.75 0 0,1 20.25,19.5C19.77,19.5 19.33,19.3 19,19L16.03,16H7.97M7,9V11H5V13H7V15H9V13H11V11H9V9H7M14.5,12A1.5,1.5 0 0,0 13,13.5A1.5,1.5 0 0,0 14.5,15A1.5,1.5 0 0,0 16,13.5A1.5,1.5 0 0,0 14.5,12M17.5,9A1.5,1.5 0 0,0 16,10.5A1.5,1.5 0 0,0 17.5,12A1.5,1.5 0 0,0 19,10.5A1.5,1.5 0 0,0 17.5,9Z"/></svg></div>
-        </div>
-        
-       
-      </div>
-
     </div>
-  </div>
-  <!-- END JARVIS -->
 
-  <!-- ═══════════════════════════════════════════════════════
-       MODALS
-  ═══════════════════════════════════════════════════════ -->
+    <!-- Badge tube (horizontal scrollable) -->
+    <div class="ach-wrap">
+      <div class="ach-label">◆ Badge Constellation — tap to inspect</div>
+      <div class="ach-row">
+        <div class="htube">
+          <div class="tcap left"></div>
+          <div class="tshaft-horizontal" id="shaft">
+            <div class="tube-loader"><div class="spinner"></div></div>
+          </div>
+          <div class="tcap right"></div>
+        </div>
+      </div>
+      <div class="ach-detail-area">
+        <div class="ach-hint" id="hint">← tap a badge to inspect</div>
+        <div class="ach-card" id="card">
+          <div class="ach-top">
+            <div class="ach-img-wrap" id="cimg"></div>
+            <div class="ach-title"    id="ct"></div>
+          </div>
+          <div class="ach-desc" id="cd"></div>
+          <div class="ach-tag"  id="ctag"></div>
+        </div>
+      </div>
+    </div>
 
-  <!-- Add Achievement Modal -->
+    <!-- Full-width achievement slideshow -->
+    <div class="container" id="portfolioPanel">
+      <section id="splitScreen" class="section active">
+        <div class="split-container">
+          <div class="split-left">
+            <div class="section-header">
+              <h2>My Achievements</h2>
+              <div class="stats-display">
+                <span class="stat-number" id="totalAchievements2">0</span>
+                <span class="stat-label">shown</span>
+              </div>
+            </div>
+            <div class="achievement-slideshow-container">
+              <div class="slideshow-wrapper">
+                <div class="achievement-slideshow" id="achievementSlideshow"></div>
+              </div>
+            </div>
+          </div>
+          <div class="split-right">
+            <div class="section-header">
+              <h2>Learning Journey</h2>
+              <div class="stats-display">
+                <span class="stat-number" id="totalCourses">0</span>
+                <span class="stat-label">courses</span>
+              </div>
+            </div>
+            <div class="courses-list-container">
+              <div class="courses-list" id="coursesList"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════════════════════╗
+       SKILLS MATRIX — Tech Stack Radar
+       ╚══════════════════════════════════════════════════════╝ -->
+  <section class="deck-section" id="skills">
+    <div class="deck-head">
+      <span class="deck-num">03</span>
+      <h2 class="deck-title">Stack <span>/ tech arsenal · capabilities</span></h2>
+      <div class="deck-line"></div>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-head">
+          <span class="skill-icon" style="background:linear-gradient(135deg,#e34c26,#f06529)">&lt;/&gt;</span>
+          <span class="skill-name">Frontend</span>
+          <span class="skill-lvl">Advanced</span>
+        </div>
+        <div class="skill-tags">
+          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span><span>Material UI</span><span>Vue</span>
+        </div>
+        <div class="skill-bar"><span style="width:88%;background:linear-gradient(90deg,var(--mint),var(--violet))"></span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-head">
+          <span class="skill-icon" style="background:linear-gradient(135deg,#3776ab,#ffd43b)">🐍</span>
+          <span class="skill-name">AI / ML</span>
+          <span class="skill-lvl">Advanced</span>
+        </div>
+        <div class="skill-tags">
+          <span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Face Recognition</span><span>Posture Detection</span>
+        </div>
+        <div class="skill-bar"><span style="width:85%;background:linear-gradient(90deg,var(--violet),var(--rose))"></span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-head">
+          <span class="skill-icon" style="background:linear-gradient(135deg,#68a063,#a4ca39)">◈</span>
+          <span class="skill-name">Backend</span>
+          <span class="skill-lvl">Proficient</span>
+        </div>
+        <div class="skill-tags">
+          <span>Node.js</span><span>Express</span><span>Java</span><span>MongoDB</span><span>REST APIs</span>
+        </div>
+        <div class="skill-bar"><span style="width:78%;background:linear-gradient(90deg,var(--mint),var(--sun))"></span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-head">
+          <span class="skill-icon" style="background:linear-gradient(135deg,#623ce4,#7c3aed)">⚡</span>
+          <span class="skill-name">DevOps / Cloud</span>
+          <span class="skill-lvl">Working</span>
+        </div>
+        <div class="skill-tags">
+          <span>Git</span><span>GitHub Actions</span><span>Terraform</span><span>Render</span><span>Cloudinary</span>
+        </div>
+        <div class="skill-bar"><span style="width:70%;background:linear-gradient(90deg,var(--rose),var(--sun))"></span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-head">
+          <span class="skill-icon" style="background:linear-gradient(135deg,#f7df1e,#1572b6)">🎯</span>
+          <span class="skill-name">Domains</span>
+          <span class="skill-lvl">Applied</span>
+        </div>
+        <div class="skill-tags">
+          <span>Computer Vision</span><span>Bus Tracking</span><span>Civic Tech</span><span>Defense Tech</span>
+        </div>
+        <div class="skill-bar"><span style="width:82%;background:linear-gradient(90deg,var(--mint),var(--rose))"></span></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-head">
+          <span class="skill-icon" style="background:linear-gradient(135deg,#ffd93d,#ff3d8b)">★</span>
+          <span class="skill-name">Leadership</span>
+          <span class="skill-lvl">Senior</span>
+        </div>
+        <div class="skill-tags">
+          <span>NCC Captain</span><span>VP (VF)</span><span>Mentoring</span><span>Public Speaking</span>
+        </div>
+        <div class="skill-bar"><span style="width:90%;background:linear-gradient(90deg,var(--sun),var(--mint))"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════════════════════╗
+       PROJECTS
+       ╚══════════════════════════════════════════════════════╝ -->
+  <section class="deck-section" id="projects">
+    <div class="deck-head">
+      <span class="deck-num">04</span>
+      <h2 class="deck-title">Projects <span>/ shipped · live · open source</span></h2>
+      <div class="deck-line"></div>
+      <div class="deck-stat">
+        <span class="stat-number" id="projCount">0</span>
+        <span class="stat-label">live</span>
+      </div>
+      <button id="projGameBtn" class="deck-action" title="Tech Stack Blaster arcade">🕹 ARCADE</button>
+    </div>
+
+    <div class="proj-panel" id="projectsPanel">
+      <div class="proj-panel-inner">
+        <div class="proj-body" id="projBody">
+          <!-- LEFT: project info with drag -->
+          <div class="proj-drag-area" id="projDragArea">
+            <div class="proj-project" id="projProject">
+              <div class="proj-name-row">
+                <h2 class="proj-name" id="projName">—</h2>
+                <div class="proj-links">
+                  <a id="projWebLink"    href="#" target="_blank" class="plink" style="display:none" title="Live demo">↗</a>
+                  <a id="projGithubLink" href="#" target="_blank" class="plink" style="display:none" title="GitHub">⌥</a>
+                </div>
+              </div>
+              <div class="proj-meta-row" id="projMetaRow"></div>
+              <p class="proj-desc" id="projDesc">—</p>
+              <div class="proj-tech-inline">
+                <div class="proj-tech-tags" id="projTechTags"></div>
+              </div>
+            </div>
+            <div class="proj-bottom-row">
+              <div class="proj-drag-hint" id="projDragHint">
+                <span class="dh-arrow">‹</span>
+                <span class="dh-text">DRAG</span>
+                <span class="dh-arrow">›</span>
+              </div>
+              <div class="proj-dots" id="projDots"></div>
+            </div>
+          </div>
+
+          <div class="proj-divider"></div>
+
+          <!-- RIGHT: preview -->
+          <div class="proj-preview-section" id="projPreviewSection">
+            <div class="proj-preview-label">LIVE PREVIEW</div>
+            <iframe id="projWebsitePreview" style="display:none;" title="Project Preview" scrolling="yes"></iframe>
+            <img    id="projPreviewImg"     src="" alt="Project Preview" style="display:none;">
+            <div    id="projPreviewPh"      class="proj-ph">
+              <span class="ph-bracket">[</span>
+              <span class="ph-icon">◈</span>
+              <span class="ph-bracket">]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════════════════════╗
+       EVENTS
+       ╚══════════════════════════════════════════════════════╝ -->
+  <section class="deck-section" id="events">
+    <div class="deck-head">
+      <span class="deck-num">05</span>
+      <h2 class="deck-title">Events <span>/ hackathons · camps · conferences</span></h2>
+      <div class="deck-line"></div>
+    </div>
+
+    <div class="events-widget" id="eventsWidget">
+      <div class="ew-header">
+        <div class="ew-title">
+          <span class="ew-title-text">EVENTS</span>
+          <span class="ew-live-dot"></span>
+        </div>
+      </div>
+      <div class="ew-body">
+        <div class="ew-info-col" id="ewInfoCol">
+          <div class="ew-info-scroll">
+            <div class="ew-event-label" id="ewLabel">CodeBreakers · Event</div>
+            <div class="ew-event-name" id="ewName">—</div>
+            <div class="ew-event-meta" id="ewMeta"></div>
+            <div class="ew-team" id="ewTeamTag"></div>
+            <p class="ew-desc" id="ewDesc">—</p>
+            <div class="ew-team-inline" id="ewTeamInline"></div>
+            <a id="ewProjLink" href="#" target="_blank" class="ew-proj-link" style="display:none;">↗ View Project</a>
+          </div>
+          <div class="ew-nav-row">
+            <div class="ew-dots" id="ewDotTrack"></div>
+          </div>
+        </div>
+        <div class="ew-divider"></div>
+        <div class="ew-photo-col" id="ewPhotoCol">
+          <div class="ew-carousel-track" id="ewCarouselTrack"></div>
+          <div class="ew-photo-strip" id="ewPhotoStrip"></div>
+          <button class="ew-photo-nav ew-photo-nav-l" id="ewPhotoLeft" style="display:none;">‹</button>
+          <button class="ew-photo-nav ew-photo-nav-r" id="ewPhotoRight" style="display:none;">›</button>
+          <div class="ew-stamp" id="ewStamp"></div>
+          <div class="ew-progress" id="ewProgressBar"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════════════════════╗
+       CONTACT / CTA
+       ╚══════════════════════════════════════════════════════╝ -->
+  <section class="deck-section deck-contact" id="contact">
+    <div class="deck-head">
+      <span class="deck-num">06</span>
+      <h2 class="deck-title">Contact <span>/ let's build something</span></h2>
+      <div class="deck-line"></div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card contact-primary">
+        <div class="bento-eyebrow">◆ Available for</div>
+        <h3 class="contact-h">Internships · Collaborations · Research</h3>
+        <p class="contact-p">Building at the intersection of AI, defense tech, and civic good. Reach out if you want to ship something that matters.</p>
+        <div class="contact-buttons">
+          <a href="mailto:pgayushrai@gmail.com" class="cta cta-primary">EMAIL ME <span>→</span></a>
+          <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" class="cta cta-ghost">LINKEDIN</a>
+        </div>
+      </div>
+
+      <a href="mailto:pgayushrai@gmail.com" class="contact-tile">
+        <div class="ct-icon" style="background:linear-gradient(135deg,var(--mint),var(--violet))">✉</div>
+        <div class="ct-label">Email</div>
+        <div class="ct-value">pgayushrai@gmail.com</div>
+      </a>
+      <a href="https://github.com/Majenayu" target="_blank" class="contact-tile">
+        <div class="ct-icon" style="background:linear-gradient(135deg,#161b22,var(--violet))">⌥</div>
+        <div class="ct-label">GitHub</div>
+        <div class="ct-value">@Majenayu</div>
+      </a>
+      <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" class="contact-tile">
+        <div class="ct-icon" style="background:linear-gradient(135deg,#0077b5,var(--mint))">in</div>
+        <div class="ct-label">LinkedIn</div>
+        <div class="ct-value">P G Ayush Rai</div>
+      </a>
+      <a href="https://www.youtube.com/channel/UCjioxN6gRm-o3SHBBlR6vhw" target="_blank" class="contact-tile">
+        <div class="ct-icon" style="background:linear-gradient(135deg,#ff0000,var(--rose))">▶</div>
+        <div class="ct-label">YouTube</div>
+        <div class="ct-value">MAJEN · CodeBreakers</div>
+      </a>
+    </div>
+
+    <footer class="deck-footer">
+      <div class="df-left">© 2026 P G Ayush Rai · Built with ♥ on Node · Express · MongoDB · Cloudinary</div>
+      <div class="df-right">
+        <button onclick="toggleTheme()" class="footer-btn">☾ Theme</button>
+        <a href="/login" class="footer-btn">⚙ Admin</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ═══ MODALS ═══ -->
   <div id="achievementModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('achievementModal')">&times;</span>
       <h3>Add Achievement</h3>
       <form id="achievementForm" enctype="multipart/form-data" class="project-form">
-        <div class="form-group">
-          <label for="eventName">Event Name *</label>
-          <input type="text" id="eventName" placeholder="Event Name" required maxlength="100">
-        </div>
-        <div class="form-group">
-          <label for="place">Place / Position *</label>
-          <input type="text" id="place" placeholder="e.g. 1st Place" required maxlength="50">
-        </div>
-        <div class="form-group">
-          <label for="achievementDescription">Description</label>
-          <textarea id="achievementDescription" placeholder="Describe this achievement…" maxlength="400" rows="2"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="priority">Priority Level</label>
-          <select id="priority">
-            <option value="high">High Priority</option>
-            <option value="medium" selected>Medium Priority</option>
-            <option value="low">Low Priority</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="photos">Photos (multiple allowed)</label>
-          <input type="file" id="photos" multiple accept="image/*">
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn-primary">Add Achievement</button>
-          <button type="button" class="btn-secondary" onclick="closeModal('achievementModal')">Cancel</button>
-        </div>
+        <div class="form-group"><label for="eventName">Event Name *</label><input type="text" id="eventName" placeholder="Event Name" required maxlength="100"></div>
+        <div class="form-group"><label for="place">Place / Position *</label><input type="text" id="place" placeholder="e.g. 1st Place" required maxlength="50"></div>
+        <div class="form-group"><label for="achievementDescription">Description</label><textarea id="achievementDescription" placeholder="Describe…" maxlength="400" rows="2"></textarea></div>
+        <div class="form-group"><label for="priority">Priority</label><select id="priority"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select></div>
+        <div class="form-group"><label for="photos">Photos</label><input type="file" id="photos" multiple accept="image/*"></div>
+        <div class="form-actions"><button type="submit" class="btn-primary">Add</button><button type="button" class="btn-secondary" onclick="closeModal('achievementModal')">Cancel</button></div>
       </form>
     </div>
   </div>
 
-  <!-- Add Course Modal -->
   <div id="courseModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('courseModal')">&times;</span>
       <h3>Add Course</h3>
       <form id="courseForm" enctype="multipart/form-data" class="project-form">
-        <div class="form-group">
-          <label for="courseName">Course Name *</label>
-          <input type="text" id="courseName" placeholder="Course Name" required maxlength="100">
-        </div>
-        <div class="form-group">
-          <label for="courseDescription">Description *</label>
-          <textarea id="courseDescription" placeholder="Course Description" required maxlength="500"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="coursePriority">Priority Level</label>
-          <select id="coursePriority">
-            <option value="high">High Priority</option>
-            <option value="medium" selected>Medium Priority</option>
-            <option value="low">Low Priority</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="courseRank">Rank / Order (1 = top)</label>
-          <input type="number" id="courseRank" placeholder="e.g. 1" min="1" max="100">
-        </div>
-        <div class="form-group">
-          <label for="certificate">Certificate (image or PDF)</label>
-          <input type="file" id="certificate" accept="image/*,application/pdf">
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn-primary">Add Course</button>
-          <button type="button" class="btn-secondary" onclick="closeModal('courseModal')">Cancel</button>
-        </div>
+        <div class="form-group"><label for="courseName">Course Name *</label><input type="text" id="courseName" placeholder="Course Name" required maxlength="100"></div>
+        <div class="form-group"><label for="courseDescription">Description *</label><textarea id="courseDescription" placeholder="Course Description" required maxlength="500"></textarea></div>
+        <div class="form-group"><label for="coursePriority">Priority</label><select id="coursePriority"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select></div>
+        <div class="form-group"><label for="courseRank">Rank</label><input type="number" id="courseRank" placeholder="e.g. 1" min="1" max="100"></div>
+        <div class="form-group"><label for="certificate">Certificate</label><input type="file" id="certificate" accept="image/*,application/pdf"></div>
+        <div class="form-actions"><button type="submit" class="btn-primary">Add</button><button type="button" class="btn-secondary" onclick="closeModal('courseModal')">Cancel</button></div>
       </form>
     </div>
   </div>
 
-  
-  <!-- ═══════════════════════════════════════════════════════
-       PROJECTS PANEL — full-width bottom bar
-  ═══════════════════════════════════════════════════════ -->
-  <div class="proj-panel" id="projectsPanel">
-    <div class="proj-panel-inner">
-
-      <!-- HEADER -->
-      <div class="proj-header">
-        <div class="proj-title-group">
-          <span class="proj-label">[ Projects ]</span>
-          <span class="proj-live-dot"></span>
-        </div>
-        <div class="proj-actions">
-          <span id="projCount" class="proj-count">—</span>
-          <button id="projGameBtn" class="proj-icon-btn proj-btn-game" title="Tech Stack Blaster">🕹</button>
-        </div>
-      </div>
-
-      <!-- BODY: drag-info LEFT + preview RIGHT -->
-      <div class="proj-body" id="projBody">
-
-        <!-- LEFT: draggable info area -->
-        <div class="proj-drag-area" id="projDragArea">
-          <div class="proj-project" id="projProject">
-            <div class="proj-name-row">
-              <h2 class="proj-name" id="projName">—</h2>
-              <div class="proj-links">
-                <a id="projWebLink"    href="#" target="_blank" class="plink" style="display:none" title="Live demo">↗</a>
-                <a id="projGithubLink" href="#" target="_blank" class="plink" style="display:none" title="GitHub">⌥</a>
-              </div>
-            </div>
-            <div class="proj-meta-row" id="projMetaRow"></div>
-            <p class="proj-desc" id="projDesc">—</p>
-            <div class="proj-tech-inline">
-              <div class="proj-tech-tags" id="projTechTags"></div>
-            </div>
-          </div>
-          <div class="proj-bottom-row">
-            <div class="proj-drag-hint" id="projDragHint">
-              <span class="dh-arrow">‹</span>
-              <span class="dh-text">DRAG</span>
-              <span class="dh-arrow">›</span>
-            </div>
-            <div class="proj-dots" id="projDots"></div>
-          </div>
-        </div>
-
-        <!-- DIVIDER -->
-        <div class="proj-divider"></div>
-
-        <!-- RIGHT: preview (iframe + image + placeholder) -->
-        <div class="proj-preview-section" id="projPreviewSection">
-          <div class="proj-preview-label">PREVIEW</div>
-          <iframe id="projWebsitePreview" style="display:none;" title="Project Preview" scrolling="yes"></iframe>
-          <img    id="projPreviewImg"     src="" alt="Project Preview" style="display:none;">
-          <div    id="projPreviewPh"      class="proj-ph">
-            <span class="ph-bracket">[</span>
-            <span class="ph-icon">◈</span>
-            <span class="ph-bracket">]</span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-  <!-- END PROJECTS PANEL -->
-
-  <!-- ═══════════════════════════════════════════════════════
-       EVENTS WIDGET — bottom-right (2-column: info+team | photo)
-  ═══════════════════════════════════════════════════════ -->
-  <div class="events-widget" id="eventsWidget" style="display:none;">
-
-    <!-- Header: title + counter + register only (no nav — auto-rotates) -->
-    <div class="ew-header">
-      <div class="ew-title">
-        <span class="ew-title-text">EVENTS</span>
-        <span class="ew-live-dot"></span>
-      </div>
-      
-    </div>
-
-    <!-- Body: 2 columns (info+team left | photo right) -->
-    <div class="ew-body">
-
-      <!-- COL 1: event info + team members + dots -->
-      <div class="ew-info-col" id="ewInfoCol">
-        <div class="ew-info-scroll">
-          <div class="ew-event-label" id="ewLabel">CodeBreakers · Event</div>
-          <div class="ew-event-name" id="ewName">—</div>
-          <div class="ew-event-meta" id="ewMeta"></div>
-          <div class="ew-team" id="ewTeamTag"></div>
-          <p class="ew-desc" id="ewDesc">—</p>
-          <!-- Team members inline below description -->
-          <div class="ew-team-inline" id="ewTeamInline"></div>
-          <a id="ewProjLink" href="#" target="_blank" class="ew-proj-link" style="display:none;">↗ View Project</a>
-        </div>
-        <div class="ew-nav-row">
-          <div class="ew-dots" id="ewDotTrack"></div>
-        </div>
-      </div>
-
-      <div class="ew-divider"></div>
-
-      <!-- COL 2: photo carousel (full right side) -->
-      <div class="ew-photo-col" id="ewPhotoCol">
-        <div class="ew-carousel-track" id="ewCarouselTrack"></div>
-        <div class="ew-photo-strip" id="ewPhotoStrip"></div>
-        <button class="ew-photo-nav ew-photo-nav-l" id="ewPhotoLeft" style="display:none;">‹</button>
-        <button class="ew-photo-nav ew-photo-nav-r" id="ewPhotoRight" style="display:none;">›</button>
-        <div class="ew-stamp" id="ewStamp"></div>
-        <div class="ew-progress" id="ewProgressBar"></div>
-      </div>
-
-    </div>
-  </div><!-- end events widget -->
-
-  <!-- GAME CONSOLE OVERLAY -->
+  <!-- GAME CONSOLE -->
   <div id="projGameConsole" class="game-console" style="display:none;">
     <div class="game-console-inner">
       <div class="game-header">
@@ -505,5 +657,47 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    // Simple hero clock + nav behavior
+    (function(){
+      const clock = document.getElementById('heroClock');
+      function tick(){
+        if(!clock) return;
+        const d = new Date();
+        clock.textContent = d.toTimeString().slice(0,8) + ' IST';
+      }
+      tick(); setInterval(tick, 1000);
+
+      const nav = document.getElementById('topNav');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      });
+
+      // Mirror counters into hero stats after portfolio data loads
+      const mirrorStats = () => {
+        const a = document.getElementById('totalAchievements');
+        const c = document.getElementById('totalCourses');
+        const p = document.getElementById('projCount');
+        const ha = document.getElementById('heroAchCount');
+        const hc = document.getElementById('heroCourseCount');
+        const hp = document.getElementById('heroProjCount');
+        const ha2 = document.getElementById('totalAchievements2');
+        if (ha && a) ha.textContent = a.textContent;
+        if (hc && c) hc.textContent = c.textContent;
+        if (hp && p) hp.textContent = (p.textContent || '0').replace(/\D/g,'') || '0';
+        if (ha2 && a) ha2.textContent = a.textContent;
+      };
+      setInterval(mirrorStats, 1500);
+
+      // Scroll-reveal for sections
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.deck-section, .bento-card, .skill-card, .contact-tile').forEach(el => io.observe(el));
+    })();
+  </script>
 </body>
 </html>
