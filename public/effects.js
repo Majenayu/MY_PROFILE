@@ -178,3 +178,52 @@
       });
   }
 })();
+
+
+/* ════════════════════════════════════════════════════════════
+   v7.2 — Visitor counter (backed by /api/visits)
+   ════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const $ = (s) => document.querySelector(s);
+
+  const uniqueEl = $('#uniqueVisitors');
+  const viewsEl  = $('#totalViews');
+  const heroEl   = $('#mVisits');
+
+  function animateNum(el, to, dur = 1200) {
+    if (!el) return;
+    if (to < 1) { el.textContent = '0'; return; }
+    const start = performance.now();
+    const from = parseInt(el.textContent) || 0;
+    function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (to - from) * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Avoid counting the admin/owner by checking sessionStorage once per tab
+  const already = sessionStorage.getItem('vcHit');
+  const endpoint = already ? '/api/visits/stats' : '/api/visits';
+  sessionStorage.setItem('vcHit', '1');
+
+  fetch(endpoint)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      if (!d || !d.success) return;
+      animateNum(uniqueEl, d.unique);
+      animateNum(viewsEl, d.total);
+      animateNum(heroEl, d.unique);
+    })
+    .catch(() => {
+      if (uniqueEl) uniqueEl.textContent = '—';
+      if (viewsEl) viewsEl.textContent = '—';
+    });
+
+  // Reveal ticker after small delay for effect
+  const ticker = $('#visitorTicker');
+  if (ticker) setTimeout(() => ticker.classList.add('visible'), 800);
+})();

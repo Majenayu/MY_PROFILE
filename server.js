@@ -161,6 +161,16 @@ const Badge       = mongoose.model('Badge',       badgeSchema);
 const Profile     = mongoose.model('Profile',     profileSchema);
 const EventModel  = mongoose.model('Event',       eventSchema);
 
+// ── Visitor counter schema ──────────────────────────────────────────────────
+const visitorSchema = new mongoose.Schema({
+  key:     { type:String, required:true, unique:true },
+  total:   { type:Number, default:0 },    // total pageviews
+  unique:  { type:Number, default:0 },    // unique visitors (by IP+UA hash)
+  seen:    { type:[String], default:[] }, // recent visitor hashes (cap 5000)
+  updated: { type:Date,   default:Date.now }
+});
+const Visitor = mongoose.model('Visitor', visitorSchema);
+
 // ── Helper: upload buffer to Cloudinary ─────────────────────────────────────
 async function uploadBuffer(buffer, mimetype, folder, prefix) {
   const r = await cloudinary.uploader.upload(
@@ -321,6 +331,44 @@ app.put('/api/projects/:id/priority', async (req, res) => {
 // Add a test route to check if server is working
 app.get('/api/test', (req, res) => {
   res.json({ message: 'Server is working!', timestamp: new Date() });
+});
+
+// ── Visitor counter: hit on every page load ──────────────────────────────
+app.get('/api/visits', async (req, res) => {
+  try {
+    const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+    const ua = (req.headers['user-agent'] || '').slice(0, 160);
+    // simple deterministic hash without extra deps
+    const hash = require('crypto').createHash('md5').update(ip + '|' + ua).digest('hex');
+
+    let v = await Visitor.findOne({ key: 'main' });
+    if (!v) v = new Visitor({ key: 'main', total: 0, unique: 0, seen: [] });
+
+    v.total += 1;
+    if (!v.seen.includes(hash)) {
+      v.unique += 1;
+      v.seen.push(hash);
+      // cap the rolling window at 5000 hashes to prevent unbounded growth
+      if (v.seen.length > 5000) v.seen = v.seen.slice(-5000);
+    }
+    v.updated = new Date();
+    await v.save();
+
+    res.json({ success: true, total: v.total, unique: v.unique });
+  } catch (err) {
+    console.error('visits error:', err.message);
+    res.json({ success: false, total: 0, unique: 0 });
+  }
+});
+
+// Read-only variant (doesn't increment) for widgets
+app.get('/api/visits/stats', async (req, res) => {
+  try {
+    const v = await Visitor.findOne({ key: 'main' });
+    res.json({ success: true, total: v?.total || 0, unique: v?.unique || 0 });
+  } catch (err) {
+    res.json({ success: false, total: 0, unique: 0 });
+  }
 });
 
 // Add a route to check database connection
