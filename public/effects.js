@@ -108,3 +108,73 @@
     setTimeout(() => { host.textContent = ''; charIdx = 0; type(); }, 2000);
   }
 })();
+
+
+/* ════════════════════════════════════════════════════════════
+   v7.1 — Extras: scroll progress, back-to-top, GitHub stats
+   ════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const $ = (s) => document.querySelector(s);
+
+  // ── Scroll progress bar ───────────────────────────────────
+  const bar = $('#scrollProgress');
+  if (bar) {
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const p = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+      bar.style.width = Math.min(p, 100) + '%';
+    }, { passive: true });
+  }
+
+  // ── Back-to-top button ────────────────────────────────────
+  const top = $('#backToTop');
+  if (top) {
+    window.addEventListener('scroll', () => {
+      top.classList.toggle('visible', window.scrollY > 480);
+    }, { passive: true });
+    top.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ── Live GitHub stats fetch ───────────────────────────────
+  const ghRepos = $('#ghRepos');
+  const ghFollowers = $('#ghFollowers');
+  const ghStars = $('#ghStars');
+  if (ghRepos && ghFollowers && ghStars) {
+    // Animate number helper
+    function animateNum(el, to, dur = 1200) {
+      if (to < 1) { el.textContent = '0'; return; }
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(to * eased);
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    fetch('https://api.github.com/users/Majenayu')
+      .then(r => r.ok ? r.json() : null)
+      .then(user => {
+        if (!user) return;
+        animateNum(ghRepos, user.public_repos || 0);
+        animateNum(ghFollowers, user.followers || 0);
+        return fetch('https://api.github.com/users/Majenayu/repos?per_page=100');
+      })
+      .then(r => r ? r.json() : null)
+      .then(repos => {
+        if (!repos || !Array.isArray(repos)) return;
+        const totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
+        animateNum(ghStars, totalStars);
+      })
+      .catch(() => {
+        // Fallback: show a dash if API fails (rate limit etc.)
+        ghRepos.textContent = '—';
+        ghFollowers.textContent = '—';
+        ghStars.textContent = '—';
+      });
+  }
+})();
