@@ -409,6 +409,16 @@ body {
 }
 .hero-lead strong { color: var(--ink); font-weight: 600; }
 
+.hero-role {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--ink-3);
+  margin-top: -4px;
+  letter-spacing: 0.01em;
+}
+
 .hero-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip {
   font-family: var(--mono);

@@ -68,6 +68,7 @@
             <span class="reveal-line">I build <em class="accent-em">thoughtful</em></span>
             <span class="reveal-line"><span class="type-host">products</span> that ship.</span>
           </h1>
+          <p class="hero-role" id="profileTitle">B.E · Developer · Builder · Cadet Captain · Vice President (VF)</p>
 
           <p class="hero-lead">
             Full-stack engineer + AI/ML builder based in <strong>Bengaluru, IN</strong>.
@@ -183,8 +184,8 @@
 
       <div class="about-grid">
         <div class="about-prose">
-          <p>
-            I'm <strong id="profileTitle">Ayush</strong> — currently pursuing B.E. Computer Science &amp; Engineering
+          <p id="profileAbout">
+            <strong>P G Ayush Rai</strong> — currently pursuing B.E. Computer Science &amp; Engineering
             with AI/ML specialisation at VVCE, Mysuru. I build at the intersection of <strong>software, AI</strong>,
             and <strong>mission-critical systems</strong>.
           </p>
@@ -770,7 +771,9 @@
           const src = document.getElementById(s);
           const dst = document.getElementById(d);
           if (src && dst) {
-            const v = (src.textContent || '0').replace(/\D/g,'') || '0';
+            // Extract first sequence of digits (e.g. "1/3" -> "1", "7" -> "7")
+            const match = (src.textContent || '').match(/\d+/);
+            const v = match ? match[0] : '0';
             if (dst.textContent !== v) dst.textContent = v;
           }
         });
