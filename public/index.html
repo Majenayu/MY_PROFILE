@@ -13,6 +13,7 @@
 
   <!-- Global aurora background + particle canvas -->
   <canvas id="bgCanvas"></canvas>
+  <canvas id="matrixCanvas"></canvas>
 
   <!-- Sticky top nav (appears after scroll) -->
   <nav class="top-nav" id="topNav">
@@ -43,6 +44,9 @@
     <div class="hero-status">
       <span class="status-led"></span>
       <span class="status-text">SYSTEM ONLINE · CODEBREAKERS MAINFRAME</span>
+      <span class="status-sep">·</span>
+      <span class="status-text">UPTIME <span id="uptimeCounter" class="status-time">00:00:00</span></span>
+      <span class="status-sep">·</span>
       <span class="status-time" id="heroClock">00:00:00</span>
     </div>
 
@@ -574,9 +578,9 @@
         </div>
       </div>
 
-      <a href="mailto:pgayushrai@gmail.com" class="contact-tile">
+      <a href="mailto:pgayushrai@gmail.com" class="contact-tile" data-copy="pgayushrai@gmail.com">
         <div class="ct-icon" style="background:linear-gradient(135deg,var(--mint),var(--violet))">✉</div>
-        <div class="ct-label">Email</div>
+        <div class="ct-label">Email <span class="ct-copy-hint">· click to copy</span></div>
         <div class="ct-value">pgayushrai@gmail.com</div>
       </a>
       <a href="https://github.com/Majenayu" target="_blank" class="contact-tile">
@@ -657,6 +661,7 @@
   </div>
 
   <script src="script.js"></script>
+  <script src="effects.js"></script>
   <script>
     // Simple hero clock + nav behavior
     (function(){
