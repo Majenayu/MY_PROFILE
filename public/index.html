@@ -3,739 +3,510 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>P G Ayush Rai — Developer · Builder · AI Engineer</title>
-  <meta name="description" content="P G Ayush Rai — full-stack developer, AI/ML engineer, NCC Naval Cadet Captain. Computer vision, civic tech, and defense innovation from Bengaluru, India.">
-  <meta name="author" content="P G Ayush Rai">
-  <meta name="theme-color" content="#0a0a0b">
-  <meta name="keywords" content="P G Ayush Rai, Ayush Rai, developer, AI engineer, NCC cadet, VVCE, portfolio, computer vision, full stack, Bengaluru">
+  <title>P G Ayush Rai · Developer · AI/ML Engineer · Builder</title>
+  <meta name="description" content="P G Ayush Rai — full-stack developer, AI/ML engineer, NCC Naval Cadet Captain. Champion × 4 in 2025. Open to Summer 2026 internships.">
+  <meta name="theme-color" content="#05060f">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="P G Ayush Rai — Developer · Builder · AI Engineer">
-  <meta property="og:description" content="Full-stack developer & AI/ML engineer. Shipped computer-vision, civic-tech, and defense-tech. Open to internships 2026.">
+  <meta property="og:title" content="P G Ayush Rai — Developer · AI/ML Engineer">
+  <meta property="og:description" content="Full-stack developer & AI/ML engineer. Champion × 4 in 2025. Open to internships 2026.">
   <meta property="og:url" content="https://pgayushrai.onrender.com">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="P G Ayush Rai — Developer · Builder">
-  <meta name="twitter:description" content="Full-stack developer & AI/ML engineer. NCC Naval Cadet Captain.">
-
-  <!-- Favicon (inline SVG data URI — always works) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300d97e'/%3E%3Cstop offset='100%25' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0b'/%3E%3Ctext x='16' y='22' font-family='Inter,sans-serif' font-size='18' font-weight='800' text-anchor='middle' fill='url(%23g)'%3EA%3C/text%3E%3C/svg%3E">
-
-  <!-- JSON-LD structured data for Google -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "P G Ayush Rai",
-    "alternateName": "Ayush Rai",
-    "jobTitle": "Full-Stack Developer & AI/ML Engineer",
-    "url": "https://pgayushrai.onrender.com",
-    "email": "pgayushrai@gmail.com",
-    "nationality": "Indian",
-    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Vidyavardhaka College of Engineering (VVCE)" },
-    "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Computer Vision", "Full-Stack Development", "Node.js", "React", "Python"],
-    "sameAs": [
-      "https://github.com/Majenayu",
-      "https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/",
-      "https://www.youtube.com/channel/UCjioxN6gRm-o3SHBBlR6vhw"
-    ]
-  }
-  </script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300b8ff'/%3E%3Cstop offset='100%25' stop-color='%23ff2db4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%2305060f'/%3E%3Ctext x='16' y='22' font-family='Inter,sans-serif' font-size='18' font-weight='800' text-anchor='middle' fill='url(%23g)'%3EA%3C/text%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Scroll progress bar (top of page) -->
-  <div class="scroll-progress" id="scrollProgress"></div>
+  <!-- ════════════ ATMOSPHERE LAYERS ════════════ -->
+  <div class="atm" aria-hidden="true">
+    <div class="atm-grid"></div>
+    <span class="atm-blob b1"></span>
+    <span class="atm-blob b2"></span>
+    <span class="atm-blob b3"></span>
+    <div class="atm-noise"></div>
+  </div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-  <!-- Noise + glow backgrounds (CSS only, subtle) -->
-  <div class="bg-layer bg-grain"></div>
-  <div class="bg-layer bg-gradient"></div>
-  <div class="cursor-glow" id="cursorGlow"></div>
-
-  <!-- Required by script.js particle engine (kept hidden; very subtle atmosphere) -->
+  <!-- Required by script.js particle engine (kept invisible) -->
   <canvas id="bgCanvas"></canvas>
+
+  <!-- Top scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress" style="width:0;"></div>
 
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- ═══ TOP NAV ═══ -->
+  <!-- ════════════ NAV ════════════ -->
   <header class="nav" id="nav">
-    <a href="#top" class="nav-logo">
-      <span class="nav-logo-mark">◆</span>
-      <span class="nav-logo-text">ayush<span class="dot">.</span>rai</span>
-    </a>
-
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#about"       class="nav-link" data-spy="about"><span class="nav-num">01</span>About</a>
-      <a href="#work"        class="nav-link" data-spy="work"><span class="nav-num">02</span>Work</a>
-      <a href="#skills"      class="nav-link" data-spy="skills"><span class="nav-num">03</span>Skills</a>
-      <a href="#experience"  class="nav-link" data-spy="experience"><span class="nav-num">04</span>Journey</a>
-      <a href="#achievements" class="nav-link" data-spy="achievements"><span class="nav-num">05</span>Wins</a>
-      <a href="#contact"     class="nav-link" data-spy="contact"><span class="nav-num">06</span>Contact</a>
-    </nav>
-
-    <div class="nav-actions">
-      <a href="https://www.canva.com/design/DAGnTB1gSSg/yaJ5iSTqmJVcGWfpTqO5fA/view" target="_blank" class="nav-resume">
-        Resume <span>↗</span>
+    <div class="nav-inner">
+      <a href="#hero" class="nav-brand" aria-label="Ayush home">
+        <span class="brand-mark"></span>
+        <span class="brand-text">ayush<span class="brand-dot">.</span>rai</span>
       </a>
-      <button onclick="toggleTheme()" class="nav-icon" id="themeToggleBtn" aria-label="Toggle theme">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
-    </div>
 
-    <button class="nav-mobile-toggle" id="navMobileToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+      <nav class="nav-pill" id="navPill" aria-label="Primary">
+        <a href="#about"   class="np-link" data-spy="about"><span class="np-num">01</span>About</a>
+        <a href="#work"    class="np-link" data-spy="work"><span class="np-num">02</span>Work</a>
+        <a href="#skills"  class="np-link" data-spy="skills"><span class="np-num">03</span>Skills</a>
+        <a href="#journey" class="np-link" data-spy="journey"><span class="np-num">04</span>Journey</a>
+        <a href="#wins"    class="np-link" data-spy="wins"><span class="np-num">05</span>Wins</a>
+        <a href="#contact" class="np-link" data-spy="contact"><span class="np-num">06</span>Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://www.canva.com/design/DAGnTB1gSSg/yaJ5iSTqmJVcGWfpTqO5fA/view" target="_blank" rel="noreferrer" class="btn btn-filled btn-sm">
+          Resume
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+        <button onclick="toggleTheme()" class="nav-icon" id="themeToggleBtn" aria-label="Toggle theme">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
   </header>
 
-  <main id="main" class="main">
+  <main id="main">
 
-    <!-- ╔══════════════════════════════════════════════════╗
-         HERO
-         ╚══════════════════════════════════════════════════╝ -->
-    <section class="hero" id="top">
-      <div class="hero-inner">
+    <!-- ════════════ HERO — CINEMATIC ════════════ -->
+    <section id="hero" class="hero">
+      <!-- Decorative axis lines -->
+      <div class="hero-axis hl-v" aria-hidden="true"></div>
+      <div class="hero-axis hl-h" aria-hidden="true"></div>
 
+      <div class="hero-grid">
+
+        <!-- LEFT: copy block -->
         <div class="hero-left">
-          <div class="hero-eyebrow">
+          <div class="hero-eyebrow fade-up">
             <span class="led"></span>
-            <span>Available for internships · Summer 2026</span>
+            <span class="mono">AVAILABLE · SUMMER 2026 INTERNSHIPS</span>
           </div>
 
           <h1 class="hero-title">
-            <span class="reveal-line">Hi, I'm <span class="hero-name" id="profileName">Ayush</span>.</span>
-            <span class="reveal-line">I build <em class="accent-em">thoughtful</em></span>
-            <span class="reveal-line"><span class="type-host">products</span> that ship.</span>
+            <span class="hl"><span class="hl-line">Hi, I'm <span class="gradient-text" id="profileName">Ayush.</span></span></span>
+            <span class="hl"><span class="hl-line">I build <em class="font-serif">cinematic</em></span></span>
+            <span class="hl"><span class="hl-line"><span class="rotator" id="heroRotator">products</span><span class="rcaret">|</span> that ship.</span></span>
           </h1>
-          <p class="hero-role" id="profileTitle">B.E · Developer · Builder · Cadet Captain · Vice President (VF)</p>
 
-          <p class="hero-lead">
-            Full-stack engineer + AI/ML builder based in <strong>Bengaluru, IN</strong>.
-            I craft pixel-perfect interfaces, production computer-vision systems, and tools that
-            solve real problems — from campus transit to defense innovation.
+          <p class="hero-role font-serif" id="profileTitle">B.E · CSE-AIML · Developer · Builder · Cadet Captain · Vice President (VF)</p>
+
+          <p class="hero-lead" id="profileAbout">
+            I build AI-driven systems, computer-vision robots, and civic-tech platforms from Bengaluru. Four-time champion of 2025, Naval Cadet Captain, and a student who treats every shipped feature like flight-deck cargo.
           </p>
 
-          <div class="hero-chips">
-            <span class="chip on"  id="chipStatus">● Open to Opportunities</span>
-            <span class="chip"     id="chipLocation">📍 India</span>
-            <span class="chip"     id="chipEdu">🎓 B.Tech CSE-AIML</span>
-            <span class="chip">⚓ NCC Captain</span>
+          <div class="chips">
+            <span class="chip chip-on" id="chipStatus"><span class="dot"></span>Open to opportunities</span>
+            <span class="chip" id="chipLocation">📍 Bengaluru · IST</span>
+            <span class="chip" id="chipEdu">🎓 VVCE · 2022–2026</span>
+            <span class="chip chip-amber">⚓ NCC Captain</span>
           </div>
 
           <div class="hero-cta">
-            <a href="#work" class="btn btn-primary">
-              See my work
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            <a href="#work" class="btn btn-filled btn-lg">
+              <span>See my work</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
-            <a href="mailto:pgayushrai@gmail.com" class="btn btn-ghost">Get in touch</a>
+            <a href="#contact" class="btn btn-ghost btn-lg">Get in touch</a>
           </div>
 
           <div class="hero-socials">
-            <a href="https://github.com/Majenayu" target="_blank" aria-label="GitHub" class="soc-link">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/></svg>
+            <a href="https://github.com/Majenayu" target="_blank" rel="noreferrer" class="chip chip-link">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/></svg>
               GitHub
             </a>
-            <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" aria-label="LinkedIn" class="soc-link">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+            <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" rel="noreferrer" class="chip chip-link">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
               LinkedIn
             </a>
-            <a href="https://www.youtube.com/channel/UCjioxN6gRm-o3SHBBlR6vhw" target="_blank" aria-label="YouTube" class="soc-link">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/></svg>
+            <a href="https://www.youtube.com/channel/UCjioxN6gRm-o3SHBBlR6vhw" target="_blank" rel="noreferrer" class="chip chip-link">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/></svg>
               YouTube
             </a>
-            <a href="mailto:pgayushrai@gmail.com" class="soc-link" data-copy="pgayushrai@gmail.com">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/></svg>
+            <a href="mailto:pgayushrai@gmail.com" class="chip chip-link" data-copy="pgayushrai@gmail.com">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/></svg>
               Email
             </a>
           </div>
         </div>
 
-        <!-- Right: Portrait-style card with stats -->
+        <!-- RIGHT: cinematic portrait + stats -->
         <div class="hero-right">
+
           <div class="portrait">
-            <!-- Abstract initials art -->
-            <div class="portrait-bg"></div>
-            <div class="portrait-initials">
-              <span class="pi-big">A</span>
-              <span class="pi-small">R</span>
+            <!-- Atmospheric back layer -->
+            <div class="portrait-bg" aria-hidden="true"></div>
+
+            <!-- Spinning rings (decorative) -->
+            <div class="portrait-ring r1" aria-hidden="true"></div>
+            <div class="portrait-ring r2" aria-hidden="true"></div>
+            <div class="portrait-ring r3" aria-hidden="true"></div>
+
+            <!-- ★ PHOTO SLOT — replace with your photo from /profile-editor -->
+            <div class="portrait-photo">
+              <img id="profileCharImg" src="" alt="Ayush Rai" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="portrait-initials">
+                <span class="pi-big font-serif gradient-text">A</span><span class="pi-small font-serif">r</span>
+              </div>
+              <span class="portrait-mark mono">PHOTO</span>
             </div>
-            <!-- Floating badges -->
-            <div class="portrait-badge pb-1">
-              <span class="pb-dot" style="background:var(--accent-coral)"></span>
-              <span>CHAMPION × 4</span>
-              <span class="pb-year">2025</span>
+
+            <!-- Floating stat badges -->
+            <div class="float-badge fb-1">
+              <span class="fb-dot" style="background:var(--accent)"></span>
+              <div><div class="fb-title">CHAMPION × 4</div><div class="fb-sub">2025</div></div>
             </div>
-            <div class="portrait-badge pb-2">
-              <span class="pb-dot" style="background:var(--accent-teal)"></span>
-              <span>NCC NAVAL</span>
-              <span class="pb-year">Captain</span>
+            <div class="float-badge fb-2">
+              <span class="fb-dot" style="background:var(--accent-2)"></span>
+              <div><div class="fb-title">NCC NAVAL</div><div class="fb-sub">Captain</div></div>
             </div>
-            <div class="portrait-badge pb-3">
-              <span class="pb-dot" style="background:var(--accent-blue)"></span>
-              <span>VP · VF</span>
-              <span class="pb-year">VVCE</span>
+            <div class="float-badge fb-3">
+              <span class="fb-dot" style="background:var(--amber)"></span>
+              <div><div class="fb-title">VP · VF</div><div class="fb-sub">VVCE</div></div>
             </div>
-            <div class="portrait-ring ring-1"></div>
-            <div class="portrait-ring ring-2"></div>
+
+            <!-- Corner accents -->
+            <span class="corner c-tl"></span><span class="corner c-tr"></span>
+            <span class="corner c-bl"></span><span class="corner c-br"></span>
           </div>
 
-          <!-- Stats strip under portrait -->
+          <!-- Hero stats grid -->
           <div class="hero-stats">
-            <div class="hs-cell">
-              <div class="hs-num" id="mAch">0</div>
-              <div class="hs-lbl">Wins</div>
-            </div>
-            <div class="hs-cell">
-              <div class="hs-num" id="mProj">0</div>
-              <div class="hs-lbl">Projects</div>
-            </div>
-            <div class="hs-cell">
-              <div class="hs-num" id="mCourse">0</div>
-              <div class="hs-lbl">Courses</div>
-            </div>
-            <div class="hs-cell">
-              <div class="hs-num" id="mVisits">0</div>
-              <div class="hs-lbl">Visits</div>
-            </div>
+            <div class="hs-cell"><div class="hs-num font-serif" id="mAch">0</div><div class="hs-lbl">Wins</div></div>
+            <div class="hs-cell"><div class="hs-num font-serif" id="mProj">0</div><div class="hs-lbl">Projects</div></div>
+            <div class="hs-cell"><div class="hs-num font-serif" id="mCourse">0</div><div class="hs-lbl">Courses</div></div>
+            <div class="hs-cell"><div class="hs-num font-serif" id="mVisits">0</div><div class="hs-lbl">Visits</div></div>
           </div>
         </div>
-
       </div>
 
-      <!-- Marquee tech strip -->
+      <!-- Tech marquee -->
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
-          <span>PYTHON</span><span>·</span><span>REACT</span><span>·</span><span>NODE.JS</span><span>·</span><span>OPENCV</span><span>·</span><span>TENSORFLOW</span><span>·</span><span>MONGODB</span><span>·</span><span>MATERIAL UI</span><span>·</span><span>JAVA</span><span>·</span><span>TERRAFORM</span><span>·</span><span>CLOUDINARY</span><span>·</span>
-          <span>PYTHON</span><span>·</span><span>REACT</span><span>·</span><span>NODE.JS</span><span>·</span><span>OPENCV</span><span>·</span><span>TENSORFLOW</span><span>·</span><span>MONGODB</span><span>·</span><span>MATERIAL UI</span><span>·</span><span>JAVA</span><span>·</span><span>TERRAFORM</span><span>·</span><span>CLOUDINARY</span><span>·</span>
+          <span>PYTHON</span><span class="m-sep">◆</span>
+          <span>REACT</span><span class="m-sep">◆</span>
+          <span>NODE.JS</span><span class="m-sep">◆</span>
+          <span>OPENCV</span><span class="m-sep">◆</span>
+          <span>TENSORFLOW</span><span class="m-sep">◆</span>
+          <span>MONGODB</span><span class="m-sep">◆</span>
+          <span>MATERIAL UI</span><span class="m-sep">◆</span>
+          <span>JAVA</span><span class="m-sep">◆</span>
+          <span>TERRAFORM</span><span class="m-sep">◆</span>
+          <span>CLOUDINARY</span><span class="m-sep">◆</span>
+          <span>MEDIAPIPE</span><span class="m-sep">◆</span>
+          <span>PYTHON</span><span class="m-sep">◆</span>
+          <span>REACT</span><span class="m-sep">◆</span>
+          <span>NODE.JS</span><span class="m-sep">◆</span>
+          <span>OPENCV</span><span class="m-sep">◆</span>
+          <span>TENSORFLOW</span><span class="m-sep">◆</span>
+          <span>MONGODB</span><span class="m-sep">◆</span>
+          <span>MATERIAL UI</span><span class="m-sep">◆</span>
+          <span>JAVA</span><span class="m-sep">◆</span>
+          <span>TERRAFORM</span><span class="m-sep">◆</span>
+          <span>CLOUDINARY</span><span class="m-sep">◆</span>
+          <span>MEDIAPIPE</span><span class="m-sep">◆</span>
         </div>
       </div>
     </section>
 
-    <!-- ╔══════════════════════════════════════════════════╗
-         ABOUT
-         ╚══════════════════════════════════════════════════╝ -->
-    <section class="sect" id="about" data-sect="about">
+    <!-- ════════════ ABOUT ════════════ -->
+    <section id="about" class="sect">
       <header class="sect-head">
         <span class="sect-num">01</span>
-        <h2 class="sect-title">A little <em>about me</em></h2>
+        <h2 class="section-title">A little <em>about me</em></h2>
         <span class="sect-rule"></span>
       </header>
 
       <div class="about-grid">
         <div class="about-prose">
-          <p id="profileAbout">
-            <strong>P G Ayush Rai</strong> — currently pursuing B.E. Computer Science &amp; Engineering
-            with AI/ML specialisation at VVCE, Mysuru. I build at the intersection of <strong>software, AI</strong>,
-            and <strong>mission-critical systems</strong>.
-          </p>
-          <p>
-            Over the past year I've shipped production-grade computer-vision tools
-            (<em>posture detection, face recognition, line-following robotics</em>),
-            full-stack apps for campus &amp; civic transit, and auto-tracking systems used in live events.
-            Four major wins in 2025 — Teck Spark, Prayog, Anveshan, Pals Case Study Challenge.
-          </p>
-          <p>
-            Off-keyboard I serve as <strong>NCC Naval Cadet Captain</strong> and
-            <strong>Vice President of VF</strong>, where systems thinking and field leadership meet
-            weekly. I care about defense tech, civic engineering, and code that actually gets used.
-          </p>
-          <p>
-            When I'm not building, you'll find me at a camp, on the parade ground, or
-            prototyping something that probably shouldn't work.
-          </p>
+          <p>I'm <strong>P G Ayush Rai</strong> — a fourth-year B.E. student specialising in <strong class="text-accent">AI &amp; Machine Learning</strong> at Vidyavardhaka College of Engineering. I write production-grade code, train models that run on edge hardware, and lead teams when the stakes are nontrivial.</p>
+          <p>My day looks like equal parts <em class="font-serif">computer-vision research</em>, full-stack engineering with Node and React, and command-grade discipline as a Naval Cadet Captain. The throughline is the same — solve real problems for real people and ship the work.</p>
+          <p>In 2025 alone I won four flagship championships — Teck Spark, Prayog, Anveshan, and the Pals Case Study. Right now I'm building a campus-wide bus &amp; asset tracking platform and a posture-correction robot. Both ship before graduation.</p>
+
+          <div class="hairline"></div>
 
           <div class="about-facts">
-            <div class="fact">
-              <span class="fact-k">Based in</span>
-              <span class="fact-v">Bengaluru, India</span>
-            </div>
-            <div class="fact">
-              <span class="fact-k">Studying at</span>
-              <span class="fact-v">VVCE · CSE-AIML</span>
-            </div>
-            <div class="fact">
-              <span class="fact-k">Graduating</span>
-              <span class="fact-v">May 2026</span>
-            </div>
-            <div class="fact">
-              <span class="fact-k">Preferred stack</span>
-              <span class="fact-v">Python · React · Node</span>
-            </div>
+            <div class="fact"><div class="mono-label">Based in</div><div class="fact-v">Bengaluru / Mysuru</div></div>
+            <div class="fact"><div class="mono-label">Studying at</div><div class="fact-v">VVCE — CSE-AIML</div></div>
+            <div class="fact"><div class="mono-label">Graduating</div><div class="fact-v">Summer 2026</div></div>
+            <div class="fact"><div class="mono-label">Preferred stack</div><div class="fact-v">React · Node · Python</div></div>
           </div>
         </div>
 
         <aside class="about-side">
-          <div class="side-card">
-            <div class="side-card-head">
-              <span class="sc-eye">◆ Currently building</span>
-              <span class="sc-live"><span></span>In production</span>
+          <div class="card current-card">
+            <span class="cc-bar" style="background:linear-gradient(180deg,var(--accent),var(--accent-2));"></span>
+            <div class="cc-head">
+              <span class="mono-label">◆ Currently building</span>
+              <span class="cc-pill cc-pill-on"><span></span>LIVE</span>
             </div>
-            <h3 class="sc-title">Campus Bus &amp; Asset Tracking System</h3>
-            <p class="sc-desc">Real-time live location, arrival estimates, and anti-loss asset tracking for a commuter fleet of 4,000+ students.</p>
-            <div class="sc-tags">
-              <span>React</span><span>Node.js</span><span>Socket.IO</span><span>MongoDB</span><span>Leaflet</span>
+            <h3 class="cc-title">Campus Bus &amp; Asset Tracking System</h3>
+            <div class="tag-row">
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Socket.IO</span>
+              <span class="tag">MongoDB</span>
+              <span class="tag">Leaflet</span>
             </div>
           </div>
 
-          <div class="side-card">
-            <div class="side-card-head">
-              <span class="sc-eye">◆ Working on</span>
-              <span class="sc-live sc-live-amber"><span></span>R&amp;D</span>
+          <div class="card current-card">
+            <span class="cc-bar" style="background:linear-gradient(180deg,var(--amber),var(--coral));"></span>
+            <div class="cc-head">
+              <span class="mono-label">◆ Working on</span>
+              <span class="cc-pill cc-pill-amber"><span></span>R&amp;D</span>
             </div>
-            <h3 class="sc-title">Posture &amp; Line-Follow Robotics</h3>
-            <p class="sc-desc">CV coach for cadets &amp; athletes + autonomous line-follower for competitive robotics.</p>
-            <div class="sc-tags">
-              <span>OpenCV</span><span>Mediapipe</span><span>Arduino</span><span>Python</span>
+            <h3 class="cc-title">Posture &amp; Line-Follow Robotics</h3>
+            <div class="tag-row">
+              <span class="tag">OpenCV</span>
+              <span class="tag">Mediapipe</span>
+              <span class="tag">Arduino</span>
+              <span class="tag">Python</span>
             </div>
           </div>
         </aside>
       </div>
     </section>
 
-    <!-- ╔══════════════════════════════════════════════════╗
-         WORK / PROJECTS
-         ╚══════════════════════════════════════════════════╝ -->
-    <section class="sect" id="work" data-sect="work">
+    <!-- ════════════ WORK ════════════ -->
+    <section id="work" class="sect">
       <header class="sect-head">
         <span class="sect-num">02</span>
-        <h2 class="sect-title">Selected <em>work</em></h2>
+        <h2 class="section-title">Selected <em>work</em></h2>
         <span class="sect-rule"></span>
-        <span class="sect-count"><span id="projCount">—</span> projects</span>
-        <button id="projGameBtn" class="sect-action">🕹 Arcade</button>
+        <span class="sect-pill"><span id="projCount">—</span></span>
+        <button id="projGameBtn" class="btn btn-ghost btn-sm">🕹 Arcade</button>
       </header>
 
-      <div class="proj-panel" id="projectsPanel">
+      <div class="card proj-panel" id="projectsPanel">
         <div class="proj-panel-inner">
-          <div class="proj-header">
-            <div class="proj-title-group">
-              <span class="proj-label">◇ FEATURED</span>
-              <span class="proj-live-dot"></span>
-              <span class="proj-live-text">Live project preview below · drag to browse</span>
-            </div>
-          </div>
           <div class="proj-body" id="projBody">
+
             <div class="proj-drag-area" id="projDragArea">
+              <div class="proj-meta-top">
+                <span class="mono-label">PROJECT — LIVE FEED</span>
+                <span class="tag tag-coral" id="projPriorityPill" style="display:none;">P0</span>
+              </div>
+
               <div class="proj-project" id="projProject">
                 <div class="proj-name-row">
                   <h3 class="proj-name" id="projName">Loading…</h3>
                   <div class="proj-links">
-                    <a id="projWebLink"    href="#" target="_blank" class="plink" style="display:none" title="Live demo" aria-label="Live demo">↗</a>
-                    <a id="projGithubLink" href="#" target="_blank" class="plink" style="display:none" title="GitHub" aria-label="GitHub">⌥</a>
+                    <a id="projWebLink" href="#" target="_blank" rel="noreferrer" class="plink" style="display:none" title="Live demo" aria-label="Live demo">↗</a>
+                    <a id="projGithubLink" href="#" target="_blank" rel="noreferrer" class="plink" style="display:none" title="GitHub" aria-label="GitHub">⌥</a>
                   </div>
                 </div>
                 <div class="proj-meta-row" id="projMetaRow"></div>
                 <p class="proj-desc" id="projDesc">—</p>
-                <div class="proj-tech-inline">
-                  <div class="proj-tech-tags" id="projTechTags"></div>
-                </div>
+                <div class="proj-tech-tags" id="projTechTags"></div>
               </div>
+
               <div class="proj-bottom-row">
-                <div class="proj-drag-hint" id="projDragHint">
-                  <span class="dh-arrow">←</span>
-                  <span class="dh-text">Drag or swipe</span>
-                  <span class="dh-arrow">→</span>
-                </div>
                 <div class="proj-dots" id="projDots"></div>
+                <span class="proj-drag-hint" id="projDragHint">← Drag or swipe →</span>
               </div>
             </div>
+
             <div class="proj-divider"></div>
+
             <div class="proj-preview-section" id="projPreviewSection">
-              <div class="proj-preview-label">◇ LIVE PREVIEW</div>
+              <div class="mono-label">◇ LIVE PREVIEW</div>
               <iframe id="projWebsitePreview" style="display:none;" title="Project Preview" scrolling="yes"></iframe>
               <img id="projPreviewImg" src="" alt="Project Preview" style="display:none;">
               <div id="projPreviewPh" class="proj-ph">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
-                <span>No live preview</span>
+                <span class="ph-num font-serif gradient-text">01</span>
+                <span class="ph-icon">◈</span>
+                <span class="ph-bracket mono-label">PREVIEW LOADING</span>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ╔══════════════════════════════════════════════════╗
-         SKILLS
-         ╚══════════════════════════════════════════════════╝ -->
-    <section class="sect" id="skills" data-sect="skills">
+    <!-- ════════════ SKILLS ════════════ -->
+    <section id="skills" class="sect">
       <header class="sect-head">
         <span class="sect-num">03</span>
-        <h2 class="sect-title">What I <em>work with</em></h2>
+        <h2 class="section-title">What I <em>work with</em></h2>
         <span class="sect-rule"></span>
       </header>
 
       <div class="skills-grid">
-        <article class="skill-card" style="--accent1:#5b8def;--accent2:#8b5cf6">
-          <div class="sk-top">
-            <div class="sk-icon">⌘</div>
+        <article class="card skill-card">
+          <div class="sk-bar" style="background:linear-gradient(135deg,var(--accent),var(--blue));"></div>
+          <div class="sk-tile" style="background:linear-gradient(135deg,var(--accent),var(--blue));">&lt;/&gt;</div>
+          <div class="sk-head">
             <h3 class="sk-name">Frontend</h3>
-            <span class="sk-level">Advanced</span>
-          </div>
-          <p class="sk-desc">Pixel-perfect, accessible UIs with thoughtful motion and component systems.</p>
-          <ul class="sk-list">
-            <li>HTML / CSS / JavaScript</li>
-            <li>React · Material UI · Vue</li>
-            <li>Responsive · A11y · Motion</li>
-          </ul>
-        </article>
-
-        <article class="skill-card" style="--accent1:#00d97e;--accent2:#5b8def">
-          <div class="sk-top">
-            <div class="sk-icon">◉</div>
-            <h3 class="sk-name">AI / ML</h3>
             <span class="sk-level">Production</span>
           </div>
-          <p class="sk-desc">Computer vision, pose estimation, and face recognition shipped in real deployments.</p>
+          <p class="sk-desc">Build accessible, performant, motion-rich React apps that hold up under real traffic.</p>
           <ul class="sk-list">
-            <li>Python · TensorFlow · Keras</li>
-            <li>OpenCV · Mediapipe</li>
-            <li>scikit-learn · Pandas</li>
+            <li>React 18 + TypeScript</li>
+            <li>Tailwind / CSS architecture</li>
+            <li>Motion · Framer · GSAP basics</li>
+            <li>Material UI · shadcn</li>
           </ul>
         </article>
 
-        <article class="skill-card" style="--accent1:#ff6b4a;--accent2:#ffc857">
-          <div class="sk-top">
-            <div class="sk-icon">◆</div>
+        <article class="card skill-card">
+          <div class="sk-bar" style="background:linear-gradient(135deg,var(--accent-2),var(--coral));"></div>
+          <div class="sk-tile" style="background:linear-gradient(135deg,var(--accent-2),var(--coral));">◉</div>
+          <div class="sk-head">
+            <h3 class="sk-name">AI / ML</h3>
+            <span class="sk-level">Advanced</span>
+          </div>
+          <p class="sk-desc">Train, evaluate, and deploy CV and tabular models that run on edge and cloud.</p>
+          <ul class="sk-list">
+            <li>TensorFlow · PyTorch</li>
+            <li>OpenCV · Mediapipe</li>
+            <li>LoRA / QLoRA fine-tuning</li>
+            <li>Model serving · ONNX</li>
+          </ul>
+        </article>
+
+        <article class="card skill-card">
+          <div class="sk-bar" style="background:linear-gradient(135deg,var(--blue),var(--accent-2));"></div>
+          <div class="sk-tile" style="background:linear-gradient(135deg,var(--blue),var(--accent-2));">◆</div>
+          <div class="sk-head">
             <h3 class="sk-name">Backend</h3>
             <span class="sk-level">Proficient</span>
           </div>
-          <p class="sk-desc">Node &amp; Java services, REST APIs, auth, file uploads, and real-time pipelines.</p>
+          <p class="sk-desc">Design Node/Express APIs and Mongo schemas with realtime sockets and RBAC.</p>
           <ul class="sk-list">
-            <li>Node.js · Express · Java</li>
-            <li>MongoDB · Mongoose · REST</li>
-            <li>JWT · Socket.IO · Cloudinary</li>
+            <li>Node 20 · Express</li>
+            <li>MongoDB · PostgreSQL</li>
+            <li>Socket.IO · REST</li>
+            <li>JWT · OAuth2</li>
           </ul>
         </article>
 
-        <article class="skill-card" style="--accent1:#8b5cf6;--accent2:#ff6b4a">
-          <div class="sk-top">
-            <div class="sk-icon">⚡</div>
+        <article class="card skill-card">
+          <div class="sk-bar" style="background:linear-gradient(135deg,var(--amber),var(--coral));"></div>
+          <div class="sk-tile" style="background:linear-gradient(135deg,var(--amber),var(--coral));">⚡</div>
+          <div class="sk-head">
             <h3 class="sk-name">DevOps</h3>
             <span class="sk-level">Working</span>
           </div>
-          <p class="sk-desc">CI/CD, cloud deploys, and IaC basics for shipping reliable small-team products.</p>
+          <p class="sk-desc">Ship and observe with CI/CD, infra-as-code, and cloud-native primitives.</p>
           <ul class="sk-list">
-            <li>Git · GitHub Actions</li>
-            <li>Render · Vercel · Docker</li>
-            <li>Terraform (basics)</li>
+            <li>Terraform · Docker</li>
+            <li>GitHub Actions</li>
+            <li>Cloudinary · S3</li>
+            <li>Linux / SSH ops</li>
           </ul>
         </article>
 
-        <article class="skill-card" style="--accent1:#ffc857;--accent2:#00d97e">
-          <div class="sk-top">
-            <div class="sk-icon">🎯</div>
+        <article class="card skill-card">
+          <div class="sk-bar" style="background:linear-gradient(135deg,var(--accent),var(--amber));"></div>
+          <div class="sk-tile" style="background:linear-gradient(135deg,var(--accent),var(--amber));">✦</div>
+          <div class="sk-head">
             <h3 class="sk-name">Applied Domains</h3>
-            <span class="sk-level">Shipped</span>
-          </div>
-          <p class="sk-desc">Problem areas where my code has reached real users, not just prototypes.</p>
-          <ul class="sk-list">
-            <li>Computer vision · Robotics</li>
-            <li>Bus &amp; asset tracking</li>
-            <li>Civic tech · Defense tech</li>
-          </ul>
-        </article>
-
-        <article class="skill-card" style="--accent1:#5b8def;--accent2:#00d97e">
-          <div class="sk-top">
-            <div class="sk-icon">★</div>
-            <h3 class="sk-name">Leadership</h3>
             <span class="sk-level">Senior</span>
           </div>
-          <p class="sk-desc">NCC Naval Cadet Captain &amp; VP of VF — running engineering cohorts &amp; field ops.</p>
+          <p class="sk-desc">Civic-tech, defense innovation, robotics, asset tracking — domains I have shipped in.</p>
           <ul class="sk-list">
-            <li>Team leadership · Mentoring</li>
-            <li>Public speaking · Hosting</li>
-            <li>Research · Strategy</li>
+            <li>Computer-vision robotics</li>
+            <li>Geospatial tracking</li>
+            <li>Civic-tech platforms</li>
+            <li>Defense / NCC ops</li>
+          </ul>
+        </article>
+
+        <article class="card skill-card">
+          <div class="sk-bar" style="background:linear-gradient(135deg,var(--coral),var(--accent-2));"></div>
+          <div class="sk-tile" style="background:linear-gradient(135deg,var(--coral),var(--accent-2));">★</div>
+          <div class="sk-head">
+            <h3 class="sk-name">Leadership</h3>
+            <span class="sk-level">Captain</span>
+          </div>
+          <p class="sk-desc">Lead teams under pressure — campus VP, NCC Cadet Captain, hackathon lead.</p>
+          <ul class="sk-list">
+            <li>NCC Naval Captain</li>
+            <li>VP · VVCE Forum</li>
+            <li>4 national NCC camps</li>
+            <li>Hackathon team lead</li>
           </ul>
         </article>
       </div>
     </section>
 
-    <!-- ╔══════════════════════════════════════════════════╗
-         EXPERIENCE / JOURNEY
-         ╚══════════════════════════════════════════════════╝ -->
-    <section class="sect" id="experience" data-sect="experience">
+    <!-- ════════════ JOURNEY ════════════ -->
+    <section id="journey" class="sect">
       <header class="sect-head">
         <span class="sect-num">04</span>
-        <h2 class="sect-title">The <em>journey</em></h2>
+        <h2 class="section-title">The <em>journey</em></h2>
         <span class="sect-rule"></span>
       </header>
 
       <div class="timeline">
-
-        <div class="tl-item">
-          <div class="tl-when">
-            <span class="tl-date">2022 — Now</span>
-            <span class="tl-duration">4 yrs</span>
-          </div>
+        <div class="tl-row">
+          <div class="tl-when"><div class="tl-date">2022 — Now</div><div class="mono-label">4 years</div></div>
           <div class="tl-body">
-            <h3 class="tl-role">
-              <span class="tl-role-title">B.E. · CSE-AIML</span>
-              <span class="tl-sep">·</span>
-              <a href="https://vvce.ac.in" target="_blank" class="tl-co">VVCE Mysuru <span>↗</span></a>
-            </h3>
-            <p class="tl-desc">Specialised in Artificial Intelligence &amp; Machine Learning. Maintaining top-of-class standing in applied AI coursework while shipping 6+ production-grade systems across web, vision, and robotics.</p>
-            <div class="tl-tags">
-              <span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>React</span><span>Node.js</span><span>MongoDB</span>
-            </div>
+            <h3 class="tl-role"><span class="tl-mark" style="color:var(--accent)">◆</span>B.E. · CSE-AIML</h3>
+            <div class="tl-org">VVCE Mysuru</div>
+            <div class="tl-tags"><span class="chip chip-sm">Academic</span><span class="chip chip-sm">Top 10%</span></div>
           </div>
+          <span class="tl-arrow">↗</span>
         </div>
 
-        <div class="tl-item">
-          <div class="tl-when">
-            <span class="tl-date">2024 — Now</span>
-            <span class="tl-duration">1+ yr</span>
-          </div>
+        <div class="tl-row">
+          <div class="tl-when"><div class="tl-date">2024 — Now</div><div class="mono-label">2 years</div></div>
           <div class="tl-body">
-            <h3 class="tl-role">
-              <span class="tl-role-title">Naval Cadet Captain</span>
-              <span class="tl-sep">·</span>
-              <span class="tl-co">NCC VVCE</span>
-            </h3>
-            <p class="tl-desc">Lead engineering cadet cohort. Completed <strong>4 national camps</strong> and <strong>2 basic camps</strong>. Represented contingent at inter-college drill, demos, and field exercises. Bridge discipline, systems thinking, and leadership under pressure.</p>
-            <div class="tl-tags">
-              <span>Leadership</span><span>Field Ops</span><span>Training</span><span>Public Speaking</span>
-            </div>
+            <h3 class="tl-role"><span class="tl-mark" style="color:var(--amber)">◆</span>Naval Cadet Captain</h3>
+            <div class="tl-org">NCC · VVCE</div>
+            <div class="tl-tags"><span class="chip chip-sm">4 National camps</span><span class="chip chip-sm">2 Basic</span></div>
           </div>
+          <span class="tl-arrow">↗</span>
         </div>
 
-        <div class="tl-item">
-          <div class="tl-when">
-            <span class="tl-date">2025 — Now</span>
-            <span class="tl-duration">Current</span>
-          </div>
+        <div class="tl-row">
+          <div class="tl-when"><div class="tl-date">2025 — Now</div><div class="mono-label">1 year</div></div>
           <div class="tl-body">
-            <h3 class="tl-role">
-              <span class="tl-role-title">Vice President</span>
-              <span class="tl-sep">·</span>
-              <span class="tl-co">VF — VVCE Forum</span>
-            </h3>
-            <p class="tl-desc">Direct a student-led tech forum focused on defense innovation, civic tech research, and applied AI for public good. Run hackathons, mentor junior builders, and partner with faculty on applied research.</p>
-            <div class="tl-tags">
-              <span>Strategy</span><span>Mentoring</span><span>Research</span><span>Community</span>
-            </div>
+            <h3 class="tl-role"><span class="tl-mark" style="color:var(--accent-2)">◆</span>Vice President</h3>
+            <div class="tl-org">VF · VVCE Forum</div>
+            <div class="tl-tags"><span class="chip chip-sm">Leadership</span><span class="chip chip-sm">Events</span></div>
           </div>
+          <span class="tl-arrow">↗</span>
         </div>
 
-        <div class="tl-item">
-          <div class="tl-when">
-            <span class="tl-date">2025</span>
-            <span class="tl-duration">4 wins</span>
-          </div>
+        <div class="tl-row">
+          <div class="tl-when"><div class="tl-date">2025</div><div class="mono-label">Multi-event</div></div>
           <div class="tl-body">
-            <h3 class="tl-role">
-              <span class="tl-role-title">Champion × 4</span>
-              <span class="tl-sep">·</span>
-              <span class="tl-co">Multi-event 2025</span>
-            </h3>
-            <p class="tl-desc">Back-to-back wins in a single academic year: <strong>Teck Spark</strong> (AI/ML), <strong>Prayog</strong>, <strong>Anveshan</strong>, and <strong>Pals Case Study Challenge</strong> (top scorer). Every win shipped a working prototype — not just slides.</p>
-            <div class="tl-tags">
-              <span>AI/ML</span><span>Case Study</span><span>Prototyping</span><span>Pitching</span>
-            </div>
+            <h3 class="tl-role"><span class="tl-mark" style="color:var(--coral)">◆</span>Champion × 4</h3>
+            <div class="tl-org">Teck Spark · Prayog · Anveshan · Pals</div>
+            <div class="tl-tags"><span class="chip chip-sm">Hackathons</span></div>
           </div>
+          <span class="tl-arrow">↗</span>
         </div>
 
+        <div class="tl-end-line"></div>
       </div>
     </section>
 
-    <!-- ╔══════════════════════════════════════════════════╗
-         LINKEDIN / PROFESSIONAL NETWORK
-         ╚══════════════════════════════════════════════════╝ -->
-    <section class="sect sect-linkedin">
-      <header class="sect-head">
-        <span class="sect-num">in</span>
-        <h2 class="sect-title">Find me on <em>LinkedIn</em></h2>
-        <span class="sect-rule"></span>
-        <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" class="sect-action">Open profile ↗</a>
-      </header>
-      <div class="li-grid">
-        <div class="li-card li-main">
-          <div class="li-head">
-            <div class="li-avatar">PG</div>
-            <div class="li-id">
-              <div class="li-name">P G Ayush Rai</div>
-              <div class="li-headline">B.E · Developer · Builder · Cadet Captain · VP (VF)</div>
-              <div class="li-meta">
-                <span>📍 Bengaluru, Karnataka, India</span>
-                <span class="li-sep">·</span>
-                <span>500+ connections</span>
-              </div>
-            </div>
-            <div class="li-logo" aria-hidden="true">in</div>
-          </div>
-
-          <p class="li-bio">
-            Full-stack developer &amp; AI/ML engineer shipping computer-vision, civic-tech, and
-            defense-innovation systems. Currently at <strong>VVCE (CSE-AIML)</strong>.
-            Actively seeking <strong>internships &amp; applied-research roles</strong>.
-          </p>
-
-          <ul class="li-highlights">
-            <li><span class="li-dot" style="--c:var(--accent-teal)"></span><strong>4× Champion</strong> · Teck Spark · Prayog · Anveshan · Pals 2025</li>
-            <li><span class="li-dot" style="--c:var(--accent-blue)"></span><strong>NCC Naval Cadet Captain</strong> · 4 national + 2 basic camps</li>
-            <li><span class="li-dot" style="--c:var(--accent-purple)"></span><strong>Vice President · VF</strong> — student tech forum, VVCE</li>
-            <li><span class="li-dot" style="--c:var(--accent-amber)"></span>Passionate about <strong>defense, civic tech, and applied AI</strong></li>
-          </ul>
-
-          <div class="li-actions">
-            <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" class="li-btn li-btn-primary">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
-              Connect on LinkedIn
-            </a>
-            <button class="li-btn li-btn-ghost" data-copy="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/">
-              Copy profile URL
-            </button>
-            <a href="https://www.canva.com/design/DAGnTB1gSSg/yaJ5iSTqmJVcGWfpTqO5fA/view" target="_blank" class="li-btn li-btn-ghost">View Resume</a>
-          </div>
-        </div>
-
-        <div class="li-side">
-          <div class="li-mini">
-            <div class="li-mini-lbl">Top Skills</div>
-            <div class="li-skills">
-              <span>Python</span><span>React</span><span>Node.js</span><span>OpenCV</span><span>TensorFlow</span><span>MongoDB</span><span>Leadership</span><span>Public Speaking</span>
-            </div>
-          </div>
-
-          <div class="li-mini">
-            <div class="li-mini-lbl">Education</div>
-            <div class="li-edu">
-              <div class="li-edu-logo">V</div>
-              <div>
-                <div class="li-edu-name">Vidyavardhaka College of Engineering</div>
-                <div class="li-edu-degree">B.E. · CSE (AI &amp; ML)</div>
-                <div class="li-edu-yr">2022 — 2026</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="li-mini">
-            <div class="li-mini-lbl">Available for</div>
-            <div class="li-avail">
-              <span class="li-avail-chip">Summer Internship 2026</span>
-              <span class="li-avail-chip">Applied-research roles</span>
-              <span class="li-avail-chip">Full-time · 2026</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ╔══════════════════════════════════════════════════╗
-         OPEN SOURCE / GITHUB CARD
-         ╚══════════════════════════════════════════════════╝ -->
-    <section class="sect sect-gh">
-      <header class="sect-head">
-        <span class="sect-num">⌥</span>
-        <h2 class="sect-title">Open <em>source</em></h2>
-        <span class="sect-rule"></span>
-        <a href="https://github.com/Majenayu" target="_blank" class="sect-action">Follow ↗</a>
-      </header>
-      <div class="gh-grid">
-        <div class="gh-card gh-main">
-          <div class="gh-head">
-            <div class="gh-avatar">
-              <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/></svg>
-            </div>
-            <div class="gh-id">
-              <div class="gh-handle">@Majenayu</div>
-              <div class="gh-who">P G Ayush Rai · Bengaluru</div>
-            </div>
-          </div>
-          <p class="gh-bio">Building at the intersection of AI, web, and civic tech. Open-source contributor. Follow for updates on projects, experiments, and work-in-progress.</p>
-          <div class="gh-stats">
-            <div class="gh-stat"><span id="ghRepos">—</span><small>Repos</small></div>
-            <div class="gh-stat"><span id="ghFollowers">—</span><small>Followers</small></div>
-            <div class="gh-stat"><span id="ghStars">—</span><small>Stars earned</small></div>
-          </div>
-          <a href="https://github.com/Majenayu" target="_blank" class="btn btn-primary gh-follow">
-            Follow on GitHub
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
-          </a>
-        </div>
-
-        <div class="gh-card gh-lang">
-          <div class="gh-lbl">Top languages</div>
-          <div class="gh-bars" id="ghLangBars">
-            <div class="gh-bar"><span class="gh-bname">Python</span><span class="gh-bfill" style="--w:88%;--c:#3776ab"></span><span class="gh-bpct">88%</span></div>
-            <div class="gh-bar"><span class="gh-bname">JavaScript</span><span class="gh-bfill" style="--w:78%;--c:#f7df1e"></span><span class="gh-bpct">78%</span></div>
-            <div class="gh-bar"><span class="gh-bname">HTML/CSS</span><span class="gh-bfill" style="--w:72%;--c:#e34c26"></span><span class="gh-bpct">72%</span></div>
-            <div class="gh-bar"><span class="gh-bname">Java</span><span class="gh-bfill" style="--w:58%;--c:#f89820"></span><span class="gh-bpct">58%</span></div>
-            <div class="gh-bar"><span class="gh-bname">TypeScript</span><span class="gh-bfill" style="--w:42%;--c:#3178c6"></span><span class="gh-bpct">42%</span></div>
-          </div>
-          <div class="gh-footer">
-            <span class="gh-live"><span></span>Live from github.com/Majenayu</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ╔══════════════════════════════════════════════════╗
-         CURRENTLY — Now page
-         ╚══════════════════════════════════════════════════╝ -->
-    <section class="sect sect-now">
-      <header class="sect-head">
-        <span class="sect-num">◉</span>
-        <h2 class="sect-title">Currently <em>doing</em></h2>
-        <span class="sect-rule"></span>
-        <span class="sect-count">updated weekly</span>
-      </header>
-      <div class="now-grid">
-        <div class="now-card">
-          <div class="now-eye" style="color:var(--accent-teal)">📚 Learning</div>
-          <div class="now-title">Large-language-model fine-tuning</div>
-          <p>Deep-diving LoRA + QLoRA for on-device inference. Building a lightweight NCC-ops assistant.</p>
-          <div class="now-tags"><span>LLM</span><span>LoRA</span><span>HuggingFace</span></div>
-        </div>
-        <div class="now-card">
-          <div class="now-eye" style="color:var(--accent-purple)">🔨 Building</div>
-          <div class="now-title">Campus Bus &amp; Asset Tracking</div>
-          <p>Real-time live location, arrival ETAs, and anti-loss asset tracking for 4,000+ daily commuters.</p>
-          <div class="now-tags"><span>React</span><span>Socket.IO</span><span>MongoDB</span></div>
-        </div>
-        <div class="now-card">
-          <div class="now-eye" style="color:var(--accent-coral)">🎯 Training for</div>
-          <div class="now-title">Republic Day Parade Selection</div>
-          <p>NCC contingent drill and fitness block. Target: New Delhi camp selection in Q1 2026.</p>
-          <div class="now-tags"><span>Discipline</span><span>Leadership</span><span>Field Ops</span></div>
-        </div>
-        <div class="now-card">
-          <div class="now-eye" style="color:var(--accent-amber)">📖 Reading</div>
-          <div class="now-title">Designing Data-Intensive Applications</div>
-          <p>Kleppmann's classic on distributed systems — making my way through the consensus chapters.</p>
-          <div class="now-tags"><span>Systems</span><span>Distributed</span><span>Databases</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ╔══════════════════════════════════════════════════╗
-         ACHIEVEMENTS / WINS
-         ╚══════════════════════════════════════════════════╝ -->
-    <section class="sect" id="achievements" data-sect="achievements">
+    <!-- ════════════ WINS ════════════ -->
+    <section id="wins" class="sect">
       <header class="sect-head">
         <span class="sect-num">05</span>
-        <h2 class="sect-title">Recent <em>wins</em></h2>
+        <h2 class="section-title">Recent <em>wins</em></h2>
         <span class="sect-rule"></span>
       </header>
 
+      <!-- Badge constellation tube -->
       <div class="ach-wrap">
-        <div class="ach-label">Hover to explore the constellation</div>
-        <div class="ach-row">
-          <div class="htube">
-            <div class="tcap left"></div>
-            <div class="tshaft-horizontal" id="shaft">
-              <div class="tube-loader"><div class="spinner"></div></div>
-            </div>
-            <div class="tcap right"></div>
+        <div class="htube">
+          <div class="tcap left"></div>
+          <div class="tshaft-horizontal" id="shaft">
+            <div class="tube-loader"><div class="spinner"></div></div>
           </div>
+          <div class="tcap right"></div>
         </div>
         <div class="ach-detail-area">
-          <div class="ach-hint" id="hint">← tap a badge to inspect</div>
+          <div class="ach-hint" id="hint">tap a badge to inspect</div>
           <div class="ach-card" id="card">
             <div class="ach-top">
               <div class="ach-img-wrap" id="cimg"></div>
@@ -747,13 +518,14 @@
         </div>
       </div>
 
+      <!-- Showcase split -->
       <div class="container" id="portfolioPanel">
         <div class="split-container">
           <div class="split-left">
             <div class="section-header">
-              <h2>Showcase</h2>
+              <h2><span class="hsec-icon" style="color:var(--amber);">🏆</span> My Showcase</h2>
               <div class="stats-display">
-                <span class="stat-number" id="totalAchievements">0</span>
+                <span class="stat-number font-serif" id="totalAchievements">0</span>
                 <span class="stat-label">total</span>
               </div>
             </div>
@@ -763,11 +535,12 @@
               </div>
             </div>
           </div>
+
           <div class="split-right">
             <div class="section-header">
-              <h2>Learning</h2>
+              <h2><span class="hsec-icon" style="color:var(--accent-2);">📖</span> Learning</h2>
               <div class="stats-display">
-                <span class="stat-number" id="totalCourses">0</span>
+                <span class="stat-number font-serif" id="totalCourses">0</span>
                 <span class="stat-label">courses</span>
               </div>
             </div>
@@ -778,15 +551,17 @@
         </div>
       </div>
 
+      <!-- Events feed -->
       <div class="events-sub">
         <header class="subsect-head">
           <h3>Events &amp; hackathons</h3>
-          <span>↓ live feed</span>
+          <span class="mono-label">↓ live feed</span>
         </header>
-        <div class="events-widget" id="eventsWidget">
+
+        <div class="events-widget" id="eventsWidget" style="display:none;">
           <div class="ew-header">
             <div class="ew-title">
-              <span class="ew-title-text">◇ LIVE EVENTS FEED</span>
+              <span class="mono-label" style="color:var(--accent);">◇ LIVE EVENTS FEED</span>
               <span class="ew-live-dot"></span>
             </div>
           </div>
@@ -794,12 +569,12 @@
             <div class="ew-info-col" id="ewInfoCol">
               <div class="ew-info-scroll">
                 <div class="ew-event-label" id="ewLabel">CodeBreakers · Event</div>
-                <div class="ew-event-name" id="ewName">—</div>
+                <div class="ew-event-name font-serif" id="ewName">—</div>
                 <div class="ew-event-meta" id="ewMeta"></div>
                 <div class="ew-team" id="ewTeamTag"></div>
                 <p class="ew-desc" id="ewDesc">—</p>
                 <div class="ew-team-inline" id="ewTeamInline"></div>
-                <a id="ewProjLink" href="#" target="_blank" class="ew-proj-link" style="display:none;">↗ View Project</a>
+                <a id="ewProjLink" href="#" target="_blank" rel="noreferrer" class="ew-proj-link" style="display:none;">↗ View Project</a>
               </div>
               <div class="ew-nav-row">
                 <div class="ew-dots" id="ewDotTrack"></div>
@@ -819,91 +594,97 @@
       </div>
     </section>
 
-    <!-- ╔══════════════════════════════════════════════════╗
-         CONTACT
-         ╚══════════════════════════════════════════════════╝ -->
-    <section class="sect sect-contact" id="contact" data-sect="contact">
+    <!-- ════════════ CONTACT ════════════ -->
+    <section id="contact" class="sect">
       <header class="sect-head">
         <span class="sect-num">06</span>
-        <h2 class="sect-title">Let's <em>talk</em></h2>
+        <h2 class="section-title">Let's <em>talk</em></h2>
         <span class="sect-rule"></span>
       </header>
 
-      <div class="contact-big-wrap">
-        <h2 class="contact-big">
-          Have a project<br>
-          <em>worth building</em>?
-        </h2>
-        <p class="contact-lead">
-          I'm currently open to internships, collaborations, and applied-research roles in
-          <strong>AI, defense tech, and civic engineering</strong>. Drop a line — I reply to every email.
-        </p>
-        <div class="contact-cta">
-          <a href="mailto:pgayushrai@gmail.com" class="btn btn-primary btn-lg">
-            Say hello
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
-          <button class="btn btn-ghost btn-lg" data-copy="pgayushrai@gmail.com">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            Copy email
-          </button>
-          <a href="https://www.canva.com/design/DAGnTB1gSSg/yaJ5iSTqmJVcGWfpTqO5fA/view" target="_blank" class="btn btn-ghost btn-lg">
-            Download resume
-          </a>
-        </div>
+      <h2 class="contact-big">
+        Have a project<br>
+        <em class="font-serif gradient-text-warm">worth building?</em>
+      </h2>
+
+      <p class="contact-lead">
+        I'm looking for an internship / research collaboration in <strong>Summer 2026</strong> and am open to full-time AI / full-stack roles starting late 2026. If your team is building something with real-world stakes, I'd like to hear about it.
+      </p>
+
+      <div class="contact-cta">
+        <a href="mailto:pgayushrai@gmail.com" class="btn btn-filled btn-lg">
+          <span>Say hello</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+        <button class="btn btn-ghost btn-lg" data-copy="pgayushrai@gmail.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy email
+        </button>
+        <a href="https://www.canva.com/design/DAGnTB1gSSg/yaJ5iSTqmJVcGWfpTqO5fA/view" target="_blank" rel="noreferrer" class="btn btn-ghost btn-lg">Download résumé</a>
       </div>
 
       <div class="contact-tiles">
-        <a href="mailto:pgayushrai@gmail.com" class="ctile" data-copy="pgayushrai@gmail.com">
-          <div class="ctile-icon" style="--c:#5b8def">✉</div>
-          <div class="ctile-k">Email · click to copy</div>
+        <a href="mailto:pgayushrai@gmail.com" class="card ctile" data-copy="pgayushrai@gmail.com" style="--c:var(--accent);">
+          <span class="ctile-glow"></span>
+          <div class="ctile-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/></svg></div>
+          <div class="mono-label">EMAIL</div>
           <div class="ctile-v">pgayushrai@gmail.com</div>
         </a>
-        <a href="https://github.com/Majenayu" target="_blank" class="ctile">
-          <div class="ctile-icon" style="--c:#8b5cf6">⌥</div>
-          <div class="ctile-k">GitHub</div>
+
+        <a href="https://github.com/Majenayu" target="_blank" rel="noreferrer" class="card ctile" style="--c:var(--accent-2);">
+          <span class="ctile-glow"></span>
+          <div class="ctile-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/></svg></div>
+          <div class="mono-label">GITHUB</div>
           <div class="ctile-v">@Majenayu</div>
         </a>
-        <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" class="ctile">
-          <div class="ctile-icon" style="--c:#0a66c2">in</div>
-          <div class="ctile-k">LinkedIn</div>
-          <div class="ctile-v">P G Ayush Rai</div>
+
+        <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" rel="noreferrer" class="card ctile" style="--c:var(--blue);">
+          <span class="ctile-glow"></span>
+          <div class="ctile-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg></div>
+          <div class="mono-label">LINKEDIN</div>
+          <div class="ctile-v">p-g-ayush-rai</div>
         </a>
-        <a href="https://www.youtube.com/channel/UCjioxN6gRm-o3SHBBlR6vhw" target="_blank" class="ctile">
-          <div class="ctile-icon" style="--c:#ff6b4a">▶</div>
-          <div class="ctile-k">YouTube</div>
-          <div class="ctile-v">MAJEN · CodeBreakers</div>
+
+        <a href="https://www.youtube.com/channel/UCjioxN6gRm-o3SHBBlR6vhw" target="_blank" rel="noreferrer" class="card ctile" style="--c:var(--coral);">
+          <span class="ctile-glow"></span>
+          <div class="ctile-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/></svg></div>
+          <div class="mono-label">YOUTUBE</div>
+          <div class="ctile-v">@MAJEN · CodeBreakers</div>
         </a>
       </div>
-
-      <footer class="page-footer">
-        <div class="pf-col">
-          <div class="pf-brand">
-            <span class="pf-mark">◆</span>
-            <span>ayush.rai</span>
-          </div>
-          <p class="pf-built">
-            Built with care using
-            <span class="pf-stack">Node</span>
-            <span class="pf-stack">Express</span>
-            <span class="pf-stack">MongoDB</span>
-            <span class="pf-stack">Cloudinary</span>
-          </p>
-        </div>
-        <div class="pf-col pf-col-right">
-          <p class="pf-copy">© 2026 P G Ayush Rai · All rights reserved</p>
-          <p class="pf-meta">
-            <a href="/login">Admin</a>
-            <span>·</span>
-            <span id="heroClock">00:00:00 IST</span>
-          </p>
-        </div>
-      </footer>
     </section>
 
   </main>
 
-  <!-- ═══ MODALS ═══ -->
+  <!-- ════════════ FOOTER ════════════ -->
+  <footer class="page-footer">
+    <div class="pf-inner">
+      <div class="pf-left">
+        <span class="brand-mark"></span>
+        <span class="font-mono">ayush.rai</span>
+        <span class="mono-label">·</span>
+        <span class="pf-built">Built with <span class="heart">♥</span> using <span class="pf-stack">Node</span> · <span class="pf-stack">Express</span> · <span class="pf-stack">MongoDB</span> · <span class="pf-stack">Cloudinary</span></span>
+      </div>
+      <div class="pf-right">
+        <span class="pf-copy">© 2026 P G Ayush Rai · All rights reserved</span>
+        <span class="mono-label" style="color:var(--accent);">● <span id="heroClock">00:00:00</span> IST</span>
+        <a href="/login" class="mono-label pf-admin">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="backToTop" class="back-top" aria-label="Back to top" title="Back to top">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <!-- Visitor ticker -->
+  <div id="visitorTicker" class="visitor-ticker">
+    <span class="vt-pulse"></span>
+    <span><span id="uniqueVisitors">—</span> unique · <span id="totalViews">—</span> views</span>
+  </div>
+
+  <!-- ════════════ MODALS ════════════ -->
   <div id="achievementModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('achievementModal')">&times;</span>
@@ -934,7 +715,7 @@
     </div>
   </div>
 
-  <!-- GAME CONSOLE -->
+  <!-- Game console -->
   <div id="projGameConsole" class="game-console" style="display:none;">
     <div class="game-console-inner">
       <div class="game-header">
@@ -954,95 +735,116 @@
     </div>
   </div>
 
-  <!-- Legacy elements for script.js compatibility (hidden) -->
+  <!-- Legacy elements for script.js compat -->
   <div class="main-interface" id="mainInterface" style="display:none;" aria-hidden="true">
     <div class="center-container">
       <div class="rotating-coin" id="rotatingCoin"></div>
       <div class="menu-nodes">
-        <div class="node" data-panel="resume"></div><div class="node" data-panel="youtube"></div>
-        <div class="node" data-panel="github"></div><div class="node" data-panel="linkedin"></div>
-        <div class="node" data-panel="settings"></div><div class="node" data-panel="contact"></div>
+        <div class="node" data-panel="resume"></div>
+        <div class="node" data-panel="youtube"></div>
+        <div class="node" data-panel="github"></div>
+        <div class="node" data-panel="linkedin"></div>
+        <div class="node" data-panel="settings"></div>
+        <div class="node" data-panel="contact"></div>
         <div class="node" id="gameNode" data-action="game"></div>
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap interactions -->
+  <!-- Inline bootstrap script -->
   <script>
     (function(){
       // Live IST clock
-      function tick() {
-        const el = document.getElementById('heroClock');
-        if (el) {
-          const t = new Date().toTimeString().slice(0,8);
-          el.textContent = t + ' IST';
+      function tick(){
+        var el=document.getElementById('heroClock');
+        if(el){var d=new Date();el.textContent=d.toTimeString().slice(0,8);}
+      }
+      tick(); setInterval(tick,1000);
+
+      // Mirror dynamic counters
+      function mirror(){
+        [['totalAchievements','mAch'],['totalCourses','mCourse'],['projCount','mProj']].forEach(function(pair){
+          var src=document.getElementById(pair[0]),dst=document.getElementById(pair[1]);
+          if(src&&dst){
+            var m=(src.textContent||'').match(/\d+/);
+            var v=m?m[0]:'0';
+            if(dst.textContent!==v) dst.textContent=v;
+          }
+        });
+      }
+      setInterval(mirror,1200);
+
+      // Nav scroll-spy + solid background
+      var nav=document.getElementById('nav');
+      window.addEventListener('scroll',function(){
+        nav.classList.toggle('scrolled',window.scrollY>60);
+        var bar=document.getElementById('scrollProgress');
+        if(bar){
+          var h=document.documentElement;
+          var p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+          bar.style.width=Math.min(p,100)+'%';
         }
-      }
-      tick(); setInterval(tick, 1000);
+        var top=document.getElementById('backToTop');
+        if(top) top.classList.toggle('visible',window.scrollY>480);
+      },{passive:true});
 
-      // Mirror API counters
-      function mirror() {
-        [['totalAchievements','mAch'],['totalCourses','mCourse'],['projCount','mProj']].forEach(([s,d])=>{
-          const src = document.getElementById(s);
-          const dst = document.getElementById(d);
-          if (src && dst) {
-            // Extract first sequence of digits (e.g. "1/3" -> "1", "7" -> "7")
-            const match = (src.textContent || '').match(/\d+/);
-            const v = match ? match[0] : '0';
-            if (dst.textContent !== v) dst.textContent = v;
+      var links=document.querySelectorAll('.np-link');
+      var spy=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            var id=e.target.id;
+            links.forEach(function(l){l.classList.toggle('active',l.dataset.spy===id);});
           }
         });
-      }
-      setInterval(mirror, 1200);
+      },{rootMargin:'-40% 0px -55% 0px',threshold:0});
+      document.querySelectorAll('.sect').forEach(function(s){spy.observe(s);});
+      var hero=document.getElementById('hero'); if(hero) spy.observe(hero);
 
-      // Nav scroll solid + scroll spy
-      const nav = document.getElementById('nav');
-      window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 60);
-      });
-
-      const links = document.querySelectorAll('.nav-link');
-      const spyObs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            const id = e.target.id;
-            links.forEach(l => l.classList.toggle('active', l.dataset.spy === id));
-          }
+      // Mobile burger
+      var burger=document.getElementById('navBurger');
+      var pill=document.getElementById('navPill');
+      if(burger){
+        burger.addEventListener('click',function(){
+          pill.classList.toggle('open');
+          burger.classList.toggle('active');
         });
-      }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-      document.querySelectorAll('.sect').forEach(s => spyObs.observe(s));
-
-      // Mobile nav toggle
-      const mobToggle = document.getElementById('navMobileToggle');
-      const linksWrap = document.querySelector('.nav-links');
-      if (mobToggle) {
-        mobToggle.addEventListener('click', () => {
-          linksWrap.classList.toggle('open');
-          mobToggle.classList.toggle('active');
+        document.querySelectorAll('.np-link').forEach(function(l){
+          l.addEventListener('click',function(){
+            pill.classList.remove('open');
+            burger.classList.remove('active');
+          });
         });
-        document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
-          linksWrap.classList.remove('open');
-          mobToggle.classList.remove('active');
-        }));
       }
+
+      // Back to top
+      var bt=document.getElementById('backToTop');
+      if(bt) bt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+      // Theme toggle
+      window.toggleTheme=function(){
+        var html=document.documentElement;
+        var cur=html.getAttribute('data-theme');
+        var next=cur==='light'?'dark':'light';
+        html.setAttribute('data-theme',next);
+        try{localStorage.setItem('theme',next);}catch(e){}
+      };
+      try{var saved=localStorage.getItem('theme'); if(saved) document.documentElement.setAttribute('data-theme',saved);}catch(e){}
+
+      // Word rotator
+      var words=['products','systems','interfaces','tools','experiences'];
+      var i=0,w='',deleting=false;
+      function step(){
+        var el=document.getElementById('heroRotator'); if(!el) return;
+        var target=words[i%words.length];
+        if(!deleting && w===target){deleting=true; setTimeout(step,2200); return;}
+        if(deleting && w===''){deleting=false; i++; setTimeout(step,260); return;}
+        w=deleting?target.slice(0,w.length-1):target.slice(0,w.length+1);
+        el.textContent=w;
+        setTimeout(step, deleting?40:90);
+      }
+      setTimeout(step,800);
     })();
   </script>
-
-  <!-- Back to top button -->
-  <button id="backToTop" class="back-top" aria-label="Back to top" title="Back to top">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <path d="M12 19V5M5 12l7-7 7 7"/>
-    </svg>
-  </button>
-
-  <!-- Live visitor ticker (bottom-left) -->
-  <div id="visitorTicker" class="visitor-ticker" role="status" aria-live="polite">
-    <span class="vt-pulse"></span>
-    <span class="vt-col">
-      <span class="vt-k">Unique visitors</span>
-      <span class="vt-v"><span id="uniqueVisitors">—</span> · <span id="totalViews">—</span> views</span>
-    </span>
-  </div>
 
   <script src="script.js"></script>
   <script src="effects.js"></script>

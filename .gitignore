@@ -64,3 +64,11 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Local backups (kept locally for rollback, never pushed)
+public_v7_backup/
+public_v*_backup/
+_figma_unzip/
+Personalportfolio-main/
+Personalportfolio-main.zip
+portfolio_project_report.md
