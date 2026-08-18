@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="P G Ayush Rai — creative technologist, cybersecurity builder, and AI/ML engineer." />
+    <meta property="og:title" content="P G Ayush Rai — Creative Technologist" />
+    <meta property="og:description" content="A living portfolio command console for code, security, and intelligent systems." />
+    <title>P G Ayush Rai — Creative Technologist</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2304d9d1'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Arial' font-size='24' font-weight='700' fill='%2307141d'%3EPG%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/portfolio/style.css" />
+    <link rel="stylesheet" href="/portfolio/hero-overrides.css" />
+  </head>
+  <body data-theme="cyan">
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="site-progress" id="site-progress"></div>
+
+    <header class="site-header" id="site-header">
+      <a class="brand" href="#hero" aria-label="Back to top">
+        <span class="brand-mark">PG</span>
+        <span class="brand-copy"><strong>AYUSH RAI</strong><small>CREATIVE TECHNOLOGIST</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a class="active" href="#hero">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#awards">Awards</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a class="social-link" href="https://github.com/Majenayu" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .6a11.4 11.4 0 0 0-3.6 22.2c.57.1.78-.25.78-.55v-2.1c-3.17.69-3.84-1.34-3.84-1.34-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.73-1.54-2.53-.29-5.19-1.27-5.19-5.64 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 5.74 0c2.19-1.48 3.15-1.17 3.15-1.17.62 1.57.23 2.73.11 3.02.73.8 1.18 1.82 1.18 3.07 0 4.38-2.66 5.35-5.2 5.63.41.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A11.4 11.4 0 0 0 12 .6Z"/></svg>
+        </a>
+        <a class="social-link" href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.3 3.5a2.2 2.2 0 1 1-4.4 0 2.2 2.2 0 0 1 4.4 0ZM1.1 8h4.3v13H1.1V8Zm6.9 0h4.1v1.78h.06c.57-1.08 1.97-2.22 4.05-2.22 4.33 0 5.13 2.85 5.13 6.55V21h-4.3v-6.1c0-1.46-.03-3.33-2.03-3.33-2.03 0-2.34 1.59-2.34 3.23V21H8V8Z"/></svg>
+        </a>
+        <a class="resume-link" href="#about">Resume <span>↗</span></a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </header>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="#hero">Home</a><a href="#about">About Me</a><a href="#awards">Awards</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+      <div class="mobile-nav-socials">
+        <a href="https://github.com/Majenayu" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .6a11.4 11.4 0 0 0-3.6 22.2c.57.1.78-.25.78-.55v-2.1c-3.17.69-3.84-1.34-3.84-1.34-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.73-1.54-2.53-.29-5.19-1.27-5.19-5.64 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 5.74 0c2.19-1.48 3.15-1.17 3.15-1.17.62 1.57.23 2.73.11 3.02.73.8 1.18 1.82 1.18 3.07 0 4.38-2.66 5.35-5.2 5.63.41.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A11.4 11.4 0 0 0 12 .6Z"/></svg> GitHub</a>
+        <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.3 3.5a2.2 2.2 0 1 1-4.4 0 2.2 2.2 0 0 1 4.4 0ZM1.1 8h4.3v13H1.1V8Zm6.9 0h4.1v1.78h.06c.57-1.08 1.97-2.22 4.05-2.22 4.33 0 5.13 2.85 5.13 6.55V21h-4.3v-6.1c0-1.46-.03-3.33-2.03-3.33-2.03 0-2.34 1.59-2.34 3.23V21H8V8Z"/></svg> LinkedIn</a>
+        <a class="mobile-resume-link" href="#about">Resume <span>↗</span></a>
+      </div>
+    </div>
+
+    <main>
+      <section class="hero" id="hero" data-theme="cyan">
+         <div class="hero-console">
+            <div class="hero-media" data-video-src="/attached_assets/PROFILE_1786957367865.mp4">
+             <img class="reference-art" src="/attached_assets/0756ab91-b987-4414-bf28-0976ad289d6b_1786876334058.jpg" alt="" aria-hidden="true" />
+             <video class="hero-video" id="hero-video" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+             <div class="media-telemetry"><span></span> MEDIA BAY / 01 <b>READY</b></div>
+             <div class="media-frame-label">VISUAL FEED <strong>LIVE</strong></div>
+           </div>
+          <div class="console-overlay" aria-label="Portfolio command console">
+            <div class="console-nameplate">
+              <span class="mini-mark">PG</span>
+              <span><strong>AYUSH RAI</strong><small>CREATIVE TECHNOLOGIST</small></span>
+            </div>
+            <div class="console-status"><i></i> SYSTEM ONLINE</div>
+            <div class="console-copy">
+              <p class="console-kicker">KINGDOM / PORTFOLIO NODE</p>
+              <h1>BUILDING THE<br /><em>NEXT SYSTEM</em></h1>
+              <p>Cybersecurity, intelligent applications, and thoughtful digital experiences assembled with curiosity.</p>
+              <a class="console-button" href="#about">ENTER PROFILE <span>↗</span></a>
+            </div>
+            <div class="console-side-label">PG / 001</div>
+          </div>
+          <aside class="hero-right-panel">
+             <div class="hero-panel-head">
+               <div><strong>AYUSH RAI'S <i>// SYSTEM READOUT</i></strong><span>CREATIVE TECHNOLOGIST</span></div>
+               <div class="hero-panel-icons">GH&nbsp;&nbsp; IN</div>
+             </div>
+             <div class="hero-panel-subtitle">
+               <span class="readout-status"><i></i> ONLINE</span>
+               <span class="readout-ticker" id="readout-ticker">LATENCY: 12ms</span>
+             </div>
+             <span class="panel-laser" aria-hidden="true"></span>
+             <a class="hero-portal portal-about" href="#about"><span class="portal-icon">SYS</span><span><strong>ABOUT ME</strong><small>Access unique skill profile and trajectory.</small></span><b>↗</b></a>
+             <a class="hero-portal portal-awards" href="#awards"><span class="portal-icon">★</span><span><strong>AWARDS</strong><small>Access recognized achievements and treasures.</small></span><b>↗</b></a>
+             <a class="hero-portal portal-projects" href="#projects"><span class="portal-icon">◉</span><span><strong>PROJECTS</strong><small>Explore diverse completed quests and ventures.</small></span><b>↗</b></a>
+             <a class="hero-portal portal-contact" href="#contact"><span class="portal-icon">⌁</span><span><strong>CONTACT</strong><small>Initiate partnerships for scientific research.</small></span><b>↗</b></a>
+          </aside>
+          <div class="console-live" aria-hidden="true"><span></span> LIVE PORTFOLIO NODE <b>●</b></div>
+        </div>
+        <div class="hero-underbar">
+          <span><i></i> SECURE CONNECTION</span><span>PORTFOLIO / 001</span><span>DESIGNED &amp; DEVELOPED WITH PASSION</span><span>SCROLL TO EXPLORE <b>↓</b></span>
+        </div>
+      </section>
+
+      <section class="section about-section" id="about" data-theme="cyan">
+        <div class="section-shell">
+          <div class="section-heading"><span class="section-index">01 / PROFILE</span><h2>ABOUT <em>ME</em></h2><p>Access unique skill profile, career trajectory, and current system status.</p></div>
+           <div class="role-switcher" aria-label="Select Ayush's focus area">
+             <span class="role-switcher-label">SELECT PROFILE MODE</span>
+             <div class="role-tabs" role="tablist">
+                <button class="role-tab active" type="button" role="tab" aria-selected="true" data-role="cybersecurity"><span>⌾</span> CYBERSECURITY</button>
+                <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="ai"><span>✣</span> AI-ML</button>
+                <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="fullstack"><span>▱</span> FULL-STACK</button>
+                <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="data"><span>⌁</span> DATA / CLOUD</button>
+                <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="github"><span>◆</span> GITHUB</button>
+                <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="leadership"><span>⚑</span> LEADERSHIP</button>
+             </div>
+           </div>
+           <div class="cybersecurity-dashboard" id="cybersecurity-dashboard" hidden>
+             <div class="cyber-dashboard-grid">
+               <article class="cyber-panel">
+                 <div class="cyber-panel-header"><span>CHARACTER STATUS</span><span class="cyber-header-status">LVL 04</span></div>
+                 <div class="cyber-video-feed">
+                    <video class="cyber-live-video" autoplay muted loop playsinline preload="metadata" aria-label="Cybersecurity live feed">
+                      <source src="/attached_assets/hack_1786944974759.mp4" type="video/mp4" />
+                    </video>
+                    <div class="cyber-live-feed-badge"><i></i> LIVE FEED</div>
+                 </div>
+                 <div class="cyber-profile-below">
+                   <div class="cyber-avatar">PG</div>
+                   <div class="cyber-profile-info">
+                     <h3 id="cyber-name">P G AYUSH RAI</h3>
+                     <p id="cyber-role">SOC Analyst · Cybersecurity Builder</p>
+                   </div>
+                 </div>
+               </article>
+
+               <article class="cyber-panel">
+                 <div class="cyber-panel-header"><span>SYSTEM READOUT</span><span class="cyber-header-status">AVAILABLE</span></div>
+                 <p class="cyber-system-description" id="cyber-description">From packet-level analysis to identity governance — I investigate alerts, simulate adversary tactics, and build defenses that reduce mean-time-to-detect.</p>
+                 <div class="cyber-section-label" id="cyber-focus-label">CORE FOCUS AREAS</div>
+                  <div class="cyber-focus-grid">
+                    <div><span>▸</span><span id="cyber-focus-1">Threat Detection &amp; Incident Triage</span></div>
+                    <div><span>▸</span><span id="cyber-focus-2">WAF, Firewall &amp; Network Defense</span></div>
+                    <div><span>▸</span><span id="cyber-focus-3">IAM, SSO &amp; Zero-Trust Access</span></div>
+                    <div><span>▸</span><span id="cyber-focus-4">SPF, DKIM, DMARC &amp; Phishing Defense</span></div>
+                 </div>
+                 <div class="cyber-section-label">TECH STACK</div>
+                 <div class="cyber-tech-stack" aria-label="Cybersecurity technology stack">
+                    <span>KALI LINUX</span><span>NMAP</span><span>WIRESHARK</span><span>BURP SUITE</span>
+                    <span>METASPLOIT</span><span>HYDRA</span><span>HASHCAT</span><span>GOBUSTER</span>
+                    <span>FFUF</span><span>FRIDA</span><span>SPLUNK</span><span>WAF / IAM</span>
+                 </div>
+                 <div class="cyber-meta-row">
+                   <div><span>BASE LOCATION</span><strong id="cyber-location">MYSURU, INDIA</strong></div>
+                   <div><span>STATUS</span><strong id="cyber-status">OPEN TO OPPORTUNITIES</strong></div>
+                 </div>
+               </article>
+             </div>
+           </div>
+           <div class="data-analyst-dashboard" id="data-analyst-dashboard" hidden>
+             <div class="data-dashboard-grid">
+               <article class="data-panel">
+                 <div class="data-panel-header"><span>CHARACTER STATUS</span><span class="data-header-status">LVL 04</span></div>
+                  <div class="data-video-feed data-live-video-feed">
+                    <video id="data-live-video" autoplay muted loop playsinline preload="metadata" aria-label="Data analyst live feed">
+                      <source src="/attached_assets/DATA_1786952566859.mp4" type="video/mp4" />
+                    </video>
+                   <div class="data-lines" aria-hidden="true"></div>
+                    <div class="data-live-feed-badge"><i></i> LIVE FEED</div>
+                 </div>
+                 <div class="data-profile" id="data-profile">
+                   <div class="data-avatar">PG</div>
+                   <div class="data-profile-info">
+                     <h3>P G Ayush Rai</h3>
+                      <p>Data Analyst · Google Cloud Learner</p>
+                   </div>
+                 </div>
+               </article>
+
+               <article class="data-panel">
+                 <div class="data-panel-header"><span>SYSTEM READOUT</span><span class="data-header-status">AVAILABLE</span></div>
+                  <p class="data-system-description" id="data-description"></p>
+                 <div class="data-graph-line" aria-hidden="true"><span id="data-graph-fill"></span></div>
+                 <div class="data-section-label" id="data-work-label">HOW I WORK</div>
+                 <div class="data-process">
+                   <div><strong>01</strong><span>Collect &amp; Clean</span></div>
+                   <div><strong>02</strong><span>Analyze</span></div>
+                   <div><strong>03</strong><span>Visualize</span></div>
+                   <div><strong>04</strong><span>Present</span></div>
+                 </div>
+                 <div class="data-section-label">CORE FOCUS AREAS</div>
+                 <div class="data-focus-grid">
+                    <div><i></i>Data Analytics</div>
+                    <div><i></i>BigQuery Warehousing</div>
+                    <div><i></i>Cloud Data Pipelines</div>
+                    <div><i></i>Looker Studio Reporting</div>
+                 </div>
+                 <div class="data-section-label">TECH STACK</div>
+                 <div class="data-tech-stack">
+                    <span>PYTHON</span><span>SQL</span><span>BIGQUERY</span><span>LOOKER STUDIO</span><span>DATAFORM</span>
+                    <span>DATAFLOW</span><span>PANDAS</span><span>DATAPREP</span><span>MONGODB ATLAS</span>
+                 </div>
+                 <div class="data-meta-row">
+                   <div><span>BASE LOCATION</span><strong>MYSURU, INDIA</strong></div>
+                   <div><span>STATUS</span><strong>OPEN TO OPPORTUNITIES</strong></div>
+                 </div>
+               </article>
+             </div>
+           </div>
+           <div class="ai-ml-dashboard" id="ai-ml-dashboard" hidden>
+             <div class="ai-dashboard-shell show" id="ai-dashboard-shell">
+               <div class="ai-dashboard-grid">
+                 <article class="ai-panel">
+                   <div class="ai-panel-header"><span>CHARACTER STATUS</span><span class="ai-header-status">LVL 04</span></div>
+                   <div class="ai-video-feed ai-live-video-feed">
+                     <video id="ai-live-video" autoplay muted loop playsinline preload="metadata" aria-label="Jarvis AI live feed">
+                       <source src="/attached_assets/jarvis_1786941454387.mp4" type="video/mp4" />
+                     </video>
+                     <div class="ai-live-feed-badge"><i></i> LIVE FEED</div>
+                   </div>
+                   <div class="ai-profile">
+                     <div class="ai-avatar">PG</div>
+                     <div class="ai-profile-info">
+                       <h3>P G Ayush Rai</h3>
+                        <p>Python / AI-ML Engineer</p>
+                     </div>
+                   </div>
+                 </article>
+
+                 <article class="ai-panel">
+                   <div class="ai-panel-header"><span>SYSTEM READOUT</span><span class="ai-header-status">AVAILABLE</span></div>
+                   <p class="ai-system-description typing" id="ai-description"></p>
+                   <div class="ai-section-label" id="ai-focus-label">CORE FOCUS AREAS</div>
+                    <div class="ai-focus-grid">
+                      <div>Real-Time Inference</div>
+                      <div>Pose Estimation</div>
+                      <div>AI Agent Systems</div>
+                      <div>Computer Vision</div>
+                   </div>
+                   <div class="ai-section-label">TECH STACK</div>
+                   <div class="ai-tech-stack">
+                      <span>PYTHON</span><span>TENSORFLOW</span><span>MOVENET</span><span>OPENCV</span>
+                      <span>MEDIAPIPE</span><span>GROQ API</span><span>LANGCHAIN</span><span>JUPYTER</span>
+                   </div>
+                   <div class="ai-meta-row">
+                     <div><span>BASE LOCATION</span><strong>MYSURU, INDIA</strong></div>
+                     <div><span>STATUS</span><strong>OPEN TO OPPORTUNITIES</strong></div>
+                   </div>
+                 </article>
+               </div>
+             </div>
+           </div>
+           <div class="ai-ml-dashboard fullstack-dashboard" id="fullstack-dashboard" hidden>
+             <div class="ai-dashboard-grid">
+               <article class="ai-panel">
+                 <div class="ai-panel-header"><span>CHARACTER STATUS</span><span class="ai-header-status">LVL 04</span></div>
+                  <div class="ai-video-feed ai-live-video-feed fullstack-video-feed">
+                    <video id="fullstack-live-video" autoplay muted loop playsinline preload="metadata" aria-label="Full-stack developer live feed">
+                      <source src="/attached_assets/FULLSTACK_1786951864819.mp4" type="video/mp4" />
+                    </video>
+                    <div class="ai-live-feed-badge"><i></i> LIVE FEED</div>
+                 </div>
+                 <div class="ai-profile">
+                   <div class="ai-avatar">PG</div>
+                   <div class="ai-profile-info">
+                     <h3>P G Ayush Rai</h3>
+                      <p>Full-Stack · Backend Developer</p>
+                   </div>
+                 </div>
+               </article>
+
+               <article class="ai-panel">
+                 <div class="ai-panel-header"><span>SYSTEM READOUT</span><span class="ai-header-status">AVAILABLE</span></div>
+                  <p class="ai-system-description fullstack-system-description">Shipping complete products from pixel to database — Evalify (AICTE activity-points platform with evidence uploads, mentor verification, and support workflows), this portfolio, and multiple client builds taken from idea to production.</p>
+                 <div class="fs-section-label show">SYSTEM ARCHITECTURE</div>
+                 <div class="fs-arch-box show" id="fs-arch-box">
+                   <div class="fs-arch-header">
+                     <span id="fs-phase-label">System Boot</span>
+                     <span id="fs-phase-status">Initializing…</span>
+                   </div>
+                   <div class="fs-phase active" id="fs-phase-boot"><div class="fs-boot-log" id="fs-boot-log"></div></div>
+                   <div class="fs-phase" id="fs-phase-pkg">
+                     <div class="fs-pkg-list" id="fs-pkg-list"></div>
+                     <div class="fs-build-success" id="fs-build-success"><b>✓</b> Build Successful — 5 packages</div>
+                   </div>
+                   <div class="fs-phase" id="fs-phase-net">
+                     <div class="fs-network-flow">
+                       <div class="fs-net-node" id="fs-net-client">CLIENT</div>
+                       <div class="fs-net-node" id="fs-net-api">API</div>
+                       <div class="fs-net-node" id="fs-net-db">DB</div>
+                       <div class="fs-net-track"></div>
+                       <div class="fs-net-dot" id="fs-net-dot"></div>
+                     </div>
+                     <div class="fs-net-label" id="fs-net-label"></div>
+                   </div>
+                   <div class="fs-phase" id="fs-phase-layers">
+                     <div class="fs-layers">
+                        <div class="fs-layer" id="fs-layer-fe"><i></i><span>Frontend Layer</span><b><em id="fs-bar-fe"></em></b><small>React · HTML / CSS</small></div>
+                        <div class="fs-layer" id="fs-layer-be"><i></i><span>Backend Layer</span><b><em id="fs-bar-be"></em></b><small>Node.js · REST APIs</small></div>
+                        <div class="fs-layer" id="fs-layer-db"><i></i><span>Database Layer</span><b><em id="fs-bar-db"></em></b><small>MongoDB · Cloudinary</small></div>
+                     </div>
+                   </div>
+                   <div class="fs-phase" id="fs-phase-final">
+                     <div class="fs-final-arch" id="fs-final-arch"><i></i><b>CLIENT</b><b>API</b><b>AUTH</b><b>DB</b></div>
+                     <div class="fs-final-msg" id="fs-final-msg">Architecture fully deployed · All systems online</div>
+                   </div>
+                 </div>
+                 <div class="fs-section-label show">TECH STACK</div>
+                 <div class="fs-tech-stack">
+                    <span>NODE.JS</span><span>EXPRESS</span><span>REACT</span><span>REST APIs</span>
+                    <span>MONGODB</span><span>JAVASCRIPT</span><span>DOCKER</span><span>GITHUB CI</span><span>CLOUDINARY</span>
+                 </div>
+                 <div class="fs-meta-row show">
+                   <div><span>BASE LOCATION</span><strong>MYSURU, INDIA</strong></div>
+                   <div><span>STATUS</span><strong>OPEN TO OPPORTUNITIES</strong></div>
+                 </div>
+               </article>
+             </div>
+           </div>
+           <div id="about-profile-modes">
+           <div class="about-grid">
+            <article class="status-panel glass-panel">
+              <div class="panel-top"><span>CHARACTER STATUS</span><b>LVL 04</b></div>
+               <div class="profile-visual" id="about-profile-visual" role="img" aria-label="Animated cybersecurity terminal feed">
+                 <div class="profile-visual-top"><span><i></i> PROFILE FEED</span><b id="about-feed-status">LIVE</b></div>
+                 <div class="terminal-lines" id="about-terminal-lines" aria-hidden="true"></div>
+                 <span class="profile-visual-scan" aria-hidden="true"></span>
+                 <span class="profile-visual-caption" id="about-visual-caption">SECURITY FEED / 01</span>
+               </div>
+              <div class="identity"><div class="avatar-ring">PG</div><div><h3>P G AYUSH RAI</h3><p id="about-role-title">CYBERSECURITY ANALYST · BUILDER</p></div></div>
+              <p class="body-copy" id="about-bio">Securing digital frontiers with a focus on network defense, ethical hacking, and threat intelligence. I enjoy turning complex risks into clear, resilient systems.</p>
+              <div class="stat-grid"><div><strong id="stat-projects">04</strong><span>PROJECTS</span></div><div><strong id="stat-awards">15</strong><span>AWARDS</span></div><div><strong>05</strong><span>SKILLS</span></div><div><strong>01</strong><span>MISSION</span></div></div>
+            </article>
+            <article class="skill-panel glass-panel" id="about-readout">
+              <div class="panel-top"><span>SYSTEM READOUT</span><b class="online">AVAILABLE</b></div>
+               <div class="readout-description" id="about-description">Defensive strategy, ethical testing, and threat intelligence workflows designed to turn weak signals into resilient systems.</div>
+               <div class="readout-visual" id="about-visual" aria-live="polite">
+                 <div class="readout-visual-head"><span id="about-visual-title">THREAT INTELLIGENCE MAP</span><b id="about-visual-metric">SCORE 88</b></div>
+                 <div id="about-visual-content"></div>
+               </div>
+               <div class="readout-stack"><span>TECH STACK</span><div id="about-stack"></div></div>
+               <div class="location-readout"><span>BASE LOCATION</span><strong>MYSURU, INDIA</strong><span>STATUS</span><strong class="online">OPEN TO OPPORTUNITIES</strong></div>
+            </article>
+          </div>
+           <div class="about-extended-grid">
+             <article class="mission-log glass-panel">
+               <div class="panel-top"><span>MISSION LOG</span><b id="about-mission-label">CYBERSECURITY CHRONICLES</b></div>
+               <h3 id="about-mission-title">DEFENDING THE DIGITAL FRONTIER</h3>
+               <p id="about-mission-summary">A builder's view of security: understand the system, find the weak signal, and make the safer path easier to choose.</p>
+               <p class="mission-detail" id="about-mission-detail">My work sits between curiosity and care — learning how systems fail, validating ideas in controlled environments, and translating technical findings into useful action.</p>
+             </article>
+             <article class="transmission-panel glass-panel">
+               <div class="panel-top"><span>LIVE TRANSMISSION</span><b class="online">ROLE FOCUS</b></div>
+               <div class="signal-screen" role="img" aria-label="Animated role focus system visualization">
+                 <div class="signal-grid"></div><div class="signal-orbit"></div><span class="signal-core">PG</span>
+                 <span class="signal-caption" id="about-signal-caption">DEFENSE NODE / ACTIVE</span>
+               </div>
+             </article>
+           </div>
+           <article class="arsenal-panel glass-panel">
+             <div class="panel-top"><span>ARSENAL</span><b id="about-arsenal-label">CYBERSECURITY TOOLKIT</b></div>
+             <div class="arsenal-grid" id="about-arsenal"></div>
+           </article>
+           </div>
+
+           <!-- GitHub Dashboard -->
+           <div class="github-dashboard" id="github-dashboard" hidden>
+             <div class="github-dash-grid">
+               <article class="gh-dash-panel gh-profile-card">
+                 <div class="gh-profile-head">
+                   <div class="gh-avatar-ring">PG</div>
+                   <div class="gh-identity">
+                     <h3>Majenayu</h3>
+                     <p>Full-Stack Developer & AI/ML Enthusiast</p>
+                   </div>
+                   <a class="gh-follow-btn" href="https://github.com/Majenayu" target="_blank" rel="noreferrer">FOLLOW ↗</a>
+                 </div>
+                 <p class="gh-bio">Building cybersecurity tools, AI experiments, full-stack products, and EdTech platforms — all in public.</p>
+                 <div class="gh-counters">
+                   <div><strong>61</strong><span>Repos</span></div>
+                   <div><strong>1,266</strong><span>Commits/Year</span></div>
+                   <div><strong>35</strong><span>Public</span></div>
+                   <div><strong>🦈</strong><span>Pull Shark</span></div>
+                 </div>
+               </article>
+               <article class="gh-dash-panel gh-repos-card">
+                 <div class="gh-repos-header"><span>PINNED REPOSITORIES</span></div>
+                 <div class="gh-repos-grid" id="gh-repos-grid">
+                   <a class="gh-repo" href="https://github.com/Majenayu/MY_PROFILE" target="_blank" rel="noreferrer">
+                     <h4>MY_PROFILE</h4>
+                     <p>Adventure portfolio — six visual worlds, cyberpunk design system, Node.js + MongoDB backend.</p>
+                     <div class="gh-repo-meta"><span class="gh-lang"><i style="background:#f1e05a"></i>JavaScript</span><span>★ Public</span></div>
+                   </a>
+                   <a class="gh-repo" href="https://github.com/Majenayu/CodeBreakers-vvce" target="_blank" rel="noreferrer">
+                     <h4>CodeBreakers-vvce</h4>
+                     <p>AI-powered Virtual Try-On System using real-time pose detection and webcam overlay with MediaPipe.</p>
+                     <div class="gh-repo-meta"><span class="gh-lang"><i style="background:#f1e05a"></i>JavaScript</span><span>★ Public</span></div>
+                   </a>
+                   <a class="gh-repo" href="https://github.com/Majenayu/Cyber-Sentinel" target="_blank" rel="noreferrer">
+                     <h4>Cyber-Sentinel</h4>
+                     <p>Cybersecurity tooling and security research — active development with latest commits.</p>
+                     <div class="gh-repo-meta"><span class="gh-lang"><i style="background:#e34c26"></i>HTML</span><span>★ Public</span></div>
+                   </a>
+                   <a class="gh-repo" href="https://github.com/Majenayu/Anveshan" target="_blank" rel="noreferrer">
+                     <h4>Anveshan</h4>
+                     <p>Research-driven innovation project — state-level finalist at Anveshan competition.</p>
+                     <div class="gh-repo-meta"><span class="gh-lang"><i style="background:#e34c26"></i>HTML</span><span>★ Public</span></div>
+                   </a>
+                 </div>
+               </article>
+             </div>
+           </div>
+
+           <!-- Leadership Dashboard -->
+           <div class="leadership-dashboard" id="leadership-dashboard" hidden>
+             <div class="lead-all-timelines">
+               <div class="lead-timeline-scale"><span>SEP 2023</span><span>2024</span><span>2025</span><span>FEB 2026</span></div>
+
+               <!-- NCC -->
+               <div class="lead-timeline-block">
+                 <div class="lead-block-header">
+                   <img class="lead-block-logo" src="/attached_assets/ncc-navy-logo.png" alt="NCC Logo" />
+                   <div>
+                     <h3>National Cadet Corps</h3>
+                     <p>Sep 2023 → Jan 2026</p>
+                   </div>
+                   <div class="lead-block-stats"><span>2 National Camps</span><span>50+ Activities</span><span>B Certificate</span></div>
+                 </div>
+                 <div class="lead-h-timeline">
+                   <div class="lht-track-scaled">
+                     <div class="lht-line-full"></div>
+                     <div class="lht-step-abs" style="left:0%"><div class="lht-dot"></div><div class="lht-label"><small>SEP 2023</small><strong>Cadet</strong></div></div>
+                     <div class="lht-step-abs" style="left:14%"><div class="lht-dot"></div><div class="lht-label"><small>JAN 2024</small><strong>Leading Cadet</strong></div></div>
+                     <div class="lht-step-abs" style="left:62%"><div class="lht-dot"></div><div class="lht-label"><small>APR 2025</small><strong>PO Cadet</strong></div></div>
+                     <div class="lht-step-abs lht-current" style="left:79%"><div class="lht-dot"></div><div class="lht-label"><small>AUG 2025</small><strong>Captain</strong></div></div>
+                   </div>
+                 </div>
+               </div>
+
+               <!-- VectorFlow -->
+               <div class="lead-timeline-block">
+                 <div class="lead-block-header">
+                   <img class="lead-block-logo" src="/attached_assets/vectorflow.jpg" alt="VectorFlow Logo" />
+                   <div>
+                     <h3>VectorFlow Club</h3>
+                     <p>Sep 2024 → Present</p>
+                   </div>
+                   <div class="lead-block-stats"><span>10+ Events</span><span>50+ Members</span><span>VP</span></div>
+                 </div>
+                 <div class="lead-h-timeline">
+                   <div class="lht-track-scaled">
+                     <div class="lht-line-full"></div>
+                     <div class="lht-step-abs" style="left:40%"><div class="lht-dot"></div><div class="lht-label"><small>SEP 2024</small><strong>Sub-Core</strong></div></div>
+                     <div class="lht-step-abs" style="left:50%"><div class="lht-dot"></div><div class="lht-label"><small>DEC 2024</small><strong>Core</strong></div></div>
+                     <div class="lht-step-abs" style="left:66%"><div class="lht-dot"></div><div class="lht-label"><small>APR 2025</small><strong>Lead</strong></div></div>
+                     <div class="lht-step-abs" style="left:90%"><div class="lht-dot"></div><div class="lht-label"><small>DEC 2025</small><strong>Tech Lead</strong></div></div>
+                     <div class="lht-step-abs lht-current" style="left:96%"><div class="lht-dot"></div><div class="lht-label"><small>FEB 2026</small><strong>VP</strong></div></div>
+                   </div>
+                 </div>
+               </div>
+
+               <!-- IEEE -->
+               <div class="lead-timeline-block">
+                 <div class="lead-block-header">
+                   <img class="lead-block-logo" src="/attached_assets/ieee.jpg" alt="IEEE Logo" />
+                   <div>
+                     <h3>IEEE Student Branch</h3>
+                     <p>Aug 2024 → Present</p>
+                   </div>
+                   <div class="lead-block-stats"><span>5+ Events</span><span>Event Coordinator</span></div>
+                 </div>
+                 <div class="lead-h-timeline">
+                   <div class="lht-track-scaled">
+                     <div class="lht-line-full"></div>
+                     <div class="lht-step-abs" style="left:37%"><div class="lht-dot"></div><div class="lht-label"><small>AUG 2024</small><strong>Member</strong></div></div>
+                     <div class="lht-step-abs lht-current" style="left:96%"><div class="lht-dot"></div><div class="lht-label"><small>FEB 2026</small><strong>Coordinator</strong></div></div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+        </div>
+      </section>
+
+       <section class="section awards-section" id="awards" data-theme="gold">
+         <div class="section-shell">
+           <div class="section-heading"><span class="section-index">02 / BOUNTY RECORDS</span><h2>RECOGNITION <em>LOG</em></h2><p>15+ achievements, hackathon wins, and earned milestones from the journey so far.</p></div>
+           <div class="awards-carousel-container">
+             <div class="awards-carousel-header">
+               <span>ACHIEVEMENT ARCHIVE</span>
+               <b id="award-count">15 RECORDS</b>
+             </div>
+             <div class="awards-carousel-body">
+               <button class="carousel-arrow arrow-left" id="award-prev" type="button" aria-label="Previous">‹</button>
+               <div class="awards-carousel-track-wrapper">
+                 <div class="awards-carousel-track" id="awards-track"></div>
+               </div>
+               <button class="carousel-arrow arrow-right" id="award-next" type="button" aria-label="Next">›</button>
+             </div>
+             <div class="awards-carousel-dots" id="awards-dots"></div>
+           </div>
+         </div>
+       </section>
+
+       <section class="section projects-section" id="projects" data-theme="orange">
+        <div class="section-shell">
+           <div class="section-heading"><span class="section-index">03 / ACTIVE MISSIONS</span><h2>PROJECT <em>CAPSULES</em></h2><p>Explore diverse completed quests and innovative ventures.</p></div>
+          <div class="project-console glass-panel">
+            <div class="project-visual"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="project-glyph">◈</span><small>ACTIVE MISSION</small></div>
+            <div class="project-detail"><div class="project-meta"><span id="project-index">01 / 04</span><span>MISSION ARCHIVE</span></div><h3 id="project-title">SECURE VISION LAB</h3><p id="project-description">A computer vision toolkit for real-time posture and activity detection, designed as a clear bridge between raw camera data and useful feedback.</p><div class="tag-row" id="project-tags"></div><div class="project-actions"><a id="project-github" href="#" target="_blank" rel="noreferrer">SOURCE CODE ↗</a><a id="project-live" href="#contact">DISCUSS BUILD ↗</a></div></div>
+            <div class="project-controls"><button id="project-prev" type="button" aria-label="Previous project">←</button><div id="project-dots"></div><button id="project-next" type="button" aria-label="Next project">→</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact" data-theme="copper">
+        <div class="section-shell">
+           <div class="section-heading"><span class="section-index">04 / OPEN TRANSMISSION</span><h2>INITIATE <em>CONTACT</em></h2><p>Have a problem worth solving or a strange idea worth testing? Send the signal.</p></div>
+          <div class="contact-grid">
+            <article class="contact-card glass-panel">
+              <span class="contact-icon">⌁</span>
+              <h3>THE NEXT INVENTION<br />STARTS WITH A QUESTION.</h3>
+              <p>Open to internships, research collaborations, freelance projects, and conversations about cybersecurity, AI, or anything in between.</p>
+              <div class="contact-links" aria-label="Contact and social links">
+                <a class="contact-link" href="mailto:pgayushrai@gmail.com">
+                  <span class="contact-link-icon">@</span>
+                  <span><small>DIRECT MAIL</small><strong>PGAYUSHRAI@GMAIL.COM</strong></span>
+                  <b>↗</b>
+                </a>
+                <a class="contact-link" href="https://github.com/Majenayu" target="_blank" rel="noreferrer">
+                  <span class="contact-link-icon">GH</span>
+                  <span><small>CODE ARCHIVE</small><strong>GITHUB.COM/MAJENAYU</strong></span>
+                  <b>↗</b>
+                </a>
+                <a class="contact-link" href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" rel="noreferrer">
+                  <span class="contact-link-icon">IN</span>
+                  <span><small>PROFESSIONAL NETWORK</small><strong>LINKEDIN / P G AYUSH RAI</strong></span>
+                  <b>↗</b>
+                </a>
+              </div>
+            </article>
+            <form class="contact-form glass-panel" id="contact-form"><label><span>IDENTIFICATION NAME</span><input required name="name" type="text" placeholder="Your name or designation" /></label><label><span>COMMUNICATION NODE</span><input required name="email" type="email" placeholder="your@email.com" /></label><label><span>MESSAGE ENCODING</span><textarea required name="message" rows="4" placeholder="What are we building?"></textarea></label><button class="console-button" type="submit"><span id="contact-submit-label">INITIATE TRANSMISSION</span> <span>↗</span></button><p class="form-status" id="form-status" role="status"></p></form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer"><span>PG AYUSH RAI <b>●</b> SYSTEM ONLINE</span><span>© 2025 / BUILT FOR THE NEXT MISSION</span></footer>
+    <script src="/portfolio/app.js"></script>
+  </body>
+</html>
