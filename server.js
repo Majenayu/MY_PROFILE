@@ -99,4 +99,18 @@ app.listen(PORT, () => {
   console.log('');
   console.log(`   🏠 Portfolio: http://localhost:${PORT}`);
   console.log('');
+
+  // Auto-ping to keep Render free tier awake (every 14m 59s)
+  const PING_URL = 'https://pgayushrai.onrender.com/health';
+  const PING_INTERVAL = 14 * 60 * 1000 + 59 * 1000; // 14min 59sec
+  setInterval(() => {
+    const https = require('https');
+    https.get(PING_URL, (res) => {
+      console.log(`🏓 Keep-alive ping: ${res.statusCode}`);
+    }).on('error', (err) => {
+      console.log(`🏓 Ping failed: ${err.message}`);
+    });
+  }, PING_INTERVAL);
+  console.log(`   🏓 Auto-ping enabled: ${PING_URL} every ~15min`);
+  console.log('');
 });
