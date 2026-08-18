@@ -4,7 +4,7 @@ A single-page cyberpunk-themed portfolio built as an interactive command console
 
 ## Live
 
-**https://majenayu.up.railway.app**
+**https://pgayushrai.onrender.com**
 
 ## Stack
 
