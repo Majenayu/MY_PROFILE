@@ -1,68 +1,78 @@
 # P G Ayush Rai — Adventure Portfolio
 
-A single-page portfolio that moves through six visual worlds: tactical mission control, a character system readout, a project capsule lab, a parchment-style recognition log, field notes, and a science communication portal.
+A single-page cyberpunk-themed portfolio built as an interactive command console. Six visual worlds, role-specific dashboards, live video feeds, and a draggable achievement carousel — all rendered with zero frameworks.
 
-The public portfolio is intentionally resilient: it renders from local content immediately and enriches projects and achievements from the existing Express/MongoDB API when those services are available.
+## Live
+
+**https://majenayu.up.railway.app**
 
 ## Stack
 
-- **Backend**: Node.js and Express
-- **Data services**: MongoDB with Mongoose, optional Cloudinary uploads
-- **Frontend**: Semantic HTML, vanilla JavaScript, and custom CSS — no frontend build step
-- **Motion**: CSS animations and IntersectionObserver
+| Layer | Tech |
+|-------|------|
+| Server | Node.js, Express |
+| Data | MongoDB + Mongoose (optional) |
+| Frontend | Semantic HTML, vanilla JS, custom CSS |
+| Assets | MP4 video feeds, Cloudinary (optional) |
+| Deploy | Railway |
 
-## Quick start
+## Features
+
+- **Hero Console** — full-screen command-center with live MP4 video feed and animated HUD
+- **Role Dashboards** — 6 switchable tabs (Cybersecurity, AI/ML, Full-Stack, Data/Cloud, GitHub, Leadership) each with unique theme color and layout
+- **GitHub Section** — profile card, real stats (61 repos, 1,266 commits/year), and pinned repo showcase
+- **Leadership Timelines** — horizontal proportional timelines for NCC, VectorFlow Club, and IEEE showing role progression from bottom to top
+- **Achievement Carousel** — draggable card slider with images, auto-scroll, swipe support, and pagination dots
+- **Project Capsules** — rotating project showcase with tech tags and links
+- **Theme Tracking** — accent color shifts as you scroll between sections
+- **Contact Form** — opens pre-filled email via mailto
+
+## Quick Start
 
 ```bash
 npm install
 npm start
 ```
 
-The server defaults to port `3000` (configurable via the `PORT` env var).
+Server runs on port 3000 by default.
 
-## Optional environment setup
+## Environment (optional)
 
-Create a `.env` file if you want to use the admin/API data services:
+Create a `.env` file to enable database-backed content:
 
 ```env
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
 MONGODB_URI=your_mongodb_connection_string
 PORT=3000
 ```
 
-The landing page still works without MongoDB or Cloudinary because it has local fallback content.
+Without MongoDB, the portfolio serves local fallback data — all sections work.
 
-## Project structure
+## Structure
 
-```text
+```
 ├── portfolio/
-│   ├── index.html         # Public portfolio page
-│   ├── style.css          # Six-world adventure design system
-│   └── app.js             # Interactions, local data, API enrichment
-├── public/                # Admin/supporting static pages
-├── server.js              # Express server and existing API routes
+│   ├── index.html            # Single-page portfolio
+│   ├── style.css             # Full design system (minified)
+│   ├── app.js                # All interactions and data
+│   └── hero-overrides.css    # Hero section tweaks
+├── attached_assets/          # Videos, images, org logos
+├── server.js                 # Express server + optional API
 ├── package.json
 └── README.md
 ```
 
-## Public experience
+## About Me
 
-- **Theme tracking** changes the accent color as each world enters the viewport.
-- **Project carousel** browses the featured quest log without leaving the page.
-- **Award detail view** expands a recognition entry into a full log.
-- **Event filters** sort field notes by party.
-- **Contact transmission** opens a pre-filled email in the visitor's mail client.
+**P G Ayush Rai** — B.Tech student at VVCE, Mysuru. Cybersecurity builder, AI/ML engineer, full-stack developer, and community leader.
 
-## Existing API
+- NCC Cadet Captain (Sep 2023 – Jan 2026)
+- Vice President, VectorFlow Club (Feb 2026 – Present)
+- IEEE Event Coordinator (Feb 2026 – Present)
+- 1,266+ GitHub contributions/year across 61 repositories
 
-The server keeps the existing management endpoints for projects, achievements, courses, profile data, events, badges, and visitor stats. The public page calls the project and achievement endpoints when they respond successfully, otherwise it uses its local fallback archive.
+## Links
 
-## Author
-
-**P G Ayush Rai**
-
+- Portfolio: [majenayu.up.railway.app](https://majenayu.up.railway.app)
 - GitHub: [@Majenayu](https://github.com/Majenayu)
 - LinkedIn: [P G Ayush Rai](https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/)
-- Email: [pgayushrai@gmail.com](mailto:pgayushrai@gmail.com)
+- Email: pgayushrai@gmail.com
