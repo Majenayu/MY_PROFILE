@@ -28,6 +28,7 @@ const roles = ['SOC Analyst', 'Python / AI-ML Engineer', 'Full-Stack Developer',
 const aboutProfiles = {
   cybersecurity: {
     theme: 'crimson',
+    resumeUrl: 'https://canva.link/uqthr9u4ufgtcn5',
     title: 'SOC ANALYST · CYBERSECURITY BUILDER',
     bio: 'Hands-on security practitioner focused on real-time threat detection, incident triage, vulnerability assessment, and hardening enterprise attack surfaces.',
     description: 'From packet-level analysis to identity governance — I investigate alerts, simulate adversary tactics, and build defenses that reduce mean-time-to-detect.',
@@ -52,6 +53,7 @@ const aboutProfiles = {
   },
   ai: {
     theme: 'gold',
+    resumeUrl: 'https://canva.link/uqthr9u4ufgtcn5',
     title: 'PYTHON / AI-ML ENGINEER',
     bio: 'Building real-time intelligent systems — from pose estimation and voice coaching to autonomous AI agents — with a focus on inference speed and practical utility.',
     description: 'I design end-to-end ML pipelines: data collection, model training, real-time inference, and deployment — specializing in computer vision and human-interaction AI.',
@@ -76,6 +78,7 @@ const aboutProfiles = {
   },
   fullstack: {
     theme: 'teal',
+    resumeUrl: 'https://canva.link/uqthr9u4ufgtcn5',
     title: 'FULL-STACK · BACKEND DEVELOPER',
     bio: 'Shipping complete products from pixel to database — REST APIs, real-time features, auth flows, and deployment pipelines that actually go to production.',
     description: 'I architect systems end-to-end: React interfaces, Node.js microservices, MongoDB data modeling, Cloudinary media pipelines, and CI/CD-driven deployments.',
@@ -100,6 +103,7 @@ const aboutProfiles = {
   },
   data: {
     theme: 'blue',
+    resumeUrl: 'https://canva.link/uqthr9u4ufgtcn5',
     title: 'DATA ANALYST · CLOUD DATA BUILDER',
     bio: 'Transforming raw data into actionable intelligence — building warehouses, dashboards, and automated pipelines on Google Cloud Platform.',
     description: 'I design data workflows end-to-end: ingestion with Dataflow, transformation in Dataform, warehousing in BigQuery, and storytelling through Looker Studio dashboards.',
@@ -579,6 +583,12 @@ function initAboutProfiles() {
     if (showLeadershipDashboard) { activeAboutTheme = 'gold'; document.body.dataset.theme = 'gold'; }
     if (!profile) { tabs.forEach((tab) => { tab.classList.toggle('active', tab.dataset.role === key); tab.setAttribute('aria-selected', String(tab.dataset.role === key)); }); return; }
     $('#about-role-title').textContent = profile.title;
+    if (profile.resumeUrl) {
+      const navResume = $('#nav-resume-link');
+      const mobileResume = $('#mobile-resume-link');
+      if (navResume) navResume.href = profile.resumeUrl;
+      if (mobileResume) mobileResume.href = profile.resumeUrl;
+    }
     $('#about-bio').textContent = profile.bio;
     $('#about-description').textContent = profile.description;
     $('#about-mission-label').textContent = profile.missionLabel;
@@ -614,22 +624,216 @@ function initAboutProfiles() {
   update('cybersecurity');
 }
 
-function renderProjects() {
-  const project = projects[projectIndex] || fallback.projects[0];
-  $('#project-index').textContent = `${String(projectIndex + 1).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')}`;
-  $('#project-title').textContent = (project.name || 'Untitled Project').toUpperCase();
-  $('#project-description').textContent = project.description || 'A work in progress from the archive.';
-  $('#project-tags').innerHTML = (project.techStack || ['BUILD', 'EXPERIMENT']).slice(0, 5).map((tag) => `<span>${escapeHtml(tag)}</span>`).join('');
-  $('#project-github').href = project.github || 'https://github.com/Majenayu';
-  $('#project-live').href = project.website || '#contact';
-  $('#project-dots').innerHTML = projects.map((_, index) => `<button type="button" aria-label="Show project ${index + 1}" class="${index === projectIndex ? 'active' : ''}"></button>`).join('');
-  $$('#project-dots button').forEach((button, index) => button.addEventListener('click', () => { projectIndex = index; renderProjects(); }));
-}
-
 function initProjects() {
-  $('#project-prev')?.addEventListener('click', () => { projectIndex = (projectIndex - 1 + projects.length) % projects.length; renderProjects(); });
-  $('#project-next')?.addEventListener('click', () => { projectIndex = (projectIndex + 1) % projects.length; renderProjects(); });
-  renderProjects();
+  const projectData = [
+    { name: 'AsanMinds — Sunday', desc: 'AI-powered AR yoga instructor. Real-time pose correction via TensorFlow.js MoveNet at 30fps, voice coach with 40+ commands, 6-semester course, verified PDF certificates.', tags: ['TensorFlow.js', 'Flask', 'MongoDB', 'MoveNet'], type: 'AI / AR', status: 'LIVE', github: 'https://github.com/Majenayu/AsanaMind', live: 'https://asanaminds.onrender.com', demo: 'https://youtu.be/1zfEa6RNBq4' },
+    { name: 'Secure Vision Lab', desc: 'Real-time posture and activity detection toolkit bridging camera data to actionable feedback.', tags: ['Python', 'OpenCV', 'MediaPipe'], type: 'COMPUTER VISION', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Civic Route', desc: 'Live bus tracking concept turning messy transport signals into a calmer commuter experience.', tags: ['Node.js', 'MongoDB', 'Maps API'], type: 'FULL-STACK', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Face Recognition Pipeline', desc: 'Identity verification with clear data flow, sensible constraints, and explainable results.', tags: ['Python', 'TensorFlow', 'CV'], type: 'ML', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Line Follower Bot', desc: 'Autonomous navigation where hardware, sensors, and real-time decisions work together.', tags: ['Arduino', 'Embedded C', 'Sensors'], type: 'HARDWARE', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Cyber Sentinel', desc: 'Cybersecurity tooling and security research — active threat detection and network defense.', tags: ['Python', 'Kali', 'Nmap'], type: 'SECURITY', status: 'ACTIVE', github: 'https://github.com/Majenayu/Cyber-Sentinel', live: '', demo: '' },
+    { name: 'Evalify', desc: 'AICTE activity-points platform with evidence uploads, mentor verification, and support workflows.', tags: ['Node.js', 'MongoDB', 'Express'], type: 'EDTECH', status: 'LIVE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'CodeBreakers VVCE', desc: 'AI-powered Virtual Try-On System using real-time pose detection and webcam overlay.', tags: ['JavaScript', 'MediaPipe', 'WebRTC'], type: 'AI / AR', status: 'DONE', github: 'https://github.com/Majenayu/CodeBreakers-vvce', live: '', demo: '' },
+    { name: 'Voice Agent System', desc: 'Conversational AI agent with wake-word detection, offline knowledge base, and LLM fallback.', tags: ['Python', 'Groq API', 'LangChain'], type: 'AI AGENT', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Threat Intel Dashboard', desc: 'Real-time threat intelligence visualization with signal tracking and anomaly detection.', tags: ['Python', 'Splunk', 'Flask'], type: 'SECURITY', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Smart Parking System', desc: 'IoT-based parking slot detection with real-time availability display and mobile alerts.', tags: ['Arduino', 'IoT', 'Node.js'], type: 'IOT', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Portfolio v2', desc: 'This cyberpunk command-console portfolio with six profile modes and live video feeds.', tags: ['JavaScript', 'Node.js', 'CSS'], type: 'WEB', status: 'LIVE', github: 'https://github.com/Majenayu/MY_PROFILE', live: 'https://pgayushrai.onrender.com', demo: '' },
+    { name: 'Chat Encryption Tool', desc: 'End-to-end encrypted messaging prototype using RSA + AES hybrid encryption.', tags: ['Python', 'Cryptography', 'Flask'], type: 'SECURITY', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Data Pipeline GCP', desc: 'Automated data ingestion and transformation pipeline on Google Cloud Platform.', tags: ['BigQuery', 'Dataflow', 'Python'], type: 'DATA', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Attendance System', desc: 'Face-based attendance tracking with anti-spoofing measures and admin dashboard.', tags: ['Python', 'OpenCV', 'Flask'], type: 'ML', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'E-Commerce API', desc: 'RESTful backend with JWT auth, cart management, payment integration, and order tracking.', tags: ['Express', 'MongoDB', 'Stripe'], type: 'BACKEND', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Phishing Detector', desc: 'ML model to classify phishing URLs using feature extraction and random forests.', tags: ['Python', 'Scikit-learn', 'NLP'], type: 'SECURITY', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Weather Station', desc: 'ESP32-based weather monitoring with temperature, humidity, and pressure sensors.', tags: ['ESP32', 'IoT', 'MQTT'], type: 'IOT', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Gesture Controller', desc: 'Hand gesture recognition for controlling presentations and media playback.', tags: ['Python', 'MediaPipe', 'PyAutoGUI'], type: 'CV', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Quiz Platform', desc: 'Timed quiz app with question banks, leaderboards, and performance analytics.', tags: ['React', 'Node.js', 'MongoDB'], type: 'EDTECH', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Network Scanner', desc: 'Automated network reconnaissance tool with port scanning and service detection.', tags: ['Python', 'Nmap', 'Socket'], type: 'SECURITY', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Blog CMS', desc: 'Markdown-based blog with admin panel, image uploads, and SEO optimization.', tags: ['Node.js', 'MongoDB', 'EJS'], type: 'WEB', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Expense Tracker', desc: 'Personal finance app with category breakdowns, monthly graphs, and budget alerts.', tags: ['React', 'Chart.js', 'Firebase'], type: 'WEB', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Drone Navigation', desc: 'Autonomous drone path planning using A* algorithm with obstacle avoidance.', tags: ['Python', 'ROS', 'Simulation'], type: 'ROBOTICS', status: 'PROTOTYPE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Sentiment Analyzer', desc: 'NLP-based tweet sentiment classification with real-time streaming dashboard.', tags: ['Python', 'NLTK', 'Streamlit'], type: 'NLP', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'File Vault', desc: 'Encrypted file storage with access control, sharing links, and audit logging.', tags: ['Node.js', 'AES-256', 'MongoDB'], type: 'SECURITY', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Task Automation Bot', desc: 'Discord bot automating team tasks, reminders, code reviews, and deployment alerts.', tags: ['Python', 'Discord.py', 'Cron'], type: 'AUTOMATION', status: 'ACTIVE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'AR Campus Tour', desc: 'Augmented reality campus navigation with 3D markers and indoor positioning.', tags: ['Unity', 'ARCore', 'C#'], type: 'AR', status: 'PROTOTYPE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Health Monitor', desc: 'Wearable data aggregation with heart rate analysis and anomaly detection.', tags: ['Python', 'BLE', 'Flask'], type: 'IOT / ML', status: 'DONE', github: 'https://github.com/Majenayu', live: '', demo: '' },
+    { name: 'Anveshan Research', desc: 'State-level research project on intelligent systems — finalist at Anveshan competition.', tags: ['Python', 'ML', 'Research'], type: 'RESEARCH', status: 'PUBLISHED', github: 'https://github.com/Majenayu/Anveshan', live: '', demo: '' },
+  ];
+
+  const scene = $('#pj-stack-scene');
+  const counter = $('#pj-stack-counter');
+  const stackView = $('#pj-stack-view');
+  const detailView = $('#pj-detail-view');
+  if (!scene) return;
+
+  let activeIndex = 0;
+  const VISIBLE_CARDS = 5; // how many cards visible in stack
+
+  const cardColors = ['#58ebe0','#ff4655','#a87cff','#5ee59c','#ff8f42','#e3c266','#3b82f6','#dc9466','#77e9d0'];
+
+  function renderStack() {
+    scene.innerHTML = projectData.map((p, i) => {
+      const color = cardColors[i % cardColors.length];
+      return `<div class="pj-stack-card" data-index="${i}" style="--card-color:${color}">
+      <div class="pj-stack-card-top"><span class="pj-stack-card-num">${String(i + 1).padStart(2, '0')}</span><span class="pj-stack-card-status">${escapeHtml(p.status)}</span></div>
+      <h4 class="pj-stack-card-title">${escapeHtml(p.name)}</h4>
+      <p class="pj-stack-card-desc">${escapeHtml(p.desc)}</p>
+      <div class="pj-stack-card-tags">${p.tags.slice(0, 3).map(t => `<span>${escapeHtml(t)}</span>`).join('')}</div>
+      <div class="pj-stack-card-footer"><span class="pj-stack-card-type">${escapeHtml(p.type)}</span><span class="pj-stack-card-hint">CLICK TO EXPAND</span></div>
+    </div>`;
+    }).join('');
+
+    scene.querySelectorAll('.pj-stack-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const idx = parseInt(card.dataset.index);
+        if (idx === activeIndex) {
+          expandProject(idx);
+        } else {
+          activeIndex = idx;
+          positionCards();
+        }
+      });
+    });
+
+    positionCards();
+  }
+
+  function positionCards() {
+    const cards = scene.querySelectorAll('.pj-stack-card');
+    cards.forEach((card, i) => {
+      const offset = i - activeIndex;
+      const absOffset = Math.abs(offset);
+
+      if (absOffset > VISIBLE_CARDS) {
+        card.style.opacity = '0';
+        card.style.pointerEvents = 'none';
+        card.style.transform = `translateX(${offset > 0 ? 600 : -600}px) scale(0.7) rotateY(${offset > 0 ? -25 : 25}deg)`;
+      } else {
+        const translateX = offset * 60;
+        const translateZ = -absOffset * 50;
+        const rotateY = offset * -8;
+        const scale = 1 - absOffset * 0.06;
+        const opacity = 1 - absOffset * 0.15;
+
+        card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+        card.style.opacity = String(Math.max(0.3, opacity));
+        card.style.pointerEvents = 'auto';
+        card.style.zIndex = String(projectData.length - absOffset);
+      }
+
+      card.classList.toggle('active', i === activeIndex);
+    });
+
+    counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(projectData.length).padStart(2, '0')}`;
+  }
+
+  function expandProject(idx) {
+    const p = projectData[idx];
+    if (!detailView || !stackView) return;
+
+    // Hide stack, show detail in same spot
+    stackView.classList.add('hide');
+    detailView.hidden = false;
+
+    // Reset to website tab
+    detailView.querySelectorAll('.pj-preview-tab').forEach(t => t.classList.toggle('active', t.dataset.preview === 'site'));
+    $('#pj-site-panel')?.classList.add('active');
+    $('#pj-video-panel')?.classList.remove('active');
+
+    $('#pj-detail-title').textContent = p.name.toUpperCase();
+    $('#pj-detail-desc').textContent = p.desc;
+    $('#pj-detail-tags').innerHTML = p.tags.map(t => `<span>${escapeHtml(t)}</span>`).join('');
+    $('#pj-detail-badges').innerHTML = `<span>${escapeHtml(p.status)}</span><span>${escapeHtml(p.type)}</span>`;
+    $('#pj-detail-meta').innerHTML = `<div><span>TYPE</span><strong>${escapeHtml(p.type)}</strong></div><div><span>STATUS</span><strong>${escapeHtml(p.status)}</strong></div>`;
+
+    // Embed live website preview
+    const siteFrame = $('#pj-site-frame');
+    const siteUrl = $('#pj-site-url');
+    if (siteFrame) {
+      if (p.live) {
+        if (siteUrl) siteUrl.textContent = p.live.replace(/https?:\/\//, '');
+        siteFrame.innerHTML = `<iframe class="pj-frame-scaled" src="${escapeHtml(p.live)}" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Live website preview"></iframe>`;
+      } else {
+        if (siteUrl) siteUrl.textContent = 'NO LIVE URL';
+        siteFrame.innerHTML = `<div style="display:grid;place-items:center;height:100%;color:#5e7a7c;font:9px var(--mono);letter-spacing:.06em">NO LIVE PREVIEW AVAILABLE</div>`;
+      }
+    }
+
+    // Embed YouTube video
+    const videoFrame = $('#pj-video-frame');
+    if (videoFrame) {
+      if (p.demo) {
+        const videoId = p.demo.match(/(?:youtu\.be\/|v=)([^&]+)/);
+        if (videoId) {
+          videoFrame.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId[1]}?rel=0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen title="Video demo"></iframe>`;
+        } else {
+          videoFrame.innerHTML = `<iframe src="${escapeHtml(p.demo)}" allowfullscreen title="Video demo"></iframe>`;
+        }
+      } else {
+        videoFrame.innerHTML = `<div style="display:grid;place-items:center;height:100%;color:#5e7a7c;font:9px var(--mono);letter-spacing:.06em">NO VIDEO DEMO</div>`;
+      }
+    }
+
+    // Action buttons (still keep as fallback links)
+    let actions = '';
+    if (p.live) actions += `<a class="pj-detail-act-primary" href="${escapeHtml(p.live)}" target="_blank" rel="noreferrer">OPEN SITE ↗</a>`;
+    if (p.demo) actions += `<a class="pj-detail-act-secondary" href="${escapeHtml(p.demo)}" target="_blank" rel="noreferrer">FULL VIDEO ↗</a>`;
+    actions += `<a class="pj-detail-act-secondary" href="${escapeHtml(p.github)}" target="_blank" rel="noreferrer">SOURCE ↗</a>`;
+    $('#pj-detail-actions').innerHTML = actions;
+  }
+
+  function closeDetail() {
+    if (!detailView || !stackView) return;
+    detailView.hidden = true;
+    stackView.classList.remove('hide');
+    // Clean up iframes to stop loading
+    const siteFrame = $('#pj-site-frame');
+    const videoFrame = $('#pj-video-frame');
+    if (siteFrame) siteFrame.innerHTML = '';
+    if (videoFrame) videoFrame.innerHTML = '';
+  }
+
+  // Preview tab switching (using event delegation on detail view for reliability)
+  if (detailView) {
+    detailView.addEventListener('click', (e) => {
+      const tab = e.target.closest('.pj-preview-tab');
+      if (!tab) return;
+      e.stopPropagation();
+      const allTabs = detailView.querySelectorAll('.pj-preview-tab');
+      const sPanel = detailView.querySelector('#pj-site-panel');
+      const vPanel = detailView.querySelector('#pj-video-panel');
+      allTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      if (tab.dataset.preview === 'site') {
+        sPanel?.classList.add('active');
+        vPanel?.classList.remove('active');
+      } else {
+        vPanel?.classList.add('active');
+        sPanel?.classList.remove('active');
+      }
+    });
+  }
+
+  // Back button
+  $('#pj-detail-back')?.addEventListener('click', closeDetail);
+
+  // Arrows
+  $('#pj-stack-next')?.addEventListener('click', () => {
+    activeIndex = (activeIndex + 1) % projectData.length;
+    positionCards();
+  });
+  $('#pj-stack-prev')?.addEventListener('click', () => {
+    activeIndex = (activeIndex - 1 + projectData.length) % projectData.length;
+    positionCards();
+  });
+
+  // Keyboard navigation
+  scene.setAttribute('tabindex', '0');
+  scene.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { activeIndex = (activeIndex + 1) % projectData.length; positionCards(); }
+    if (e.key === 'ArrowLeft') { activeIndex = (activeIndex - 1 + projectData.length) % projectData.length; positionCards(); }
+    if (e.key === 'Enter') expandProject(activeIndex);
+  });
+
+  renderStack();
 }
 
 function renderAwards() {
@@ -637,7 +841,11 @@ function renderAwards() {
   const track = $('#awards-track');
   if (!track) return;
 
-  track.innerHTML = awards.map((award, index) => `<article class="award-slide">
+  const cardColors = ['#58ebe0','#ff4655','#a87cff','#5ee59c','#ff8f42','#e3c266','#3b82f6','#dc9466','#77e9d0'];
+
+  track.innerHTML = awards.map((award, index) => {
+    const color = cardColors[index % cardColors.length];
+    return `<article class="award-slide" style="--card-color:${color}">
     <div class="award-slide-image">${award.image ? `<img src="${escapeHtml(award.image)}" alt="${escapeHtml(award.title)}" loading="lazy" />` : `<div class="award-slide-placeholder"><span>★</span><small>${String(index + 1).padStart(2, '0')}</small></div>`}</div>
     <div class="award-slide-content">
       <div class="award-slide-head">
@@ -650,7 +858,8 @@ function renderAwards() {
         <span class="award-slide-date">${escapeHtml(award.date)}</span>
       </div>
     </div>
-  </article>`).join('');
+  </article>`;
+  }).join('');
 
   renderAwardDots();
   updateCarouselPosition(false);
@@ -796,7 +1005,7 @@ async function enrichFromApi() {
     } catch { return null; }
   };
   const [projectData, achievementData] = await Promise.all([get('/api/projects'), get('/api/achievements')]);
-  if (Array.isArray(projectData) && projectData.length) { projects = projectData; renderProjects(); $('#stat-projects').textContent = String(projects.length).padStart(2, '0'); }
+  if (Array.isArray(projectData) && projectData.length) { projects = projectData; $('#stat-projects').textContent = String(projects.length).padStart(2, '0'); }
   if (Array.isArray(achievementData) && achievementData.length) {
     awards = achievementData.map((item) => ({
       title: item.eventName,

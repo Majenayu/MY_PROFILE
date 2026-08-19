@@ -37,7 +37,7 @@
         <a class="social-link" href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.3 3.5a2.2 2.2 0 1 1-4.4 0 2.2 2.2 0 0 1 4.4 0ZM1.1 8h4.3v13H1.1V8Zm6.9 0h4.1v1.78h.06c.57-1.08 1.97-2.22 4.05-2.22 4.33 0 5.13 2.85 5.13 6.55V21h-4.3v-6.1c0-1.46-.03-3.33-2.03-3.33-2.03 0-2.34 1.59-2.34 3.23V21H8V8Z"/></svg>
         </a>
-        <a class="resume-link" href="#about">Resume <span>↗</span></a>
+        <a class="resume-link" id="nav-resume-link" href="https://canva.link/uqthr9u4ufgtcn5" target="_blank" rel="noreferrer">Resume <span>↗</span></a>
       </nav>
       <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </header>
@@ -46,7 +46,7 @@
       <div class="mobile-nav-socials">
         <a href="https://github.com/Majenayu" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .6a11.4 11.4 0 0 0-3.6 22.2c.57.1.78-.25.78-.55v-2.1c-3.17.69-3.84-1.34-3.84-1.34-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.73-1.54-2.53-.29-5.19-1.27-5.19-5.64 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 5.74 0c2.19-1.48 3.15-1.17 3.15-1.17.62 1.57.23 2.73.11 3.02.73.8 1.18 1.82 1.18 3.07 0 4.38-2.66 5.35-5.2 5.63.41.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A11.4 11.4 0 0 0 12 .6Z"/></svg> GitHub</a>
         <a href="https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.3 3.5a2.2 2.2 0 1 1-4.4 0 2.2 2.2 0 0 1 4.4 0ZM1.1 8h4.3v13H1.1V8Zm6.9 0h4.1v1.78h.06c.57-1.08 1.97-2.22 4.05-2.22 4.33 0 5.13 2.85 5.13 6.55V21h-4.3v-6.1c0-1.46-.03-3.33-2.03-3.33-2.03 0-2.34 1.59-2.34 3.23V21H8V8Z"/></svg> LinkedIn</a>
-        <a class="mobile-resume-link" href="#about">Resume <span>↗</span></a>
+        <a class="mobile-resume-link" id="mobile-resume-link" href="https://canva.link/uqthr9u4ufgtcn5" target="_blank" rel="noreferrer">Resume <span>↗</span></a>
       </div>
     </div>
 
@@ -499,12 +499,49 @@
 
        <section class="section projects-section" id="projects" data-theme="orange">
         <div class="section-shell">
-           <div class="section-heading"><span class="section-index">03 / ACTIVE MISSIONS</span><h2>PROJECT <em>CAPSULES</em></h2><p>Explore diverse completed quests and innovative ventures.</p></div>
-          <div class="project-console glass-panel">
-            <div class="project-visual"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="project-glyph">◈</span><small>ACTIVE MISSION</small></div>
-            <div class="project-detail"><div class="project-meta"><span id="project-index">01 / 04</span><span>MISSION ARCHIVE</span></div><h3 id="project-title">SECURE VISION LAB</h3><p id="project-description">A computer vision toolkit for real-time posture and activity detection, designed as a clear bridge between raw camera data and useful feedback.</p><div class="tag-row" id="project-tags"></div><div class="project-actions"><a id="project-github" href="#" target="_blank" rel="noreferrer">SOURCE CODE ↗</a><a id="project-live" href="#contact">DISCUSS BUILD ↗</a></div></div>
-            <div class="project-controls"><button id="project-prev" type="button" aria-label="Previous project">←</button><div id="project-dots"></div><button id="project-next" type="button" aria-label="Next project">→</button></div>
+           <div class="section-heading"><span class="section-index">03 / ACTIVE MISSIONS</span><h2>PROJECT <em>LAB</em></h2><p>Click any card to expand. 30+ builds from hackathons to deployed products.</p></div>
+
+          <div class="pj-stage" id="pj-stage">
+            <!-- Stack View -->
+            <div class="pj-stack-view" id="pj-stack-view">
+              <div class="pj-stack-scene" id="pj-stack-scene"></div>
+              <div class="pj-stack-controls">
+                <button class="pj-stack-arrow" id="pj-stack-prev" type="button" aria-label="Previous">‹</button>
+                <span class="pj-stack-counter" id="pj-stack-counter">01 / 30</span>
+                <button class="pj-stack-arrow" id="pj-stack-next" type="button" aria-label="Next">›</button>
+              </div>
+            </div>
+
+            <!-- Detail View (appears in same spot) -->
+            <div class="pj-detail-view" id="pj-detail-view" hidden>
+              <button class="pj-detail-back" id="pj-detail-back" type="button">← BACK TO ALL PROJECTS</button>
+              <div class="pj-detail-layout">
+                <div class="pj-detail-previews">
+                  <div class="pj-preview-tabs">
+                    <button class="pj-preview-tab active" data-preview="site" type="button">WEBSITE</button>
+                    <button class="pj-preview-tab" data-preview="video" type="button">VIDEO</button>
+                  </div>
+                  <div class="pj-preview-panel active" id="pj-site-panel">
+                    <div class="pj-preview-bar"><div class="pj-browser-dots"><i></i><i></i><i></i></div><span class="pj-preview-label" id="pj-site-url">LIVE WEBSITE</span></div>
+                    <div class="pj-preview-frame" id="pj-site-frame"></div>
+                  </div>
+                  <div class="pj-preview-panel" id="pj-video-panel">
+                    <div class="pj-preview-bar"><div class="pj-browser-dots"><i></i><i></i><i></i></div><span class="pj-preview-label">VIDEO DEMO</span></div>
+                    <div class="pj-preview-frame" id="pj-video-frame"></div>
+                  </div>
+                </div>
+                <div class="pj-detail-info">
+                  <div class="pj-detail-badges" id="pj-detail-badges"></div>
+                  <h3 class="pj-detail-title" id="pj-detail-title">ASANMINDS</h3>
+                  <p class="pj-detail-desc" id="pj-detail-desc"></p>
+                  <div class="pj-detail-tags" id="pj-detail-tags"></div>
+                  <div class="pj-detail-meta" id="pj-detail-meta"></div>
+                  <div class="pj-detail-actions" id="pj-detail-actions"></div>
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
 
