@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#071119"/>
+  <rect x="0" y="0" width="1200" height="4" fill="#58ebe0"/>
+  <rect x="0" y="626" width="1200" height="4" fill="#58ebe0"/>
+  <!-- Grid pattern -->
+  <g opacity="0.06">
+    <line x1="200" y1="0" x2="200" y2="630" stroke="#58ebe0" stroke-width="1"/>
+    <line x1="400" y1="0" x2="400" y2="630" stroke="#58ebe0" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="630" stroke="#58ebe0" stroke-width="1"/>
+    <line x1="800" y1="0" x2="800" y2="630" stroke="#58ebe0" stroke-width="1"/>
+    <line x1="1000" y1="0" x2="1000" y2="630" stroke="#58ebe0" stroke-width="1"/>
+    <line x1="0" y1="150" x2="1200" y2="150" stroke="#58ebe0" stroke-width="1"/>
+    <line x1="0" y1="315" x2="1200" y2="315" stroke="#58ebe0" stroke-width="1"/>
+    <line x1="0" y1="480" x2="1200" y2="480" stroke="#58ebe0" stroke-width="1"/>
+  </g>
+  <!-- Brand mark -->
+  <rect x="80" y="80" width="64" height="58" fill="#58ebe0" rx="2" transform="skewX(-8)"/>
+  <text x="104" y="118" font-family="Arial, sans-serif" font-size="22" font-weight="900" fill="#071119" letter-spacing="1">PG</text>
+  <!-- Name -->
+  <text x="170" y="105" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#edf8f7" letter-spacing="3">AYUSH RAI</text>
+  <text x="170" y="128" font-family="monospace" font-size="11" fill="#58ebe0" letter-spacing="2">CREATIVE TECHNOLOGIST</text>
+  <!-- Main heading -->
+  <text x="80" y="270" font-family="Arial, sans-serif" font-size="72" font-weight="900" fill="#edf8f7" letter-spacing="2">BUILDING THE</text>
+  <text x="80" y="355" font-family="Arial, sans-serif" font-size="72" font-weight="900" fill="#58ebe0" letter-spacing="2">NEXT SYSTEM</text>
+  <!-- Description -->
+  <text x="80" y="420" font-family="Arial, sans-serif" font-size="20" fill="#8ca2a7">Cybersecurity | AI/ML Engineer | Full-Stack Developer</text>
+  <text x="80" y="452" font-family="Arial, sans-serif" font-size="16" fill="#5e7a7c">30+ Projects | 15+ Awards | Open to Opportunities</text>
+  <!-- Bottom bar -->
+  <rect x="80" y="520" width="200" height="44" fill="#58ebe0" rx="0"/>
+  <text x="112" y="548" font-family="monospace" font-size="12" font-weight="700" fill="#071119" letter-spacing="2">VIEW PORTFOLIO</text>
+  <!-- URL -->
+  <text x="80" y="600" font-family="monospace" font-size="13" fill="#5e7a7c" letter-spacing="1">pgayushrai.onrender.com</text>
+  <!-- Decorative corner -->
+  <polygon points="1120,80 1200,80 1200,0" fill="none" stroke="#58ebe0" stroke-width="1" opacity="0.3"/>
+  <polygon points="1080,630 1200,630 1200,510" fill="none" stroke="#58ebe0" stroke-width="1" opacity="0.2"/>
+</svg>
