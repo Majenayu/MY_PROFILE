@@ -282,6 +282,27 @@ function scrambleCyberText(element, finalText, speed = 35, delay = 0, step = 0.5
   }, delay);
 }
 
+function lazyLoadVideo(video) {
+  if (!video) return;
+  const source = video.querySelector('source[data-src]');
+  if (source && !source.getAttribute('src')) {
+    source.setAttribute('src', source.dataset.src);
+    video.load();
+  }
+}
+
+function startCyberDashboard() {
+  const video = $('#cyber-live-video');
+  lazyLoadVideo(video);
+  video?.play().catch(() => {});
+  animateCybersecurityDashboard();
+}
+
+function stopCyberDashboard() {
+  const video = $('#cyber-live-video');
+  video?.pause();
+}
+
 function animateCybersecurityDashboard() {
   scrambleCyberText($('#cyber-name'), 'P G AYUSH RAI', 38, 120);
   scrambleCyberText($('#cyber-role'), 'SOC Analyst · Cybersecurity Builder', 32, 520);
@@ -298,7 +319,9 @@ function animateCybersecurityDashboard() {
 let dataDashboardAnimation = 0;
 
 function startDataDashboard() {
-  $('#data-live-video')?.play().catch(() => {});
+  const video = $('#data-live-video');
+  lazyLoadVideo(video);
+  video?.play().catch(() => {});
   animateDataDashboard();
 }
 
@@ -404,6 +427,7 @@ function startAiDashboard() {
   const dashboard = $('#ai-dashboard-shell');
   if (!dashboard) return;
   dashboard.classList.add('show');
+  lazyLoadVideo(video);
   video?.play().catch(() => {});
   animateAiDashboard();
 }
@@ -415,7 +439,9 @@ function stopAiDashboard() {
 }
 
 function startFullstackDashboard() {
-  $('#fullstack-live-video')?.play().catch(() => {});
+  const video = $('#fullstack-live-video');
+  lazyLoadVideo(video);
+  video?.play().catch(() => {});
   animateFullstackDashboard();
 }
 
@@ -572,7 +598,8 @@ function initAboutProfiles() {
     $('#github-dashboard').hidden = !showGithubDashboard;
     $('#leadership-dashboard').hidden = !showLeadershipDashboard;
     $('#about-profile-modes').hidden = showCybersecurityDashboard || showDataDashboard || showAiDashboard || showFullstackDashboard || showGithubDashboard || showLeadershipDashboard;
-    if (showCybersecurityDashboard) animateCybersecurityDashboard();
+    if (showCybersecurityDashboard) startCyberDashboard();
+    else stopCyberDashboard();
     if (showDataDashboard) startDataDashboard();
     else stopDataDashboard();
     if (showAiDashboard) startAiDashboard();
@@ -672,7 +699,7 @@ function initProjects() {
   function renderStack() {
     scene.innerHTML = projectData.map((p, i) => {
       const color = cardColors[i % cardColors.length];
-      return `<div class="pj-stack-card" data-index="${i}" style="--card-color:${color}">
+      return `<div class="pj-stack-card" data-index="${i}" style="--card-color:${color}" role="article" aria-label="Project ${i + 1}: ${escapeHtml(p.name)} — ${escapeHtml(p.status)}">
       <div class="pj-stack-card-top"><span class="pj-stack-card-num">${String(i + 1).padStart(2, '0')}</span><span class="pj-stack-card-status">${escapeHtml(p.status)}</span></div>
       <h4 class="pj-stack-card-title">${escapeHtml(p.name)}</h4>
       <p class="pj-stack-card-desc">${escapeHtml(p.desc)}</p>
@@ -720,6 +747,7 @@ function initProjects() {
       }
 
       card.classList.toggle('active', i === activeIndex);
+      card.setAttribute('aria-hidden', String(i !== activeIndex));
     });
 
     counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(projectData.length).padStart(2, '0')}`;
@@ -750,10 +778,10 @@ function initProjects() {
     if (siteFrame) {
       if (p.live) {
         if (siteUrl) siteUrl.textContent = p.live.replace(/https?:\/\//, '');
-        siteFrame.innerHTML = `<iframe class="pj-frame-scaled" src="${escapeHtml(p.live)}" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Live website preview"></iframe>`;
+        siteFrame.innerHTML = `<div class="pj-frame-loader">LOADING SITE</div><iframe class="pj-frame-scaled" src="${escapeHtml(p.live)}" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Live website preview"></iframe>`;
       } else {
         if (siteUrl) siteUrl.textContent = 'NO LIVE URL';
-        siteFrame.innerHTML = `<div style="display:grid;place-items:center;height:100%;color:#5e7a7c;font:9px var(--mono);letter-spacing:.06em">NO LIVE PREVIEW AVAILABLE</div>`;
+        siteFrame.innerHTML = `<div class="pj-frame-loader">NO LIVE PREVIEW AVAILABLE</div>`;
       }
     }
 
@@ -763,12 +791,12 @@ function initProjects() {
       if (p.demo) {
         const videoId = p.demo.match(/(?:youtu\.be\/|v=)([^&]+)/);
         if (videoId) {
-          videoFrame.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId[1]}?rel=0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen title="Video demo"></iframe>`;
+          videoFrame.innerHTML = `<div class="pj-frame-loader">LOADING VIDEO</div><iframe src="https://www.youtube.com/embed/${videoId[1]}?rel=0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen title="Video demo"></iframe>`;
         } else {
-          videoFrame.innerHTML = `<iframe src="${escapeHtml(p.demo)}" allowfullscreen title="Video demo"></iframe>`;
+          videoFrame.innerHTML = `<div class="pj-frame-loader">LOADING VIDEO</div><iframe src="${escapeHtml(p.demo)}" allowfullscreen title="Video demo"></iframe>`;
         }
       } else {
-        videoFrame.innerHTML = `<div style="display:grid;place-items:center;height:100%;color:#5e7a7c;font:9px var(--mono);letter-spacing:.06em">NO VIDEO DEMO</div>`;
+        videoFrame.innerHTML = `<div class="pj-frame-loader">NO VIDEO DEMO</div>`;
       }
     }
 
@@ -1029,15 +1057,38 @@ function initLeadershipTabs() {
 }
 
 function initContact() {
-  $('#contact-form')?.addEventListener('submit', (event) => {
+  const form = $('#contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const subject = encodeURIComponent(`Portfolio enquiry from ${data.get('name')}`);
-    const body = encodeURIComponent(`${data.get('message')}\n\nReply to: ${data.get('email')}`);
-    $('#contact-submit-label').textContent = 'OPENING MAIL CLIENT...';
-    $('#form-status').textContent = 'TRANSMISSION READY — YOUR MAIL CLIENT WILL OPEN.';
-    window.location.href = `mailto:pgayushrai@gmail.com?subject=${subject}&body=${body}`;
-    window.setTimeout(() => { $('#contact-submit-label').textContent = 'INITIATE TRANSMISSION'; }, 1400);
+    const submitLabel = $('#contact-submit-label');
+    const status = $('#form-status');
+    const data = new FormData(form);
+
+    submitLabel.textContent = 'TRANSMITTING...';
+    status.textContent = '';
+
+    try {
+      const response = await fetch('https://formspree.io/f/xpwrrwpn', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        status.textContent = 'TRANSMISSION SUCCESSFUL — MESSAGE DELIVERED.';
+        status.style.color = 'var(--teal)';
+        form.reset();
+        submitLabel.textContent = 'INITIATE TRANSMISSION';
+      } else {
+        throw new Error('Server returned an error');
+      }
+    } catch (err) {
+      status.textContent = 'TRANSMISSION FAILED — TRY AGAIN OR EMAIL DIRECTLY.';
+      status.style.color = 'var(--crimson)';
+      submitLabel.textContent = 'RETRY TRANSMISSION';
+    }
   });
 }
 

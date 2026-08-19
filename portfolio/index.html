@@ -7,6 +7,39 @@
     <meta property="og:title" content="P G Ayush Rai — Creative Technologist" />
     <meta property="og:description" content="A living portfolio command console for code, security, and intelligent systems." />
     <title>P G Ayush Rai — Creative Technologist</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "P G Ayush Rai",
+      "alternateName": "Majenayu",
+      "url": "https://pgayushrai.onrender.com",
+      "image": "https://pgayushrai.onrender.com/attached_assets/0756ab91-b987-4414-bf28-0976ad289d6b_1786876334058.jpg",
+      "jobTitle": "Creative Technologist",
+      "description": "Cybersecurity analyst, AI/ML engineer, and full-stack developer building intelligent systems and thoughtful digital experiences.",
+      "email": "pgayushrai@gmail.com",
+      "sameAs": [
+        "https://github.com/Majenayu",
+        "https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/"
+      ],
+      "knowsAbout": ["Cybersecurity", "Artificial Intelligence", "Machine Learning", "Full-Stack Development", "Data Analytics", "Computer Vision", "TensorFlow", "Python", "Node.js"],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "VVCE"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mysuru",
+        "addressCountry": "IN"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://pgayushrai.onrender.com",
+        "name": "P G Ayush Rai — Creative Technologist Portfolio",
+        "description": "A living portfolio command console for code, security, and intelligent systems."
+      }
+    }
+    </script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2304d9d1'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Arial' font-size='24' font-weight='700' fill='%2307141d'%3EPG%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -66,10 +99,10 @@
             </div>
             <div class="console-status"><i></i> SYSTEM ONLINE</div>
             <div class="console-copy">
-              <p class="console-kicker">KINGDOM / PORTFOLIO NODE</p>
+              <p class="console-kicker">MAJEN / PORTFOLIO NODE</p>
               <h1>BUILDING THE<br /><em>NEXT SYSTEM</em></h1>
               <p>Cybersecurity, intelligent applications, and thoughtful digital experiences assembled with curiosity.</p>
-              <a class="console-button" href="#about">ENTER PROFILE <span>↗</span></a>
+              <a class="console-button" href="#about" onclick="event.preventDefault();document.getElementById('about').scrollIntoView({behavior:'smooth'})">ENTER PROFILE <span>↗</span></a>
             </div>
             <div class="console-side-label">PG / 001</div>
           </div>
@@ -114,8 +147,8 @@
                <article class="cyber-panel">
                  <div class="cyber-panel-header"><span>CHARACTER STATUS</span><span class="cyber-header-status">LVL 04</span></div>
                  <div class="cyber-video-feed">
-                    <video class="cyber-live-video" autoplay muted loop playsinline preload="metadata" aria-label="Cybersecurity live feed">
-                      <source src="/attached_assets/hack_1786944974759.mp4" type="video/mp4" />
+                    <video class="cyber-live-video" id="cyber-live-video" muted loop playsinline preload="none" aria-label="Cybersecurity live feed">
+                      <source data-src="/attached_assets/hack_1786944974759.mp4" type="video/mp4" />
                     </video>
                     <div class="cyber-live-feed-badge"><i></i> LIVE FEED</div>
                  </div>
@@ -156,8 +189,8 @@
                <article class="data-panel">
                  <div class="data-panel-header"><span>CHARACTER STATUS</span><span class="data-header-status">LVL 04</span></div>
                   <div class="data-video-feed data-live-video-feed">
-                    <video id="data-live-video" autoplay muted loop playsinline preload="metadata" aria-label="Data analyst live feed">
-                      <source src="/attached_assets/DATA_1786952566859.mp4" type="video/mp4" />
+                    <video id="data-live-video" muted loop playsinline preload="none" aria-label="Data analyst live feed">
+                      <source data-src="/attached_assets/DATA_1786952566859.mp4" type="video/mp4" />
                     </video>
                    <div class="data-lines" aria-hidden="true"></div>
                     <div class="data-live-feed-badge"><i></i> LIVE FEED</div>
@@ -207,8 +240,8 @@
                  <article class="ai-panel">
                    <div class="ai-panel-header"><span>CHARACTER STATUS</span><span class="ai-header-status">LVL 04</span></div>
                    <div class="ai-video-feed ai-live-video-feed">
-                     <video id="ai-live-video" autoplay muted loop playsinline preload="metadata" aria-label="Jarvis AI live feed">
-                       <source src="/attached_assets/jarvis_1786941454387.mp4" type="video/mp4" />
+                     <video id="ai-live-video" muted loop playsinline preload="none" aria-label="Jarvis AI live feed">
+                       <source data-src="/attached_assets/jarvis_1786941454387.mp4" type="video/mp4" />
                      </video>
                      <div class="ai-live-feed-badge"><i></i> LIVE FEED</div>
                    </div>
@@ -249,8 +282,8 @@
                <article class="ai-panel">
                  <div class="ai-panel-header"><span>CHARACTER STATUS</span><span class="ai-header-status">LVL 04</span></div>
                   <div class="ai-video-feed ai-live-video-feed fullstack-video-feed">
-                    <video id="fullstack-live-video" autoplay muted loop playsinline preload="metadata" aria-label="Full-stack developer live feed">
-                      <source src="/attached_assets/FULLSTACK_1786951864819.mp4" type="video/mp4" />
+                    <video id="fullstack-live-video" muted loop playsinline preload="none" aria-label="Full-stack developer live feed">
+                      <source data-src="/attached_assets/FULLSTACK_1786951864819.mp4" type="video/mp4" />
                     </video>
                     <div class="ai-live-feed-badge"><i></i> LIVE FEED</div>
                  </div>
@@ -504,11 +537,11 @@
           <div class="pj-stage" id="pj-stage">
             <!-- Stack View -->
             <div class="pj-stack-view" id="pj-stack-view">
-              <div class="pj-stack-scene" id="pj-stack-scene"></div>
+              <div class="pj-stack-scene" id="pj-stack-scene" role="group" aria-label="Project cards — use arrow keys to navigate" aria-roledescription="project carousel"></div>
               <div class="pj-stack-controls">
-                <button class="pj-stack-arrow" id="pj-stack-prev" type="button" aria-label="Previous">‹</button>
-                <span class="pj-stack-counter" id="pj-stack-counter">01 / 30</span>
-                <button class="pj-stack-arrow" id="pj-stack-next" type="button" aria-label="Next">›</button>
+                <button class="pj-stack-arrow" id="pj-stack-prev" type="button" aria-label="Previous project">‹</button>
+                <span class="pj-stack-counter" id="pj-stack-counter" aria-live="polite" aria-atomic="true">01 / 30</span>
+                <button class="pj-stack-arrow" id="pj-stack-next" type="button" aria-label="Next project">›</button>
               </div>
             </div>
 
