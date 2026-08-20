@@ -153,7 +153,7 @@
                 <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="ai"><span>✣</span> AI-ML</button>
                 <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="fullstack"><span>▱</span> FULL-STACK</button>
                 <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="data"><span>⌁</span> DATA / CLOUD</button>
-                <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="github"><span>◆</span> GITHUB</button>
+                <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="github"><span>◆</span> PROFILES</button>
                 <button class="role-tab" type="button" role="tab" aria-selected="false" data-role="leadership"><span>⚑</span> LEADERSHIP</button>
              </div>
            </div>
@@ -407,53 +407,186 @@
 
            <!-- GitHub Dashboard -->
            <div class="github-dashboard" id="github-dashboard" hidden>
-             <div class="github-dash-grid">
-               <article class="gh-dash-panel gh-profile-card">
-                 <div class="gh-profile-head">
-                   <div class="gh-avatar-ring">PG</div>
-                   <div class="gh-identity">
-                     <h3>Majenayu</h3>
-                     <p>Full-Stack Developer & AI/ML Enthusiast</p>
-                   </div>
-                   <a class="gh-follow-btn" href="https://github.com/Majenayu" target="_blank" rel="noreferrer">FOLLOW ↗</a>
-                 </div>
-                 <p class="gh-bio">Building cybersecurity tools, AI experiments, full-stack products, and EdTech platforms — all in public.</p>
-                 <div class="gh-counters">
-                   <div><strong>61</strong><span>Repos</span></div>
-                   <div><strong>1,266</strong><span>Commits/Year</span></div>
-                   <div><strong>35</strong><span>Public</span></div>
-                   <div><strong>🦈</strong><span>Pull Shark</span></div>
-                 </div>
-               </article>
-               <article class="gh-dash-panel gh-repos-card">
-                 <div class="gh-repos-header"><span>PINNED REPOSITORIES</span></div>
-                 <div class="gh-repos-grid" id="gh-repos-grid">
-                   <a class="gh-repo" href="https://github.com/Majenayu/MY_PROFILE" target="_blank" rel="noreferrer">
-                     <h4>MY_PROFILE</h4>
-                     <p>Adventure portfolio — six visual worlds, cyberpunk design system, Node.js + MongoDB backend.</p>
-                     <div class="gh-repo-meta"><span class="gh-lang"><i style="background:#f1e05a"></i>JavaScript</span><span>★ Public</span></div>
-                   </a>
-                   <a class="gh-repo" href="https://github.com/Majenayu/CodeBreakers-vvce" target="_blank" rel="noreferrer">
-                     <h4>CodeBreakers-vvce</h4>
-                     <p>AI-powered Virtual Try-On System using real-time pose detection and webcam overlay with MediaPipe.</p>
-                     <div class="gh-repo-meta"><span class="gh-lang"><i style="background:#f1e05a"></i>JavaScript</span><span>★ Public</span></div>
-                   </a>
-                   <a class="gh-repo" href="https://github.com/Majenayu/Cyber-Sentinel" target="_blank" rel="noreferrer">
-                     <h4>Cyber-Sentinel</h4>
-                     <p>Cybersecurity tooling and security research — active development with latest commits.</p>
-                     <div class="gh-repo-meta"><span class="gh-lang"><i style="background:#e34c26"></i>HTML</span><span>★ Public</span></div>
-                   </a>
-                   <a class="gh-repo" href="https://github.com/Majenayu/Anveshan" target="_blank" rel="noreferrer">
-                     <h4>Anveshan</h4>
-                     <p>Research-driven innovation project — state-level finalist at Anveshan competition.</p>
-                     <div class="gh-repo-meta"><span class="gh-lang"><i style="background:#e34c26"></i>HTML</span><span>★ Public</span></div>
-                   </a>
-                 </div>
-               </article>
+             <!-- Platform Sub-Tabs -->
+             <div class="plat-tabs" id="plat-tabs">
+               <button class="plat-tab active" data-plat="github" style="--plat-color:#a882ff">GitHub</button>
+               <button class="plat-tab" data-plat="hackerrank" style="--plat-color:#2ec866">HackerRank</button>
+               <button class="plat-tab" data-plat="leetcode" style="--plat-color:#ffa116">LeetCode</button>
+               <button class="plat-tab" data-plat="gcloud" style="--plat-color:#4285f4">Google Cloud</button>
+               <button class="plat-tab" data-plat="tryhackme" style="--plat-color:#ff4655">TryHackMe</button>
+               <button class="plat-tab" data-plat="hackthebox" style="--plat-color:#9fef00">HackTheBox</button>
              </div>
-           </div>
 
-           <!-- Leadership Dashboard -->
+             <!-- GitHub Panel -->
+             <div class="plat-panel active" id="plat-github">
+               <div class="github-dash-grid">
+                 <article class="gh-dash-panel gh-profile-card">
+                   <div class="gh-profile-head">
+                     <div class="gh-avatar-ring">PG</div>
+                     <div class="gh-identity"><h3>Majenayu</h3><p>Full-Stack Developer & AI/ML Enthusiast</p></div>
+                     <a class="gh-follow-btn" href="https://github.com/Majenayu" target="_blank" rel="noreferrer">FOLLOW ↗</a>
+                   </div>
+                   <p class="gh-bio">Building cybersecurity tools, AI experiments, full-stack products, and EdTech platforms — all in public.</p>
+                   <div class="gh-counters">
+                     <div><strong>61</strong><span>Repos</span></div>
+                     <div><strong>1,266</strong><span>Commits/Year</span></div>
+                     <div><strong>35</strong><span>Public</span></div>
+                     <div><strong>🦈</strong><span>Pull Shark</span></div>
+                   </div>
+                 </article>
+                 <article class="gh-dash-panel gh-repos-card">
+                   <div class="gh-repos-header"><span>PINNED REPOSITORIES</span></div>
+                   <div class="gh-repos-grid">
+                     <a class="gh-repo" href="https://github.com/Majenayu/MY_PROFILE" target="_blank" rel="noreferrer"><h4>MY_PROFILE</h4><p>Adventure portfolio — cyberpunk design, Node.js + MongoDB.</p><div class="gh-repo-meta"><span class="gh-lang"><i style="background:#f1e05a"></i>JavaScript</span><span>★ Public</span></div></a>
+                     <a class="gh-repo" href="https://github.com/Majenayu/CodeBreakers-vvce" target="_blank" rel="noreferrer"><h4>CodeBreakers-vvce</h4><p>AI Virtual Try-On with pose detection and webcam overlay.</p><div class="gh-repo-meta"><span class="gh-lang"><i style="background:#f1e05a"></i>JavaScript</span><span>★ Public</span></div></a>
+                     <a class="gh-repo" href="https://github.com/Majenayu/Cyber-Sentinel" target="_blank" rel="noreferrer"><h4>Cyber-Sentinel</h4><p>Cybersecurity tooling and security research.</p><div class="gh-repo-meta"><span class="gh-lang"><i style="background:#e34c26"></i>HTML</span><span>★ Public</span></div></a>
+                     <a class="gh-repo" href="https://github.com/Majenayu/Anveshan" target="_blank" rel="noreferrer"><h4>Anveshan</h4><p>State-level research innovation finalist.</p><div class="gh-repo-meta"><span class="gh-lang"><i style="background:#e34c26"></i>HTML</span><span>★ Public</span></div></a>
+                   </div>
+                 </article>
+               </div>
+             </div>
+
+             <!-- HackerRank Panel -->
+             <div class="plat-panel" id="plat-hackerrank">
+               <div class="plat-dash" style="--plat-color:#2ec866">
+                 <div class="plat-dash-head">
+                   <span class="plat-dash-icon">⟨⟩</span>
+                   <div><strong>HackerRank</strong><small>@vvce23cseaiml018</small></div>
+                   <a class="plat-visit" href="https://www.hackerrank.com/profile/vvce23cseaiml018" target="_blank" rel="noreferrer">OPEN PROFILE ↗</a>
+                 </div>
+                 <div class="plat-split">
+                   <div class="plat-split-preview plat-no-embed" onclick="window.open('https://www.hackerrank.com/profile/vvce23cseaiml018','_blank')">
+                     <div class="plat-no-embed-content"><span class="plat-no-embed-icon">⟨⟩</span><strong>HackerRank</strong><small>CLICK TO VIEW LIVE PROFILE</small></div>
+                   </div>
+                   <div class="plat-split-info">
+                     <p class="plat-about">Practising data structures, algorithms, and language proficiency challenges. Focused on Python, SQL, and problem-solving domains with active certifications.</p>
+                     <div class="plat-info-grid">
+                       <div><span>FOCUS</span><strong>Problem Solving & Python</strong></div>
+                       <div><span>DOMAINS</span><strong>Algorithms, SQL, 30 Days of Code</strong></div>
+                       <div><span>CERTIFICATIONS</span><strong>Python, Problem Solving, SQL</strong></div>
+                       <div><span>STATUS</span><strong>Active</strong></div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+             <!-- LeetCode Panel -->
+             <div class="plat-panel" id="plat-leetcode">
+               <div class="plat-dash" style="--plat-color:#ffa116">
+                 <div class="plat-dash-head">
+                   <span class="plat-dash-icon">◆</span>
+                   <div><strong>LeetCode</strong><small>@P_G_Ayush_Rai</small></div>
+                   <a class="plat-visit" href="https://leetcode.com/u/P_G_Ayush_Rai/" target="_blank" rel="noreferrer">OPEN PROFILE ↗</a>
+                 </div>
+                 <div class="plat-split">
+                   <div class="plat-split-preview plat-no-embed" onclick="window.open('https://leetcode.com/u/P_G_Ayush_Rai/','_blank')">
+                     <div class="plat-no-embed-content"><span class="plat-no-embed-icon">◆</span><strong>LeetCode</strong><small>CLICK TO VIEW LIVE PROFILE</small></div>
+                   </div>
+                   <div class="plat-split-info">
+                     <p class="plat-about">Solving DSA problems across arrays, trees, graphs, dynamic programming, and binary search. Building consistency with daily challenges and contest participation.</p>
+                     <div class="plat-info-grid">
+                       <div><span>FOCUS</span><strong>Arrays, Trees, DP, Graphs</strong></div>
+                       <div><span>LANGUAGES</span><strong>Python, C++, JavaScript</strong></div>
+                       <div><span>APPROACH</span><strong>Daily problems + Contests</strong></div>
+                       <div><span>STATUS</span><strong>Active</strong></div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+             <!-- Google Cloud Panel -->
+             <div class="plat-panel" id="plat-gcloud">
+               <div class="plat-dash" style="--plat-color:#4285f4">
+                 <div class="plat-dash-head">
+                   <span class="plat-dash-icon">☁</span>
+                   <div><strong>Google Cloud Skills Boost</strong><small>Member since 2024</small></div>
+                   <a class="plat-visit" href="https://www.skills.google/public_profiles/4286964a-5665-43fe-99c7-5a83d6034e80" target="_blank" rel="noreferrer">OPEN PROFILE ↗</a>
+                 </div>
+                 <div class="plat-split">
+                   <div class="plat-split-preview plat-no-embed" onclick="window.open('https://www.skills.google/public_profiles/4286964a-5665-43fe-99c7-5a83d6034e80','_blank')">
+                     <div class="plat-no-embed-content"><span class="plat-no-embed-icon">☁</span><strong>Google Cloud</strong><small>CLICK TO VIEW LIVE PROFILE</small></div>
+                   </div>
+                   <div class="plat-split-info">
+                     <div class="plat-info-grid">
+                       <div><span>BADGES EARNED</span><strong>100+</strong></div>
+                       <div><span>MEMBER SINCE</span><strong>2024</strong></div>
+                       <div><span>FOCUS</span><strong>Data, AI, Security, Cloud Infra</strong></div>
+                       <div><span>STATUS</span><strong>Active</strong></div>
+                     </div>
+                     <div class="plat-badge-scroll">
+                       <span class="plat-section-label">RECENT BADGES</span>
+                       <div class="plat-badge-list">
+                         <div><strong>Derive Insights from BigQuery Data</strong><small>Dec 27, 2025</small></div>
+                         <div><strong>Kickstarting App Dev with Gemini Code Assist</strong><small>Dec 27, 2025</small></div>
+                         <div><strong>Google DeepMind: Train A Small Language Model</strong><small>Dec 25, 2025</small></div>
+                         <div><strong>Monitor and Log with Cloud Observability</strong><small>Dec 24, 2025</small></div>
+                         <div><strong>Optimize Costs for Google Kubernetes Engine</strong><small>Dec 24, 2025</small></div>
+                         <div><strong>Level 3: Cloud Development Essentials</strong><small>Dec 24, 2025</small></div>
+                         <div><strong>Conversational AI on Vertex AI</strong><small>Oct 9, 2025</small></div>
+                         <div><strong>Build Real World AI Apps with Gemini</strong><small>Oct 6, 2025</small></div>
+                         <div><strong>Build a Data Warehouse with BigQuery</strong><small>Oct 6, 2025</small></div>
+                         <div><strong>Implement CI/CD Pipelines on Google Cloud</strong><small>Oct 4, 2025</small></div>
+                         <div><strong>Deploy Kubernetes Apps on Google Cloud</strong><small>Aug 31, 2025</small></div>
+                         <div><strong>Enhance Gemini Model Capabilities</strong><small>Aug 31, 2025</small></div>
+                         <div><strong>ML Operations: Model Evaluation</strong><small>Aug 31, 2025</small></div>
+                         <div><strong>Secure Software Delivery</strong><small>Aug 29, 2025</small></div>
+                         <div><strong>Introduction to Large Language Models</strong><small>Aug 29, 2025</small></div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+             <!-- TryHackMe Panel -->
+             <div class="plat-panel" id="plat-tryhackme">
+               <div class="plat-dash" style="--plat-color:#ff4655">
+                 <div class="plat-dash-head">
+                   <span class="plat-dash-icon">☠</span>
+                   <div><strong>TryHackMe</strong><small>@pgayushrai</small></div>
+                   <a class="plat-visit" href="https://tryhackme.com/p/pgayushrai" target="_blank" rel="noreferrer">OPEN PROFILE ↗</a>
+                 </div>
+                 <div class="plat-split">
+                   <div class="plat-split-preview"><iframe src="https://tryhackme.com/p/pgayushrai" loading="lazy" title="TryHackMe Profile"></iframe></div>
+                   <div class="plat-split-info">
+                     <p class="plat-about">Hands-on cybersecurity learning — completing rooms on network security, web exploitation, privilege escalation, and Linux fundamentals. Working through structured learning paths.</p>
+                     <div class="plat-info-grid">
+                       <div><span>FOCUS</span><strong>Pentesting & Network Security</strong></div>
+                       <div><span>PATHS</span><strong>Pre-Security, Jr Pentest</strong></div>
+                       <div><span>SKILLS</span><strong>Linux, Web Apps, Privesc</strong></div>
+                       <div><span>STATUS</span><strong>Active</strong></div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+             <!-- HackTheBox Panel -->
+             <div class="plat-panel" id="plat-hackthebox">
+               <div class="plat-dash" style="--plat-color:#9fef00">
+                 <div class="plat-dash-head">
+                   <span class="plat-dash-icon">▣</span>
+                   <div><strong>HackTheBox</strong><small>Pentesting & CTF</small></div>
+                   <a class="plat-visit" href="https://profile.hackthebox.com/profile/019ef35c-7f84-73a0-93b6-f4287541b769" target="_blank" rel="noreferrer">OPEN PROFILE ↗</a>
+                 </div>
+                 <div class="plat-split">
+                   <div class="plat-split-preview"><iframe src="https://profile.hackthebox.com/profile/019ef35c-7f84-73a0-93b6-f4287541b769" loading="lazy" title="HackTheBox Profile"></iframe></div>
+                   <div class="plat-split-info">
+                     <p class="plat-about">Pwning machines and solving challenges in realistic environments — focusing on Linux exploitation, Active Directory attacks, web app vulnerabilities, and privilege escalation.</p>
+                     <div class="plat-info-grid">
+                       <div><span>FOCUS</span><strong>Linux Exploitation & AD</strong></div>
+                       <div><span>METHODS</span><strong>Web Attacks, Privesc, Recon</strong></div>
+                       <div><span>FORMAT</span><strong>Machines + Challenges</strong></div>
+                       <div><span>STATUS</span><strong>Active</strong></div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+           </div>
            <div class="leadership-dashboard" id="leadership-dashboard" hidden>
              <div class="lead-all-timelines">
                <div class="lead-timeline-scale"><span>SEP 2023</span><span>2024</span><span>2025</span><span>FEB 2026</span></div>

@@ -1056,6 +1056,21 @@ function initLeadershipTabs() {
   // All timelines visible on same page — no tab switching needed
 }
 
+function initPlatformTabs() {
+  const container = $('#github-dashboard');
+  if (!container) return;
+  container.addEventListener('click', (e) => {
+    const tab = e.target.closest('.plat-tab');
+    if (!tab) return;
+    const plat = tab.dataset.plat;
+    container.querySelectorAll('.plat-tab').forEach(t => t.classList.remove('active'));
+    container.querySelectorAll('.plat-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panel = container.querySelector(`#plat-${plat}`);
+    if (panel) panel.classList.add('active');
+  });
+}
+
 function initContact() {
   const form = $('#contact-form');
   if (!form) return;
@@ -1104,6 +1119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAwards();
   initAwardCube();
   initLeadershipTabs();
+  initPlatformTabs();
   initContact();
   enrichFromApi();
 });
