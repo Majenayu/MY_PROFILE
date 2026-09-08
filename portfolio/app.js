@@ -653,7 +653,7 @@ function initAboutProfiles() {
 
 function initProjects() {
   const projectData = [
-    { name: 'Evalify', desc: 'My top edtech project: a multi-tenant AICTE platform for evidence uploads, mentor verification, activity points, and institutional reporting.', tags: ['React', 'Node.js', 'MongoDB'], type: 'TOP PROJECT', status: 'TOP PROJECT', github: 'https://github.com/Majenayu/Evalify', live: 'https://symboit-60sd.onrender.com', demo: 'https://youtu.be/CUAox58apzE' },
+    { name: 'Evalify', desc: 'My top edtech project: a multi-tenant AICTE platform for evidence uploads, mentor verification, activity points, and institutional reporting.', tags: ['React', 'Node.js', 'MongoDB'], type: 'TOP PROJECT', status: 'TOP PROJECT', github: 'https://github.com/Majenayu/Evalify', live: 'https://evalifyv1.onrender.com/', demo: 'https://youtu.be/CUAox58apzE' },
     { name: 'Anveshan / SUNDAY', desc: 'My top research build: an AI yoga coach with voice guidance, real-time pose detection, posture correction, scoring, and progress tracking.', tags: ['Python', 'TensorFlow.js', 'Computer Vision'], type: 'TOP PROJECT', status: 'TOP PROJECT', github: 'https://github.com/Majenayu/Anveshan', live: 'https://asanaminds.onrender.com', demo: 'https://youtu.be/1zfEa6RNBq4' },
     { name: 'FormPay', desc: 'Event payment command center that connects Google Forms to Razorpay, verifies transactions, detects fraud, and records every decision.', tags: ['React', 'Node.js', 'Razorpay'], type: 'FINTECH / AI', status: 'LIVE', github: 'https://github.com/Majenayu/RAZOOOO', live: 'https://formpay-8zen.onrender.com', demo: '' },
     { name: 'CyberSentinel', desc: 'Cybersecurity operations dashboard with AI threat analysis, intrusion maps, CVE search, reconnaissance tools, and security utilities.', tags: ['React', 'TypeScript', 'MongoDB'], type: 'SECURITY', status: 'LIVE', github: 'https://github.com/Majenayu/Cyber-Sentinel', live: 'https://cyber-sentinel-clon.onrender.com', demo: '' },
@@ -1054,6 +1054,7 @@ async function enrichFromApi() {
 
 function initProjectWarmup() {
   const projectUrls = [
+    'https://evalifyv1.onrender.com',
     'https://formpay-8zen.onrender.com',
     'https://cyber-sentinel-clon.onrender.com',
     'https://tracksmart-company.onrender.com',

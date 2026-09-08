@@ -32,6 +32,11 @@ const projectSchema = new mongoose.Schema({
   name: { type: String, required: true },
   website: String,
   description: { type: String, required: true },
+  problem: String,
+  solution: String,
+  contribution: String,
+  outcome: String,
+  demo: String,
   github: String,
   techStack: [String],
   hardware: String,
@@ -49,6 +54,7 @@ const achievementSchema = new mongoose.Schema({
   photos:      [{ type: String }],
   postUrl:     { type: String, default: '' },
   certificateUrl: { type: String, default: '' },
+  proofUrl: { type: String, default: '' },
   links:       [{ label: String, url: String }],
   date:        { type: Date, default: Date.now }
 });
