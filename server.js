@@ -121,14 +121,6 @@ app.get('/api/achievements', async (req, res) => {
   }
 });
 
-function authorizeMajen(req, res, next) {
-  const configuredKey = process.env.MAJEN_UPLOAD_KEY;
-  if (configuredKey && req.get('x-majen-key') !== configuredKey) {
-    return res.status(401).json({ error: 'Invalid upload key' });
-  }
-  next();
-}
-
 function getMajenBucket() {
   if (mongoose.connection.readyState !== 1) return null;
   return new mongoose.mongo.GridFSBucket(mongoose.connection.db, { bucketName: 'majenPhotos' });
@@ -146,7 +138,7 @@ function uploadToGridFs(bucket, file) {
   });
 }
 
-app.post('/api/majen/uploads', authorizeMajen, majenUpload.array('photos', 20), async (req, res) => {
+app.post('/api/majen/uploads', majenUpload.array('photos', 20), async (req, res) => {
   const bucket = getMajenBucket();
   const dateKey = String(req.body.dateKey || '').trim();
   if (!bucket) return res.status(503).json({ error: 'MongoDB is not connected' });
@@ -166,7 +158,7 @@ app.post('/api/majen/uploads', authorizeMajen, majenUpload.array('photos', 20), 
   }
 });
 
-app.get('/api/majen/uploads', authorizeMajen, async (req, res) => {
+app.get('/api/majen/uploads', async (req, res) => {
   if (mongoose.connection.readyState !== 1) return res.status(503).json({ error: 'MongoDB is not connected' });
   try {
     const uploads = await MajenUpload.find().sort({ dateKey: -1, createdAt: -1 }).lean();
@@ -182,7 +174,7 @@ app.get('/api/majen/uploads', authorizeMajen, async (req, res) => {
   }
 });
 
-app.patch('/api/majen/uploads/:id', authorizeMajen, async (req, res) => {
+app.patch('/api/majen/uploads/:id', async (req, res) => {
   if (mongoose.connection.readyState !== 1 || !mongoose.isValidObjectId(req.params.id)) {
     return res.status(404).json({ error: 'Upload record not found' });
   }

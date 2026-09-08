@@ -43,7 +43,6 @@ Create a `.env` file to enable database-backed content:
 ```env
 MONGODB_URI=your_mongodb_connection_string
 PORT=3000
-MAJEN_UPLOAD_KEY=choose-a-private-key
 ```
 
 Without MongoDB, the portfolio serves local fallback data — all sections work.
@@ -52,9 +51,8 @@ Without MongoDB, the portfolio serves local fallback data — all sections work.
 
 Open `http://localhost:3000/Majen` to upload up to 20 JPG, PNG, or WebP photos
 for one achievement date. Images are stored in MongoDB GridFS and their date,
-filenames, and description are stored in the `MajenUpload` collection. Set
-`MAJEN_UPLOAD_KEY` before deployment to protect the upload and archive routes.
-The archive page lets you add or update each achievement description later.
+filenames, and description are stored in the `MajenUpload` collection. The
+archive page lets you add or update each achievement description later.
 
 ## Structure
 
