@@ -1031,6 +1031,34 @@ async function enrichFromApi() {
   // GitHub stats are set directly in the HTML
 }
 
+function initProjectWarmup() {
+  const projectUrls = [
+    'https://formpay-8zen.onrender.com',
+    'https://cyber-sentinel-clon.onrender.com',
+    'https://tracksmart-company.onrender.com',
+    'https://ncc-vvce-attendence.onrender.com',
+    'https://python-boot-camp.onrender.com',
+    'https://nitk2025-node.onrender.com',
+    'https://codebreakers-vvce.onrender.com'
+  ];
+  let warmedUp = false;
+
+  const pingProjects = () => {
+    if (warmedUp) return;
+    warmedUp = true;
+    projectUrls.forEach((url) => {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+      fetch(url, { mode: 'no-cors', cache: 'no-store', signal: controller.signal })
+        .catch(() => {})
+        .finally(() => clearTimeout(timeout));
+    });
+  };
+
+  pingProjects();
+  window.addEventListener('scroll', pingProjects, { once: true, passive: true });
+}
+
 function initLeadershipTabs() {
   // All timelines visible on same page — no tab switching needed
 }
@@ -1100,5 +1128,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initLeadershipTabs();
   initPlatformTabs();
   initContact();
+  initProjectWarmup();
   enrichFromApi();
 });
