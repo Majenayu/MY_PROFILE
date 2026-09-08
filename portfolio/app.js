@@ -6,21 +6,21 @@ const fallback = {
     { name: 'Line Follower', description: 'A compact autonomous navigation build where hardware, sensors, and small decisions have to work together in real time.', techStack: ['Arduino', 'Embedded C', 'Sensors'], github: 'https://github.com/Majenayu', website: '' },
   ],
   awards: [
-    { title: 'Teck Spark', rating: 'FIRST PLACE', description: 'Won first place at a competitive tech showcase with a practical demo and clear engineering.', date: '2025', image: '/attached_assets/award-placeholder.png' },
-    { title: 'Prayog', rating: 'WINNER', description: 'Hackathon victory through rapid prototyping and public problem-solving under time pressure.', date: '2025', image: '/attached_assets/award-placeholder.png' },
-    { title: 'Anveshan', rating: 'FINALIST', description: 'State-level recognition for research-driven innovation and experimental methodology.', date: '2025', image: '/attached_assets/award-placeholder.png' },
-    { title: 'Smart India Hackathon', rating: 'PARTICIPANT', description: 'National-level hackathon focused on building solutions for real government problem statements.', date: '2024', image: '/attached_assets/award-placeholder.png' },
-    { title: 'Google Cloud Skills Boost', rating: 'CERTIFIED', description: 'Completed multiple skill badges across BigQuery, Dataflow, and cloud data engineering.', date: '2024', image: '/attached_assets/award-placeholder.png' },
-    { title: 'IEEE Paper Publication', rating: 'PUBLISHED', description: 'Co-authored a research paper on intelligent systems submitted to an IEEE conference.', date: '2025', image: '/attached_assets/award-placeholder.png' },
-    { title: 'CTF Challenge', rating: 'TOP 10', description: 'Capture-the-flag cybersecurity competition testing exploitation, forensics, and cryptography.', date: '2024', image: '/attached_assets/award-placeholder.png' },
-    { title: 'CodeChef Contest', rating: 'RATED', description: 'Competitive programming contest improving algorithmic thinking and time complexity skills.', date: '2024', image: '/attached_assets/award-placeholder.png' },
-    { title: 'VVCE Hackathon', rating: 'WINNER', description: 'Built and shipped a working prototype in 24 hours under intense competition at VVCE.', date: '2025', image: '/attached_assets/award-placeholder.png' },
-    { title: 'TechFest Project Expo', rating: 'BEST PROJECT', description: 'Showcased an end-to-end IoT + ML project recognized as best in category.', date: '2024', image: '/attached_assets/award-placeholder.png' },
-    { title: 'Cloud Computing Workshop', rating: 'CERTIFIED', description: 'Hands-on workshop covering AWS/GCP services, deployment pipelines, and serverless.', date: '2024', image: '/attached_assets/award-placeholder.png' },
-    { title: 'Cybersecurity Workshop', rating: 'CERTIFIED', description: 'Practical training in ethical hacking, network security, and vulnerability assessment.', date: '2024', image: '/attached_assets/award-placeholder.png' },
-    { title: 'AI/ML Bootcamp', rating: 'COMPLETED', description: 'Intensive bootcamp covering neural networks, computer vision, and model deployment.', date: '2024', image: '/attached_assets/award-placeholder.png' },
-    { title: 'Open Source Contribution', rating: 'CONTRIBUTOR', description: 'Meaningful contributions to open-source projects with merged pull requests.', date: '2024', image: '/attached_assets/award-placeholder.png' },
-    { title: 'College Tech Lead', rating: 'LEADERSHIP', description: 'Led a technical team organizing workshops, hackathons, and peer learning sessions.', date: '2024', image: '/attached_assets/award-placeholder.png' },
+    { title: 'Teck Spark', rating: 'FIRST PLACE', description: 'First-place recognition at a tech showcase. Add the event result or certificate link to publish verification.', date: '2025', image: '' },
+    { title: 'Prayog', rating: 'WINNER', description: 'Hackathon win recorded in the portfolio archive. Add the result post or certificate link to publish verification.', date: '2025', image: '' },
+    { title: 'Anveshan', rating: 'FINALIST', description: 'Research-focused recognition connected to the Anveshan build. Add the official result or certificate link to publish verification.', date: '2025', image: '' },
+    { title: 'Smart India Hackathon', rating: 'PARTICIPANT', description: 'Participation in a national problem-solving hackathon. Add the official team or participation record to publish verification.', date: '2024', image: '' },
+    { title: 'Google Cloud Skills Boost', rating: 'CERTIFIED', description: 'Cloud learning milestone covering data and platform skills. Add the public skills profile or badge URL to publish verification.', date: '2024', image: '' },
+    { title: 'IEEE Paper Publication', rating: 'PUBLISHED', description: 'Research publication milestone. Add the DOI or official publication page to publish verification.', date: '2025', image: '' },
+    { title: 'CTF Challenge', rating: 'TOP 10', description: 'Cybersecurity competition result. Add the event scoreboard or team profile to publish verification.', date: '2024', image: '' },
+    { title: 'CodeChef Contest', rating: 'RATED', description: 'Competitive programming milestone. Add the public contest profile or result page to publish verification.', date: '2024', image: '' },
+    { title: 'VVCE Hackathon', rating: 'WINNER', description: 'Prototype built and shipped during a VVCE hackathon. Add the official event result or project post to publish verification.', date: '2025', image: '' },
+    { title: 'TechFest Project Expo', rating: 'BEST PROJECT', description: 'Project expo recognition. Add the official event result or presentation evidence to publish verification.', date: '2024', image: '' },
+    { title: 'Cloud Computing Workshop', rating: 'CERTIFIED', description: 'Hands-on cloud computing training. Add the certificate URL to publish verification.', date: '2024', image: '' },
+    { title: 'Cybersecurity Workshop', rating: 'CERTIFIED', description: 'Practical security training milestone. Add the certificate URL to publish verification.', date: '2024', image: '' },
+    { title: 'AI/ML Bootcamp', rating: 'COMPLETED', description: 'Completed an applied AI and machine learning bootcamp. Add the certificate or provider page to publish verification.', date: '2024', image: '' },
+    { title: 'Open Source Contribution', rating: 'CONTRIBUTOR', description: 'Open-source contribution milestone. Add a merged pull request or repository link to publish verification.', date: '2024', image: '' },
+    { title: 'College Tech Lead', rating: 'LEADERSHIP', description: 'Technical leadership milestone across workshops and peer learning. Add an organization page or event archive to publish verification.', date: '2024', image: '' },
   ],
 };
 
@@ -653,9 +653,9 @@ function initAboutProfiles() {
 
 function initProjects() {
   const projectData = [
-    { name: 'Evalify', desc: 'My top edtech project: a multi-tenant AICTE platform for evidence uploads, mentor verification, activity points, and institutional reporting.', tags: ['React', 'Node.js', 'MongoDB'], type: 'TOP PROJECT', status: 'TOP PROJECT', github: 'https://github.com/Majenayu/Evalify', live: 'https://evalifyv1.onrender.com/', demo: 'https://youtu.be/CUAox58apzE' },
-    { name: 'Anveshan / SUNDAY', desc: 'My top research build: an AI yoga coach with voice guidance, real-time pose detection, posture correction, scoring, and progress tracking.', tags: ['Python', 'TensorFlow.js', 'Computer Vision'], type: 'TOP PROJECT', status: 'TOP PROJECT', github: 'https://github.com/Majenayu/Anveshan', live: 'https://asanaminds.onrender.com', demo: 'https://youtu.be/1zfEa6RNBq4' },
-    { name: 'FormPay', desc: 'Event payment command center that connects Google Forms to Razorpay, verifies transactions, detects fraud, and records every decision.', tags: ['React', 'Node.js', 'Razorpay'], type: 'FINTECH / AI', status: 'LIVE', github: 'https://github.com/Majenayu/RAZOOOO', live: 'https://formpay-8zen.onrender.com', demo: '' },
+    { name: 'Evalify', desc: 'A multi-tenant AICTE platform for evidence uploads, mentor verification, activity points, and institutional reporting.', problem: 'Student activity evidence and mentor approvals were scattered across manual workflows.', solution: 'Built a role-based platform that centralizes uploads, verification, points, and reporting.', contribution: 'Designed and implemented the full-stack workflow across the React interface, Node.js API, MongoDB models, and deployment.', outcome: 'Live product with a public demo and source repository; add user or workflow metrics when verified.', tags: ['React', 'Node.js', 'MongoDB'], type: 'TOP PROJECT', status: 'TOP PROJECT', github: 'https://github.com/Majenayu/Evalify', live: 'https://evalifyv1.onrender.com/', demo: 'https://youtu.be/CUAox58apzE' },
+    { name: 'Anveshan / SUNDAY', desc: 'An AI yoga coach with voice guidance, real-time pose detection, posture correction, scoring, and progress tracking.', problem: 'Beginners need immediate, understandable feedback while practicing without a trainer.', solution: 'Combined pose estimation, posture rules, voice guidance, scoring, and progress tracking in one browser experience.', contribution: 'Built the computer-vision pipeline, feedback logic, interaction flow, and deployed experience.', outcome: 'Live prototype with a public walkthrough and source repository; add accuracy or user-test metrics when verified.', tags: ['Python', 'TensorFlow.js', 'Computer Vision'], type: 'TOP PROJECT', status: 'TOP PROJECT', github: 'https://github.com/Majenayu/Anveshan', live: 'https://asanaminds.onrender.com', demo: 'https://youtu.be/1zfEa6RNBq4' },
+    { name: 'FormPay', desc: 'Event payment command center connecting Google Forms to Razorpay with transaction verification and fraud review.', problem: 'Event organizers need to reconcile form responses and payment status without manual spreadsheets.', solution: 'Connected form submissions, payment verification, fraud signals, and decision records in one workflow.', contribution: 'Implemented the full-stack payment flow, integration logic, and review dashboard.', outcome: 'Live deployed product; add transaction volume or reconciliation-time results when verified.', tags: ['React', 'Node.js', 'Razorpay'], type: 'FINTECH / AI', status: 'LIVE', github: 'https://github.com/Majenayu/RAZOOOO', live: 'https://formpay-8zen.onrender.com', demo: '' },
     { name: 'CyberSentinel', desc: 'Cybersecurity operations dashboard with AI threat analysis, intrusion maps, CVE search, reconnaissance tools, and security utilities.', tags: ['React', 'TypeScript', 'MongoDB'], type: 'SECURITY', status: 'LIVE', github: 'https://github.com/Majenayu/Cyber-Sentinel', live: 'https://cyber-sentinel-clon.onrender.com', demo: '' },
     { name: 'TrackSmart', desc: 'Full-stack delivery platform with QR tracking, live GPS updates, and separate customer, delivery, and company portals.', tags: ['Flask', 'MongoDB', 'GPS'], type: 'FULL-STACK', status: 'LIVE', github: 'https://github.com/Majenayu/Infosys', live: 'https://tracksmart-company.onrender.com', demo: '' },
     { name: 'NCC Attendance', desc: 'Attendance management system for NCC cadets with secure login, image verification, admin tools, and report generation.', tags: ['Node.js', 'Express', 'MongoDB'], type: 'EDTECH / ADMIN', status: 'LIVE', github: 'https://github.com/Majenayu/NCC-VVCE-ATTENDENCE', live: 'https://ncc-vvce-attendence.onrender.com', demo: '' },
@@ -768,6 +768,18 @@ function initProjects() {
 
     $('#pj-detail-title').textContent = p.name.toUpperCase();
     $('#pj-detail-desc').textContent = p.desc;
+    const story = $('#pj-detail-story');
+    if (story) {
+      const storyFields = [
+        ['PROBLEM', p.problem],
+        ['SOLUTION', p.solution],
+        ['MY CONTRIBUTION', p.contribution],
+        ['OUTCOME', p.outcome]
+      ].filter(([, value]) => value);
+      story.innerHTML = storyFields.length
+        ? storyFields.map(([label, value]) => `<div><span>${label}</span><p>${escapeHtml(value)}</p></div>`).join('')
+        : '<div><span>CASE STUDY</span><p>Detailed problem, contribution, and outcome notes are being added for this project.</p></div>';
+    }
     $('#pj-detail-tags').innerHTML = p.tags.map(t => `<span>${escapeHtml(t)}</span>`).join('');
     $('#pj-detail-badges').innerHTML = `<span>${escapeHtml(p.status)}</span><span>${escapeHtml(p.type)}</span>`;
     $('#pj-detail-meta').innerHTML = `<div><span>TYPE</span><strong>${escapeHtml(p.type)}</strong></div><div><span>STATUS</span><strong>${escapeHtml(p.status)}</strong></div>`;
@@ -873,8 +885,9 @@ function renderAwards() {
 
   track.innerHTML = awards.map((award, index) => {
     const color = cardColors[index % cardColors.length];
+    const proofUrl = award.proofUrl || award.certificateUrl || award.postUrl || (award.links && award.links[0]?.url);
     return `<article class="award-slide" style="--card-color:${color}">
-    <div class="award-slide-image">${award.image ? `<img src="${escapeHtml(award.image)}" alt="${escapeHtml(award.title)}" loading="lazy" />` : `<div class="award-slide-placeholder"><span>★</span><small>${String(index + 1).padStart(2, '0')}</small></div>`}</div>
+    <div class="award-slide-image">${award.image ? `<img src="${escapeHtml(award.image)}" alt="${escapeHtml(award.title)}" loading="lazy" />` : `<div class="award-slide-evidence"><span>◎</span><small>${proofUrl ? 'EVIDENCE LINKED' : 'EVIDENCE PENDING'}</small></div>`}</div>
     <div class="award-slide-content">
       <div class="award-slide-head">
         <span class="award-slide-index">${String(index + 1).padStart(2, '0')}</span>
@@ -884,6 +897,7 @@ function renderAwards() {
       <p class="award-slide-desc">${escapeHtml(award.description)}</p>
       <div class="award-slide-footer">
         <span class="award-slide-date">${escapeHtml(award.date)}</span>
+        ${proofUrl ? `<a class="award-proof-link" href="${escapeHtml(proofUrl)}" target="_blank" rel="noreferrer">VERIFY ↗</a>` : '<span class="award-proof-pending">ADD PROOF</span>'}
       </div>
     </div>
   </article>`;
@@ -1040,7 +1054,8 @@ async function enrichFromApi() {
       rating: String(item.place || 'RECOGNITION').toUpperCase(),
       description: item.description || 'A hard-earned mark in the journey.',
       date: item.date ? new Date(item.date).toLocaleDateString('en-IN', { year: 'numeric' }) : 'ARCHIVE',
-      image: (item.photos && item.photos[0]) || '/attached_assets/award-placeholder.png',
+      image: (item.photos && item.photos[0]) || '',
+      proofUrl: item.proofUrl || '',
       postUrl: item.postUrl || item.postLink || item.linkedPost,
       certificateUrl: item.certificateUrl || item.certificateLink || item.driveUrl || item.certificate,
       links: item.links
