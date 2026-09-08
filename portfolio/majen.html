@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Majen Achievement Archive</title>
+    <style>
+      :root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#edf8f7;background:#071119;--line:#25434b;--accent:#58ebe0;--muted:#8ca2a7}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0,#173641 0,#071119 45%);min-height:100vh}main{width:min(980px,100%);margin:auto;padding:56px 20px}.eyebrow{color:var(--accent);font:11px monospace;letter-spacing:.14em}h1{font-size:clamp(36px,7vw,72px);line-height:.95;margin:12px 0 16px;letter-spacing:-.04em}p{color:var(--muted);line-height:1.6}.panel{border:1px solid var(--line);background:rgba(9,28,36,.86);padding:24px;margin-top:24px;box-shadow:0 18px 50px #0003}label{display:grid;gap:8px;color:#b9cbca;font:11px monospace;letter-spacing:.08em}input[type=date],input[type=password]{width:100%;padding:13px;border:1px solid var(--line);background:#071820;color:#edf8f7}input[type=file]{width:100%;padding:22px 12px;border:1px dashed #42777a;background:#0a2028;color:var(--muted)}.row{display:grid;grid-template-columns:220px 1fr;gap:16px;align-items:end}.button{border:1px solid var(--accent);background:var(--accent);color:#071119;padding:13px 18px;font-weight:800;cursor:pointer}.button:disabled{opacity:.5;cursor:wait}.hint{font:11px monospace;color:#789092}.status{min-height:20px;color:var(--accent);font:12px monospace}.archive{display:grid;gap:14px}.record{border-top:1px solid var(--line);padding-top:16px}.record-head{display:flex;justify-content:space-between;gap:12px;color:var(--accent);font:13px monospace}.thumbs{display:flex;gap:10px;overflow:auto;margin-top:12px}.thumbs img{width:110px;height:82px;object-fit:cover;border:1px solid var(--line)}.record textarea{width:100%;min-height:74px;margin-top:12px;padding:10px;border:1px solid var(--line);background:#071820;color:#edf8f7;resize:vertical}.record .save{margin-top:8px;padding:8px 12px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}.record .save:disabled{opacity:.5}@media(max-width:620px){main{padding:34px 14px}.row{grid-template-columns:1fr}.button{width:100%}}
+    </style>
+  </head>
+  <body>
+    <main>
+      <span class="eyebrow">MAJEN / TEMPORARY EVIDENCE NODE</span>
+      <h1>Achievement<br />Photo Archive</h1>
+      <p>Upload multiple photos under the achievement date. The date becomes your lookup key when you later send descriptions in chat.</p>
+      <form class="panel" id="upload-form">
+        <div class="row">
+          <label>ACHIEVEMENT DATE<input required type="date" name="dateKey" /></label>
+          <label>PHOTOS<input required type="file" name="photos" accept="image/jpeg,image/png,image/webp" multiple /><span class="hint">Up to 20 images, 12 MB each. JPG, PNG, or WebP.</span></label>
+        </div>
+        <label style="margin-top:16px">UPLOAD KEY <input type="password" name="uploadKey" placeholder="Only needed when MAJEN_UPLOAD_KEY is configured" autocomplete="off" /></label>
+        <button class="button" type="submit" style="margin-top:18px">UPLOAD TO MONGODB</button>
+        <p class="status" id="status" role="status"></p>
+      </form>
+      <section class="panel"><span class="eyebrow">UPLOADED RECORDS</span><div class="archive" id="archive"><p>Loading archive...</p></div></section>
+    </main>
+    <script>
+      const form = document.querySelector('#upload-form');
+      const status = document.querySelector('#status');
+      const archive = document.querySelector('#archive');
+      const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
+      const headers = () => { const key = form.elements.uploadKey.value.trim(); return key ? {'x-majen-key': key} : {}; };
+      async function saveDescription(id, textarea, button) {
+        button.disabled = true;
+        try {
+          const response = await fetch(`/api/majen/uploads/${encodeURIComponent(id)}`, { method:'PATCH', headers:{...headers(), 'Content-Type':'application/json'}, body:JSON.stringify({ description: textarea.value }) });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || 'Could not save description');
+          button.textContent = 'SAVED';
+          setTimeout(() => { button.textContent = 'SAVE DESCRIPTION'; }, 1400);
+        } catch (error) {
+          status.textContent = error.message;
+        } finally {
+          button.disabled = false;
+        }
+      }
+      async function loadArchive() {
+        const response = await fetch('/api/majen/uploads', { headers: headers() });
+        const records = response.ok ? await response.json() : [];
+        archive.innerHTML = records.length ? records.map((record) => `<article class="record"><div class="record-head"><strong>${escapeHtml(record.dateKey)}</strong><span>${record.files.length} PHOTO${record.files.length === 1 ? '' : 'S'}</span></div><div class="thumbs">${record.files.map((file) => `<img src="${file.url}" alt="${escapeHtml(file.filename)}" loading="lazy" />`).join('')}</div><textarea maxlength="2000" placeholder="Add the achievement description for ${escapeHtml(record.dateKey)}...">${escapeHtml(record.description || '')}</textarea><button class="save" type="button" data-id="${escapeHtml(record.id)}">SAVE DESCRIPTION</button></article>`).join('') : '<p>No uploads yet.</p>';
+        archive.querySelectorAll('.save').forEach((button) => button.addEventListener('click', () => saveDescription(button.dataset.id, button.previousElementSibling, button)));
+      }
+      form.addEventListener('submit', async (event) => { event.preventDefault(); const button = form.querySelector('button'); button.disabled = true; status.textContent = 'UPLOADING...'; try { const response = await fetch('/api/majen/uploads', { method:'POST', headers:headers(), body:new FormData(form) }); const result = await response.json(); if (!response.ok) throw new Error(result.error || 'Upload failed'); status.textContent = `${result.files.length} photo(s) stored under ${result.dateKey}.`; form.elements.photos.value = ''; await loadArchive(); } catch (error) { status.textContent = error.message; } finally { button.disabled = false; } });
+      loadArchive().catch(() => { archive.innerHTML = '<p>MongoDB archive unavailable. Configure MONGODB_URI first.</p>'; });
+    </script>
+  </body>
+</html>
