@@ -917,7 +917,6 @@ function renderAwards() {
       <h4 class="award-slide-title">${escapeHtml(award.title)}</h4>
       <p class="award-slide-desc">${escapeHtml(award.description)}</p>
       <div class="award-slide-footer">
-        <span class="award-slide-date">${escapeHtml(award.date)}</span>
         ${proofUrl ? `<a class="award-proof-link" href="${escapeHtml(proofUrl)}" target="_blank" rel="noreferrer">VERIFY ↗</a>` : '<span class="award-proof-pending">ADD PROOF</span>'}
       </div>
     </div>
