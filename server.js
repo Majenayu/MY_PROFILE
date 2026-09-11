@@ -91,13 +91,21 @@ const MajenUpload = mongoose.model('MajenUpload', majenUploadSchema);
 async function seedAchievements() {
   if (mongoose.connection.readyState !== 1) return;
   await Achievement.deleteMany({ eventName: { $in: ['Vibeathon', 'VectorFlow Vice President'] } });
-  const operations = achievementSeed.map((achievement) => ({
+  const uploads = await MajenUpload.find().sort({ createdAt: 1 }).lean();
+  const operations = achievementSeed.map((achievement, index) => {
+    const upload = uploads[index];
+    const update = { place: achievement.place, description: achievement.description };
+    if (upload?.files?.length) {
+      update.photos = upload.files.map((file) => `/api/majen/photos/${file.fileId}`);
+    }
+    return {
     updateOne: {
       filter: { eventName: achievement.eventName },
-      update: { $set: { place: achievement.place, description: achievement.description } },
+      update: { $set: update },
       upsert: true,
     },
-  }));
+    };
+  });
   if (!operations.length) return;
   const result = await Achievement.bulkWrite(operations, { ordered: false });
   console.log(`📚 Achievement archive synced: ${result.upsertedCount} added, ${result.modifiedCount} updated`);
