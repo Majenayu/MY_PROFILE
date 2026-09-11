@@ -32,8 +32,7 @@ const fallback = {
     { title: 'Rural Silk-Maker Survey', rating: 'FIELD RESEARCH', description: 'Conducted a rural survey among silk-cloth makers to gather firsthand information and understand local production practices and challenges.', date: 'DATE UNVERIFIED', image: '' },
     { title: 'VVCE One-Day Idea Generation', rating: 'SECOND PLACE', description: 'Won second place in the one-day VVCE Idea Generation event with the team through rapid ideation and a focused final presentation.', date: 'DATE UNVERIFIED', image: '' },
     { title: 'Code Hunt · Student Organizer', rating: '100 TEAMS', description: 'Organized the Code Hunt event as a student coordinator, helping deliver a competition with approximately 100 participating teams.', date: 'DATE UNVERIFIED', image: '' },
-    { title: 'VectorFlow Vice President', rating: 'LEADERSHIP', description: 'Became Vice President of VectorFlow, the department’s technical club, supporting operations, student coordination, and technical programming.', date: 'DATE UNVERIFIED', image: '' },
-    { title: 'Vibeathon', rating: 'EVENT LEADERSHIP', description: 'Conducted Vibeathon, a coding event organized through VectorFlow Club, coordinating the event experience as Vice President.', date: 'DATE UNVERIFIED', image: '' },
+    { title: 'VectorFlow Vice President · Vibeathon', rating: 'LEADERSHIP', description: 'Became Vice President of VectorFlow, the department’s technical club, supporting operations and student coordination while conducting Vibeathon, a coding event organized through the club.', date: 'DATE UNVERIFIED', image: '' },
   ],
 };
 

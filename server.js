@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const compression = require('compression');
 const multer = require('multer');
+const achievementSeed = require('./portfolio/achievements.json');
 require('dotenv').config();
 
 const app = express();
@@ -27,7 +28,10 @@ if (process.env.MONGODB_URI) {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('✅ Connected to MongoDB'))
+  .then(async () => {
+    console.log('✅ Connected to MongoDB');
+    await seedAchievements();
+  })
   .catch(err => {
     console.warn('⚠️  MongoDB connection error:', err.message);
     console.warn('⚠️  Running in limited mode (portfolio still available)');
@@ -83,6 +87,21 @@ const majenUploadSchema = new mongoose.Schema({
 });
 
 const MajenUpload = mongoose.model('MajenUpload', majenUploadSchema);
+
+async function seedAchievements() {
+  if (mongoose.connection.readyState !== 1) return;
+  await Achievement.deleteMany({ eventName: { $in: ['Vibeathon', 'VectorFlow Vice President'] } });
+  const operations = achievementSeed.map((achievement) => ({
+    updateOne: {
+      filter: { eventName: achievement.eventName },
+      update: { $set: { place: achievement.place, description: achievement.description } },
+      upsert: true,
+    },
+  }));
+  if (!operations.length) return;
+  const result = await Achievement.bulkWrite(operations, { ordered: false });
+  console.log(`📚 Achievement archive synced: ${result.upsertedCount} added, ${result.modifiedCount} updated`);
+}
 
 // ── Static files ────────────────────────────────────────────────────────────
 app.use('/portfolio', express.static(path.join(__dirname, 'portfolio')));

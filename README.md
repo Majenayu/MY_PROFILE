@@ -47,6 +47,11 @@ PORT=3000
 
 Without MongoDB, the portfolio serves local fallback data — all sections work.
 
+When MongoDB is connected, the server automatically syncs the 27 records in
+`portfolio/achievements.json` into the `Achievement` collection. The portfolio
+then loads the recognition log from MongoDB instead of relying on frontend
+fallback data.
+
 ### Temporary achievement archive
 
 Open `http://localhost:3000/Majen` to upload up to 20 JPG, PNG, or WebP photos
