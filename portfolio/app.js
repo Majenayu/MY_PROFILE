@@ -906,8 +906,12 @@ function renderAwards() {
   track.innerHTML = awards.map((award, index) => {
     const color = cardColors[index % cardColors.length];
     const proofUrl = award.proofUrl || award.certificateUrl || award.postUrl || (award.links && award.links[0]?.url);
+    const images = award.images || (award.image ? [award.image] : []);
+    const imageMarkup = images.length
+      ? `<div class="award-slide-gallery">${images.map((image, imageIndex) => `<img src="${escapeHtml(image)}" alt="${escapeHtml(award.title)} evidence ${imageIndex + 1}" loading="lazy" />`).join('')}</div>`
+      : `<div class="award-slide-evidence"><span>◎</span><small>${proofUrl ? 'EVIDENCE LINKED' : 'EVIDENCE PENDING'}</small></div>`;
     return `<article class="award-slide" style="--card-color:${color}">
-    <div class="award-slide-image">${award.image ? `<img src="${escapeHtml(award.image)}" alt="${escapeHtml(award.title)}" loading="lazy" />` : `<div class="award-slide-evidence"><span>◎</span><small>${proofUrl ? 'EVIDENCE LINKED' : 'EVIDENCE PENDING'}</small></div>`}</div>
+    <div class="award-slide-image">${imageMarkup}</div>
     <div class="award-slide-content">
       <div class="award-slide-head">
         <span class="award-slide-index">${String(index + 1).padStart(2, '0')}</span>
@@ -1073,6 +1077,7 @@ async function enrichFromApi() {
       rating: String(item.place || 'RECOGNITION').toUpperCase(),
       description: item.description || 'A hard-earned mark in the journey.',
       date: item.date ? new Date(item.date).toLocaleDateString('en-IN', { year: 'numeric' }) : 'ARCHIVE',
+      images: item.photos || [],
       image: (item.photos && item.photos[0]) || '',
       proofUrl: item.proofUrl || '',
       postUrl: item.postUrl || item.postLink || item.linkedPost,
