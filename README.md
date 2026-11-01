@@ -88,3 +88,28 @@ archive page lets you add or update each achievement description later.
 - GitHub: [@Majenayu](https://github.com/Majenayu)
 - LinkedIn: [P G Ayush Rai](https://www.linkedin.com/in/p-g-ayush-rai-8b90082a9/)
 - Email: pgayushrai@gmail.com
+
+## Runtime and deployment notes
+
+`server.js` serves the static portfolio and exposes optional achievement/upload routes.
+The browser experience is framework-free: `portfolio/index.html`, `style.css`, and
+`app.js` provide the console UI, dashboards, carousel, video backgrounds, and
+navigation. `portfolio/achievements.json` is the checked-in fallback dataset.
+
+Run locally with Node.js:
+
+```bash
+npm install
+PORT=3000 npm start
+```
+
+MongoDB is optional and is used for achievement synchronization and GridFS uploads.
+Keep `MONGODB_URI` out of source control, restrict upload access before exposing
+`/Majen`, and treat bundled media as static assets. No automated test suite is declared,
+so validate the main routes and browser interactions manually after deployment.
+
+## Limitations
+
+- MongoDB-backed content and uploads are optional prototype features.
+- The contact action opens a `mailto:` link; it does not send mail from the server.
+- Large video/image assets affect cold-start and bandwidth costs on free hosting.
